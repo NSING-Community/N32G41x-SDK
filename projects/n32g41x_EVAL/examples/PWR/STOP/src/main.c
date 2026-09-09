@@ -1,0 +1,264 @@
+/**
+*     Copyright (c) 2025, Nsing Technologies Inc.
+* 
+*     All rights reserved.
+*
+*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
+* referred to as Nsing). This software, and the product of Nsing described herein 
+* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+* of the People's Republic of China and other applicable jurisdictions worldwide.
+*
+*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
+* intellectual property rights. Names and brands of third party may be mentioned or referred 
+* thereto (if any) for identification purposes only.
+*
+*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
+* improvements to this software at any time without notice. Please contact Nsing and obtain 
+* the latest version of this software before placing orders.
+
+*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+* no responsibility for the accuracy and reliability of this software.
+* 
+*     It is the responsibility of the user of this software to properly design, program, and test 
+* the functionality and safety of any application made of this information and any resulting product. 
+* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+* consequential damages arising in any way out of the use of this software or the Product.
+*
+*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+* damage. Such applications are deemed, "Insecure Usage".
+*
+*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+* to any customer's Insecure Usage.
+
+*     Any express or implied warranty with regard to this software or the Product, including,but not 
+* limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
+* are disclaimed to the fullest extent permitted by law.
+
+*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+* or otherwise distribute this software for any purposes, in whole or in part.
+*
+*     Nsing products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
+* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+* the governments of any countries asserting jurisdiction over the parties or transactions.
+**/
+
+/**
+*\*\file main.c
+*\*\author Nsing
+*\*\version v1.0.0
+*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+**/
+#include "main.h"
+#include <stdio.h>
+
+void KeyInputExtiInit(GPIO_Module* GPIOx, uint16_t Pin);
+ErrorStatus SetSysClockToPLL(uint32_t PLL_src, uint32_t SYS_freq);
+/**
+*\*\name    main.
+*\*\fun     STOP mode demo: enter STOP mode and wake up by WKUP (PA0) key press.
+*\*\param   none
+*\*\return  none
+**/
+int main(void)
+{
+    /* At this stage the microcontroller clock setting is already configured,
+         this is done through SystemInit() function which is called from startup
+         file (startup_n32g41x.s) before to branch to application main.
+       */
+    log_init(); 
+    log_info("\r\n --- Reset for STOP --- \r\n");
+    
+    /* Initialize Key button Interrupt to wakeUp stop */
+    KeyInputExtiInit(BUTTON_WKUP_PORT, BUTTON_WKUP_PIN);
+    
+    while (1)
+    {
+       /* Insert a long delay */
+       SysTick_Delay_Ms(1000);
+       log_info("Entry STOP mode\n"); 
+       /* Request to enter STOP mode*/
+       PWR_EnterSTOPMode(PWR_STOPENTRY_WFI);
+       /* Configures system clock after wake-up from STOP: enable HSI, PLL and select
+          PLL as system clock source */
+       SetSysClockToPLL(RCC_PLL_SRC_HSI,80000000);
+       SysTick_Delay_Ms(10);
+       log_init();
+       log_info("\nExit STOP mode\n");
+    }
+}
+
+/**
+*\*\name    KeyInputExtiInit.
+*\*\fun     Configures key GPIO.
+*\*\param   GPIOx
+*\*\param   Pin
+*\*\return  none
+**/
+void KeyInputExtiInit(GPIO_Module* GPIOx, uint16_t Pin)
+{
+    GPIO_InitType GPIO_InitStructure;
+    EXTI_InitType EXTI_InitStructure;
+    NVIC_InitType NVIC_InitStructure;
+ 
+    /* Enable the GPIO Clock */
+    BUTTON_WKUP_CLK_ENABLE;
+
+    /*Configure the GPIO pin as input floating*/
+    GPIO_InitStruct(&GPIO_InitStructure);
+    GPIO_InitStructure.Pin        = Pin;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_INPUT;
+    GPIO_InitPeripheral(GPIOx, &GPIO_InitStructure);
+
+    /*Configure key EXTI Line to key input  Pin*/
+    GPIO_ConfigEXTILine(KEY_EXTI_PORT_SOURCE, KEY_EXTI_PIN_SOURCE);
+
+    /*Configure key EXTI line*/
+    EXTI_InitStruct(&EXTI_InitStructure);
+    EXTI_InitStructure.EXTI_Line = KEY_EXTI_LINE;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_InitPeripheral(&EXTI_InitStructure);
+
+    /* Configure one bit for preemption priority */
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    /*Set key input interrupt priority*/
+    NVIC_InitStructure.NVIC_IRQChannel                   = KEY_EXTI_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority        = 0x0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd                = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+}
+
+/**
+*\*\name    SetSysClockToPLL.
+*\*\fun     Selects PLL clock as System clock source and configure HCLK, PCLK2 and PCLK1.
+*\*\param   PLL_src
+*\*\         - RCC_PLL_SRC_HSI
+*\*\         - RCC_PLL_SRC_HSE
+*\*\param   SYS_freq
+*\*\         - 72000000  (sysclk-72M, pll-144M, hclk-72M, pclk2-72M, pclk1-36M)
+*\*\         - 80000000  (sysclk-80M, pll-80M, hclk-80M, pclk2-80M, pclk1-40M)
+*\*\return  SUCCESS or ERROR
+*\*\note    Fin frequency requirement is in the range of 8MHz ~ 32MHz,
+*\*\	    Fvco(=Fin/pllinpre*pllmul) frequency requirement is in the range of 100MHz ~ 160MHz,
+*\*\	    Fout(=Fvco/plloutdiv) frequency requirement is in the range of 64MHz ~ 160MHz. 
+**/
+ErrorStatus SetSysClockToPLL(uint32_t PLL_src, uint32_t SYS_freq)
+{
+    uint32_t timeout_value = 0xFFFFFFFF;
+    ErrorStatus ClockStatus;
+    uint32_t latency;
+    uint32_t pllmul, pllinpre, plloutdiv;
+    FunctionalState pllsysdiv;
+    
+    if ((PLL_src == RCC_PLL_SRC_HSE)&&(HSE_VALUE != 8000000))
+    {
+        /* HSE_VALUE == 8000000 is needed in this project! */
+        return ERROR;
+    }
+
+    /* RCC system reset */
+    FLASH_SetLatency(FLASH_LATENCY_2);
+    RCC_DeInit();
+
+    if (PLL_src == RCC_PLL_SRC_HSE)
+    {
+        /* Enable HSE */
+        RCC_ConfigHse(RCC_HSE_ENABLE);
+
+        /* Wait till HSE is ready */
+        ClockStatus = RCC_WaitHseStable();
+    }
+    else
+    {
+        /* Enable HSI */
+        RCC_EnableHsi(ENABLE);
+
+        /* Wait till HSI is ready */
+        ClockStatus = RCC_WaitHsiStable();
+    }
+
+    if (ClockStatus != SUCCESS)
+    {
+        return ERROR;
+    }
+
+    /* Configure PLL input prescaler based on clock source
+     * HSI = 16MHz -> PLLINPRES = /4 -> 4MHz 
+     * HSE = 8MHz  -> PLLINPRES = /2 -> 4MHz  */
+    if (PLL_src == RCC_PLL_SRC_HSI)
+    {
+        pllinpre = 4;
+    }
+    else
+    {
+        pllinpre = 2;
+    }
+
+    switch (SYS_freq)
+    {
+        case 72000000:
+            /* 4MHz * 36 = 144MHz(FVCO) / 1(PLLOD) /1 = 144MHz(Fpll) */
+            latency   = FLASH_LATENCY_1;   /* 36MHz < SYSCLK <= 72MHz */
+            pllmul    = 36;
+            plloutdiv = RCC_PLL_OD_DIV_1;
+            pllsysdiv = ENABLE;
+            break;
+        case 80000000:
+            /* 4MHz * 40 = 160MHz(FVCO) / 2(PLLOD) /1 = 80MHz(Fpll) */
+            latency   = FLASH_LATENCY_2;   /* 72MHz < SYSCLK <= 80MHz */
+            pllmul    = 40;
+            plloutdiv = RCC_PLL_OD_DIV_2;
+            pllsysdiv = DISABLE;
+            break;
+        default:
+            return ERROR;
+    }
+
+    /* HCLK = SYSCLK */
+    RCC_ConfigHclk(RCC_SYSCLK_DIV1);
+
+    /* PCLK2 = HCLK */
+    RCC_ConfigPclk2(RCC_HCLK_DIV1);
+
+    /* PCLK1 = HCLK/2 */
+    RCC_ConfigPclk1(RCC_HCLK_DIV2);
+
+    /* Configure PLL: source, input prescaler, multiplier, output prescaler */
+    RCC_ConfigPll(PLL_src, pllinpre, pllmul, plloutdiv);
+
+    /* Enable PLL */
+    RCC_EnablePll(ENABLE);
+
+    /* Wait till PLL is ready */
+    while (RCC_GetFlagStatus(RCC_CTRL_FLAG_PLLRDF) != SET)
+    {
+        if ((timeout_value--) == 0)
+        {
+            return ERROR;
+        }
+    }
+    
+    /* Enable or Disable PLLSYSDIV (SYSCLK = FPLL / pllsysdiv) */
+    RCC_EnablePllSysclkDiv(pllsysdiv);
+
+    /* Select PLL as system clock source */
+    RCC_ConfigSysclk(RCC_SYSCLK_SRC_PLL);
+
+    /* Wait till PLL is used as system clock source */
+    timeout_value = 0xFFFFFFFF;
+    while (RCC_GetSysclkSrc() != RCC_SYSCLK_STS_PLL)
+    {
+        if ((timeout_value--) == 0)
+        {
+            return ERROR;
+        }
+    }
+
+    FLASH_SetLatency(latency);
+    return SUCCESS;
+}

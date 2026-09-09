@@ -1,0 +1,368 @@
+/**
+*     Copyright (c) 2025, Nsing Technologies Inc.
+* 
+*     All rights reserved.
+*
+*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
+* referred to as Nsing). This software, and the product of Nsing described herein 
+* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+* of the People's Republic of China and other applicable jurisdictions worldwide.
+*
+*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
+* intellectual property rights. Names and brands of third party may be mentioned or referred 
+* thereto (if any) for identification purposes only.
+*
+*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
+* improvements to this software at any time without notice. Please contact Nsing and obtain 
+* the latest version of this software before placing orders.
+
+*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+* no responsibility for the accuracy and reliability of this software.
+* 
+*     It is the responsibility of the user of this software to properly design, program, and test 
+* the functionality and safety of any application made of this information and any resulting product. 
+* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+* consequential damages arising in any way out of the use of this software or the Product.
+*
+*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+* damage. Such applications are deemed, "Insecure Usage".
+*
+*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+* to any customer's Insecure Usage.
+
+*     Any express or implied warranty with regard to this software or the Product, including,but not 
+* limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
+* are disclaimed to the fullest extent permitted by law.
+
+*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+* or otherwise distribute this software for any purposes, in whole or in part.
+*
+*     Nsing products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
+* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+* the governments of any countries asserting jurisdiction over the parties or transactions.
+**/
+
+
+/**
+*\*\file lin_master.c
+*\*\author Nsing
+*\*\version v1.0.0
+*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+**/
+#include "main.h"
+#include "lin_master.h"
+
+M_LIN_EX_MSG M_TxMsg;
+
+/**
+*\*\name    SetFrameMsg.
+*\*\fun     Copies source LIN message to destination message.
+*\*\param   dst_Msg - pointer to destination message
+*\*\param   src_Msg - source message
+*\*\return  none
+**/
+void SetFrameMsg(M_LIN_EX_MSG *dst_Msg, M_LIN_EX_MSG src_Msg)
+{
+    int i = 0;
+    Memset(dst_Msg, 0, sizeof(M_LIN_EX_MSG));
+    dst_Msg->Check = src_Msg.Check;
+    dst_Msg->DataLen = src_Msg.DataLen;
+    dst_Msg->Sync = src_Msg.Sync;
+    dst_Msg->PID = src_Msg.PID;
+    for(i = 0; i < src_Msg.DataLen; i++)
+    {
+        dst_Msg->Data[i] = src_Msg.Data[i];
+    }
+    log_info("SetFrameMsg ID:0x%02x\r\n", dst_Msg->PID);
+}
+
+/**
+*\*\name    SetFramePID.
+*\*\fun     Computes and sets PID with parity bits for LIN frame.
+*\*\param   src_Msg - pointer to LIN message
+*\*\return  none
+**/
+void SetFramePID(M_LIN_EX_MSG *src_Msg)
+{
+    uint8_t p0 = 0, p1 = 0;
+    uint8_t LIN_ID = src_Msg->PID, PID = 0x00;
+    p0 = (LIN_ID & 0x01) ^ ((LIN_ID & 0x02) >> 1) ^ ((LIN_ID & 0x04) >> 2) ^ ((LIN_ID & 0x10) >> 4);
+    p0 = p0 & 0x01;
+    p1 = ~(((LIN_ID & 0x02) >> 1) ^ ((LIN_ID & 0x08) >> 3) ^ ((LIN_ID & 0x10) >> 4) ^ ((LIN_ID & 0x20) >> 5));
+    p1 = p1 & 0x01;
+    PID = (p1 << 7) | (p0 << 6) | LIN_ID;
+    src_Msg->PID = PID;
+    log_info("p0 = %02x;p1 = %02x;PID = %02x\r\n", p0, p1, PID);
+}
+
+/**
+*\*\name    MasterGetCheckSum.
+*\*\fun     Calculates LIN classic checksum.
+*\*\param   pData - pointer to data buffer
+*\*\param   len - data length
+*\*\return  checksum value
+**/
+uint8_t MasterGetCheckSum(uint8_t *pData, uint8_t len)
+{
+    uint16_t check_sum_temp = 0;
+    uint8_t i;
+    for(i = 0; i < len; i++)
+    {
+        check_sum_temp += pData[i];
+        if(check_sum_temp > 0xFF)
+        {
+            check_sum_temp -= 0xFF;
+        }
+    }
+    return (~check_sum_temp) & 0xFF;
+}
+
+/**
+*\*\name    SetFrameChecksum.
+*\*\fun     Calculates and sets checksum in LIN message.
+*\*\param   Msg - pointer to LIN message
+*\*\return  none
+**/
+void SetFrameChecksum(M_LIN_EX_MSG *Msg)
+{
+    uint8_t CheckSum = 0;
+    uint8_t len = Msg->DataLen;
+    if(Msg->Check)
+    {
+        CheckSum = MasterGetCheckSum(&Msg->PID, len + 1);
+    }
+    else
+    {
+        CheckSum = MasterGetCheckSum(Msg->Data, len);
+    }
+    if(len < 8)
+    {
+        Msg->Data[len] = CheckSum;
+    }
+    else
+    {
+        Msg->Check = CheckSum;
+    }
+}
+
+/**
+*\*\name    MasterSendBytes.
+*\*\fun     Sends bytes via USART with break character, used for LIN frame transmission.
+*\*\param   pBuf - pointer to data buffer
+*\*\param   Len - number of bytes to send
+*\*\return  none
+**/
+void MasterSendBytes(uint8_t *pBuf, uint8_t Len)
+{
+    USART_SendBreak(USARTx);
+    while(Len--)
+    {
+        while(USART_GetFlagStatus(USARTx, USART_FLAG_TXC) == RESET);
+        USART_SendData(USARTx, *pBuf++);
+    }
+    while(USART_GetFlagStatus(USARTx, USART_FLAG_TXC) == RESET);
+}
+
+/**
+*\*\name    MasterSendFrame.
+*\*\fun     Sends a complete LIN frame.
+*\*\param   Msg - LIN message structure
+*\*\return  none
+**/
+void MasterSendFrame(M_LIN_EX_MSG Msg)
+{
+    if(Msg.DataLen)
+    {
+        MasterSendBytes(&Msg.Sync, Msg.DataLen + 3);
+    }
+    else
+    {
+        MasterSendBytes(&Msg.Sync, 2);
+    }
+}
+
+/**
+*\*\name    FrameHandle.
+*\*\fun     Handles frame preparation and transmission based on PID type.
+*\*\param   none
+*\*\return  none
+**/
+void FrameHandle(void)
+{
+    uint8_t tmp_PID  = M_TxMsg.PID;
+    SetFramePID(&M_TxMsg);
+    switch (tmp_PID)
+    {
+    case 0x3C://Master request frame
+        SetFrameChecksum(&M_TxMsg);
+        break;
+    case 0x3D://Slave reply frame
+        M_TxMsg.DataLen = 0;
+        break;
+    default:
+        break;
+    }
+    MasterSendFrame(M_TxMsg);
+}
+
+/**
+*\*\name    USART_ByteReceive.
+*\*\fun     Receives a byte from USART with timeout.
+*\*\param   Data - pointer to store received byte
+*\*\param   TimeOut - timeout value
+*\*\return  SUCCESS or ERROR
+**/
+static ErrorStatus USART_ByteReceive(uint8_t *Data, uint32_t TimeOut)
+{
+    uint32_t Counter = 0;
+    while((USART_GetFlagStatus(USARTx, USART_FLAG_RXDNE) == RESET) && (Counter != TimeOut))
+    {
+        Counter++;
+        /* Overflow data loss */
+        if(USART_GetFlagStatus(USARTx, USART_FLAG_OREF) != RESET)
+        {
+            USARTx->DAT;
+        }
+    }
+    if(Counter != TimeOut)
+    {
+        *Data = (uint8_t)USART_ReceiveData(USARTx);
+        return SUCCESS;
+    }
+    else
+    {
+        return ERROR;
+    }
+}
+
+/**
+*\*\name    Master_RecData.
+*\*\fun     Receives data from slave with timeout.
+*\*\param   pdata - pointer to receive buffer
+*\*\param   length - maximum bytes to receive
+*\*\return  number of bytes received
+**/
+uint32_t Master_RecData(uint8_t *pdata, uint8_t length)
+{
+    int i = 0;
+    uint8_t Data = 0;
+    uint32_t number = 0;
+    while(i < length)
+    {
+        i++;
+        if((USART_ByteReceive(&Data, SC_RECEIVE_TIMEOUT)) == SUCCESS)
+        {
+            pdata[number] = Data;
+            number++;
+        }
+    }
+    return number;
+}
+
+/**
+*\*\name    WaitFrameRes.
+*\*\fun     Waits for slave response frame and validates checksum.
+*\*\param   dst_data - pointer to destination buffer for received data
+*\*\param   length - maximum data length
+*\*\return  SUCCESS or ERROR
+**/
+ErrorStatus WaitFrameRes(uint8_t *dst_data, uint8_t length)
+{
+    int datalen = 0;
+    uint8_t recv_data[16];
+    uint8_t CheckSum = 0;
+    datalen = Master_RecData(recv_data, 16);
+    if(datalen)
+    {
+        CheckSum = MasterGetCheckSum(recv_data, datalen - 1);
+        log_info("CheckSum:0x%x\r\n", CheckSum);
+        if(CheckSum == recv_data[datalen - 1])
+        {
+            if( (datalen - 2) > length)
+            {
+                Buffercopy(dst_data, &recv_data[0], length);
+            }
+            else
+            {
+                Buffercopy(dst_data, &recv_data[0], datalen - 1);
+            }
+            return SUCCESS;
+        }
+    }
+    return ERROR;
+}
+
+/**
+*\*\name    TestMasterReqFrame.
+*\*\fun     Sends master request frame (PID 0x3C) for testing.
+*\*\param   none
+*\*\return  none
+**/
+void TestMasterReqFrame(void)
+{
+    int i = 0;
+    M_LIN_EX_MSG CurLINTxMsg;
+    CurLINTxMsg.Check = CLASSIC;
+    CurLINTxMsg.DataLen = 8;
+    CurLINTxMsg.Sync = 0x55;
+    CurLINTxMsg.PID = 0x3C;
+    for(i = 0; i < CurLINTxMsg.DataLen; i++)
+    {
+        CurLINTxMsg.Data[i] = 0x0F;
+    }
+    SetFrameMsg(&M_TxMsg, CurLINTxMsg);
+    FrameHandle();
+}
+
+/**
+*\*\name    TestSlaveResFrame.
+*\*\fun     Sends slave response frame request (PID 0x3D) for testing.
+*\*\param   none
+*\*\return  none
+**/
+void TestSlaveResFrame(void)
+{
+    M_LIN_EX_MSG CurLINTxMsg;
+    CurLINTxMsg.Check = CLASSIC;
+    CurLINTxMsg.DataLen = 0;
+    CurLINTxMsg.Sync = 0x55;
+    CurLINTxMsg.PID = 0x3D;
+    SetFrameMsg(&M_TxMsg, CurLINTxMsg);
+    FrameHandle();
+}
+
+/**
+*\*\name    TestLinMaster.
+*\*\fun     LIN master test: sends request, waits for slave response.
+*\*\param   none
+*\*\return  none
+**/
+void TestLinMaster(void)
+{
+    int i = 0, count = 0;
+    uint8_t recv_data[8];
+    TestMasterReqFrame();
+    SysTick_Delay_Ms(20);
+    while(count < 4)
+    {
+        Memset(recv_data, 0, 8);
+        TestSlaveResFrame();
+        if(WaitFrameRes(recv_data, 8) == SUCCESS)
+        {
+            log_info("recv_data:\r\n");
+            for(i = 0; i < 8; i++)
+            {
+                log_info("recv_data[%d] = 0x%x\r\n", i, recv_data[i]);
+            }
+            break;
+        }
+        else
+        {
+            printf("slave no response!!\r\n");
+            count++;
+        }
+    }
+}
