@@ -2,8 +2,8 @@
 
 # N32G41x-SDK
 
-> 当前导入版本：**v1.0.0**  
-> 原始软件包目录：`Nsing.N32G41x_Library.1.0.0`
+> 当前导入版本：**v1.1.0**
+> 原始软件包目录：`Nsing.N32G41x_Library.1.1.0`
 
 ## 概述
 
@@ -15,6 +15,7 @@
 - `.vscode/`
 - `firmware/`
 - `jlink/`
+- `Middlewares/`
 - `projects/`
 
 ## 使用方法
@@ -23,8 +24,7 @@
 
 ## 版本
 
-版本信息以当前 Tag 和原始软件包命名为准。
-
+版本历史请参阅 `N32G41x Version History.txt`。
 
 ## 许可证与来源
 
@@ -36,8 +36,8 @@
 
 # N32G41x-SDK
 
-> Imported version: **v1.0.0**  
-> Original package directory: `Nsing.N32G41x_Library.1.0.0`
+> Imported version: **v1.1.0**
+> Original package directory: `Nsing.N32G41x_Library.1.1.0`
 
 ## Overview
 
@@ -49,6 +49,7 @@
 - `.vscode/`
 - `firmware/`
 - `jlink/`
+- `Middlewares/`
 - `projects/`
 
 ## Usage
@@ -57,8 +58,7 @@ Clone the repository, then open the appropriate Keil MDK, IAR EWARM, or GCC proj
 
 ## Version
 
-Version information follows the Git tag and the original package name.
-
+See `N32G41x Version History.txt` for the original version history.
 
 ## License and provenance
 
