@@ -1,38 +1,38 @@
 /**
-*     Copyright (c) 2025, NSING Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter 
-* referred to as NSING). This software, and the product of NSING described herein 
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
 * (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     NSING does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     NSING reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact NSING and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although NSING has attempted to provide accurate and reliable information, NSING assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
 *     NSING Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
@@ -40,8 +40,8 @@
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
 *     NSING products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
@@ -49,7 +49,7 @@
 *\*\file main.c
 *\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, NSING Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
 #include <string.h>
@@ -59,10 +59,38 @@
 DMA_InitType DMA_InitStructure;
 
 const uint32_t SRC_Const_Buffer[] = {
-    0x72aa0305, 0x839916bf, 0x913782c5, 0x7e3bd953, 0x4174430c, 0x40d59981, 0xbccff537, 0xd22bca1a,
-    0xda039c07, 0xff38219a, 0x17f16c33, 0x0056b9cf, 0x4e75ab0a, 0x0751b137, 0xbb051ec9, 0xcac01e06,
-    0x5de647ba, 0xf2bd2108, 0x60a32be0, 0xbf80a68f, 0x299b4a55, 0xd37b1965, 0x84a3ca5b, 0x0f08f335,
-    0x21c4084b, 0x738688ca, 0xe7971a03, 0xadcd6bfc, 0xd4bb55ae, 0x0ea4ed88, 0x131711a3, 0x4e92f42f,
+    0x72aa0305,
+    0x839916bf,
+    0x913782c5,
+    0x7e3bd953,
+    0x4174430c,
+    0x40d59981,
+    0xbccff537,
+    0xd22bca1a,
+    0xda039c07,
+    0xff38219a,
+    0x17f16c33,
+    0x0056b9cf,
+    0x4e75ab0a,
+    0x0751b137,
+    0xbb051ec9,
+    0xcac01e06,
+    0x5de647ba,
+    0xf2bd2108,
+    0x60a32be0,
+    0xbf80a68f,
+    0x299b4a55,
+    0xd37b1965,
+    0x84a3ca5b,
+    0x0f08f335,
+    0x21c4084b,
+    0x738688ca,
+    0xe7971a03,
+    0xadcd6bfc,
+    0xd4bb55ae,
+    0x0ea4ed88,
+    0x131711a3,
+    0x4e92f42f,
 };
 uint32_t DST_Buffer[BUFFER_SIZE];
 
@@ -126,10 +154,17 @@ int main(void)
     DMA_InitStructure.Mem2Mem        = DMA_M2M_ENABLE;
     DMA_Init(DMA_CHANNEL_USED, &DMA_InitStructure);
 
+    /** In memory-to-memory mode, it is recommended to set an reserved  
+    peripheral request source in the system, otherwise the request 
+    will be mapped to the ADC1. **/
+    DMA_RequestRemap(DMA_REMAP_NONE, DMA, DMA_CHANNEL_USED, ENABLE);
+
     DMA_ConfigInt(DMA_CHANNEL_USED, DMA_INT_TXC, ENABLE);
     DMA_EnableChannel(DMA_CHANNEL_USED, ENABLE);
 
-    while (TransferCompleteFlag == 0) {}
+    while (TransferCompleteFlag == 0)
+    {
+    }
 
     if (memcmp(SRC_Const_Buffer, DST_Buffer, sizeof(SRC_Const_Buffer)) == 0)
     {
@@ -140,7 +175,9 @@ int main(void)
         log_error("DMA Flash to RAM failed\n");
     }
 
-    while (1) {}
+    while (1)
+    {
+    }
 }
 
 /**

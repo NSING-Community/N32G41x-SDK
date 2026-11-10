@@ -1,38 +1,38 @@
 /**
-*     Copyright (c) 2025, NSING Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter 
-* referred to as NSING). This software, and the product of NSING described herein 
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
 * (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     NSING does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     NSING reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact NSING and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although NSING has attempted to provide accurate and reliable information, NSING assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
 *     NSING Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
@@ -40,8 +40,8 @@
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
 *     NSING products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
@@ -49,7 +49,7 @@
 *\*\file main.c
 *\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, NSING Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
 #include <stdio.h>
@@ -60,8 +60,8 @@
 #define CRC32_DFE_POLY 0x04C11DB7
 
 static const uint32_t DataBuffer[BUFFER_SIZE] =
-{
-    0x00001021, 0x20423063, 0x408450a5, 0x60c670e7, 0x9129a14a, 0xb16bc18c, 0xd1ade1ce, 0xf1ef1231, 0x32732252,
+    {
+        0x00001021, 0x20423063, 0x408450a5, 0x60c670e7, 0x9129a14a, 0xb16bc18c, 0xd1ade1ce, 0xf1ef1231, 0x32732252,
     0x52b54294, 0x72f762d6, 0x93398318, 0xa35ad3bd, 0xc39cf3ff, 0xe3de2462, 0x34430420, 0x64e674c7, 0x44a45485,
     0xa56ab54b, 0x85289509, 0xf5cfc5ac, 0xd58d3653, 0x26721611, 0x063076d7, 0x569546b4, 0xb75ba77a, 0x97198738,
     0xf7dfe7fe, 0xc7bc48c4, 0x58e56886, 0x78a70840, 0x18612802, 0xc9ccd9ed, 0xe98ef9af, 0x89489969, 0xa90ab92b,
@@ -90,7 +90,7 @@ __IO uint32_t CRC32Value = 0;
 *\*\param   initcrc - initial CRC value
 *\*\return  CRC16 result
 **/
-uint16_t GetCRC16_Software(uint8_t* buf, uint32_t len, uint16_t initcrc)
+uint16_t GetCRC16_Software(uint8_t *buf, uint32_t len, uint16_t initcrc)
 {
     uint16_t crc16 = initcrc;
     uint8_t i = 0, j = 0;
@@ -123,7 +123,7 @@ uint16_t GetCRC16_Software(uint8_t* buf, uint32_t len, uint16_t initcrc)
 *\*\param   initcrc - initial CRC value
 *\*\return  CRC32 result
 **/
-uint32_t GetCRC32_Software(uint32_t* buf, uint32_t len, uint32_t initcrc)
+uint32_t GetCRC32_Software(uint32_t *buf, uint32_t len, uint32_t initcrc)
 {
     uint32_t crc32 = initcrc;
     uint32_t xbit;
@@ -175,10 +175,10 @@ int main(void)
     log_init();
 
     /* Compute the 32-bit CRC of DataBuffer using hardware */
-    CRC32Value = CRC32_CalcBufCrc((uint32_t*)DataBuffer, BUFFER_SIZE);
+    CRC32Value = CRC32_CalcBufCrc((uint32_t *)DataBuffer, BUFFER_SIZE);
 
     /* Compute the 32-bit CRC of DataBuffer using software */
-    CRCValue   = GetCRC32_Software((uint32_t*)DataBuffer, BUFFER_SIZE, 0xffffffff);
+    CRCValue = GetCRC32_Software((uint32_t *)DataBuffer, BUFFER_SIZE, 0xffffffff);
 
     /* Read volatile values into local variables to avoid undefined access order */
     crc32_hw = CRC32Value;
@@ -193,10 +193,10 @@ int main(void)
     }
 
     /* Compute the 16-bit CRC of Buffer using hardware */
-    CRC16Value = CRC16_CalcBufCrc((uint8_t*)Buffer, 8);
+    CRC16Value = CRC16_CalcBufCrc((uint8_t *)Buffer, 8);
 
     /* Compute the 16-bit CRC of Buffer using software */
-    CRCValue   = GetCRC16_Software((uint8_t*)Buffer, 8, 0x00);
+    CRCValue = GetCRC16_Software((uint8_t *)Buffer, 8, 0x00);
 
     /* Read volatile values into local variables to avoid undefined access order */
     crc16_hw = CRC16Value;

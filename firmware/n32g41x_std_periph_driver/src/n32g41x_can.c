@@ -1,64 +1,64 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
 *\*\file n32g41x_can.c
-*\*\author Nsing
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 #include "n32g41x_can.h"
 #include "n32g41x_rcc.h"
 
-/** CAN Private Defines **/
+/*** CAN Private Defines ***/
 
 static INTStatus CheckINTStatus(uint32_t CAN_Reg, uint32_t Int_Bit);
 
-/** CAN Driving Functions Declaration **/
+/*** CAN Driving Functions Declaration ***/
 
 /**
 *\*\name    CAN_DeInit
@@ -67,17 +67,16 @@ static INTStatus CheckINTStatus(uint32_t CAN_Reg, uint32_t Int_Bit);
 *\*\             - CAN
 *\*\return  none
 **/
-void CAN_DeInit(const CAN_Module* CANx)
+void CAN_DeInit(const CAN_Module *CANx)
 {
     UNUSED(CANx);
     RCC_EnableAPB1PeriphReset(RCC_APB1_PERIPH_CAN);
 }
 
-
 /**
 *\*\name   CAN_Init
 *\*\fun    Initializes the CAN peripheral according to the specified
-*\*\       parameters in the CAN_initializes_parameter.
+*\*\       parameters in the CAN_InitType structure.
 *\*\param  CANx:
 *\*\            - CAN
 *\*\param  CAN_InitParam (The input parameters must be the following values) :
@@ -136,15 +135,15 @@ void CAN_DeInit(const CAN_Module* CANx)
 *\*\                - ENABLE
 *\*\            - TXFP
 *\*\                - DISABLE
-*\*\                - ENABLE           
+*\*\                - ENABLE
 *\*\return InitStatus :
 *\*\            - CAN_InitSTS_Failed
 *\*\            - CAN_InitSTS_Success
 **/
-uint8_t CAN_Init(CAN_Module* CANx, const CAN_InitType* CAN_InitParam)
+uint8_t CAN_Init(CAN_Module *CANx, const CAN_InitType *CAN_InitParam)
 {
     uint8_t InitStatus;
-    uint32_t wait_ack  = 0x00000000;
+    uint32_t wait_ack = 0x00000000U;
 
     /* Exit from sleep mode */
     CANx->MCTRL &= (~(uint32_t)CAN_MCTRL_SLPRQ);
@@ -226,15 +225,15 @@ uint8_t CAN_Init(CAN_Module* CANx, const CAN_InitType* CAN_InitParam)
         }
 
         /* Set the bit timing register */
-        CANx->BTIM = (uint32_t)((uint32_t)CAN_InitParam->OperatingMode << 30) | ((uint32_t)CAN_InitParam->RSJW << 24)
-                    | ((uint32_t)CAN_InitParam->TBS1 << 16) | ((uint32_t)CAN_InitParam->TBS2 << 20)
-                    | ((uint32_t)CAN_InitParam->BaudRatePrescaler - (uint32_t)0x1);
+        CANx->BTIM = (uint32_t)((uint32_t)CAN_InitParam->OperatingMode << 30U) | ((uint32_t)CAN_InitParam->RSJW << 24U)
+                     | ((uint32_t)CAN_InitParam->TBS1 << 16U) | ((uint32_t)CAN_InitParam->TBS2 << 20U)
+                     | ((uint32_t)CAN_InitParam->BaudRatePrescaler - (uint32_t)0x1U);
 
         /* Request leave initialisation */
         CANx->MCTRL &= ~(uint32_t)CAN_MCTRL_INIRQ;
 
         /* Wait the acknowledge */
-        wait_ack = 0;
+        wait_ack = 0U;
 
         while (((CANx->MSTS & CAN_MSTS_INIAK) == CAN_MSTS_INIAK) && (wait_ack != INIAK_TIMEOUT))
         {
@@ -256,11 +255,10 @@ uint8_t CAN_Init(CAN_Module* CANx, const CAN_InitType* CAN_InitParam)
     return InitStatus;
 }
 
-
 /**
 *\*\name   CAN_InitFilter
 *\*\fun    Initializes the CAN peripheral according to the specified
-*\*\       parameters in the CAN_filter_initializes_structure.
+*\*\       parameters in the CAN_FilterInitType structure.
 *\*\param  CAN_InitFilterStruct (The input parameters must be the following values) :
 *\*\            - Filter_HighId
 *\*\                - It ranges from 0x0000 to 0xFFFF
@@ -286,11 +284,11 @@ uint8_t CAN_Init(CAN_Module* CANx, const CAN_InitType* CAN_InitParam)
 *\*\                - DISABLE
 *\*\return none
 **/
-void CAN_InitFilter(const CAN_FilterInitType* CAN_InitFilterStruct)
+void CAN_InitFilter(const CAN_FilterInitType *CAN_InitFilterStruct)
 {
     uint32_t filter_number_bit_pos;
 
-    filter_number_bit_pos = ((uint32_t)1) << CAN_InitFilterStruct->Filter_Num;
+    filter_number_bit_pos = ((uint32_t)1U) << CAN_InitFilterStruct->Filter_Num;
 
     /* Initialisation mode for the filter */
     CAN->FMC |= FMC_FINITM;
@@ -307,14 +305,14 @@ void CAN_InitFilter(const CAN_FilterInitType* CAN_InitFilterStruct)
         /* First 16-bit identifier and First 16-bit mask */
         /* Or First 16-bit identifier and Second 16-bit identifier */
         CAN->sFilterRegister[CAN_InitFilterStruct->Filter_Num].FR1 =
-            (((uint32_t)0x0000FFFF & (uint32_t)CAN_InitFilterStruct->FilterMask_LowId) << 16)
-            | ((uint32_t)0x0000FFFF & (uint32_t)CAN_InitFilterStruct->Filter_LowId);
+            (((uint32_t)0x0000FFFFU & (uint32_t)CAN_InitFilterStruct->FilterMask_LowId) << 16U)
+            | ((uint32_t)0x0000FFFFU & (uint32_t)CAN_InitFilterStruct->Filter_LowId);
 
         /* Second 16-bit identifier and Second 16-bit mask */
         /* Or Third 16-bit identifier and Fourth 16-bit identifier */
         CAN->sFilterRegister[CAN_InitFilterStruct->Filter_Num].FR2 =
-            (((uint32_t)0x0000FFFF & (uint32_t)CAN_InitFilterStruct->FilterMask_HighId) << 16)
-            | ((uint32_t)0x0000FFFF & (uint32_t)CAN_InitFilterStruct->Filter_HighId);
+            (((uint32_t)0x0000FFFFU & (uint32_t)CAN_InitFilterStruct->FilterMask_HighId) << 16U)
+            | ((uint32_t)0x0000FFFFU & (uint32_t)CAN_InitFilterStruct->Filter_HighId);
     }
 
     if (CAN_InitFilterStruct->Filter_Scale == CAN_Filter_32bitScale)
@@ -323,23 +321,23 @@ void CAN_InitFilter(const CAN_FilterInitType* CAN_InitFilterStruct)
         CAN->FS1 |= filter_number_bit_pos;
         /* 32-bit identifier or First 32-bit identifier */
         CAN->sFilterRegister[CAN_InitFilterStruct->Filter_Num].FR1 =
-            (((uint32_t)0x0000FFFF & (uint32_t)CAN_InitFilterStruct->Filter_HighId) << 16)
-            | ((uint32_t)0x0000FFFF & (uint32_t)CAN_InitFilterStruct->Filter_LowId);
+            (((uint32_t)0x0000FFFFU & (uint32_t)CAN_InitFilterStruct->Filter_HighId) << 16U)
+            | ((uint32_t)0x0000FFFFU & (uint32_t)CAN_InitFilterStruct->Filter_LowId);
         /* 32-bit mask or Second 32-bit identifier */
         CAN->sFilterRegister[CAN_InitFilterStruct->Filter_Num].FR2 =
-            (((uint32_t)0x0000FFFF & (uint32_t)CAN_InitFilterStruct->FilterMask_HighId) << 16)
-            | ((uint32_t)0x0000FFFF & (uint32_t)CAN_InitFilterStruct->FilterMask_LowId);
+            (((uint32_t)0x0000FFFFU & (uint32_t)CAN_InitFilterStruct->FilterMask_HighId) << 16U)
+            | ((uint32_t)0x0000FFFFU & (uint32_t)CAN_InitFilterStruct->FilterMask_LowId);
     }
 
     /* Filter Mode */
     if (CAN_InitFilterStruct->Filter_Mode == CAN_Filter_IdMaskMode)
     {
-        /*Id/Mask mode for the filter*/
+        /* Id/Mask mode for the filter */
         CAN->FM1 &= ~(uint32_t)filter_number_bit_pos;
     }
     else /* CAN_InitFilterStruct->Filter_Mode == CAN_Filter_IdListMode */
     {
-        /*Identifier list mode for the filter*/
+        /* Identifier list mode for the filter */
         CAN->FM1 |= (uint32_t)filter_number_bit_pos;
     }
 
@@ -368,7 +366,7 @@ void CAN_InitFilter(const CAN_FilterInitType* CAN_InitFilterStruct)
 
 /**
 *\*\name   CAN_InitStruct
-*\*\fun    Fills each CAN_initializes_parameter member with its default value.
+*\*\fun    Fills each CAN_InitType member with its default value.
 *\*\param  CAN_InitParam (The input parameters must be the following values) :
 *\*\            - BaudRatePrescaler
 *\*\                - It ranges from 1 to 1024.
@@ -425,10 +423,10 @@ void CAN_InitFilter(const CAN_FilterInitType* CAN_InitFilterStruct)
 *\*\                - ENABLE
 *\*\            - TXFP
 *\*\                - DISABLE
-*\*\                - ENABLE 
+*\*\                - ENABLE
 *\*\return none
 **/
-void CAN_InitStruct(CAN_InitType* CAN_InitParam)
+void CAN_InitStruct(CAN_InitType *CAN_InitParam)
 {
     /* Reset CAN init structure parameters values */
 
@@ -463,7 +461,7 @@ void CAN_InitStruct(CAN_InitType* CAN_InitParam)
     CAN_InitParam->TBS2 = CAN_TBS2_3tq;
 
     /* Initialize the BaudRatePrescaler member */
-    CAN_InitParam->BaudRatePrescaler = 1;
+    CAN_InitParam->BaudRatePrescaler = 1U;
 }
 
 /**
@@ -476,7 +474,7 @@ void CAN_InitStruct(CAN_InitType* CAN_InitParam)
 *\*\            - ENABLE
 *\*\return none
 **/
-void CAN_DebugFreeze(CAN_Module* CANx, FunctionalState Cmd)
+void CAN_DebugFreeze(CAN_Module *CANx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -498,14 +496,14 @@ void CAN_DebugFreeze(CAN_Module* CANx, FunctionalState Cmd)
 *\*\param  Cmd (The input parameters must be the following values):
 *\*\            - DISABLE
 *\*\            - ENABLE
-*\*\note   when enabled, Time stamp (TIME[15:0]) value is sent in the last
-*\*\       two data bytes of the 8-byte message: TIME[7:0] in data byte 6
-*\*\       and TIME[15:8] in data byte 7
+*\*\note   when enabled, Time stamp (MTIM[15:0]) value is sent in the last
+*\*\       two data bytes of the 8-byte message: MTIM[7:0] in data byte 6
+*\*\       and MTIM[15:8] in data byte 7
 *\*\note   DLC must be programmed as 8 in order Time Stamp (2 bytes) to be
 *\*\       sent over the CAN bus.
 *\*\return none
 **/
-void CAN_EnTTComMode(CAN_Module* CANx, FunctionalState Cmd)
+void CAN_EnTTComMode(CAN_Module *CANx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -513,9 +511,9 @@ void CAN_EnTTComMode(CAN_Module* CANx, FunctionalState Cmd)
         CANx->MCTRL |= CAN_MCTRL_TTCM;
 
         /* Set TGT bits */
-        CANx->sTxMailBox[0].TMDT |= ((uint32_t)CAN_TMDT0_TGT);
-        CANx->sTxMailBox[1].TMDT |= ((uint32_t)CAN_TMDT1_TGT);
-        CANx->sTxMailBox[2].TMDT |= ((uint32_t)CAN_TMDT2_TGT);
+        CANx->sTxMailBox[0U].TMDT |= ((uint32_t)CAN_TMDT0_TGT);
+        CANx->sTxMailBox[1U].TMDT |= ((uint32_t)CAN_TMDT1_TGT);
+        CANx->sTxMailBox[2U].TMDT |= ((uint32_t)CAN_TMDT2_TGT);
     }
     else
     {
@@ -523,12 +521,11 @@ void CAN_EnTTComMode(CAN_Module* CANx, FunctionalState Cmd)
         CANx->MCTRL &= (uint32_t)(~(uint32_t)CAN_MCTRL_TTCM);
 
         /* Reset TGT bits */
-        CANx->sTxMailBox[0].TMDT &= ((uint32_t)~CAN_TMDT0_TGT);
-        CANx->sTxMailBox[1].TMDT &= ((uint32_t)~CAN_TMDT1_TGT);
-        CANx->sTxMailBox[2].TMDT &= ((uint32_t)~CAN_TMDT2_TGT);
+        CANx->sTxMailBox[0U].TMDT &= ((uint32_t)~CAN_TMDT0_TGT);
+        CANx->sTxMailBox[1U].TMDT &= ((uint32_t)~CAN_TMDT1_TGT);
+        CANx->sTxMailBox[2U].TMDT &= ((uint32_t)~CAN_TMDT2_TGT);
     }
 }
-
 
 /**
 *\*\name   CAN_TransmitMessage
@@ -556,22 +553,22 @@ void CAN_EnTTComMode(CAN_Module* CANx, FunctionalState Cmd)
 *\*\            - CAN_TXMAILBOX_2
 *\*\            - CAN_TxSTS_NoMailBox
 **/
-uint8_t CAN_TransmitMessage(CAN_Module* CANx, CanTxMessage* TxMessage)
+uint8_t CAN_TransmitMessage(CAN_Module *CANx, CanTxMessage *TxMessage)
 {
     uint8_t transmit_mailbox;
 
     /* Select one empty transmit mailbox */
     if ((CANx->TSTS & CAN_TSTS_TMEM0) == CAN_TSTS_TMEM0)
     {
-        transmit_mailbox = 0;
+        transmit_mailbox = 0U;
     }
     else if ((CANx->TSTS & CAN_TSTS_TMEM1) == CAN_TSTS_TMEM1)
     {
-        transmit_mailbox = 1;
+        transmit_mailbox = 1U;
     }
     else if ((CANx->TSTS & CAN_TSTS_TMEM2) == CAN_TSTS_TMEM2)
     {
-        transmit_mailbox = 2;
+        transmit_mailbox = 2U;
     }
     else
     {
@@ -584,25 +581,25 @@ uint8_t CAN_TransmitMessage(CAN_Module* CANx, CanTxMessage* TxMessage)
         CANx->sTxMailBox[transmit_mailbox].TMI &= TMIDxR_TXRQ;
         if (TxMessage->IDE == CAN_Standard_Id)
         {
-            CANx->sTxMailBox[transmit_mailbox].TMI |= ((TxMessage->StdId << 21) | TxMessage->RTR);
+            CANx->sTxMailBox[transmit_mailbox].TMI |= ((TxMessage->StdId << 21U) | TxMessage->RTR);
         }
         else
         {
-            CANx->sTxMailBox[transmit_mailbox].TMI |= ((TxMessage->ExtId << 3) | TxMessage->IDE | TxMessage->RTR);
+            CANx->sTxMailBox[transmit_mailbox].TMI |= ((TxMessage->ExtId << 3U) | TxMessage->IDE | TxMessage->RTR);
         }
 
         /* Set up the DLC */
-        TxMessage->DLC &= (uint8_t)0x0000000F;
+        TxMessage->DLC &= (uint8_t)0x0000000FU;
         CANx->sTxMailBox[transmit_mailbox].TMDT &= (uint32_t)0xFFFFFFF0U;
         CANx->sTxMailBox[transmit_mailbox].TMDT |= TxMessage->DLC;
 
         /* Set up the data field */
         CANx->sTxMailBox[transmit_mailbox].TMDL =
-            (((uint32_t)TxMessage->Data[3] << 24) | ((uint32_t)TxMessage->Data[2] << 16)
-             | ((uint32_t)TxMessage->Data[1] << 8) | ((uint32_t)TxMessage->Data[0]));
+            (((uint32_t)TxMessage->Data[3U] << 24U) | ((uint32_t)TxMessage->Data[2U] << 16U)
+             | ((uint32_t)TxMessage->Data[1U] << 8U) | ((uint32_t)TxMessage->Data[0U]));
         CANx->sTxMailBox[transmit_mailbox].TMDH =
-            (((uint32_t)TxMessage->Data[7] << 24) | ((uint32_t)TxMessage->Data[6] << 16)
-             | ((uint32_t)TxMessage->Data[5] << 8) | ((uint32_t)TxMessage->Data[4]));
+            (((uint32_t)TxMessage->Data[7U] << 24U) | ((uint32_t)TxMessage->Data[6U] << 16U)
+             | ((uint32_t)TxMessage->Data[5U] << 8U) | ((uint32_t)TxMessage->Data[4U]));
         /* Request transmission */
         CANx->sTxMailBox[transmit_mailbox].TMI |= TMIDxR_TXRQ;
     }
@@ -614,7 +611,7 @@ uint8_t CAN_TransmitMessage(CAN_Module* CANx, CanTxMessage* TxMessage)
 *\*\fun    Checks the transmission of a message.
 *\*\param  CANx:
 *\*\            - CAN
-*\*\param  mailbox_queue (The input parameters must be the following values) :
+*\*\param  TransmitMailbox (The input parameters must be the following values) :
 *\*\            - CAN_TXMAILBOX_0
 *\*\            - CAN_TXMAILBOX_1
 *\*\            - CAN_TXMAILBOX_2
@@ -623,58 +620,57 @@ uint8_t CAN_TransmitMessage(CAN_Module* CANx, CanTxMessage* TxMessage)
 *\*\            - CAN_TxSTS_Ok
 *\*\            - CAN_TxSTS_Pending
 **/
-uint8_t CAN_TransmitSTS(const CAN_Module* CANx, uint8_t TransmitMailbox)
+uint8_t CAN_TransmitSTS(const CAN_Module *CANx, uint8_t TransmitMailbox)
 {
     uint32_t state;
 
     switch (TransmitMailbox)
     {
-    case (CAN_TXMAILBOX_0):
-        state = CANx->TSTS & (CAN_TSTS_RQCPM0 | CAN_TSTS_TXOKM0 | CAN_TSTS_TMEM0);
-        break;
-    case (CAN_TXMAILBOX_1):
-        state = CANx->TSTS & (CAN_TSTS_RQCPM1 | CAN_TSTS_TXOKM1 | CAN_TSTS_TMEM1);
-        break;
-    case (CAN_TXMAILBOX_2):
-        state = CANx->TSTS & (CAN_TSTS_RQCPM2 | CAN_TSTS_TXOKM2 | CAN_TSTS_TMEM2);
-        break;
-    default:
-        state = (uint32_t)CAN_TxSTS_Failed;
-        break;
+        case (CAN_TXMAILBOX_0):
+            state = CANx->TSTS & (CAN_TSTS_RQCPM0 | CAN_TSTS_TXOKM0 | CAN_TSTS_TMEM0);
+            break;
+        case (CAN_TXMAILBOX_1):
+            state = CANx->TSTS & (CAN_TSTS_RQCPM1 | CAN_TSTS_TXOKM1 | CAN_TSTS_TMEM1);
+            break;
+        case (CAN_TXMAILBOX_2):
+            state = CANx->TSTS & (CAN_TSTS_RQCPM2 | CAN_TSTS_TXOKM2 | CAN_TSTS_TMEM2);
+            break;
+        default:
+            state = (uint32_t)CAN_TxSTS_NoMailBox;
+            break;
     }
     switch (state)
     {
-        /* transmit pending  */
-    case (0x0):
-        state = (uint32_t)CAN_TxSTS_Pending;
-        break;
-        /* transmit failed  */
-    case (CAN_TSTS_RQCPM0 | CAN_TSTS_TMEM0):
-        state = (uint32_t)CAN_TxSTS_Failed;
-        break;
-    case (CAN_TSTS_RQCPM1 | CAN_TSTS_TMEM1):
-        state = (uint32_t)CAN_TxSTS_Failed;
-        break;
-    case (CAN_TSTS_RQCPM2 | CAN_TSTS_TMEM2):
-        state = (uint32_t)CAN_TxSTS_Failed;
-        break;
-        /* transmit succeeded  */
-    case (CAN_TSTS_RQCPM0 | CAN_TSTS_TXOKM0 | CAN_TSTS_TMEM0):
-        state = (uint32_t)CAN_TxSTS_Ok;
-        break;
-    case (CAN_TSTS_RQCPM1 | CAN_TSTS_TXOKM1 | CAN_TSTS_TMEM1):
-        state = (uint32_t)CAN_TxSTS_Ok;
-        break;
-    case (CAN_TSTS_RQCPM2 | CAN_TSTS_TXOKM2 | CAN_TSTS_TMEM2):
-        state = (uint32_t)CAN_TxSTS_Ok;
-        break;
-    default:
-        state = (uint32_t)CAN_TxSTS_Failed;
-        break;
+            /* transmit pending  */
+        case (0x0U):
+            state = (uint32_t)CAN_TxSTS_Pending;
+            break;
+            /* transmit failed  */
+        case (CAN_TSTS_RQCPM0 | CAN_TSTS_TMEM0):
+            state = (uint32_t)CAN_TxSTS_Failed;
+            break;
+        case (CAN_TSTS_RQCPM1 | CAN_TSTS_TMEM1):
+            state = (uint32_t)CAN_TxSTS_Failed;
+            break;
+        case (CAN_TSTS_RQCPM2 | CAN_TSTS_TMEM2):
+            state = (uint32_t)CAN_TxSTS_Failed;
+            break;
+            /* transmit succeeded  */
+        case (CAN_TSTS_RQCPM0 | CAN_TSTS_TXOKM0 | CAN_TSTS_TMEM0):
+            state = (uint32_t)CAN_TxSTS_Ok;
+            break;
+        case (CAN_TSTS_RQCPM1 | CAN_TSTS_TXOKM1 | CAN_TSTS_TMEM1):
+            state = (uint32_t)CAN_TxSTS_Ok;
+            break;
+        case (CAN_TSTS_RQCPM2 | CAN_TSTS_TXOKM2 | CAN_TSTS_TMEM2):
+            state = (uint32_t)CAN_TxSTS_Ok;
+            break;
+        default:
+            state = (uint32_t)CAN_TxSTS_Failed;
+            break;
     }
     return (uint8_t)state;
 }
-
 
 /**
 *\*\name   CAN_CancelTransmitMessage
@@ -687,23 +683,23 @@ uint8_t CAN_TransmitSTS(const CAN_Module* CANx, uint8_t TransmitMailbox)
 *\*\            - CAN_TXMAILBOX_2
 *\*\return none
 **/
-void CAN_CancelTransmitMessage(CAN_Module* CANx, uint8_t Mailbox)
+void CAN_CancelTransmitMessage(CAN_Module *CANx, uint8_t Mailbox)
 {
     /* abort transmission */
     switch (Mailbox)
     {
-    case (CAN_TXMAILBOX_0):
-        CANx->TSTS |= CAN_TSTS_ABRQM0;
-        break;
-    case (CAN_TXMAILBOX_1):
-        CANx->TSTS |= CAN_TSTS_ABRQM1;
-        break;
-    case (CAN_TXMAILBOX_2):
-        CANx->TSTS |= CAN_TSTS_ABRQM2;
-        break;
-    default:
-    	/* No Process */
-        break;
+        case (CAN_TXMAILBOX_0):
+            CANx->TSTS = CAN_TSTS_ABRQM0;
+            break;
+        case (CAN_TXMAILBOX_1):
+            CANx->TSTS = CAN_TSTS_ABRQM1;
+            break;
+        case (CAN_TXMAILBOX_2):
+            CANx->TSTS = CAN_TSTS_ABRQM2;
+            break;
+        default:
+            /* No Process */
+            break;
     }
 }
 
@@ -734,43 +730,43 @@ void CAN_CancelTransmitMessage(CAN_Module* CANx, uint8_t Mailbox)
 *\*\                - It ranges from 0 to 0xFF
 *\*\return none
 **/
-void CAN_ReceiveMessage(CAN_Module* CANx, uint8_t FIFONum, CanRxMessage* RxMessage)
+void CAN_ReceiveMessage(CAN_Module *CANx, uint8_t FIFONum, CanRxMessage *RxMessage)
 {
     /* Get the Id */
     RxMessage->IDE = (uint8_t)(CAN_RMIx_IDE & CANx->sFIFOMailBox[FIFONum].RMI);
     if (RxMessage->IDE == CAN_Standard_Id)
     {
-        RxMessage->StdId = (uint32_t)0x000007FF & (CANx->sFIFOMailBox[FIFONum].RMI >> 21);
+        RxMessage->StdId = (uint32_t)0x000007FFU & (CANx->sFIFOMailBox[FIFONum].RMI >> 21U);
     }
     else
     {
-        RxMessage->ExtId = (uint32_t)0x1FFFFFFF & (CANx->sFIFOMailBox[FIFONum].RMI >> 3);
+        RxMessage->ExtId = (uint32_t)0x1FFFFFFFU & (CANx->sFIFOMailBox[FIFONum].RMI >> 3U);
     }
 
     RxMessage->RTR = (uint8_t)(CAN_RMIx_RTRQ & CANx->sFIFOMailBox[FIFONum].RMI);
     /* Get the DLC */
     RxMessage->DLC = (uint8_t)(CAN_TMDTx_DLC & CANx->sFIFOMailBox[FIFONum].RMDT);
     /* Get the FMI */
-    RxMessage->FMI = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDT >> 8));
+    RxMessage->FMI = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDT >> 8U));
     /* Get the data field */
-    RxMessage->Data[0] = (uint8_t)(CAN_DATA_FIFO_MASK & CANx->sFIFOMailBox[FIFONum].RMDL);
-    RxMessage->Data[1] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDL >> 8));
-    RxMessage->Data[2] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDL >> 16));
-    RxMessage->Data[3] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDL >> 24));
-    RxMessage->Data[4] = (uint8_t)(CAN_DATA_FIFO_MASK & CANx->sFIFOMailBox[FIFONum].RMDH);
-    RxMessage->Data[5] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDH >> 8));
-    RxMessage->Data[6] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDH >> 16));
-    RxMessage->Data[7] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDH >> 24));
+    RxMessage->Data[0U] = (uint8_t)(CAN_DATA_FIFO_MASK & CANx->sFIFOMailBox[FIFONum].RMDL);
+    RxMessage->Data[1U] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDL >> 8U));
+    RxMessage->Data[2U] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDL >> 16U));
+    RxMessage->Data[3U] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDL >> 24U));
+    RxMessage->Data[4U] = (uint8_t)(CAN_DATA_FIFO_MASK & CANx->sFIFOMailBox[FIFONum].RMDH);
+    RxMessage->Data[5U] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDH >> 8U));
+    RxMessage->Data[6U] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDH >> 16U));
+    RxMessage->Data[7U] = (uint8_t)(CAN_DATA_FIFO_MASK & (CANx->sFIFOMailBox[FIFONum].RMDH >> 24U));
     /* Release the DATFIFO */
     /* Release FIFO0 */
     if (FIFONum == CAN_FIFO0)
     {
-        CANx->RFF0 |= CAN_RFF0_RFFOM0;
+        CANx->RFF0 = (uint32_t)CAN_RFF0_RFFOM0;
     }
     /* Release FIFO1 */
     else /* FIFONum == CAN_FIFO1 */
     {
-        CANx->RFF1 |= CAN_RFF1_RFFOM1;
+        CANx->RFF1 = (uint32_t)CAN_RFF1_RFFOM1;
     }
 }
 
@@ -784,17 +780,17 @@ void CAN_ReceiveMessage(CAN_Module* CANx, uint8_t FIFONum, CanRxMessage* RxMessa
 *\*\            - CAN_FIFO1
 *\*\return none
 **/
-void CAN_ReleaseFIFO(CAN_Module* CANx, uint8_t FIFONum)
+void CAN_ReleaseFIFO(CAN_Module *CANx, uint8_t FIFONum)
 {
     /* Release FIFO0 */
     if (FIFONum == CAN_FIFO0)
     {
-        CANx->RFF0 |= CAN_RFF0_RFFOM0;
+        CANx->RFF0 = (uint32_t)CAN_RFF0_RFFOM0;
     }
     /* Release FIFO1 */
     else /* FIFONum == CAN_FIFO1 */
     {
-        CANx->RFF1 |= CAN_RFF1_RFFOM1;
+        CANx->RFF1 = (uint32_t)CAN_RFF1_RFFOM1;
     }
 }
 
@@ -806,27 +802,27 @@ void CAN_ReleaseFIFO(CAN_Module* CANx, uint8_t FIFONum)
 *\*\param  FIFONum (The input parameters must be the following values) :
 *\*\            - CAN_FIFO0
 *\*\            - CAN_FIFO1
-*\*\return message_pending : 
+*\*\return message_pending :
 *\*\            - CAN_FIFOX_PENDING_0
 *\*\            - CAN_FIFOX_PENDING_1
 *\*\            - CAN_FIFOX_PENDING_2
 *\*\            - CAN_FIFOX_PENDING_3
 **/
-uint8_t CAN_PendingMessage(const CAN_Module* CANx, uint8_t FIFONum)
+uint8_t CAN_PendingMessage(const CAN_Module *CANx, uint8_t FIFONum)
 {
     uint8_t message_pending;
 
     if (FIFONum == CAN_FIFO0)
     {
-        message_pending = (uint8_t)(CANx->RFF0 & (uint32_t)0x03);
+        message_pending = (uint8_t)(CANx->RFF0 & (uint32_t)CAN_RFF0_FFMP0);
     }
     else if (FIFONum == CAN_FIFO1)
     {
-        message_pending = (uint8_t)(CANx->RFF1 & (uint32_t)0x03);
+        message_pending = (uint8_t)(CANx->RFF1 & (uint32_t)CAN_RFF1_FFMP1);
     }
     else
     {
-        message_pending = 0;
+        message_pending = 0U;
     }
     return message_pending;
 }
@@ -844,11 +840,11 @@ uint8_t CAN_PendingMessage(const CAN_Module* CANx, uint8_t FIFONum)
 *\*\               - CAN_ModeSTS_Failed    CAN failed entering the specific mode
 *\*\               - CAN_ModeSTS_Success   CAN Succeed entering the specific mode
 **/
-uint8_t CAN_OperatingModeReq(CAN_Module* CANx, uint8_t CAN_OperatingMode)
+uint8_t CAN_OperatingModeReq(CAN_Module *CANx, uint8_t CAN_OperatingMode)
 {
     uint8_t status;
 
-    /* Timeout for INAK or also for SLAK bits*/
+    /* Timeout for INAK or also for SLAK bits */
     uint32_t timeout = INIAK_TIMEOUT;
 
     if (CAN_OperatingMode == CAN_Operating_InitMode)
@@ -857,7 +853,7 @@ uint8_t CAN_OperatingModeReq(CAN_Module* CANx, uint8_t CAN_OperatingMode)
         CANx->MCTRL = (uint32_t)((CANx->MCTRL & (uint32_t)(~(uint32_t)CAN_MCTRL_SLPRQ)) | CAN_MCTRL_INIRQ);
 
         /* Wait the acknowledge */
-        while (((CANx->MSTS & CAN_MODE_MASK) != CAN_MSTS_INIAK) && (timeout != (uint32_t)0))
+        while (((CANx->MSTS & CAN_MODE_MASK) != CAN_MSTS_INIAK) && (timeout != (uint32_t)0U))
         {
             timeout--;
         }
@@ -876,11 +872,11 @@ uint8_t CAN_OperatingModeReq(CAN_Module* CANx, uint8_t CAN_OperatingMode)
         CANx->MCTRL &= (uint32_t)(~(CAN_MCTRL_SLPRQ | CAN_MCTRL_INIRQ));
 
         /* Wait the acknowledge */
-        while (((CANx->MSTS & CAN_MODE_MASK) != (uint32_t)0) && (timeout != (uint32_t)0))
+        while (((CANx->MSTS & CAN_MODE_MASK) != (uint32_t)0U) && (timeout != (uint32_t)0U))
         {
             timeout--;
         }
-        if ((CANx->MSTS & CAN_MODE_MASK) != (uint32_t)0)
+        if ((CANx->MSTS & CAN_MODE_MASK) != (uint32_t)0U)
         {
             status = CAN_ModeSTS_Failed;
         }
@@ -895,7 +891,7 @@ uint8_t CAN_OperatingModeReq(CAN_Module* CANx, uint8_t CAN_OperatingMode)
         CANx->MCTRL = (uint32_t)((CANx->MCTRL & (uint32_t)(~(uint32_t)CAN_MCTRL_INIRQ)) | CAN_MCTRL_SLPRQ);
 
         /* Wait the acknowledge */
-        while (((CANx->MSTS & CAN_MODE_MASK) != CAN_MSTS_SLPAK) && (timeout != (uint32_t)0))
+        while (((CANx->MSTS & CAN_MODE_MASK) != CAN_MSTS_SLPAK) && (timeout != (uint32_t)0U))
         {
             timeout--;
         }
@@ -921,11 +917,11 @@ uint8_t CAN_OperatingModeReq(CAN_Module* CANx, uint8_t CAN_OperatingMode)
 *\*\fun    Enters sleep mode.
 *\*\param  CANx:
 *\*\            - CAN
-*\*\return sleepstatus: 
+*\*\return sleepstatus:
 *\*\            - CAN_SLEEP_Ok
 *\*\            - CAN_SLEEP_Failed
 **/
-uint8_t CAN_EnterSleep(CAN_Module* CANx)
+uint8_t CAN_EnterSleep(CAN_Module *CANx)
 {
     uint8_t sleepstatus = CAN_SLEEP_Failed;
 
@@ -947,11 +943,11 @@ uint8_t CAN_EnterSleep(CAN_Module* CANx)
 *\*\fun    Wakes the CAN up.
 *\*\param  CANx:
 *\*\            - CAN
-*\*\return CAN_Status: 
+*\*\return CAN_Status:
 *\*\            - CAN_WKU_Ok
 *\*\            - CAN_WKU_Failed
 **/
-uint8_t CAN_WakeUp(CAN_Module* CANx)
+uint8_t CAN_WakeUp(CAN_Module *CANx)
 {
     uint32_t wait_slak   = SLPAK_TIMEOUT;
     uint8_t wakeupstatus = CAN_WKU_Failed;
@@ -960,7 +956,7 @@ uint8_t CAN_WakeUp(CAN_Module* CANx)
     CANx->MCTRL &= ~(uint32_t)CAN_MCTRL_SLPRQ;
 
     /* Sleep mode status */
-    while (((CANx->MSTS & CAN_MSTS_SLPAK) == CAN_MSTS_SLPAK) && (wait_slak != (uint32_t)0x00))
+    while (((CANx->MSTS & CAN_MSTS_SLPAK) == CAN_MSTS_SLPAK) && (wait_slak != (uint32_t)0x00U))
     {
         wait_slak--;
     }
@@ -988,14 +984,14 @@ uint8_t CAN_WakeUp(CAN_Module* CANx)
 *\*\            - CAN_ERRORCODE_CRCErr           CRC Error
 *\*\            - CAN_ERRORCODE_SoftwareSetErr   Software Set Error
 **/
-uint8_t CAN_GetLastErrCode(const CAN_Module* CANx)
+uint8_t CAN_GetLastErrCode(const CAN_Module *CANx)
 {
     uint8_t errorcode;
 
-    /* Get the error code*/
+    /* Get the error code */
     errorcode = (((uint8_t)CANx->ESTS) & (uint8_t)CAN_ESTS_LEC);
 
-    /* Return the error code*/
+    /* Return the error code */
     return errorcode;
 }
 
@@ -1005,38 +1001,39 @@ uint8_t CAN_GetLastErrCode(const CAN_Module* CANx)
 *\*\param  CANx:
 *\*\            - CAN
 *\*\return counter_value:
-*\*\            - It ranges from 0 to 127
+*\*\            - It ranges from 0 to 255
 *\*\note   In case of an error during reception, this counter is incremented
 *\*\       by 1 or by 8 depending on the error condition as defined by the CAN
 *\*\       standard. After every successful reception, the counter is
-*\*\       decremented by 1 or reset to 120 if its value was higher than 128.
+*\*\       decremented by 1 or reset to 120 if its value was higher than 127.
 *\*\       When the counter value exceeds 127, the CAN controller enters the
 *\*\       error passive state.
 **/
-uint8_t CAN_GetReceiveErrCounter(const CAN_Module* CANx)
+uint8_t CAN_GetReceiveErrCounter(const CAN_Module *CANx)
 {
     uint8_t counter;
 
-    /* Get the Receive Error Counter*/
+    /* Get the Receive Error Counter */
     counter = (uint8_t)((CANx->ESTS & CAN_ESTS_RXEC) >> 24U);
 
-    /* Return the Receive Error Counter*/
+    /* Return the Receive Error Counter */
     return counter;
 }
 
 /**
 *\*\name   CAN_GetLSBTransmitErrCounter
 *\*\fun    Returns the LSB of the 9-bit CANx Transmit Error Counter(TEC).
-*\*\param  CAN to to select the CAN peripheral.
+*\*\param  CANx:
+*\*\            - CAN
 *\*\return counter_value:
-*\*\            - It ranges from 0 to 127
+*\*\            - It ranges from 0 to 255
 **/
-uint8_t CAN_GetLSBTransmitErrCounter(const CAN_Module* CANx)
+uint8_t CAN_GetLSBTransmitErrCounter(const CAN_Module *CANx)
 {
     uint8_t counter;
 
     /* Get the LSB of the 9-bit CANx Transmit Error Counter(TEC) */
-    counter = (uint8_t)((CANx->ESTS & CAN_ESTS_TXEC) >> 16);
+    counter = (uint8_t)((CANx->ESTS & CAN_ESTS_TXEC) >> 16U);
 
     /* Return the LSB of the 9-bit CANx Transmit Error Counter(TEC) */
     return counter;
@@ -1044,7 +1041,8 @@ uint8_t CAN_GetLSBTransmitErrCounter(const CAN_Module* CANx)
 
 /**
 *\*\name   CAN_INTConfig
-*\*\fun    Enables the specified CANx interrupts.
+*\*\fun    Enables or disables the specified CANx interrupts according
+*\*\       to Cmd.
 *\*\param  CANx:
 *\*\               - CAN
 *\*\param  CAN_INT (The input parameters must be the following values) :
@@ -1067,7 +1065,7 @@ uint8_t CAN_GetLSBTransmitErrCounter(const CAN_Module* CANx)
 *\*\               - ENABLE
 *\*\return none
 **/
-void CAN_INTConfig(CAN_Module* CANx, uint32_t CAN_INT, FunctionalState Cmd)
+void CAN_INTConfig(CAN_Module *CANx, uint32_t CAN_INT, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -1081,13 +1079,12 @@ void CAN_INTConfig(CAN_Module* CANx, uint32_t CAN_INT, FunctionalState Cmd)
     }
 }
 
-
 /**
 *\*\name   CAN_GetFlagSTS
 *\*\fun    Checks whether the specified CAN flag is set or not.
 *\*\param  CANx:
 *\*\                - CAN
-*\*\param  CAN_flag (The input parameters must be the following values) :
+*\*\param  CAN_FLAG (The input parameters must be the following values) :
 *\*\                - CAN_FLAG_EWGFL
 *\*\                - CAN_FLAG_EPVFL
 *\*\                - CAN_FLAG_BOFFL
@@ -1107,7 +1104,7 @@ void CAN_INTConfig(CAN_Module* CANx, uint32_t CAN_INT, FunctionalState Cmd)
 *\*\                - SET
 *\*\                - RESET
 **/
-FlagStatus CAN_GetFlagSTS(const CAN_Module* CANx, uint32_t CAN_FLAG)
+FlagStatus CAN_GetFlagSTS(const CAN_Module *CANx, uint32_t CAN_FLAG)
 {
     FlagStatus bitstatus;
 
@@ -1190,7 +1187,7 @@ FlagStatus CAN_GetFlagSTS(const CAN_Module* CANx, uint32_t CAN_FLAG)
 *\*\fun    Clears the CAN's flag status.
 *\*\param  CANx:
 *\*\                  - CAN
-*\*\param  CAN_flag :
+*\*\param  CAN_FLAG (The input parameters must be the following values) :
 *\*\                  - CAN_FLAG_RQCPM0
 *\*\                  - CAN_FLAG_RQCPM1
 *\*\                  - CAN_FLAG_RQCPM2
@@ -1203,7 +1200,7 @@ FlagStatus CAN_GetFlagSTS(const CAN_Module* CANx, uint32_t CAN_FLAG)
 *\*\                  - CAN_FLAG_LEC
 *\*\return none
 **/
-void CAN_ClearFlag(CAN_Module* CANx, uint32_t CAN_FLAG)
+void CAN_ClearFlag(CAN_Module *CANx, uint32_t CAN_FLAG)
 {
     uint32_t flagtmp;
 
@@ -1244,7 +1241,7 @@ void CAN_ClearFlag(CAN_Module* CANx, uint32_t CAN_FLAG)
 *\*\fun    Checks whether the specified CANx interrupt has occurred or not.
 *\*\param  CANx:
 *\*\                    -  CAN
-*\*\param  CAN_interrupt (The input parameters must be the following values) :
+*\*\param  CAN_INT (The input parameters must be the following values) :
 *\*\                    -  CAN_INT_TME
 *\*\                    -  CAN_INT_FMP0
 *\*\                    -  CAN_INT_FF0
@@ -1259,11 +1256,11 @@ void CAN_ClearFlag(CAN_Module* CANx, uint32_t CAN_FLAG)
 *\*\                    -  CAN_INT_BOF
 *\*\                    -  CAN_INT_LEC
 *\*\                    -  CAN_INT_ERR
-*\*\return INTStatus : 
+*\*\return INTStatus :
 *\*\                    - SET
 *\*\                    - RESET
 **/
-INTStatus CAN_GetIntStatus(const CAN_Module* CANx, uint32_t CAN_INT)
+INTStatus CAN_GetIntStatus(const CAN_Module *CANx, uint32_t CAN_INT)
 {
     INTStatus itstatus;
 
@@ -1273,66 +1270,66 @@ INTStatus CAN_GetIntStatus(const CAN_Module* CANx, uint32_t CAN_INT)
         /* in case the Interrupt is enabled, .... */
         switch (CAN_INT)
         {
-        case CAN_INT_TME:
-            /* Check CAN_TSTS_RQCPx bits */
-            itstatus = CheckINTStatus(CANx->TSTS, CAN_TSTS_RQCPM0 | CAN_TSTS_RQCPM1 | CAN_TSTS_RQCPM2);
-            break;
-        case CAN_INT_FMP0:
-            /* Check CAN_RFF0_FFMP0 bit */
-            itstatus = CheckINTStatus(CANx->RFF0, CAN_RFF0_FFMP0);
-            break;
-        case CAN_INT_FF0:
-            /* Check CAN_RFF0_FFULL0 bit */
-            itstatus = CheckINTStatus(CANx->RFF0, CAN_RFF0_FFULL0);
-            break;
-        case CAN_INT_FOV0:
-            /* Check CAN_RFF0_FFOVR0 bit */
-            itstatus = CheckINTStatus(CANx->RFF0, CAN_RFF0_FFOVR0);
-            break;
-        case CAN_INT_FMP1:
-            /* Check CAN_RFF1_FFMP1 bit */
-            itstatus = CheckINTStatus(CANx->RFF1, CAN_RFF1_FFMP1);
-            break;
-        case CAN_INT_FF1:
-            /* Check CAN_RFF1_FFULL1 bit */
-            itstatus = CheckINTStatus(CANx->RFF1, CAN_RFF1_FFULL1);
-            break;
-        case CAN_INT_FOV1:
-            /* Check CAN_RFF1_FFOVR1 bit */
-            itstatus = CheckINTStatus(CANx->RFF1, CAN_RFF1_FFOVR1);
-            break;
-        case CAN_INT_WKU:
-            /* Check CAN_MSTS_WKUINT bit */
-            itstatus = CheckINTStatus(CANx->MSTS, CAN_MSTS_WKUINT);
-            break;
-        case CAN_INT_SLK:
-            /* Check CAN_MSTS_SLAKINT bit */
-            itstatus = CheckINTStatus(CANx->MSTS, CAN_MSTS_SLAKINT);
-            break;
-        case CAN_INT_EWG:
-            /* Check CAN_ESTS_EWGFL bit */
-            itstatus = CheckINTStatus(CANx->ESTS, CAN_ESTS_EWGFL);
-            break;
-        case CAN_INT_EPV:
-            /* Check CAN_ESTS_EPVFL bit */
-            itstatus = CheckINTStatus(CANx->ESTS, CAN_ESTS_EPVFL);
-            break;
-        case CAN_INT_BOF:
-            /* Check CAN_ESTS_BOFFL bit */
-            itstatus = CheckINTStatus(CANx->ESTS, CAN_ESTS_BOFFL);
-            break;
-        case CAN_INT_LEC:
-            /* Check CAN_ESTS_LEC bit */
-            itstatus = CheckINTStatus(CANx->ESTS, CAN_ESTS_LEC);
-            break;
-        case CAN_INT_ERR:
-            /* Check CAN_MSTS_ERRINT bit */
-            itstatus = CheckINTStatus(CANx->MSTS, CAN_MSTS_ERRINT);
-            break;
-        default:
-            /* in case of error, return RESET */
-            itstatus = RESET;
-            break;
+            case CAN_INT_TME:
+                /* Check CAN_TSTS_RQCPMx bits */
+                itstatus = CheckINTStatus(CANx->TSTS, CAN_TSTS_RQCPM0 | CAN_TSTS_RQCPM1 | CAN_TSTS_RQCPM2);
+                break;
+            case CAN_INT_FMP0:
+                /* Check CAN_RFF0_FFMP0 bit */
+                itstatus = CheckINTStatus(CANx->RFF0, CAN_RFF0_FFMP0);
+                break;
+            case CAN_INT_FF0:
+                /* Check CAN_RFF0_FFULL0 bit */
+                itstatus = CheckINTStatus(CANx->RFF0, CAN_RFF0_FFULL0);
+                break;
+            case CAN_INT_FOV0:
+                /* Check CAN_RFF0_FFOVR0 bit */
+                itstatus = CheckINTStatus(CANx->RFF0, CAN_RFF0_FFOVR0);
+                break;
+            case CAN_INT_FMP1:
+                /* Check CAN_RFF1_FFMP1 bit */
+                itstatus = CheckINTStatus(CANx->RFF1, CAN_RFF1_FFMP1);
+                break;
+            case CAN_INT_FF1:
+                /* Check CAN_RFF1_FFULL1 bit */
+                itstatus = CheckINTStatus(CANx->RFF1, CAN_RFF1_FFULL1);
+                break;
+            case CAN_INT_FOV1:
+                /* Check CAN_RFF1_FFOVR1 bit */
+                itstatus = CheckINTStatus(CANx->RFF1, CAN_RFF1_FFOVR1);
+                break;
+            case CAN_INT_WKU:
+                /* Check CAN_MSTS_WKUINT bit */
+                itstatus = CheckINTStatus(CANx->MSTS, CAN_MSTS_WKUINT);
+                break;
+            case CAN_INT_SLK:
+                /* Check CAN_MSTS_SLAKINT bit */
+                itstatus = CheckINTStatus(CANx->MSTS, CAN_MSTS_SLAKINT);
+                break;
+            case CAN_INT_EWG:
+                /* Check CAN_ESTS_EWGFL bit */
+                itstatus = CheckINTStatus(CANx->ESTS, CAN_ESTS_EWGFL);
+                break;
+            case CAN_INT_EPV:
+                /* Check CAN_ESTS_EPVFL bit */
+                itstatus = CheckINTStatus(CANx->ESTS, CAN_ESTS_EPVFL);
+                break;
+            case CAN_INT_BOF:
+                /* Check CAN_ESTS_BOFFL bit */
+                itstatus = CheckINTStatus(CANx->ESTS, CAN_ESTS_BOFFL);
+                break;
+            case CAN_INT_LEC:
+                /* Check CAN_ESTS_LEC bit */
+                itstatus = CheckINTStatus(CANx->ESTS, CAN_ESTS_LEC);
+                break;
+            case CAN_INT_ERR:
+                /* Check CAN_MSTS_ERRINT bit */
+                itstatus = CheckINTStatus(CANx->MSTS, CAN_MSTS_ERRINT);
+                break;
+            default:
+                /* in case of error, return RESET */
+                itstatus = RESET;
+                break;
         }
     }
     else
@@ -1350,7 +1347,7 @@ INTStatus CAN_GetIntStatus(const CAN_Module* CANx, uint32_t CAN_INT)
 *\*\fun    Clears the CANx's interrupt status.
 *\*\param  CANx:
 *\*\                -  CAN
-*\*\param  CAN_interrupt (The input parameters must be the following values) :
+*\*\param  CAN_INT (The input parameters must be the following values) :
 *\*\                -  CAN_INT_TME
 *\*\                -  CAN_INT_FF0
 *\*\                -  CAN_INT_FOV0
@@ -1365,81 +1362,81 @@ INTStatus CAN_GetIntStatus(const CAN_Module* CANx, uint32_t CAN_INT)
 *\*\                -  CAN_INT_ERR
 *\*\return none
 **/
-void CAN_ClearINTPendingBit(CAN_Module* CANx, uint32_t CAN_INT)
+void CAN_ClearINTPendingBit(CAN_Module *CANx, uint32_t CAN_INT)
 {
     switch (CAN_INT)
     {
-    case CAN_INT_TME:
-        /* Clear CAN_TSTS_RQCPx (rc_w1)*/
-        CANx->TSTS = CAN_TSTS_RQCPM0 | CAN_TSTS_RQCPM1 | CAN_TSTS_RQCPM2;
-        break;
-    case CAN_INT_FF0:
-        /* Clear CAN_RFF0_FFULL0 (rc_w1)*/
-        CANx->RFF0 = CAN_RFF0_FFULL0;
-        break;
-    case CAN_INT_FOV0:
-        /* Clear CAN_RFF0_FFOVR0 (rc_w1)*/
-        CANx->RFF0 = CAN_RFF0_FFOVR0;
-        break;
-    case CAN_INT_FF1:
-        /* Clear CAN_RFF1_FFULL1 (rc_w1)*/
-        CANx->RFF1 = CAN_RFF1_FFULL1;
-        break;
-    case CAN_INT_FOV1:
-        /* Clear CAN_RFF1_FFOVR1 (rc_w1)*/
-        CANx->RFF1 = CAN_RFF1_FFOVR1;
-        break;
-    case CAN_INT_WKU:
-        /* Clear CAN_MSTS_WKUINT (rc_w1)*/
-        CANx->MSTS = CAN_MSTS_WKUINT;
-        break;
-    case CAN_INT_SLK:
-        /* Clear CAN_MSTS_SLAKINT (rc_w1)*/
-        CANx->MSTS = CAN_MSTS_SLAKINT;
-        break;
-    case CAN_INT_EWG:
-        /* Clear CAN_MSTS_ERRINT (rc_w1) */
-        CANx->MSTS = CAN_MSTS_ERRINT;
-        /* Note : the corresponding Flag is cleared by hardware depending
-                  of the CAN Bus status*/
-        break;
-    case CAN_INT_EPV:
-        /* Clear CAN_MSTS_ERRINT (rc_w1) */
-        CANx->MSTS = CAN_MSTS_ERRINT;
-        /* Note : the corresponding Flag is cleared by hardware depending
-                  of the CAN Bus status*/
-        break;
-    case CAN_INT_BOF:
-        /* Clear CAN_MSTS_ERRINT (rc_w1) */
-        CANx->MSTS = CAN_MSTS_ERRINT;
-        /* Note : the corresponding Flag is cleared by hardware depending
-                  of the CAN Bus status*/
-        break;
-    case CAN_INT_LEC:
-        /*  Clear LEC bits */
-        CANx->ESTS = (uint32_t)0x00;
-        /* Clear CAN_MSTS_ERRINT (rc_w1) */
-        CANx->MSTS = CAN_MSTS_ERRINT;
-        break;
-    case CAN_INT_ERR:
-        /*Clear LEC bits */
-        CANx->ESTS = (uint32_t)0x00;
-        /* Clear CAN_MSTS_ERRINT (rc_w1) */
-        CANx->MSTS = CAN_MSTS_ERRINT;
-        /* Note : BOFF, EPVF and EWGF Flags are cleared by hardware depending
-            of the CAN Bus status*/
-        break;
-    default:
-    	/* No Process */
-        break;
+        case CAN_INT_TME:
+            /* Clear CAN_TSTS_RQCPMx (rc_w1) */
+            CANx->TSTS = CAN_TSTS_RQCPM0 | CAN_TSTS_RQCPM1 | CAN_TSTS_RQCPM2;
+            break;
+        case CAN_INT_FF0:
+            /* Clear CAN_RFF0_FFULL0 (rc_w1) */
+            CANx->RFF0 = CAN_RFF0_FFULL0;
+            break;
+        case CAN_INT_FOV0:
+            /* Clear CAN_RFF0_FFOVR0 (rc_w1) */
+            CANx->RFF0 = CAN_RFF0_FFOVR0;
+            break;
+        case CAN_INT_FF1:
+            /* Clear CAN_RFF1_FFULL1 (rc_w1) */
+            CANx->RFF1 = CAN_RFF1_FFULL1;
+            break;
+        case CAN_INT_FOV1:
+            /* Clear CAN_RFF1_FFOVR1 (rc_w1) */
+            CANx->RFF1 = CAN_RFF1_FFOVR1;
+            break;
+        case CAN_INT_WKU:
+            /* Clear CAN_MSTS_WKUINT (rc_w1) */
+            CANx->MSTS = CAN_MSTS_WKUINT;
+            break;
+        case CAN_INT_SLK:
+            /* Clear CAN_MSTS_SLAKINT (rc_w1) */
+            CANx->MSTS = CAN_MSTS_SLAKINT;
+            break;
+        case CAN_INT_EWG:
+            /* Clear CAN_MSTS_ERRINT (rc_w1) */
+            CANx->MSTS = CAN_MSTS_ERRINT;
+            /** Note : the corresponding Flag is cleared by hardware depending
+                  of the CAN Bus status **/
+            break;
+        case CAN_INT_EPV:
+            /* Clear CAN_MSTS_ERRINT (rc_w1) */
+            CANx->MSTS = CAN_MSTS_ERRINT;
+            /** Note : the corresponding Flag is cleared by hardware depending
+                  of the CAN Bus status **/
+            break;
+        case CAN_INT_BOF:
+            /* Clear CAN_MSTS_ERRINT (rc_w1) */
+            CANx->MSTS = CAN_MSTS_ERRINT;
+            /** Note : the corresponding Flag is cleared by hardware depending
+                  of the CAN Bus status **/
+            break;
+        case CAN_INT_LEC:
+            /*  Clear LEC bits */
+            CANx->ESTS = (uint32_t)0x00U;
+            /* Clear CAN_MSTS_ERRINT (rc_w1) */
+            CANx->MSTS = CAN_MSTS_ERRINT;
+            break;
+        case CAN_INT_ERR:
+            /* Clear LEC bits */
+            CANx->ESTS = (uint32_t)0x00U;
+            /* Clear CAN_MSTS_ERRINT (rc_w1) */
+            CANx->MSTS = CAN_MSTS_ERRINT;
+            /** Note : BOFFL, EPVFL and EWGFL Flags are cleared by hardware depending
+            of the CAN Bus status **/
+            break;
+        default:
+            /* No Process */
+            break;
     }
 }
 
 /**
 *\*\name   CheckINTStatus
 *\*\fun    Checks whether the CAN interrupt has occurred or not.
-*\*\param  CAN_register specifies the CAN interrupt register to check.
-*\*\param  interrupt_bit specifies the interrupt source bit to check.
+*\*\param  CAN_Reg specifies the CAN interrupt register to check.
+*\*\param  Int_Bit specifies the interrupt source bit to check.
 *\*\return INTStatus:
 *\*\                    - SET
 *\*\                    - RESET
@@ -1461,7 +1458,6 @@ static INTStatus CheckINTStatus(uint32_t CAN_Reg, uint32_t Int_Bit)
     return pendingbitstatus;
 }
 
-
 /**
 *\*\name   CAN_SoftwareReset
 *\*\fun    Enable software reset.
@@ -1469,16 +1465,15 @@ static INTStatus CheckINTStatus(uint32_t CAN_Reg, uint32_t Int_Bit)
 *\*\               - CAN
 *\*\return none
 **/
-void CAN_SoftwareReset(CAN_Module* CANx)
+void CAN_SoftwareReset(CAN_Module *CANx)
 {
     /* Enable software reset */
     CANx->MCTRL |= CAN_MCTRL_MRST;
 }
 
-
 /**
 *\*\name   CAN_GetTransmitFailStatus
-*\*\fun    Get the status of sending email failure.
+*\*\fun    Get the transmit failure status of the given transmit mailbox.
 *\*\param  CANx:
 *\*\               - CAN
 *\*\param  mailbox_queue:
@@ -1489,7 +1484,7 @@ void CAN_SoftwareReset(CAN_Module* CANx)
 *\*\               - SET
 *\*\               - RESET
 **/
-FlagStatus CAN_GetTransmitFailStatus(const CAN_Module* CANx,uint8_t mailbox_queue)
+FlagStatus CAN_GetTransmitFailStatus(const CAN_Module *CANx, uint8_t mailbox_queue)
 {
     FlagStatus status_value = RESET;
 
@@ -1498,7 +1493,7 @@ FlagStatus CAN_GetTransmitFailStatus(const CAN_Module* CANx,uint8_t mailbox_queu
     switch (mailbox_queue)
     {
         case (CAN_TXMAILBOX_0):
-            if((CAN->TSTS & CAN_TSTS_TERRM0) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_TERRM0) == 0U)
             {
                 status_value = RESET;
             }
@@ -1508,7 +1503,7 @@ FlagStatus CAN_GetTransmitFailStatus(const CAN_Module* CANx,uint8_t mailbox_queu
             }
             break;
         case (CAN_TXMAILBOX_1):
-            if((CAN->TSTS & CAN_TSTS_TERRM1) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_TERRM1) == 0U)
             {
                 status_value = RESET;
             }
@@ -1518,7 +1513,7 @@ FlagStatus CAN_GetTransmitFailStatus(const CAN_Module* CANx,uint8_t mailbox_queu
             }
             break;
         case (CAN_TXMAILBOX_2):
-            if((CAN->TSTS & CAN_TSTS_TERRM2) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_TERRM2) == 0U)
             {
                 status_value = RESET;
             }
@@ -1528,7 +1523,7 @@ FlagStatus CAN_GetTransmitFailStatus(const CAN_Module* CANx,uint8_t mailbox_queu
             }
             break;
         default:
-        	/* No Process */
+            /* No Process */
             break;
     }
     return status_value;
@@ -1547,7 +1542,7 @@ FlagStatus CAN_GetTransmitFailStatus(const CAN_Module* CANx,uint8_t mailbox_queu
 *\*\               - SET
 *\*\               - RESET
 **/
-FlagStatus CAN_GetArbitrationLostStatus(const CAN_Module* CANx,uint8_t mailbox_queue)
+FlagStatus CAN_GetArbitrationLostStatus(const CAN_Module *CANx, uint8_t mailbox_queue)
 {
     FlagStatus status_value = RESET;
 
@@ -1556,7 +1551,7 @@ FlagStatus CAN_GetArbitrationLostStatus(const CAN_Module* CANx,uint8_t mailbox_q
     switch (mailbox_queue)
     {
         case (CAN_TXMAILBOX_0):
-            if((CAN->TSTS & CAN_TSTS_ALSTM0) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_ALSTM0) == 0U)
             {
                 status_value = RESET;
             }
@@ -1566,7 +1561,7 @@ FlagStatus CAN_GetArbitrationLostStatus(const CAN_Module* CANx,uint8_t mailbox_q
             }
             break;
         case (CAN_TXMAILBOX_1):
-            if((CAN->TSTS & CAN_TSTS_ALSTM1) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_ALSTM1) == 0U)
             {
                 status_value = RESET;
             }
@@ -1576,7 +1571,7 @@ FlagStatus CAN_GetArbitrationLostStatus(const CAN_Module* CANx,uint8_t mailbox_q
             }
             break;
         case (CAN_TXMAILBOX_2):
-            if((CAN->TSTS & CAN_TSTS_ALSTM2) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_ALSTM2) == 0U)
             {
                 status_value = RESET;
             }
@@ -1586,12 +1581,11 @@ FlagStatus CAN_GetArbitrationLostStatus(const CAN_Module* CANx,uint8_t mailbox_q
             }
             break;
         default:
-        	/* No Process */
+            /* No Process */
             break;
     }
     return status_value;
 }
-
 
 /**
 *\*\name   CAN_GetFlagLowestPriority
@@ -1606,7 +1600,7 @@ FlagStatus CAN_GetArbitrationLostStatus(const CAN_Module* CANx,uint8_t mailbox_q
 *\*\               - SET
 *\*\               - RESET
 **/
-FlagStatus CAN_GetFlagLowestPriority(const CAN_Module* CANx,uint8_t mailbox_queue)
+FlagStatus CAN_GetFlagLowestPriority(const CAN_Module *CANx, uint8_t mailbox_queue)
 {
     FlagStatus status_value = RESET;
 
@@ -1615,7 +1609,7 @@ FlagStatus CAN_GetFlagLowestPriority(const CAN_Module* CANx,uint8_t mailbox_queu
     switch (mailbox_queue)
     {
         case (CAN_TXMAILBOX_0):
-            if((CAN->TSTS & CAN_TSTS_LOWM0) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_LOWM0) == 0U)
             {
                 status_value = RESET;
             }
@@ -1625,7 +1619,7 @@ FlagStatus CAN_GetFlagLowestPriority(const CAN_Module* CANx,uint8_t mailbox_queu
             }
             break;
         case (CAN_TXMAILBOX_1):
-            if((CAN->TSTS & CAN_TSTS_LOWM1) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_LOWM1) == 0U)
             {
                 status_value = RESET;
             }
@@ -1635,7 +1629,7 @@ FlagStatus CAN_GetFlagLowestPriority(const CAN_Module* CANx,uint8_t mailbox_queu
             }
             break;
         case (CAN_TXMAILBOX_2):
-            if((CAN->TSTS & CAN_TSTS_LOWM2) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_LOWM2) == 0U)
             {
                 status_value = RESET;
             }
@@ -1645,12 +1639,11 @@ FlagStatus CAN_GetFlagLowestPriority(const CAN_Module* CANx,uint8_t mailbox_queu
             }
             break;
         default:
-        	/* No Process */
+            /* No Process */
             break;
     }
     return status_value;
 }
-
 
 /**
 *\*\name   CAN_GetTransmitMailboxEmptyFlag
@@ -1665,7 +1658,7 @@ FlagStatus CAN_GetFlagLowestPriority(const CAN_Module* CANx,uint8_t mailbox_queu
 *\*\               - SET
 *\*\               - RESET
 **/
-FlagStatus CAN_GetTransmitMailboxEmptyFlag(const CAN_Module* CANx,uint8_t mailbox_queue)
+FlagStatus CAN_GetTransmitMailboxEmptyFlag(const CAN_Module *CANx, uint8_t mailbox_queue)
 {
     FlagStatus status_value = RESET;
 
@@ -1674,7 +1667,7 @@ FlagStatus CAN_GetTransmitMailboxEmptyFlag(const CAN_Module* CANx,uint8_t mailbo
     switch (mailbox_queue)
     {
         case (CAN_TXMAILBOX_0):
-            if((CAN->TSTS & CAN_TSTS_TMEM0) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_TMEM0) == 0U)
             {
                 status_value = RESET;
             }
@@ -1684,7 +1677,7 @@ FlagStatus CAN_GetTransmitMailboxEmptyFlag(const CAN_Module* CANx,uint8_t mailbo
             }
             break;
         case (CAN_TXMAILBOX_1):
-            if((CAN->TSTS & CAN_TSTS_TMEM1) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_TMEM1) == 0U)
             {
                 status_value = RESET;
             }
@@ -1694,7 +1687,7 @@ FlagStatus CAN_GetTransmitMailboxEmptyFlag(const CAN_Module* CANx,uint8_t mailbo
             }
             break;
         case (CAN_TXMAILBOX_2):
-            if((CAN->TSTS & CAN_TSTS_TMEM2) == 0U)
+            if ((CAN->TSTS & CAN_TSTS_TMEM2) == 0U)
             {
                 status_value = RESET;
             }
@@ -1704,12 +1697,11 @@ FlagStatus CAN_GetTransmitMailboxEmptyFlag(const CAN_Module* CANx,uint8_t mailbo
             }
             break;
         default:
-        	/* No Process */
+            /* No Process */
             break;
     }
     return status_value;
 }
-
 
 /**
 *\*\name   CAN_GetReceiveSignal
@@ -1720,10 +1712,10 @@ FlagStatus CAN_GetTransmitMailboxEmptyFlag(const CAN_Module* CANx,uint8_t mailbo
 *\*\            - SET
 *\*\            - RESET
 **/
-FlagStatus CAN_GetReceiveSignal(const CAN_Module* CANx)
-{    
+FlagStatus CAN_GetReceiveSignal(const CAN_Module *CANx)
+{
     FlagStatus status_temp;
-    if((CANx->MSTS & CAN_MSTS_RXS) == 0U)
+    if ((CANx->MSTS & CAN_MSTS_RXS) == 0U)
     {
         status_temp = RESET;
     }
@@ -1731,9 +1723,8 @@ FlagStatus CAN_GetReceiveSignal(const CAN_Module* CANx)
     {
         status_temp = SET;
     }
-	return status_temp;
+    return status_temp;
 }
-
 
 /**
 *\*\name   CAN_GetLastSamplePoint
@@ -1744,10 +1735,10 @@ FlagStatus CAN_GetReceiveSignal(const CAN_Module* CANx)
 *\*\            - SET
 *\*\            - RESET
 **/
-FlagStatus CAN_GetLastSamplePoint(const CAN_Module* CANx)
-{    
+FlagStatus CAN_GetLastSamplePoint(const CAN_Module *CANx)
+{
     FlagStatus status_temp;
-    if((CANx->MSTS & CAN_MSTS_LSMP) == 0U)
+    if ((CANx->MSTS & CAN_MSTS_LSMP) == 0U)
     {
         status_temp = RESET;
     }
@@ -1755,12 +1746,11 @@ FlagStatus CAN_GetLastSamplePoint(const CAN_Module* CANx)
     {
         status_temp = SET;
     }
-	return status_temp;
+    return status_temp;
 }
 
-
 /**
-*\*\name   CAN_Receive_Mode_Get
+*\*\name   CAN_GetReceiveMode
 *\*\fun    Returns the CANx's receive mode (RXMD).
 *\*\param  CANx:
 *\*\            - CAN
@@ -1768,10 +1758,10 @@ FlagStatus CAN_GetLastSamplePoint(const CAN_Module* CANx)
 *\*\            - SET
 *\*\            - RESET
 **/
-FlagStatus CAN_GetReceiveMode(const CAN_Module* CANx)
-{    
+FlagStatus CAN_GetReceiveMode(const CAN_Module *CANx)
+{
     FlagStatus status_temp;
-    if((CANx->MSTS & CAN_MSTS_RXMD) == 0U)
+    if ((CANx->MSTS & CAN_MSTS_RXMD) == 0U)
     {
         status_temp = RESET;
     }
@@ -1779,9 +1769,8 @@ FlagStatus CAN_GetReceiveMode(const CAN_Module* CANx)
     {
         status_temp = SET;
     }
-	return status_temp;
+    return status_temp;
 }
-
 
 /**
 *\*\name   CAN_GetTransmitMode
@@ -1792,10 +1781,10 @@ FlagStatus CAN_GetReceiveMode(const CAN_Module* CANx)
 *\*\            - SET
 *\*\            - RESET
 **/
-FlagStatus CAN_GetTransmitMode(const CAN_Module* CANx)
-{   
+FlagStatus CAN_GetTransmitMode(const CAN_Module *CANx)
+{
     FlagStatus status_temp;
-    if((CANx->MSTS & CAN_MSTS_TXMD) == 0U)
+    if ((CANx->MSTS & CAN_MSTS_TXMD) == 0U)
     {
         status_temp = RESET;
     }
@@ -1803,10 +1792,8 @@ FlagStatus CAN_GetTransmitMode(const CAN_Module* CANx)
     {
         status_temp = SET;
     }
-	return status_temp;
+    return status_temp;
 }
-
-
 
 /**
 *\*\name   CAN_GetMailboxCode
@@ -1817,20 +1804,20 @@ FlagStatus CAN_GetTransmitMode(const CAN_Module* CANx)
 *\*\            - CAN_TXMAILBOX_0
 *\*\            - CAN_TXMAILBOX_1
 *\*\            - CAN_TXMAILBOX_2
-*\*\            - CAN_TXSTS_NOMAILBOX
+*\*\            - CAN_TxSTS_NoMailBox
 **/
-uint8_t CAN_GetMailboxCode(const CAN_Module* CANx)
+uint8_t CAN_GetMailboxCode(const CAN_Module *CANx)
 {
-    uint8_t mailbox_queue;    
-    if((CANx->TSTS & CAN_TSTS_CODE) == CAN_TXMAILBOX_0)
+    uint8_t mailbox_queue;
+    if ((CANx->TSTS & CAN_TSTS_CODE) == CAN_TXMAILBOX_0)
     {
         mailbox_queue = CAN_TXMAILBOX_0;
     }
-    else if((CANx->TSTS & CAN_TSTS_CODE) == CAN_TSTS_CODE_0)
+    else if ((CANx->TSTS & CAN_TSTS_CODE) == CAN_TSTS_CODE_0)
     {
         mailbox_queue = CAN_TXMAILBOX_1;
     }
-    else if((CANx->TSTS & CAN_TSTS_CODE) == CAN_TSTS_CODE_1)
+    else if ((CANx->TSTS & CAN_TSTS_CODE) == CAN_TSTS_CODE_1)
     {
         mailbox_queue = CAN_TXMAILBOX_2;
     }
@@ -1838,7 +1825,7 @@ uint8_t CAN_GetMailboxCode(const CAN_Module* CANx)
     {
         mailbox_queue = CAN_TxSTS_NoMailBox;
     }
-    
+
     return mailbox_queue;
 }
 

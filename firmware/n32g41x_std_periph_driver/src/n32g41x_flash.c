@@ -1,70 +1,68 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
 *\*\file n32g41x_flash.c
-*\*\author Nsing 
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
-
 #include "n32g41x_flash.h"
-
 
 /**
 *\*\name    FLASH_SetLatency
 *\*\fun     Sets the code latency value.
 *\*\param   FLASH_Latency :(The input parameters must be the following values)
-*\*\            - FLASH_LATENCY_0    FLASH Zero Latency cycle, 0 < HCLK <= 36MHz
-*\*\            - FLASH_LATENCY_1    FLASH One Latency cycle,  36MHZ < HCLK <= 72MHz
-*\*\            - FLASH_LATENCY_2    FLASH two Latency cycle, N32G412: 72Mhz < HCLK <= 80Mhz; N32G415: 72Mhz < HCLK <= 96Mhz;
+*\*\            - FLASH_LATENCY_0    FLASH Zero Latency cycle, 0 < SYSCLK <= 36MHz
+*\*\            - FLASH_LATENCY_1    FLASH One Latency cycle,  36MHZ < SYSCLK <= 72MHz
+*\*\            - FLASH_LATENCY_2    FLASH two Latency cycle, N32G412: 72Mhz < SYSCLK <= 80Mhz; N32G415: 72Mhz < SYSCLK <= 96Mhz;
 *\*\return  none
-*\*\note    The larger the latency, the longer the flash read operation will take. 
+*\*\note    The larger the latency, the longer the flash read operation will take.
 *\*\        If not necessary, it is recommended to use a smaller latency.
 **/
 void FLASH_SetLatency(uint32_t FLASH_Latency)
@@ -82,15 +80,14 @@ void FLASH_SetLatency(uint32_t FLASH_Latency)
     FLASH->AC = tmpregister;
 }
 
-
 /**
 *\*\name    FLASH_GetLatency
 *\*\fun     Get the code latency value.
 *\*\param   none
 *\*\return  FLASH_LATENCY :(The input parameters must be the following values)
-*\*\            - FLASH_LATENCY_0    FLASH Zero Latency cycle, 0 < HCLK <= 36MHz
-*\*\            - FLASH_LATENCY_1    FLASH One Latency cycle,  36MHZ < HCLK <= 72MHz
-*\*\            - FLASH_LATENCY_2    FLASH two Latency cycle, N32G412: 72Mhz < HCLK <= 80Mhz; N32G415: 72Mhz < HCLK <= 96Mhz;
+*\*\            - FLASH_LATENCY_0    FLASH Zero Latency cycle, 0 < SYSCLK <= 36MHz
+*\*\            - FLASH_LATENCY_1    FLASH One Latency cycle,  36MHZ < SYSCLK <= 72MHz
+*\*\            - FLASH_LATENCY_2    FLASH two Latency cycle, N32G412: 72Mhz < SYSCLK <= 80Mhz; N32G415: 72Mhz < SYSCLK <= 96Mhz;
 **/
 uint8_t FLASH_GetLatency(void)
 {
@@ -98,12 +95,11 @@ uint8_t FLASH_GetLatency(void)
     return (uint8_t)(FLASH->AC & FLASH_AC_LATENCY);
 }
 
-
 /**
 *\*\name    FLASH_PrefetchBufSet
 *\*\fun     Enables or disables the Prefetch Buffer.
 *\*\param   FLASH_PrefetchBuf:(The input parameters must be the following values)
-*\*\            - FLASH_PrefetchBuf_EN      
+*\*\            - FLASH_PrefetchBuf_EN
 *\*\            - FLASH_PrefetchBuf_DIS
 *\*\return  none
 **/
@@ -131,7 +127,7 @@ FlagStatus Flash_GetPrefetchBufferStatus(void)
     }
     else
     {
-        bit_status =  RESET;
+        bit_status = RESET;
     }
     return bit_status;
 }
@@ -152,7 +148,7 @@ void FLASH_iCacheRST(void)
 *\*\name    FLASH_iCacheCmd
 *\*\fun     Enables or disables the iCache.
 *\*\param   FLASH_iCache:(The input parameters must be the following values)
-*\*\            - FLASH_iCache_EN FLASH iCache Enable      
+*\*\            - FLASH_iCache_EN FLASH iCache Enable
 *\*\            - FLASH_iCache_DIS FLASH iCache Disable
 *\*\return  none
 *\*\note    When the N32G412 series runs above 72MHz, can't enable Icache.
@@ -195,10 +191,9 @@ void FLASH_StopCacheLock(uint32_t lock_stop_way)
     FLASH->CAHR |= lock_stop_way;
 }
 
-
 /**
 *\*\name   FLASH_CancelCacheLock
-*\*\fun    Cancle cache lock.
+*\*\fun    Cancel cache lock.
 *\*\param  lock_stop_way :
 *\*\            - FLASH_CAHR_LOCKSTOP_WAY0
 *\*\            - FLASH_CAHR_LOCKSTOP_WAY1
@@ -211,7 +206,6 @@ void FLASH_CancelCacheLock(uint32_t lock_stop_way)
     FLASH->CAHR |= lock_stop_way;
     FLASH->CAHR &= (~lock_stop_way);
 }
-
 
 /**
 *\*\name   FLASH_Unlock
@@ -226,7 +220,6 @@ void FLASH_Unlock(void)
     FLASH->KEY = FLASH_KEY2;
 }
 
-
 /**
 *\*\name   FLASH_Lock
 *\*\fun    Locks the FLASH Program Erase Controller.
@@ -237,7 +230,6 @@ void FLASH_Lock(void)
 {
     FLASH->CTRL |= CTRL_Set_LOCK;
 }
-
 
 /**
 *\*\name   Flash_GetLockStatus
@@ -256,11 +248,10 @@ FlagStatus Flash_GetLockStatus(void)
     }
     else
     {
-        bit_status =  RESET;
+        bit_status = RESET;
     }
     return bit_status;
 }
-
 
 /**
 *\*\name   Option_Bytes_Unlock
@@ -274,7 +265,6 @@ void Option_Bytes_Unlock(void)
     FLASH->OPTKEY = FLASH_KEY2;
 }
 
-
 /**
 *\*\name   Option_Bytes_Lock
 *\*\fun    Locks the Option_Bytes Program Erase Controller.
@@ -286,7 +276,6 @@ void Option_Bytes_Lock(void)
     /* Set the FLASH_CTRL_SET_OPTWE Bit to lock */
     FLASH->CTRL &= (~FLASH_CTRL_SET_OPTWE);
 }
-
 
 /**
 *\*\name   OB_GetLockStatus
@@ -305,11 +294,10 @@ FlagStatus OB_GetLockStatus(void)
     }
     else
     {
-        bit_status =  RESET;
+        bit_status = RESET;
     }
     return bit_status;
 }
-
 
 /**
 *\*\name   FLASH_EraseOnePage
@@ -350,7 +338,6 @@ FLASH_STS FLASH_EraseOnePage(uint32_t Page_Address)
     return status;
 }
 
-
 /**
 *\*\name   FLASH_MassErase
 *\*\fun    Erases all main FLASH pages.
@@ -388,7 +375,6 @@ FLASH_STS FLASH_MassErase(void)
     return status;
 }
 
-
 /**
 *\*\name   FLASH_ProgramWord
 *\*\fun    Programs one word at a specified address.
@@ -408,19 +394,18 @@ FLASH_STS FLASH_ProgramWord(uint32_t address, uint32_t data)
 {
     FLASH_STS status_value = FLASH_EOP;
 
-    if((address & FLASH_WORD_LENGTH) != (uint32_t)0x00)
+    if ((address & FLASH_WORD_LENGTH) != (uint32_t)0x00U)
     {
         /* The programming address is not a multiple of 4 */
         status_value = FLASH_ERR_ADD;
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
-    if(status_value == FLASH_ERR_ADD)
+    if (status_value == FLASH_ERR_ADD)
     {
-    
     }
     else
     {
@@ -435,7 +420,7 @@ FLASH_STS FLASH_ProgramWord(uint32_t address, uint32_t data)
         /* if the previous operation is completed, proceed to program the new word */
         FLASH->CTRL |= CTRL_Set_PG;
 
-        *((__IO uint32_t*)(uintptr_t)address) = (uint32_t)data;
+        *((__IO uint32_t *)(uintptr_t)address) = (uint32_t)data;
 
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
@@ -445,13 +430,12 @@ FLASH_STS FLASH_ProgramWord(uint32_t address, uint32_t data)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
+
     /* Return the Program status_value */
     return status_value;
 }
-
 
 /**
 *\*\name   FLASH_EraseOB
@@ -476,12 +460,11 @@ FLASH_STS FLASH_EraseOB(void)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
@@ -518,18 +501,17 @@ FLASH_STS FLASH_EraseOB(void)
             }
             else
             {
-                /*No process*/
+                /* No process */
             }
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
     /* Return the erase status_value */
     return status_value;
 }
-
 
 /**
 *\*\name   FLASH_ProgramOptionBytes_RDP1
@@ -556,17 +538,16 @@ FLASH_STS FLASH_ProgramOptionBytes_RDP1(uint8_t option_byte_rpd1)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
         Option_Bytes_Unlock();
-      
+
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
         /* Wait for last operation to be completed */
@@ -577,9 +558,9 @@ FLASH_STS FLASH_ProgramOptionBytes_RDP1(uint8_t option_byte_rpd1)
     {
         /* Enable the Option Bytes Programming operation */
         FLASH->CTRL |= CTRL_Set_OPTPG;
-        /* Restore the last read protection Option Byte value */
+        /* Program the read protection Option Byte value */
         OBT->RDP1 = ((uint32_t)option_byte_rpd1);
-        
+
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
         if (status_value != FLASH_TIMEOUT)
@@ -589,24 +570,21 @@ FLASH_STS FLASH_ProgramOptionBytes_RDP1(uint8_t option_byte_rpd1)
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
     /* Return the Option Byte program status_value */
     return status_value;
 }
 
-
-
-
 /**
 *\*\name   FLASH_ProgramOptionBytes_USER0
-*\*\fun    Programs the Option Byte: WDG_SW.
+*\*\fun    Programs the Option Byte: IWDG_SW.
 *\*\param  option_byte_iwdg :(The input parameters must be the following values)
 *\*\            - FLASH_OB_IWDG_SOFTWARE Software IWDG selected
 *\*\            - FLASH_OB_IWDG_HARDWARE Hardware IWDG selected
@@ -629,29 +607,28 @@ FLASH_STS FLASH_ProgramOptionBytes_USER0(uint32_t option_byte_iwdg)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
         Option_Bytes_Unlock();
-      
+
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
     }
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Enable the Option Bytes Programming operation */
         FLASH->CTRL |= CTRL_Set_OPTPG;
-        /* Restore the last read protection Option Byte value */
-        OBT->USER0 = ((uint32_t)(option_byte_iwdg));     
+        /* Program the IWDG option byte value */
+        OBT->USER0 = ((uint32_t)(option_byte_iwdg));
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
         if (status_value != FLASH_TIMEOUT)
@@ -661,18 +638,17 @@ FLASH_STS FLASH_ProgramOptionBytes_USER0(uint32_t option_byte_iwdg)
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
     /* Return the Option Byte program status_value */
     return status_value;
 }
-
 
 /**
 *\*\name   FLASH_ProgramOptionBytes_USER1
@@ -699,29 +675,28 @@ FLASH_STS FLASH_ProgramOptionBytes_USER1(uint32_t option_byte_PD7)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
         Option_Bytes_Unlock();
-      
+
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
     }
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Enable the Option Bytes Programming operation */
         FLASH->CTRL |= CTRL_Set_OPTPG;
-        /* Restore the last read protection Option Byte value */
-        OBT->USER1 = ((uint32_t)(option_byte_PD7));       
+        /* Program the PD7 option byte value */
+        OBT->USER1 = ((uint32_t)(option_byte_PD7));
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
         if (status_value != FLASH_TIMEOUT)
@@ -731,12 +706,12 @@ FLASH_STS FLASH_ProgramOptionBytes_USER1(uint32_t option_byte_PD7)
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
     /* Return the Option Byte program status_value */
@@ -759,13 +734,13 @@ FLASH_STS FLASH_ProgramOptionBytes_USER1(uint32_t option_byte_PD7)
 *\*\            - FLASH_OB_BOOT0_CFG_HIGH Boot0 high active
 *\*\            - FLASH_OB_BOOT0_CFG_LOW  Boot0 low active
 *\*\param   option_byte_iwdg_stop :(The input parameters must be the following values)
-*\*\            - FLASH_OB_IWDG_SLEEP_NOFRZ IWDG not freeze when enrting Sleep mode
-*\*\            - FLASH_OB_IWDG_SLEEP_FRZ  IWDG freeze when enrting Sleep mode
+*\*\            - FLASH_OB_IWDG_STOP_NOFRZ  IWDG not frozen in Stop mode
+*\*\            - FLASH_OB_IWDG_STOP_FRZ    IWDG frozen in Stop mode
 *\*\param   option_byte_iwdg_sleep :(The input parameters must be the following values)
-*\*\            - FLASH_OB_IWDG_STOP_NOFRZ IWDG not freeze when enrting Stop mode
-*\*\            - FLASH_OB_IWDG_STOP_FRZ  IWDG freeze when enrting Stop mode
+*\*\            - FLASH_OB_IWDG_SLEEP_NOFRZ IWDG not frozen in Sleep mode
+*\*\            - FLASH_OB_IWDG_SLEEP_FRZ   IWDG frozen in Sleep mode
 *\*\param  option_byte_user2:(The input parameters must be the following values)
-*\*\                - 0x00 to 0xFF  PDR/POR filter control count value,30~8192us
+*\*\                - 0x00 to 0xFF  PDR/POR delay count; 0x00 = longest, 0xFF = no delay; 30~8192us
 *\*\return FLASH_STS : 
 *\*\        - FLASH_BUSY     FLASH is busy
 *\*\        - FLASH_ERR_PG   FLASH programming error
@@ -774,9 +749,12 @@ FLASH_STS FLASH_ProgramOptionBytes_USER1(uint32_t option_byte_PD7)
 *\*\        - FLASH_ERR_RDP2 FLASH is in read protection L2 status
 *\*\        - FLASH_TIMEOUT  FLASH operation timeout
 **/
-FLASH_STS FLASH_ProgramOptionBytes_USER3_USER2(uint32_t option_byte_nBOOT0, uint32_t option_byte_nBOOT1, \
-                                               uint32_t option_byte_nSWBOOT0, uint32_t option_byte_BOOT0_CFG, \
-                                               uint32_t option_byte_iwdg_stop, uint32_t option_byte_iwdg_sleep, \
+FLASH_STS FLASH_ProgramOptionBytes_USER3_USER2(uint32_t option_byte_nBOOT0, 
+                                               uint32_t option_byte_nBOOT1, 
+                                               uint32_t option_byte_nSWBOOT0, 
+                                               uint32_t option_byte_BOOT0_CFG, 
+                                               uint32_t option_byte_iwdg_stop, 
+                                               uint32_t option_byte_iwdg_sleep, 
                                                uint32_t option_byte_user2)
 {
     FLASH_STS status_value = FLASH_EOP;
@@ -788,17 +766,16 @@ FLASH_STS FLASH_ProgramOptionBytes_USER3_USER2(uint32_t option_byte_nBOOT0, uint
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
         Option_Bytes_Unlock();
-      
+
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
         /* Wait for last operation to be completed */
@@ -809,9 +786,13 @@ FLASH_STS FLASH_ProgramOptionBytes_USER3_USER2(uint32_t option_byte_nBOOT0, uint
     {
         /* Enable the Option Bytes Programming operation */
         FLASH->CTRL |= CTRL_Set_OPTPG;
-        /* Restore the last read protection Option Byte value */
-        OBT->USER3_USER2 = (((uint32_t)(option_byte_nBOOT0 | option_byte_nBOOT1 | option_byte_nSWBOOT0 | option_byte_BOOT0_CFG |\
-                                        option_byte_iwdg_stop | option_byte_iwdg_sleep)) | ((uint32_t)option_byte_user2));      
+        /* Program the USER3 and USER2 option byte values */
+        OBT->USER3_USER2 = (((uint32_t)(option_byte_nBOOT0    | \
+                                        option_byte_nBOOT1    | \
+                                        option_byte_nSWBOOT0  | \
+                                        option_byte_BOOT0_CFG | \
+                                        option_byte_iwdg_stop | \
+                                        option_byte_iwdg_sleep)) | ((uint32_t)option_byte_user2));
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
         if (status_value != FLASH_TIMEOUT)
@@ -821,12 +802,12 @@ FLASH_STS FLASH_ProgramOptionBytes_USER3_USER2(uint32_t option_byte_nBOOT0, uint
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
     /* Return the Option Byte program status_value */
@@ -838,20 +819,20 @@ FLASH_STS FLASH_ProgramOptionBytes_USER3_USER2(uint32_t option_byte_nBOOT0, uint
 *\*\fun    Programs the Option Byte: USER5 and USER4.
 *\*\param   option_byte_user4 :(The input parameters must be the following values)
 *\*\            - BOOT_UARTPIN_PA9PA10
-*\*\            - BOOT_UARTPIN_PA0PA1 
-*\*\            - BOOT_UARTPIN_PA4PA5       
-*\*\            - BOOT_UARTPIN_PB4PB5       
-*\*\            - BOOT_UARTPIN_PB6PB7       
-*\*\            - BOOT_UARTPIN_NUM5       N32G412 serial BOOT uart pins are PB8 and PB9, N32G415 serial BOOT uart pins are PB8 and PC10
-*\*\            - BOOT_UARTPIN_PC4PC5       
+*\*\            - BOOT_UARTPIN_PA0PA1
+*\*\            - BOOT_UARTPIN_PA4PA5
+*\*\            - BOOT_UARTPIN_PB4PB5
+*\*\            - BOOT_UARTPIN_PB6PB7
+*\*\            - BOOT_UARTPIN_NUM5       N32G412 serial BOOT uart pins are PB8 and PB9, N32G415 serial BOOT uart pins are PB9 and PC10
+*\*\            - BOOT_UARTPIN_PC4PC5
 *\*\            - BOOT_UARTPIN_NUM7       N32G412 serial BOOT uart pins are PC7 and PC6, N32G415 serial BOOT uart pins are PA9 and PA8
 *\*\            - BOOT_UARTPIN_NUM8       N32G412 serial BOOT uart pins are PC12 and PD2, N32G415 serial BOOT uart pins are PD0 and PD2
 *\*\param   option_byte_user5 :(The input parameters must be the following values)
-*\*\            - BOOT_I2C_PIN_PA4PA5   
-*\*\            - BOOT_I2C_PIN_PA9PA10  
-*\*\            - BOOT_I2C_PIN_PA15PA14       
-*\*\            - BOOT_I2C_PIN_PB6PB7         
-*\*\            - BOOT_I2C_PIN_NUM4       N32G412 serial BOOT i2c pins are PB7 and PB8, N32G415 serial BOOT i2c pins are PB7 and PB9  
+*\*\            - BOOT_I2C_PIN_PA4PA5
+*\*\            - BOOT_I2C_PIN_PA9PA10
+*\*\            - BOOT_I2C_PIN_PA15PA14
+*\*\            - BOOT_I2C_PIN_PB6PB7
+*\*\            - BOOT_I2C_PIN_NUM4       N32G412 serial BOOT i2c pins are PB7 and PB8, N32G415 serial BOOT i2c pins are PB7 and PB9
 *\*\            - BOOT_I2C_PIN_NUM5       N32G412 serial BOOT i2c pins are PB8 and PB9, N32G415 serial BOOT i2c pins are PB9 and PC10
 *\*\            - BOOT_I2C_PIN_PC0PC1
 *\*\            - BOOT_I2C_PIN_PC4PC5         
@@ -875,17 +856,16 @@ FLASH_STS FLASH_ProgramOptionBytes_USER5_USER4(uint32_t option_byte_user4, uint3
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
         Option_Bytes_Unlock();
-      
+
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
         /* Wait for last operation to be completed */
@@ -896,8 +876,8 @@ FLASH_STS FLASH_ProgramOptionBytes_USER5_USER4(uint32_t option_byte_user4, uint3
     {
         /* Enable the Option Bytes Programming operation */
         FLASH->CTRL |= CTRL_Set_OPTPG;
-        /* Restore the last read protection Option Byte value */
-        OBT->USER5_USER4 = ((uint32_t)(option_byte_user4 | option_byte_user5));      
+        /* Program the USER5 and USER4 option byte values */
+        OBT->USER5_USER4 = ((uint32_t)(option_byte_user4 | option_byte_user5));
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
         if (status_value != FLASH_TIMEOUT)
@@ -907,12 +887,12 @@ FLASH_STS FLASH_ProgramOptionBytes_USER5_USER4(uint32_t option_byte_user4, uint3
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
     /* Return the Option Byte program status_value */
@@ -944,17 +924,16 @@ FLASH_STS FLASH_ProgramOptionBytes_USER6(uint32_t option_byte_user6)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
         Option_Bytes_Unlock();
-      
+
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
         /* Wait for last operation to be completed */
@@ -965,8 +944,8 @@ FLASH_STS FLASH_ProgramOptionBytes_USER6(uint32_t option_byte_user6)
     {
         /* Enable the Option Bytes Programming operation */
         FLASH->CTRL |= CTRL_Set_OPTPG;
-        /* Restore the last read protection Option Byte value */
-        OBT->USER6 = ((uint32_t)(option_byte_user6));      
+        /* Program the USER6 Option Byte value */
+        OBT->USER6 = ((uint32_t)(option_byte_user6));
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
         if (status_value != FLASH_TIMEOUT)
@@ -976,12 +955,12 @@ FLASH_STS FLASH_ProgramOptionBytes_USER6(uint32_t option_byte_user6)
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
     /* Return the Option Byte program status_value */
@@ -1013,17 +992,16 @@ FLASH_STS FLASH_ProgramOptionBytes_USER7(uint32_t option_byte_user7)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
         Option_Bytes_Unlock();
-      
+
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
         /* Wait for last operation to be completed */
@@ -1033,8 +1011,8 @@ FLASH_STS FLASH_ProgramOptionBytes_USER7(uint32_t option_byte_user7)
     {
         /* Enable the Option Bytes Programming operation */
         FLASH->CTRL |= CTRL_Set_OPTPG;
-        /* Restore the last read protection Option Byte value */
-        OBT->USER7 = ((uint32_t)(option_byte_user7));     
+        /* Program the USER7 Option Byte value */
+        OBT->USER7 = ((uint32_t)(option_byte_user7));
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
         if (status_value != FLASH_TIMEOUT)
@@ -1044,12 +1022,12 @@ FLASH_STS FLASH_ProgramOptionBytes_USER7(uint32_t option_byte_user7)
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
     /* Return the Option Byte program status_value */
@@ -1082,17 +1060,16 @@ FLASH_STS FLASH_ProgramOptionBytes_DATA1_DATA0(uint8_t option_byte_data1, uint8_
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
         Option_Bytes_Unlock();
-      
+
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
         /* Wait for last operation to be completed */
@@ -1103,8 +1080,8 @@ FLASH_STS FLASH_ProgramOptionBytes_DATA1_DATA0(uint8_t option_byte_data1, uint8_
     {
         /* Enable the Option Bytes Programming operation */
         FLASH->CTRL |= CTRL_Set_OPTPG;
-        /* Restore the last read protection Option Byte value */
-        OBT->Data1_Data0 = ((((uint32_t)option_byte_data1) << REG_BIT16_OFFSET) | ((uint32_t)option_byte_data0));        
+        /* Program the Data1_Data0 Option Byte value */
+        OBT->Data1_Data0 = ((((uint32_t)option_byte_data1) << REG_BIT16_OFFSET) | ((uint32_t)option_byte_data0));
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
         if (status_value != FLASH_TIMEOUT)
@@ -1114,18 +1091,17 @@ FLASH_STS FLASH_ProgramOptionBytes_DATA1_DATA0(uint8_t option_byte_data1, uint8_
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
     /* Return the Option Byte program status_value */
     return status_value;
 }
-
 
 /**
 *\*\name   FLASH_EnWriteProtection
@@ -1175,10 +1151,10 @@ FLASH_STS FLASH_ProgramOptionBytes_DATA1_DATA0(uint8_t option_byte_data1, uint8_
 **/
 FLASH_STS FLASH_EnWriteProtection(uint32_t FLASH_Pages)
 {
-    uint32_t WRP0_Data, WRP1_Data,WRP2_Data, WRP3_Data;
+    uint32_t WRP0_Data, WRP1_Data, WRP2_Data, WRP3_Data;
 
     FLASH_STS status_value = FLASH_EOP;
-    
+
     uint32_t FLASH_Pages_temp;
 
     /* Get the actual read protection L2 Option Byte value */
@@ -1188,19 +1164,17 @@ FLASH_STS FLASH_EnWriteProtection(uint32_t FLASH_Pages)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    
+
     FLASH_Pages_temp = (uint32_t)(~FLASH_Pages);
-    WRP0_Data   = (uint16_t)( FLASH_Pages_temp & FLASH_WRP0_MSK);
-    WRP1_Data   = (uint16_t)((FLASH_Pages_temp & FLASH_WRP1_MSK) >> FLASH_WRP_WRP1_OFFSET);
-    WRP2_Data   = (uint16_t)((FLASH_Pages_temp & FLASH_WRP2_MSK) >> FLASH_WRP_WRP2_OFFSET);
-    WRP3_Data   = (uint16_t)((FLASH_Pages_temp & FLASH_WRP3_MSK) >> FLASH_WRP_WRP3_OFFSET);
-    
-    if(status_value == FLASH_ERR_RDP2)
+    WRP0_Data        = (uint16_t)(FLASH_Pages_temp & FLASH_WRP0_MSK);
+    WRP1_Data        = (uint16_t)((FLASH_Pages_temp & FLASH_WRP1_MSK) >> FLASH_WRP_WRP1_OFFSET);
+    WRP2_Data        = (uint16_t)((FLASH_Pages_temp & FLASH_WRP2_MSK) >> FLASH_WRP_WRP2_OFFSET);
+    WRP3_Data        = (uint16_t)((FLASH_Pages_temp & FLASH_WRP3_MSK) >> FLASH_WRP_WRP3_OFFSET);
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
@@ -1224,11 +1198,10 @@ FLASH_STS FLASH_EnWriteProtection(uint32_t FLASH_Pages)
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
-        
-        
-        if (((WRP2_Data != 0xFFU) || (WRP3_Data != 0xFFU)) &&(status_value == FLASH_EOP))
+
+        if (((WRP2_Data != 0xFFU) || (WRP3_Data != 0xFFU)) && (status_value == FLASH_EOP))
         {
             OBT->WRP3_WRP2 = ((WRP3_Data << REG_BIT16_OFFSET) | WRP2_Data);
 
@@ -1237,9 +1210,9 @@ FLASH_STS FLASH_EnWriteProtection(uint32_t FLASH_Pages)
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
-                
+
         if (status_value != FLASH_TIMEOUT)
         {
             /* if the program operation is completed, disable the OPTPG Bit */
@@ -1247,17 +1220,16 @@ FLASH_STS FLASH_EnWriteProtection(uint32_t FLASH_Pages)
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
     /* Return the write protection operation Status */
     return status_value;
 }
-
 
 /**
 *\*\name   FLASH_ProgramOptionBytes_RDP2
@@ -1284,17 +1256,16 @@ FLASH_STS FLASH_ProgramOptionBytes_RDP2(uint8_t option_byte_rpd2)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
-    if(status_value == FLASH_ERR_RDP2)
+
+    if (status_value == FLASH_ERR_RDP2)
     {
-    
     }
     else
     {
         Option_Bytes_Unlock();
-      
+
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
         /* Wait for last operation to be completed */
@@ -1305,9 +1276,9 @@ FLASH_STS FLASH_ProgramOptionBytes_RDP2(uint8_t option_byte_rpd2)
     {
         /* Enable the Option Bytes Programming operation */
         FLASH->CTRL |= CTRL_Set_OPTPG;
-        /* Restore the last read protection Option Byte value */
+        /* Program the read protection Option Byte value given by the caller */
         OBT->RDP2 = (uint32_t)option_byte_rpd2;
-        
+
         /* Wait for last operation to be completed */
         status_value = FLASH_WaitForLastOpt(ProgramTimeout);
         if (status_value != FLASH_TIMEOUT)
@@ -1317,18 +1288,17 @@ FLASH_STS FLASH_ProgramOptionBytes_RDP2(uint8_t option_byte_rpd2)
         }
         else
         {
-            /*No process*/
+            /* No process */
         }
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
 
     /* Return the Option Byte program status_value */
     return status_value;
 }
-
 
 /**
 *\*\name   FLASH_ReadOutProtectionL1
@@ -1345,11 +1315,11 @@ FLASH_STS FLASH_ProgramOptionBytes_RDP2(uint8_t option_byte_rpd2)
 *\*\        - FLASH_TIMEOUT  FLASH operation timeout
 **/
 FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
-{ 
-    uint32_t user0_temp = 0xFFU, user1_temp = 0xFFU, user2_user3_temp = 0xFFU;    
-    uint32_t user4_user5_temp = 0xFFU,user6_temp = 0xFFU,user7_temp = 0xFFU;
-    uint32_t data0_data1_temp = 0xFFU,rpd1_tmp = 0xFFU;
-    uint32_t wrp0_wrp1_tmp = 0xFFU,wrp2_wrp3_tmp = 0xFFU;
+{
+    uint32_t user0_temp = 0xFFU, user1_temp = 0xFFU, user2_user3_temp = 0xFFU;
+    uint32_t user4_user5_temp = 0xFFU, user6_temp = 0xFFU, user7_temp = 0xFFU;
+    uint32_t data0_data1_temp = 0xFFU, rpd1_tmp = 0xFFU;
+    uint32_t wrp0_wrp1_tmp = 0xFFU, wrp2_wrp3_tmp = 0xFFU;
     FLASH_STS status_value;
     uint32_t timeout_value;
     timeout_value = EraseTimeout;
@@ -1361,30 +1331,29 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        if(Cmd == ENABLE)
+        if (Cmd == ENABLE)
         {
-            
         }
         else
         {
             rpd1_tmp = FLASH_OB_RDP1_DISABLE;
         }
-        
-        user0_temp = OBT->USER0;
-        user1_temp = OBT->USER1;
+
+        user0_temp       = OBT->USER0;
+        user1_temp       = OBT->USER1;
         user2_user3_temp = OBT->USER3_USER2;
         user4_user5_temp = OBT->USER5_USER4;
-        user6_temp = OBT->USER6; 
-        user7_temp = OBT->USER7;
+        user6_temp       = OBT->USER6;
+        user7_temp       = OBT->USER7;
         data0_data1_temp = OBT->Data1_Data0;
-        wrp0_wrp1_tmp = OBT->WRP1_WRP0;
-        wrp2_wrp3_tmp = OBT->WRP3_WRP2;
-        
+        wrp0_wrp1_tmp    = OBT->WRP1_WRP0;
+        wrp2_wrp3_tmp    = OBT->WRP3_WRP2;
+
         FLASH_Unlock();
         status_value = FLASH_EraseOB();
     }
-    
-    if(status_value == FLASH_EOP)
+
+    if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
@@ -1393,9 +1362,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1414,10 +1383,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1436,10 +1404,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1458,10 +1425,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1480,10 +1446,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1502,9 +1467,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1523,10 +1488,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1545,10 +1509,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1567,9 +1530,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1588,10 +1551,9 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1610,13 +1572,12 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-  
+
     /* Return the protection operation status_value */
     return status_value;
 }
-
 
 /**
 *\*\name   FLASH_ReadOutProtectionL2_ENABLE
@@ -1631,11 +1592,11 @@ FLASH_STS FLASH_ReadOutProtectionL1(FunctionalState Cmd)
 *\*\        - FLASH_TIMEOUT  FLASH operation timeout
 **/
 FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
-{ 
-    uint32_t user0_temp = 0xFFU, user1_temp = 0xFFU, user2_user3_temp = 0xFFU;    
-    uint32_t user4_user5_temp = 0xFFU,user6_temp = 0xFFU,user7_temp = 0xFFU;
+{
+    uint32_t user0_temp = 0xFFU, user1_temp = 0xFFU, user2_user3_temp = 0xFFU;
+    uint32_t user4_user5_temp = 0xFFU, user6_temp = 0xFFU, user7_temp = 0xFFU;
     uint32_t data0_data1_temp = 0xFFU;
-    uint32_t wrp0_wrp1_tmp = 0xFFU,wrp2_wrp3_tmp = 0xFFU;
+    uint32_t wrp0_wrp1_tmp = 0xFFU, wrp2_wrp3_tmp = 0xFFU;
     FLASH_STS status_value;
     uint32_t timeout_value;
     timeout_value = EraseTimeout;
@@ -1647,21 +1608,21 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        user0_temp = OBT->USER0;
-        user1_temp = OBT->USER1;
+        user0_temp       = OBT->USER0;
+        user1_temp       = OBT->USER1;
         user2_user3_temp = OBT->USER3_USER2;
         user4_user5_temp = OBT->USER5_USER4;
-        user6_temp = OBT->USER6; 
-        user7_temp = OBT->USER7;
+        user6_temp       = OBT->USER6;
+        user7_temp       = OBT->USER7;
         data0_data1_temp = OBT->Data1_Data0;
-        wrp0_wrp1_tmp = OBT->WRP1_WRP0;
-        wrp2_wrp3_tmp = OBT->WRP3_WRP2;
-        
+        wrp0_wrp1_tmp    = OBT->WRP1_WRP0;
+        wrp2_wrp3_tmp    = OBT->WRP3_WRP2;
+
         FLASH_Unlock();
         status_value = FLASH_EraseOB();
     }
-    
-    if(status_value == FLASH_EOP)
+
+    if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
         FLASH_ClearFlag(FLASH_STS_CLRFLAG);
@@ -1670,9 +1631,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /*No process*/
+        /* No process */
     }
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1691,10 +1652,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1713,10 +1673,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1735,10 +1694,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1757,10 +1715,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1779,9 +1736,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1800,10 +1757,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1822,10 +1778,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1844,9 +1799,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1865,10 +1820,9 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-    
-    
+
     if (status_value == FLASH_EOP)
     {
         /* Clears the FLASH's pending flags */
@@ -1887,13 +1841,12 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
     }
     else
     {
-        /* no process*/
+        /* no process */
     }
-  
+
     /* Return the protection operation status_value */
     return status_value;
 }
-
 
 /**
 *\*\name   FLASH_GetOptionBytes_User0
@@ -1906,7 +1859,7 @@ FLASH_STS FLASH_ReadOutProtectionL2_ENABLE(void)
 FlagStatus FLASH_GetOptionBytes_User0(void)
 {
     FlagStatus bit_status;
-    if(((FLASH->OB >> REG_BIT2_OFFSET) & FLASH_OB_IWDG_SOFTWARE) != (uint32_t)RESET)
+    if (((FLASH->OB >> REG_BIT2_OFFSET) & FLASH_OB_IWDG_SOFTWARE) != (uint32_t)RESET)
     {
         bit_status = SET;
     }
@@ -1916,20 +1869,19 @@ FlagStatus FLASH_GetOptionBytes_User0(void)
     }
     return bit_status;
 }
-
 
 /**
 *\*\name   FLASH_GetOptionBytes_User1
 *\*\fun    Returns the FLASH User Option Bytes values.
 *\*\param  none
 *\*\return FlagStatus :
-*\*\            - SET      PF3 used as NRST
-*\*\            - RESET    PF3 used as GPIO
+*\*\            - SET      PD7 used as NRST
+*\*\            - RESET    PD7 used as GPIO
 **/
 FlagStatus FLASH_GetOptionBytes_User1(void)
 {
     FlagStatus bit_status;
-    if(((FLASH->OB >> REG_BIT2_OFFSET) & FLASH_OB_PD7_NRST) != (uint32_t)RESET)
+    if (((FLASH->OB >> REG_BIT2_OFFSET) & FLASH_OB_PD7_NRST) != (uint32_t)RESET)
     {
         bit_status = SET;
     }
@@ -1940,12 +1892,11 @@ FlagStatus FLASH_GetOptionBytes_User1(void)
     return bit_status;
 }
 
-
 /**
 *\*\name   FLASH_GetOptionBytes_User2
-*\*\fun    Returns the FLASH Option Bytes PORCNT values.
+*\*\fun    Returns the FLASH Option Bytes POR_DELAY values.
 *\*\param  none
-*\*\return PORCNT:
+*\*\return POR_DELAY:
 *\*\            - 0x00 to 0xFF.
 **/
 uint32_t FLASH_GetOptionBytes_User2(void)
@@ -1953,7 +1904,6 @@ uint32_t FLASH_GetOptionBytes_User2(void)
     /* Return the User Option Byte2 */
     return (uint32_t)((FLASH->OB & FLASH_USER_POR_DELAY_MSK) >> REG_BIT4_OFFSET);
 }
-
 
 /**
 *\*\name   FLASH_GetOptionBytes_User3
@@ -1966,13 +1916,13 @@ uint32_t FLASH_GetOptionBytes_User2(void)
 *\*\            - FLASH_OB_IWDG_SLEEP_NOFRZ    IWDG_SLEEP_NOFRZ configuration bit
 *\*\            - FLASH_OB_IWDG_STOP_NOFRZ     IWDG_STOP_NOFRZ configuration bit
 *\*\return FlagStatus :
-*\*\            - SET      Enter this mode without resetting
-*\*\            - RESET    Enter this mode reset
+*\*\            - SET      The selected option bit is 1
+*\*\            - RESET    The selected option bit is 0
 **/
 FlagStatus FLASH_GetOptionBytes_User3(uint32_t option_byte_bit)
 {
     FlagStatus bit_status;
-    if(((FLASH->OB ) & (option_byte_bit >> REG_BIT4_OFFSET)) != (uint32_t)RESET)
+    if (((FLASH->OB) & (option_byte_bit >> REG_BIT4_OFFSET)) != (uint32_t)RESET)
     {
         bit_status = SET;
     }
@@ -1989,38 +1939,38 @@ FlagStatus FLASH_GetOptionBytes_User3(uint32_t option_byte_bit)
 *\*\param  none
 *\*\return option_byte_user4 0x0~0x8:
 *\*\            - BOOT_UARTPIN_PA9PA10    BOOT uart pins are PA9 and PA10
-*\*\            - BOOT_UARTPIN_PA0PA1     BOOT uart pins are PA0 and PA1 
-*\*\            - BOOT_UARTPIN_PA4PA5     BOOT uart pins are PA4 and PA5 
-*\*\            - BOOT_UARTPIN_PB4PB5     BOOT uart pins are PB4 and PB5 
-*\*\            - BOOT_UARTPIN_PB6PB7     BOOT uart pins are PB6 and PB7 
-*\*\            - BOOT_UARTPIN_NUM5       N32G412 serial BOOT uart pins are PB8 and PB9, N32G415 serial BOOT uart pins are PB8 and PC10
-*\*\            - BOOT_UARTPIN_PC4PC5     BOOT uart pins are PC4 and PC5 
+*\*\            - BOOT_UARTPIN_PA0PA1     BOOT uart pins are PA0 and PA1
+*\*\            - BOOT_UARTPIN_PA4PA5     BOOT uart pins are PA4 and PA5
+*\*\            - BOOT_UARTPIN_PB4PB5     BOOT uart pins are PB4 and PB5
+*\*\            - BOOT_UARTPIN_PB6PB7     BOOT uart pins are PB6 and PB7
+*\*\            - BOOT_UARTPIN_NUM5       N32G412 serial BOOT uart pins are PB8 and PB9, N32G415 serial BOOT uart pins are PB9 and PC10
+*\*\            - BOOT_UARTPIN_PC4PC5     BOOT uart pins are PC4 and PC5
 *\*\            - BOOT_UARTPIN_NUM7       N32G412 serial BOOT uart pins are PC7 and PC6, N32G415 serial BOOT uart pins are PA9 and PA8
 *\*\            - BOOT_UARTPIN_NUM8       N32G412 serial BOOT uart pins are PC12 and PD2, N32G415 serial BOOT uart pins are PD0 and PD2
 **/
 uint32_t FLASH_GetBOOTUartPIN(void)
 {
-    return (uint32_t)(((FLASH->OB & FLASH_OB_BOOT_SEL_UART) >> REG_BIT20_OFFSET));   
+    return (uint32_t)(((FLASH->OB & FLASH_OB_BOOT_SEL_UART) >> REG_BIT20_OFFSET));
 }
 
 /**
 *\*\name   FLASH_GetBOOTI2cPIN
 *\*\fun    Returns the FLASH User Option Bytes values.
 *\*\param  none
-*\*\return option_byte_user5 0x0~0x8:
-*\*\            - BOOT_I2C_PIN_PA4PA5      I2C SCL SDA pins are PA4 and PA5 
-*\*\            - BOOT_I2C_PIN_PA9PA10     I2C SCL SDA pins are PA9 and PA10 
+*\*\return option_byte_user5 0x00000000~0x00080000:
+*\*\            - BOOT_I2C_PIN_PA4PA5      I2C SCL SDA pins are PA4 and PA5
+*\*\            - BOOT_I2C_PIN_PA9PA10     I2C SCL SDA pins are PA9 and PA10
 *\*\            - BOOT_I2C_PIN_PA15PA14    I2C SCL SDA pins are PA15 and PA14
-*\*\            - BOOT_I2C_PIN_PB6PB7      I2C SCL SDA pins are PB6 and PB7 
+*\*\            - BOOT_I2C_PIN_PB6PB7      I2C SCL SDA pins are PB6 and PB7
 *\*\            - BOOT_I2C_PIN_NUM4        N32G412 serial I2C SCL SDA pins are PB7 and PB8 , N32G415 serial I2C SCL SDA pins are PB7 and PB9
 *\*\            - BOOT_I2C_PIN_NUM5        N32G412 serial I2C SCL SDA pins are PB8 and PB9 , N32G415 serial I2C SCL SDA pins are PB9 and PC10
-*\*\            - BOOT_I2C_PIN_PC0PC1      I2C SCL SDA pins are PC0 and PC1 
-*\*\            - BOOT_I2C_PIN_PC4PC5      I2C SCL SDA pins are PC4 and PC5 
+*\*\            - BOOT_I2C_PIN_PC0PC1      I2C SCL SDA pins are PC0 and PC1
+*\*\            - BOOT_I2C_PIN_PC4PC5      I2C SCL SDA pins are PC4 and PC5
 *\*\            - BOOT_I2C_PIN_PD15PD14    I2C SCL SDA pins are PD15 and PD14
 **/
 uint32_t FLASH_GetBOOTI2cPIN(void)
 {
-    return (uint32_t)(((FLASH->OB2 & FLASH_OB2_BOOT_SEL_I2C) << REG_BIT16_OFFSET));   
+    return (uint32_t)(((FLASH->OB2 & FLASH_OB2_BOOT_SEL_I2C) << REG_BIT16_OFFSET));
 }
 
 /**
@@ -2033,7 +1983,7 @@ uint32_t FLASH_GetBOOTI2cPIN(void)
 **/
 uint32_t FLASH_GetBOOTCanPIN(void)
 {
-    return (uint32_t)(((FLASH->OB2 & FLASH_OB2_BOOT_SEL_CAN) >> REG_BIT8_OFFSET));   
+    return (uint32_t)(((FLASH->OB2 & FLASH_OB2_BOOT_SEL_CAN) >> REG_BIT8_OFFSET));
 }
 
 /**
@@ -2045,10 +1995,9 @@ uint32_t FLASH_GetBOOTCanPIN(void)
 **/
 uint32_t FLASH_GetOptionBytes_Data0(void)
 {
-    /* Return the User Option Byte2 */
+    /* Return the User Option Byte Data0 */
     return (uint32_t)((FLASH->OB2 & FLASH_DATA0_MASK) >> REG_BIT16_OFFSET);
 }
-
 
 /**
 *\*\name   FLASH_GetOptionBytes_Data1
@@ -2059,10 +2008,9 @@ uint32_t FLASH_GetOptionBytes_Data0(void)
 **/
 uint32_t FLASH_GetOptionBytes_Data1(void)
 {
-    /* Return the User Option Byte2 */
+    /* Return the User Option Byte Data1 */
     return (uint32_t)((FLASH->OB2 & FLASH_DATA1_MASK) >> REG_BIT24_OFFSET);
 }
-
 
 /**
 *\*\name   FLASH_GetReadOutProtectionSTS
@@ -2086,9 +2034,8 @@ FlagStatus FLASH_GetReadOutProtectionSTS(void)
     return bit_status;
 }
 
-
 /**
-*\*\name   FLASH_Read_Out_Protection_L2_Status_Get
+*\*\name   FLASH_GetReadOutProtectionL2STS
 *\*\fun    Checks whether the FLASH Read Out Protection L2 status_value is set or not.
 *\*\param  none
 *\*\return FlagStatus :
@@ -2109,13 +2056,12 @@ FlagStatus FLASH_GetReadOutProtectionL2STS(void)
     return readoutstatus;
 }
 
-
 /**
 *\*\name   FLASH_GetWriteProtectionSTS
 *\*\fun    Returns the FLASH Write Protection Option Bytes Register value.
 *\*\param  none
 *\*\return The FLASH Write Protection  Option Bytes Register value :
-*\*\            - Bit31 - Bit0 write-protects pages (255~248) - page (0~7) 
+*\*\            - Bit31 - Bit0 write-protect pages (248~255) ... pages (0~7)
 **/
 uint32_t FLASH_GetWriteProtectionSTS(void)
 {
@@ -2153,7 +2099,7 @@ FlagStatus FLASH_GetBOOTWriteProtectionSTS(void)
 *\*\            - FLASH_INT_EOP      FLASH end of operation Interrupt
 *\*\param  Cmd:(The input parameters must be the following values)
 *\*\            - ENABLE
-*\*\            - DISABLE 
+*\*\            - DISABLE
 *\*\return none
 **/
 void FLASH_INTConfig(uint32_t FLASH_INT, FunctionalState Cmd)
@@ -2169,7 +2115,6 @@ void FLASH_INTConfig(uint32_t FLASH_INT, FunctionalState Cmd)
         FLASH->CTRL &= ~(uint32_t)FLASH_INT;
     }
 }
-
 
 /**
 *\*\name   FLASH_GetFlagSTS
@@ -2199,7 +2144,6 @@ FlagStatus FLASH_GetFlagSTS(uint32_t FLASH_FLAG)
     return bit_status;
 }
 
-
 /**
 *\*\name   FLASH_GetOBFlagSTS
 *\*\fun    Checks whether the specified FLASH flag is set or not.
@@ -2223,7 +2167,6 @@ FlagStatus FLASH_GetOBFlagSTS(uint32_t FLASH_FLAG)
     return bit_status;
 }
 
-
 /**
 *\*\name   FLASH_ClearFlag
 *\*\fun    Clears the FLASH's status flags.
@@ -2238,7 +2181,6 @@ void FLASH_ClearFlag(uint32_t FLASH_FLAG)
     /* Clear the flags */
     FLASH->STS = FLASH_FLAG;
 }
-
 
 /**
 *\*\name   FLASH_GetSTS
@@ -2281,11 +2223,10 @@ FLASH_STS FLASH_GetSTS(void)
     return flashstatus;
 }
 
-
 /**
 *\*\name   FLASH_WaitForLastOpt
 *\*\fun    Waits for a Flash operation to complete or a timeout to occur.
-*\*\param  timeout :(The input parameters must be the following values)
+*\*\param  Timeout :(The input parameters must be the following values)
 *\*\            - EraseTimeout
 *\*\            - ProgramTimeout
 *\*\return FLASH_STS: The returned value can be: 
@@ -2300,7 +2241,7 @@ FLASH_STS FLASH_WaitForLastOpt(uint32_t Timeout)
     FLASH_STS status;
     uint32_t Timeout_temp;
     Timeout_temp = Timeout;
- 
+
     /* Check for the Flash Status */
     status = FLASH_GetSTS();
     /* Wait for a Flash operation to complete or a TIMEOUT to occur */

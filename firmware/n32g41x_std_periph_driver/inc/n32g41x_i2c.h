@@ -1,59 +1,59 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
 *\*\file n32g41x_i2c.h
-*\*\author Nsing 
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
+
 #ifndef __N32G41X_I2C_H__
 #define __N32G41X_I2C_H__
-
 
 #ifdef __cplusplus
 extern "C" {
@@ -61,271 +61,264 @@ extern "C" {
 
 #include "n32g41x.h"
 
-/**  n32g41x_StdPeriph_Driver **/
+/*** n32g41x_StdPeriph_Driver ***/
 
-/** I2C Init structure definition **/
+/*** I2C Init structure definition ***/
 
 typedef struct
 {
-    uint32_t ClkSpeed; /* Specifies the clock frequency. */
+    uint32_t ClkSpeed;    /* Specifies the clock frequency. */
 
-    uint32_t BusMode; /* Specifies the I2C mode. */
+    uint32_t BusMode;     /* Specifies the I2C mode. */
 
     uint16_t FmDutyCycle; /* Specifies the I2C fastmode duty cycle. */
 
-    uint16_t OwnAddr1; /* Specifies the first device own address. */
+    uint16_t OwnAddr1;    /* Specifies the first device own address. */
 
-    uint32_t AckEnable; /* Enables or disables the acknowledgement. */
+    uint32_t AckEnable;   /* Enables or disables the acknowledgement. */
 
-    uint16_t AddrMode; /* Specifies if 7-bit or 10-bit address is acknowledged. */
+    uint16_t AddrMode;    /* Specifies if 7-bit or 10-bit address is acknowledged. */
 } I2C_InitType;
 
-
-#if defined (N32G415)
-    #define APB_FREQ_MAX_VALUE   (48U)     /*48MHz*/
-#elif defined(N32G412) 
-    #define APB_FREQ_MAX_VALUE   (40U)     /*40MHz*/
+#if defined(N32G415)
+#define APB_FREQ_MAX_VALUE (48U)                                         /* 48MHz */
+#elif defined(N32G412)
+#define APB_FREQ_MAX_VALUE (40U)                                         /* 40MHz */
 #endif
 
-/** Register shift macro definition **/
-#define  RCC_FLAG_STS2_OFFSET     (REG_BIT16_OFFSET)
-#define  RCC_FLAG_GET_OFFSET      (REG_BIT28_OFFSET)
-#define  I2C_REG_BIT_MASK          ((uint16_t)0x0000)
-#define  I2C_CTRL_BIT_MASK         ((uint32_t)0x00000000)
+/*** Register shift macro definition ***/
+#define RCC_FLAG_STS2_OFFSET               (REG_BIT16_OFFSET)
+#define RCC_FLAG_GET_OFFSET                (REG_BIT28_OFFSET)
+#define I2C_REG_BIT_MASK                   ((uint16_t)0x0000U)
+#define I2C_CTRL_BIT_MASK                  ((uint32_t)0x00000000U)
 
 /* I2C EN mask */
-#define I2C_EN_SET      (I2C_CTRL1_EN)
-#define I2C_EN_RESET    (~I2C_CTRL1_EN)
+#define I2C_EN_SET                         (I2C_CTRL1_EN)
+#define I2C_EN_RESET                       (~I2C_CTRL1_EN)
 
 /* I2C START mask */
-#define I2C_START_SET   (I2C_CTRL1_STARTGEN)
-#define I2C_START_RESET (~I2C_CTRL1_STARTGEN)
+#define I2C_START_SET                      (I2C_CTRL1_STARTGEN)
+#define I2C_START_RESET                    (~I2C_CTRL1_STARTGEN)
 
 /* I2C STOP mask */
-#define I2C_STOP_SET    (I2C_CTRL1_STOPGEN)
-#define I2C_STOP_RESET  (~I2C_CTRL1_STOPGEN)
+#define I2C_STOP_SET                       (I2C_CTRL1_STOPGEN)
+#define I2C_STOP_RESET                     (~I2C_CTRL1_STOPGEN)
 
 /* I2C ACK mask */
-#define I2C_ACK_SET     (I2C_CTRL1_ACKEN)
-#define I2C_ACK_RESET   (~I2C_CTRL1_ACKEN)
+#define I2C_ACK_SET                        (I2C_CTRL1_ACKEN)
+#define I2C_ACK_RESET                      (~I2C_CTRL1_ACKEN)
 
 /* I2C GCEN mask */
-#define I2C_GCEN_SET    (I2C_CTRL1_GCEN)
-#define I2C_GCEN_RESET  (~I2C_CTRL1_GCEN)
+#define I2C_GCEN_SET                       (I2C_CTRL1_GCEN)
+#define I2C_GCEN_RESET                     (~I2C_CTRL1_GCEN)
 
 /* I2C SWRESET mask */
-#define I2C_SWRESET_SET   (I2C_CTRL1_SWRESET)
-#define I2C_SWRESET_RESET (~I2C_CTRL1_SWRESET)
+#define I2C_SWRESET_SET                    (I2C_CTRL1_SWRESET)
+#define I2C_SWRESET_RESET                  (~I2C_CTRL1_SWRESET)
 
 /* I2C DATACKTC mask */
-#define I2C_DATACKTC_SET   (I2C_CTRL1_DATACKTC)
-#define I2C_DATACKTC_RESET (~I2C_CTRL1_DATACKTC)
+#define I2C_DATACKTC_SET                   (I2C_CTRL1_DATACKTC)
+#define I2C_DATACKTC_RESET                 (~I2C_CTRL1_DATACKTC)
 
 /* I2C PEC mask */
-#define I2C_PEC_SET        (I2C_CTRL1_PEC)
-#define I2C_PEC_RESET      (~I2C_CTRL1_PEC)
+#define I2C_PEC_SET                        (I2C_CTRL1_PEC)
+#define I2C_PEC_RESET                      (~I2C_CTRL1_PEC)
 
 /* I2C PECEN mask */
-#define I2C_PECEN_SET      (I2C_CTRL1_PECEN)
-#define I2C_PECEN_RESET    (~I2C_CTRL1_PECEN)
+#define I2C_PECEN_SET                      (I2C_CTRL1_PECEN)
+#define I2C_PECEN_RESET                    (~I2C_CTRL1_PECEN)
 
 /* I2C ARPEN mask */
-#define I2C_ARPEN_SET      (I2C_CTRL1_ARPEN)
-#define I2C_ARPEN_RESET    (~I2C_CTRL1_ARPEN)
+#define I2C_ARPEN_SET                      (I2C_CTRL1_ARPEN)
+#define I2C_ARPEN_RESET                    (~I2C_CTRL1_ARPEN)
 
 /* I2C NOEXTEND mask */
-#define I2C_NOEXTEND_SET   (I2C_CTRL1_NOEXTEND)
-#define I2C_NOEXTEND_RESET (~I2C_CTRL1_NOEXTEND)
+#define I2C_NOEXTEND_SET                   (I2C_CTRL1_NOEXTEND)
+#define I2C_NOEXTEND_RESET                 (~I2C_CTRL1_NOEXTEND)
 
 /* I2C registers Masks */
-#define I2C_CTRL1_CLR_MASK  (~(I2C_CTRL1_SMBMODE | I2C_CTRL1_SMBTYPE | I2C_CTRL1_ACKEN))
+#define I2C_CTRL1_CLR_MASK                 (~(I2C_CTRL1_SMBMODE | I2C_CTRL1_SMBTYPE | I2C_CTRL1_ACKEN))
 
 /* I2C DMAEN mask */
-#define I2C_DMAEN_SET     (I2C_CTRL2_DMAEN)
-#define I2C_DMAEN_RESET   (~I2C_CTRL2_DMAEN)
+#define I2C_DMAEN_SET                      (I2C_CTRL2_DMAEN)
+#define I2C_DMAEN_RESET                    (~I2C_CTRL2_DMAEN)
 
 /* I2C LAST mask */
-#define I2C_DMALAST_SET   (I2C_CTRL2_DMALAST)
-#define I2C_DMALAST_RESET (~I2C_CTRL2_DMALAST)
+#define I2C_DMALAST_SET                    (I2C_CTRL2_DMALAST)
+#define I2C_DMALAST_RESET                  (~I2C_CTRL2_DMALAST)
 
 /* I2C FREQ mask */
-#define I2C_CLKFREQ_RESET (~I2C_CTRL2_CLKFREQ)
+#define I2C_CLKFREQ_RESET                  (~I2C_CTRL2_CLKFREQ)
 
 /* I2C ADD0 mask */
-#define I2C_ADDR0_SET    (I2C_OADDR1_ADDR0)
-#define I2C_ADDR0_RESET  (~I2C_OADDR1_ADDR0)
+#define I2C_ADDR0_SET                      (I2C_OADDR1_ADDR0)
+#define I2C_ADDR0_RESET                    (~I2C_OADDR1_ADDR0)
 
 /* I2C ENDUAL mask */
-#define I2C_DUALEN_SET   (((uint16_t)I2C_OADDR2_DUALEN))
-#define I2C_DUALEN_RESET (~((uint16_t)I2C_OADDR2_DUALEN))
+#define I2C_DUALEN_SET                     (((uint16_t)I2C_OADDR2_DUALEN))
+#define I2C_DUALEN_RESET                   (~((uint16_t)I2C_OADDR2_DUALEN))
 
 /* I2C ADD2 mask */
-#define I2C_ADDR2_SET    ((uint16_t)I2C_OADDR2_ADDR2)
-#define I2C_ADDR2_RESET  (~((uint16_t)I2C_OADDR2_ADDR2))
+#define I2C_ADDR2_SET                      ((uint16_t)I2C_OADDR2_ADDR2)
+#define I2C_ADDR2_RESET                    (~((uint16_t)I2C_OADDR2_ADDR2))
 
 /* I2C F/S mask */
-#define I2C_FSMODE_SET  (I2C_CLKCTRL_FSMODE)
+#define I2C_FSMODE_SET                     (I2C_CLKCTRL_FSMODE)
 
 /* I2C CLKCTRL mask */
-#define I2C_CLKCTRL_SET (I2C_CLKCTRL_CLKCTRL)
+#define I2C_CLKCTRL_SET                    (I2C_CLKCTRL_CLKCTRL)
 
 /* I2C registers */
-#define I2C_REG_CTRL1   ((uint8_t)0x00)
-#define I2C_REG_CTRL2   ((uint8_t)0x04)
-#define I2C_REG_OADDR1  ((uint8_t)0x08)
-#define I2C_REG_OADDR2  ((uint8_t)0x0C)
-#define I2C_REG_DAT     ((uint8_t)0x10)
-#define I2C_REG_STS1    ((uint8_t)0x14)
-#define I2C_REG_STS2    ((uint8_t)0x18)
-#define I2C_REG_CLKCTRL ((uint8_t)0x1C)
-#define I2C_REG_TMRISE  ((uint8_t)0x20)
-#define I2C_REG_GFLTRCTRL  ((uint8_t)0x28)
+#define I2C_REG_CTRL1                      ((uint8_t)0x00U)
+#define I2C_REG_CTRL2                      ((uint8_t)0x04U)
+#define I2C_REG_OADDR1                     ((uint8_t)0x08U)
+#define I2C_REG_OADDR2                     ((uint8_t)0x0CU)
+#define I2C_REG_DAT                        ((uint8_t)0x10U)
+#define I2C_REG_STS1                       ((uint8_t)0x14U)
+#define I2C_REG_STS2                       ((uint8_t)0x18U)
+#define I2C_REG_CLKCTRL                    ((uint8_t)0x1CU)
+#define I2C_REG_TMRISE                     ((uint8_t)0x20U)
+#define I2C_REG_GFLTRCTRL                  ((uint8_t)0x28U)
 
 /* I2C TMRISE mask */
-#define I2C_SDADFW_MASK  (~I2C_GFLTRCTRL_SDADFW)
-#define I2C_SCLDFW_MASK  (~I2C_GFLTRCTRL_SCLDFW)
-#define I2C_SDAAFW_MASK  (~I2C_GFLTRCTRL_SDAAFW)
-#define I2C_SCLAFW_MASK  (~I2C_GFLTRCTRL_SCLAFW)
+#define I2C_SDADFW_MASK                    (~I2C_GFLTRCTRL_SDADFW)
+#define I2C_SCLDFW_MASK                    (~I2C_GFLTRCTRL_SCLDFW)
+#define I2C_SDAAFW_MASK                    (~I2C_GFLTRCTRL_SDAAFW)
+#define I2C_SCLAFW_MASK                    (~I2C_GFLTRCTRL_SCLAFW)
 
-#define I2C_SDAAFENN_SET  (I2C_GFLTRCTRL_SDAAFENN)
-#define I2C_SDAAFENN_RESET  (~I2C_GFLTRCTRL_SDAAFENN)
+#define I2C_SDAAFENN_SET                   (I2C_GFLTRCTRL_SDAAFENN)
+#define I2C_SDAAFENN_RESET                 (~I2C_GFLTRCTRL_SDAAFENN)
 
-#define I2C_SCLAFENN_SET  (I2C_GFLTRCTRL_SCLAFENN)
-#define I2C_SCLAFENN_RESET  (~I2C_GFLTRCTRL_SCLAFENN)
+#define I2C_SCLAFENN_SET                   (I2C_GFLTRCTRL_SCLAFENN)
+#define I2C_SCLAFENN_RESET                 (~I2C_GFLTRCTRL_SCLAFENN)
 
 /* I2C TMRISE mask */
-#define I2C_TMRISE_MASK  (I2C_TMRISE_TMRISE)
+#define I2C_TMRISE_MASK                    (I2C_TMRISE_TMRISE)
 
 /* I2C FLAG mask */
-#define I2C_FLAG_MASK ((uint32_t)0x00FFFFFF)
+#define I2C_FLAG_MASK                      ((uint32_t)0x00FFFFFFU)
 
 /* I2C Interrupt Enable mask */
-#define I2C_INTEN_MASK ((uint32_t)0x70000000)
+#define I2C_INTEN_MASK                     ((uint32_t)0x70000000U)
 
 /* I2C reserved mask */
-#define I2C_STS1_RESERVED_MASK ((uint32_t)0x03807F7F)
+#define I2C_STS1_RESERVED_MASK             ((uint32_t)0x03807F7FU)
 
+/*** I2C_BusMode ***/
+#define I2C_BUSMODE_I2C                    (I2C_CTRL_BIT_MASK)
+#define I2C_BUSMODE_SMBDEVICE              (I2C_CTRL1_SMBMODE)
+#define I2C_BUSMODE_SMBHOST                (I2C_CTRL1_SMBMODE | I2C_CTRL1_SMBTYPE)
 
-/**  I2C_BusMode **/
-#define I2C_BUSMODE_I2C        (I2C_CTRL_BIT_MASK)
-#define I2C_BUSMODE_SMBDEVICE  (I2C_CTRL1_SMBMODE)
-#define I2C_BUSMODE_SMBHOST    (I2C_CTRL1_SMBMODE | I2C_CTRL1_SMBTYPE)
+/*** I2C_duty_cycle ***/
+#define I2C_SMDUTYCYCLE_1                  (I2C_REG_BIT_MASK)            /* I2C standard mode Tlow/Thigh = 1/1 */
+#define I2C_FMDUTYCYCLE_16_9               (I2C_CLKCTRL_DUTY)            /* I2C fast mode Tlow/Thigh = 16/9 */
+#define I2C_FMDUTYCYCLE_2                  ((uint16_t)~I2C_CLKCTRL_DUTY) /* I2C fast mode Tlow/Thigh = 2 */
 
+/*** I2C_acknowledgement ***/
+#define I2C_ACKEN                          (I2C_CTRL1_ACKEN)
+#define I2C_ACKDIS                         (I2C_CTRL_BIT_MASK)
 
-/**  I2C_duty_cycle **/
-#define I2C_SMDUTYCYCLE_1       (I2C_REG_BIT_MASK)  /* I2C standard mode Tlow/Thigh = 1/1 */
-#define I2C_FMDUTYCYCLE_16_9    (I2C_CLKCTRL_DUTY)  /* I2C fast mode Tlow/Thigh = 16/9 */
-#define I2C_FMDUTYCYCLE_2       ((uint16_t)~I2C_CLKCTRL_DUTY) /* I2C fast mode Tlow/Thigh = 2 */
+/*** I2C_transfer_direction ***/
+#define I2C_DIRECTION_SEND                 ((uint8_t)0x00U)
+#define I2C_DIRECTION_RECV                 ((uint8_t)0x01U)
 
+/*** I2C_acknowledged_address ***/
+/* Bit 14 Should be kept at 1 by software */
+#define I2C_ADDR_MODE_7BIT                 (I2C_REG_BIT_MASK)
+#define I2C_ADDR_MODE_10BIT                (I2C_OADDR1_ADDRMODE)
 
-/**  I2C_acknowledgement **/
-#define I2C_ACKEN               (I2C_CTRL1_ACKEN)
-#define I2C_ACKDIS              (I2C_CTRL_BIT_MASK)
+/*** I2C_SMBus_alert_pin_level ***/
+#define I2C_SMBALERT_LOW                   (I2C_CTRL1_SMBALERT)
+#define I2C_SMBALERT_HIGH                  (~I2C_CTRL1_SMBALERT)
 
+/*** I2C_NCAK_or_PEC_position ***/
+#define I2C_NACK_POS_NEXT                  (I2C_CTRL1_ACKPOS)
+#define I2C_NACK_POS_CURRENT               (~I2C_CTRL1_ACKPOS)
 
-/**  I2C_transfer_direction **/
-#define I2C_DIRECTION_SEND          ((uint8_t)0x00)
-#define I2C_DIRECTION_RECV          ((uint8_t)0x01)
+#define I2C_PEC_POS_NEXT                   (I2C_CTRL1_ACKPOS)
+#define I2C_PEC_POS_CURRENT                (~I2C_CTRL1_ACKPOS)
 
+/*** I2C_Analog_Filter_Width ***/
+#define I2C_ANALOG_FILTER_WIDTH_5NS        (I2C_REG_BIT_MASK)
+#define I2C_ANALOG_FILTER_WIDTH_15NS       (I2C_GFLTRCTRL_SDAAFW_0)
+#define I2C_ANALOG_FILTER_WIDTH_25NS       (I2C_GFLTRCTRL_SDAAFW_1)
+#define I2C_ANALOG_FILTER_WIDTH_35NS       (I2C_GFLTRCTRL_SDAAFW_0 | I2C_GFLTRCTRL_SDAAFW_1)
 
-/**  I2C_acknowledged_address **/
-/* Bit 14 Should be kept at 1 by software*/
-#define I2C_ADDR_MODE_7BIT   	 (I2C_REG_BIT_MASK) 
-#define I2C_ADDR_MODE_10BIT   	 (I2C_OADDR1_ADDRMODE) 
-
-/**  I2C_SMBus_alert_pin_level **/
-#define I2C_SMBALERT_LOW        (I2C_CTRL1_SMBALERT)
-#define I2C_SMBALERT_HIGH       (~I2C_CTRL1_SMBALERT)
-
-/**  I2C_NCAK_or_PEC_position **/
-#define I2C_NACK_POS_NEXT         (I2C_CTRL1_ACKPOS)
-#define I2C_NACK_POS_CURRENT      (~I2C_CTRL1_ACKPOS)
-
-#define I2C_PEC_POS_NEXT         (I2C_CTRL1_ACKPOS)
-#define I2C_PEC_POS_CURRENT      (~I2C_CTRL1_ACKPOS)
-
-/**  I2C_Analog_Filter_Width **/
-#define I2C_ANALOG_FILTER_WIDTH_5NS   (I2C_REG_BIT_MASK)
-#define I2C_ANALOG_FILTER_WIDTH_15NS  (I2C_GFLTRCTRL_SDAAFW_0)
-#define I2C_ANALOG_FILTER_WIDTH_25NS  (I2C_GFLTRCTRL_SDAAFW_1)
-#define I2C_ANALOG_FILTER_WIDTH_35NS  (I2C_GFLTRCTRL_SDAAFW_0|I2C_GFLTRCTRL_SDAAFW_1)
-
-/**  I2C_interrupts_definition **/
-#define I2C_INT_BUF        (I2C_CTRL2_BUFINTEN)
-#define I2C_INT_EVENT      (I2C_CTRL2_EVTINTEN)
-#define I2C_INT_ERR        (I2C_CTRL2_ERRINTEN)
+/*** I2C_interrupts_definition ***/
+#define I2C_INT_BUF                        (I2C_CTRL2_BUFINTEN)
+#define I2C_INT_EVENT                      (I2C_CTRL2_EVTINTEN)
+#define I2C_INT_ERR                        (I2C_CTRL2_ERRINTEN)
 
 /* I2C timeout detection function enable */
-#define I2C_LTOSEL_MASK              (~I2C_CTRL1_LTOSEL)
-#define I2C_TIMEOUT_LOWLIMIT_25MS    (I2C_CTRL_BIT_MASK)
-#define I2C_TIMEOUT_LOWLIMIT_100MS   (I2C_CTRL1_LTOSEL_0)
-#define I2C_TIMEOUT_LOWLIMIT_1S      (I2C_CTRL1_LTOSEL_1)
-#define I2C_TIMEOUT_LOWLIMIT_4S      (I2C_CTRL1_LTOSEL_0|I2C_CTRL1_LTOSEL_1)
+#define I2C_LTOSEL_MASK                    (~I2C_CTRL1_LTOSEL)
+#define I2C_TIMEOUT_LOWLIMIT_25MS          (I2C_CTRL_BIT_MASK)
+#define I2C_TIMEOUT_LOWLIMIT_100MS         (I2C_CTRL1_LTOSEL_0)
+#define I2C_TIMEOUT_LOWLIMIT_1S            (I2C_CTRL1_LTOSEL_1)
+#define I2C_TIMEOUT_LOWLIMIT_4S            (I2C_CTRL1_LTOSEL_0 | I2C_CTRL1_LTOSEL_1)
 
-#define I2C_HTOSEL_MASK               (~I2C_CTRL1_HTOSEL)
-#define I2C_TIMEOUT_HIGHLIMIT_256US   (I2C_CTRL_BIT_MASK)
-#define I2C_TIMEOUT_HIGHLIMIT_512US   (I2C_CTRL1_HTOSEL_0)
-#define I2C_TIMEOUT_HIGHLIMIT_1MS     (I2C_CTRL1_HTOSEL_1)
-#define I2C_TIMEOUT_HIGHLIMIT_128US   (I2C_CTRL1_HTOSEL_0|I2C_CTRL1_HTOSEL_1)
+#define I2C_HTOSEL_MASK                    (~I2C_CTRL1_HTOSEL)
+#define I2C_TIMEOUT_HIGHLIMIT_256US        (I2C_CTRL_BIT_MASK)
+#define I2C_TIMEOUT_HIGHLIMIT_512US        (I2C_CTRL1_HTOSEL_0)
+#define I2C_TIMEOUT_HIGHLIMIT_1MS          (I2C_CTRL1_HTOSEL_1)
+#define I2C_TIMEOUT_HIGHLIMIT_128US        (I2C_CTRL1_HTOSEL_0 | I2C_CTRL1_HTOSEL_1)
 
-#define I2C_TIMEOUT_INT_SCLLOW    (I2C_CTRL2_SCLLTOINTEN)
-#define I2C_TIMEOUT_INT_SCLHIGH   (I2C_CTRL2_SCLHTOINTEN)
-#define I2C_TIMEOUT_INT_SDALOW    (I2C_CTRL2_SDALTOINTEN)
+#define I2C_TIMEOUT_INT_SCLLOW             (I2C_CTRL2_SCLLTOINTEN)
+#define I2C_TIMEOUT_INT_SCLHIGH            (I2C_CTRL2_SCLHTOINTEN)
+#define I2C_TIMEOUT_INT_SDALOW             (I2C_CTRL2_SDALTOINTEN)
 
-#define I2C_TIMEOUT_LOW           (I2C_CTRL2_LTOEN)
-#define I2C_TIMEOUT_HIGH          (I2C_CTRL2_HTOEN)
+#define I2C_TIMEOUT_LOW                    (I2C_CTRL2_LTOEN)
+#define I2C_TIMEOUT_HIGH                   (I2C_CTRL2_HTOEN)
 
-#define I2C_TIMEOUT_FLAG_SCLLOW    (I2C_STS1_SCLLTO)
-#define I2C_TIMEOUT_FLAG_SCLHIGH   (I2C_STS1_SCLHTO)
-#define I2C_TIMEOUT_FLAG_SDALOW    (I2C_STS1_SDALTO)
+#define I2C_TIMEOUT_FLAG_SCLLOW            (I2C_STS1_SCLLTO)
+#define I2C_TIMEOUT_FLAG_SCLHIGH           (I2C_STS1_SCLHTO)
+#define I2C_TIMEOUT_FLAG_SDALOW            (I2C_STS1_SDALTO)
 
-/**  I2C_interrupts_definition **/
-#define I2C_INT_SMBALERT (((uint32_t)0x40000000) | ((uint32_t)I2C_STS1_SMBALERT))
-#define I2C_INT_TIMEOUT  (((uint32_t)0x40000000) | ((uint32_t)I2C_STS1_TIMEOUT))
-#define I2C_INT_PECERR   (((uint32_t)0x40000000) | ((uint32_t)I2C_STS1_PECERR))
-#define I2C_INT_OVERRUN  (((uint32_t)0x40000000) | ((uint32_t)I2C_STS1_OVERRUN))
-#define I2C_INT_ACKFAIL  (((uint32_t)0x40000000) | ((uint32_t)I2C_STS1_ACKFAIL))
-#define I2C_INT_ARLOST   (((uint32_t)0x40000000) | ((uint32_t)I2C_STS1_ARLOST))
-#define I2C_INT_BUSERR   (((uint32_t)0x40000000) | ((uint32_t)I2C_STS1_BUSERR))
-#define I2C_INT_TXDATE   (((uint32_t)0x30000000) | ((uint32_t)I2C_STS1_TXDATE))
-#define I2C_INT_RXDATNE  (((uint32_t)0x30000000) | ((uint32_t)I2C_STS1_RXDATNE))
-#define I2C_INT_STOPF    (((uint32_t)0x20000000) | ((uint32_t)I2C_STS1_STOPF))
-#define I2C_INT_ADDR10F  (((uint32_t)0x20000000) | ((uint32_t)I2C_STS1_ADDR10F))
-#define I2C_INT_BYTEF    (((uint32_t)0x20000000) | ((uint32_t)I2C_STS1_BSF))
-#define I2C_INT_ADDRF    (((uint32_t)0x20000000) | ((uint32_t)I2C_STS1_ADDRF))
-#define I2C_INT_STARTBF  (((uint32_t)0x20000000) | ((uint32_t)I2C_STS1_STARTBF))
+/*** I2C_interrupts_definition ***/
+#define I2C_INT_SMBALERT                   (((uint32_t)0x40000000U) | ((uint32_t)I2C_STS1_SMBALERT))
+#define I2C_INT_TIMEOUT                    (((uint32_t)0x40000000U) | ((uint32_t)I2C_STS1_TIMEOUT))
+#define I2C_INT_PECERR                     (((uint32_t)0x40000000U) | ((uint32_t)I2C_STS1_PECERR))
+#define I2C_INT_OVERRUN                    (((uint32_t)0x40000000U) | ((uint32_t)I2C_STS1_OVERRUN))
+#define I2C_INT_ACKFAIL                    (((uint32_t)0x40000000U) | ((uint32_t)I2C_STS1_ACKFAIL))
+#define I2C_INT_ARLOST                     (((uint32_t)0x40000000U) | ((uint32_t)I2C_STS1_ARLOST))
+#define I2C_INT_BUSERR                     (((uint32_t)0x40000000U) | ((uint32_t)I2C_STS1_BUSERR))
+#define I2C_INT_TXDATE                     (((uint32_t)0x30000000U) | ((uint32_t)I2C_STS1_TXDATE))
+#define I2C_INT_RXDATNE                    (((uint32_t)0x30000000U) | ((uint32_t)I2C_STS1_RXDATNE))
+#define I2C_INT_STOPF                      (((uint32_t)0x20000000U) | ((uint32_t)I2C_STS1_STOPF))
+#define I2C_INT_ADDR10F                    (((uint32_t)0x20000000U) | ((uint32_t)I2C_STS1_ADDR10F))
+#define I2C_INT_BYTEF                      (((uint32_t)0x20000000U) | ((uint32_t)I2C_STS1_BSF))
+#define I2C_INT_ADDRF                      (((uint32_t)0x20000000U) | ((uint32_t)I2C_STS1_ADDRF))
+#define I2C_INT_STARTBF                    (((uint32_t)0x20000000U) | ((uint32_t)I2C_STS1_STARTBF))
 
-/**  I2C_flags_definition **/
+/*** I2C_flags_definition ***/
 
-/** STS2 register flags **/
-#define I2C_FLAG_DUALFLAG  (((uint32_t)I2C_STS2_DUALFLAG)<<REG_BIT16_OFFSET)
-#define I2C_FLAG_SMBHADDR  (((uint32_t)I2C_STS2_SMBHADDR)<<REG_BIT16_OFFSET)
-#define I2C_FLAG_SMBDADDR  (((uint32_t)I2C_STS2_SMBDADDR)<<REG_BIT16_OFFSET)
-#define I2C_FLAG_GCALLADDR (((uint32_t)I2C_STS2_GCALLADDR)<<REG_BIT16_OFFSET)
-#define I2C_FLAG_TRF       (((uint32_t)I2C_STS2_TRF)<<REG_BIT16_OFFSET)
-#define I2C_FLAG_BUSY      (((uint32_t)I2C_STS2_BUSY)<<REG_BIT16_OFFSET)
-#define I2C_FLAG_MSMODE    (((uint32_t)I2C_STS2_MSMODE)<<REG_BIT16_OFFSET)
+/*** STS2 register flags ***/
+#define I2C_FLAG_DUALFLAG                  (((uint32_t)I2C_STS2_DUALFLAG) << REG_BIT16_OFFSET)
+#define I2C_FLAG_SMBHADDR                  (((uint32_t)I2C_STS2_SMBHADDR) << REG_BIT16_OFFSET)
+#define I2C_FLAG_SMBDADDR                  (((uint32_t)I2C_STS2_SMBDADDR) << REG_BIT16_OFFSET)
+#define I2C_FLAG_GCALLADDR                 (((uint32_t)I2C_STS2_GCALLADDR) << REG_BIT16_OFFSET)
+#define I2C_FLAG_TRF                       (((uint32_t)I2C_STS2_TRF) << REG_BIT16_OFFSET)
+#define I2C_FLAG_BUSY                      (((uint32_t)I2C_STS2_BUSY) << REG_BIT16_OFFSET)
+#define I2C_FLAG_MSMODE                    (((uint32_t)I2C_STS2_MSMODE) << REG_BIT16_OFFSET)
 
-/** STS1 register flags **/
-#define I2C_FLAG_SMBALERT (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_SMBALERT))
-#define I2C_FLAG_TIMEOUT  (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_TIMEOUT))
-#define I2C_FLAG_PECERR   (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_PECERR))
-#define I2C_FLAG_OVERRUN  (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_OVERRUN))
-#define I2C_FLAG_ACKFAIL  (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_ACKFAIL))
-#define I2C_FLAG_ARLOST   (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_ARLOST))
-#define I2C_FLAG_BUSERR   (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_BUSERR))
-#define I2C_FLAG_TXDATE   (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_TXDATE))
-#define I2C_FLAG_RXDATNE  (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_RXDATNE))
-#define I2C_FLAG_STOPF    (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_STOPF))
-#define I2C_FLAG_ADDR10F  (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_ADDR10F))
-#define I2C_FLAG_BYTEF    (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_BSF))
-#define I2C_FLAG_ADDRF    (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_ADDRF))
-#define I2C_FLAG_STARTBF  (((uint32_t)0x10000000) | ((uint32_t)I2C_STS1_STARTBF))
+/*** STS1 register flags ***/
+#define I2C_FLAG_SMBALERT                  (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_SMBALERT))
+#define I2C_FLAG_TIMEOUT                   (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_TIMEOUT))
+#define I2C_FLAG_PECERR                    (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_PECERR))
+#define I2C_FLAG_OVERRUN                   (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_OVERRUN))
+#define I2C_FLAG_ACKFAIL                   (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_ACKFAIL))
+#define I2C_FLAG_ARLOST                    (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_ARLOST))
+#define I2C_FLAG_BUSERR                    (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_BUSERR))
+#define I2C_FLAG_TXDATE                    (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_TXDATE))
+#define I2C_FLAG_RXDATNE                   (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_RXDATNE))
+#define I2C_FLAG_STOPF                     (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_STOPF))
+#define I2C_FLAG_ADDR10F                   (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_ADDR10F))
+#define I2C_FLAG_BYTEF                     (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_BSF))
+#define I2C_FLAG_ADDRF                     (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_ADDRF))
+#define I2C_FLAG_STARTBF                   (((uint32_t)0x10000000U) | ((uint32_t)I2C_STS1_STARTBF))
 
+/*** I2C_Events ***/
 
-/***  I2C_Events ***/
-
-/** I2C Master Events (Events grouped in order of communication) **/
+/*** I2C Master Events (Events grouped in order of communication) ***/
 /**
 *\*\brief  Communication start
 *\*\       After sending the START condition (I2C_Generate_Start_Enable() function) the master
@@ -333,13 +326,12 @@ typedef struct
 *\*\       released on the I2C bus (the bus is free, no other devices is communicating).
 **/
 
-/* MSMODE */ 
-#define I2C_ROLE_MASTER (((uint32_t)I2C_STS2_MSMODE)<<16) 
+/* MSMODE */
+#define I2C_ROLE_MASTER                    (((uint32_t)I2C_STS2_MSMODE) << 16U)
 /* EV5 */
-/* BUSY, MSMODE and STARTBF flag*/
-#define I2C_EVT_MASTER_MODE_FLAG (((uint32_t)I2C_STS1_STARTBF)\
-                                |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_MSMODE))<<16))
- 
+/* BUSY, MSMODE and STARTBF flag */
+#define I2C_EVT_MASTER_MODE_FLAG           (((uint32_t)I2C_STS1_STARTBF) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_MSMODE)) << 16U))
 
 /**
 *\*\brief  Address Acknowledge
@@ -361,17 +353,17 @@ typedef struct
 *\*\       should wait for event EV6.
  **/
 
-/* --EV6 */
+/* EV6 */
 /* BUSY, MSMODE, ADDRF, TXDATE and TRF flags */
-#define I2C_EVT_MASTER_TXMODE_FLAG (((uint32_t)I2C_STS1_ADDRF)|((uint32_t)I2C_STS1_TXDATE)\
-                                  |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_MSMODE)|((uint32_t)I2C_STS2_TRF))<<16)) 
+#define I2C_EVT_MASTER_TXMODE_FLAG         (((uint32_t)I2C_STS1_ADDRF) | ((uint32_t)I2C_STS1_TXDATE) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_MSMODE) | ((uint32_t)I2C_STS2_TRF)) << 16U))
 /* BUSY, MSMODE and ADDRF flags */
-#define I2C_EVT_MASTER_RXMODE_FLAG (((uint32_t)I2C_STS1_ADDRF)\
-                                  |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_MSMODE))<<16)) 
-/* --EV9 */
+#define I2C_EVT_MASTER_RXMODE_FLAG         (((uint32_t)I2C_STS1_ADDRF) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_MSMODE)) << 16U))
+/* EV9 */
 /* BUSY, MSMODE and ADD10RF flags */
-#define I2C_EVT_MASTER_MODE_ADDRESS10_FLAG (((uint32_t)I2C_STS1_ADDR10F)\
-                                          |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_MSMODE))<<16))  
+#define I2C_EVT_MASTER_MODE_ADDRESS10_FLAG (((uint32_t)I2C_STS1_ADDR10F) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_MSMODE)) << 16U))
 
 /**
 *\*\brief Communication events
@@ -397,28 +389,28 @@ typedef struct
 *\*\     In this case the communication may be slower.
  **/
 
-/* Master RECEIVER mode -----------------------------*/
-/* --EV7 */
+/*** Master RECEIVER mode ***/
+/* EV7 */
 /* BUSY, MSMODE and RXDATNE flags */
-#define I2C_EVT_MASTER_DATA_RECVD_FLAG (((uint32_t)I2C_STS1_RXDATNE)\
-                                       |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_MSMODE))<<16)) 
-                                       
+#define I2C_EVT_MASTER_DATA_RECVD_FLAG     (((uint32_t)I2C_STS1_RXDATNE) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_MSMODE)) << 16U))
+
 /* EV7x shifter register full */
 /* BUSY, MSMODE, BSF and RXDATNE flags */
-#define I2C_EVT_MASTER_DATA_RECVD_BSF_FLAG (((uint32_t)I2C_STS1_RXDATNE)|((uint32_t)I2C_STS1_BSF)\
-                                          |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_MSMODE))<<16))
+#define I2C_EVT_MASTER_DATA_RECVD_BSF_FLAG (((uint32_t)I2C_STS1_RXDATNE) | ((uint32_t)I2C_STS1_BSF) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_MSMODE)) << 16U))
 
-/* Master TRANSMITTER mode --------------------------*/
-/* --EV8 */
+/*** Master TRANSMITTER mode ***/
+/* EV8 */
 /* TRF, BUSY, MSMODE, TXDATE flags */
-#define I2C_EVT_MASTER_DATA_SENDING (((uint32_t)I2C_STS1_TXDATE)\
-                  |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_MSMODE)|((uint32_t)I2C_STS2_TRF))<<16)) 
-/* --EV8_2 */
+#define I2C_EVT_MASTER_DATA_SENDING        (((uint32_t)I2C_STS1_TXDATE) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_MSMODE) | ((uint32_t)I2C_STS2_TRF)) << 16U))
+/* EV8_2 */
 /* TRF, BUSY, MSMODE, TXDATE and BSF flags */
-#define I2C_EVT_MASTER_DATA_SENDED (((uint32_t)I2C_STS1_BSF)|((uint32_t)I2C_STS1_TXDATE)\
-                  |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_MSMODE)|((uint32_t)I2C_STS2_TRF))<<16)) 
+#define I2C_EVT_MASTER_DATA_SENDED         (((uint32_t)I2C_STS1_BSF) | ((uint32_t)I2C_STS1_TXDATE) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_MSMODE) | ((uint32_t)I2C_STS2_TRF)) << 16U))
 
-/***  I2C Slave Events (Events grouped in order of communication) ***/
+/*** I2C Slave Events (Events grouped in order of communication) ***/
 
 /**
 *\*\brief  Communication start events
@@ -440,25 +432,25 @@ typedef struct
 *\*\         the following event is set I2C_EVT_SLAVE_GCALLADDR_MATCHED.
  **/
 
-/* --EV1  (all the events below are variants of EV1) */
+/* EV1  (all the events below are variants of EV1) */
 /* 1) Case of One Single Address managed by the slave */
- /* BUSY and ADDRF flags */
-#define I2C_EVT_SLAVE_RECV_ADDR_MATCHED (((uint32_t)I2C_STS1_ADDRF)\
-                                       |((((uint32_t)I2C_STS2_BUSY))<<16)) 
- /* TRF, BUSY, TXDATE and ADDRF flags */
-#define I2C_EVT_SLAVE_SEND_ADDR_MATCHED (((uint32_t)I2C_STS1_TXDATE)|((uint32_t)I2C_STS1_ADDRF)\
-                                       |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_TRF))<<16))
+/* BUSY and ADDRF flags */
+#define I2C_EVT_SLAVE_RECV_ADDR_MATCHED    (((uint32_t)I2C_STS1_ADDRF) \
+                                            | ((((uint32_t)I2C_STS2_BUSY)) << 16U))
+/* TRF, BUSY, TXDATE and ADDRF flags */
+#define I2C_EVT_SLAVE_SEND_ADDR_MATCHED    (((uint32_t)I2C_STS1_TXDATE) | ((uint32_t)I2C_STS1_ADDRF) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_TRF)) << 16U))
 
 /* 2) Case of Dual address managed by the slave */
- /* DUALF and BUSY flags */
-#define I2C_EVT_SLAVE_RECV_ADDR2_MATCHED ((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_DUALFLAG))<<16) 
- /* DUALF, TRF, BUSY and TXDATE flags */
-#define I2C_EVT_SLAVE_SEND_ADDR2_MATCHED (((uint32_t)I2C_STS1_TXDATE)\
-               |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_DUALFLAG)|((uint32_t)I2C_STS2_TRF))<<16))
+/* DUALF and BUSY flags */
+#define I2C_EVT_SLAVE_RECV_ADDR2_MATCHED   ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_DUALFLAG)) << 16U)
+/* DUALF, TRF, BUSY and TXDATE flags */
+#define I2C_EVT_SLAVE_SEND_ADDR2_MATCHED   (((uint32_t)I2C_STS1_TXDATE) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_DUALFLAG) | ((uint32_t)I2C_STS2_TRF)) << 16U))
 
 /* 3) Case of General Call enabled for the slave */
- /* GENCALL and BUSY flags */
-#define I2C_EVT_SLAVE_GCALLADDR_MATCHED ((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_GCALLADDR))<<16) 
+/* GENCALL and BUSY flags */
+#define I2C_EVT_SLAVE_GCALLADDR_MATCHED    ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_GCALLADDR)) << 16U)
 
 /**
 *\*\brief  Communication events
@@ -482,99 +474,97 @@ typedef struct
 *\*\In this case the communication may be slower.
  **/
 
-/* Slave RECEIVER mode --------------------------*/
-/* --EV2 */
- /* BUSY and RXDATNE flags */
-#define I2C_EVT_SLAVE_DATA_RECVD (((uint32_t)I2C_STS1_RXDATNE)\
-                                |((((uint32_t)I2C_STS2_BUSY))<<16))  
-/* --EV2x */
- /* no BUSY and RXDATNE flags */
-#define I2C_EVT_SLAVE_DATA_RECVD_NOBUSY ((uint32_t)I2C_STS1_RXDATNE)
-/* --EV4  */
- /* STOPF flag */
-#define I2C_EVT_SLAVE_STOP_RECVD ((uint32_t)I2C_STS1_STOPF)
+/*** Slave RECEIVER mode ***/
+/* EV2 */
+/* BUSY and RXDATNE flags */
+#define I2C_EVT_SLAVE_DATA_RECVD           (((uint32_t)I2C_STS1_RXDATNE) \
+                                            | ((((uint32_t)I2C_STS2_BUSY)) << 16U))
+/* EV2x */
+/* no BUSY and RXDATNE flags */
+#define I2C_EVT_SLAVE_DATA_RECVD_NOBUSY    ((uint32_t)I2C_STS1_RXDATNE)
+/* EV4  */
+/* STOPF flag */
+#define I2C_EVT_SLAVE_STOP_RECVD           ((uint32_t)I2C_STS1_STOPF)
 
-/* Slave TRANSMITTER mode -----------------------*/
-/* --EV3 */
- /* TRF, BUSY, TXDATE and BSF flags */
-#define I2C_EVT_SLAVE_DATA_SENDED  (((uint32_t)I2C_STS1_BSF)|((uint32_t)I2C_STS1_TXDATE)\
-                                  |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_TRF))<<16)) 
- /* TRF, BUSY and TXDATE flags */
-#define I2C_EVT_SLAVE_DATA_SENDING (((uint32_t)I2C_STS1_TXDATE)\
-                                  |((((uint32_t)I2C_STS2_BUSY)|((uint32_t)I2C_STS2_TRF))<<16)) 
-/* --EV3_2 */
- /* AF flag */
-#define I2C_EVT_SLAVE_ACK_MISS ((uint32_t)I2C_STS1_ACKFAIL)
-
+/*** Slave TRANSMITTER mode ***/
+/* EV3 */
+/* TRF, BUSY, TXDATE and BSF flags */
+#define I2C_EVT_SLAVE_DATA_SENDED          (((uint32_t)I2C_STS1_BSF) | ((uint32_t)I2C_STS1_TXDATE) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_TRF)) << 16U))
+/* TRF, BUSY and TXDATE flags */
+#define I2C_EVT_SLAVE_DATA_SENDING         (((uint32_t)I2C_STS1_TXDATE) \
+                                            | ((((uint32_t)I2C_STS2_BUSY) | ((uint32_t)I2C_STS2_TRF)) << 16U))
+/* EV3_2 */
+/* AF flag */
+#define I2C_EVT_SLAVE_ACK_MISS             ((uint32_t)I2C_STS1_ACKFAIL)
 
 /* Reset and init */
-void I2C_DeInit(const I2C_Module* I2Cx);
-void I2C_Init(I2C_Module* I2Cx, const I2C_InitType* I2C_InitParam);
-void I2C_InitStruct(I2C_InitType* I2C_InitParam);
+void I2C_DeInit(const I2C_Module *I2Cx);
+void I2C_Init(I2C_Module *I2Cx, const I2C_InitType *I2C_InitParam);
+void I2C_InitStruct(I2C_InitType *I2C_InitParam);
 
 /* Selects the specified I2C fast mode duty cycle */
-void I2C_ConfigFastModeDutyCycle(I2C_Module* I2Cx, uint32_t DutyCycle);
+void I2C_ConfigFastModeDutyCycle(I2C_Module *I2Cx, uint32_t DutyCycle);
 /* Enable and disable */
-void I2C_Enable(I2C_Module* I2Cx, FunctionalState Cmd);
-/* Get Register*/
-uint32_t I2C_GetRegister(const I2C_Module* I2Cx, uint8_t I2C_Register);
+void I2C_Enable(I2C_Module *I2Cx, FunctionalState Cmd);
+/* Get Register */
+uint32_t I2C_GetRegister(const I2C_Module *I2Cx, uint8_t I2C_Register);
 /* Configuration */
-void I2C_GenerateStart(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_GenerateStop(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_ConfigAck(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_ConfigDatacktc(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_SendAddr7bit(I2C_Module* I2Cx, uint8_t address, uint8_t mode);
-void I2C_ConfigOwnAddr2(I2C_Module* I2Cx, uint8_t address);
-void I2C_EnableDualAddr(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_EnableGeneralCall(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_ConfigNackLocation(I2C_Module* I2Cx, uint32_t position);
-void I2C_ConfigSmbusAlert(I2C_Module* I2Cx, uint32_t polarity);
-void I2C_EnableArp(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_EnableExtendClk(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_EnableSoftwareReset(I2C_Module* I2Cx, FunctionalState Cmd);
+void I2C_GenerateStart(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_GenerateStop(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_ConfigAck(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_ConfigDatacktc(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_SendAddr7bit(I2C_Module *I2Cx, uint8_t address, uint8_t mode);
+void I2C_ConfigOwnAddr2(I2C_Module *I2Cx, uint8_t address);
+void I2C_EnableDualAddr(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_EnableGeneralCall(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_ConfigNackLocation(I2C_Module *I2Cx, uint32_t position);
+void I2C_ConfigSmbusAlert(I2C_Module *I2Cx, uint32_t polarity);
+void I2C_EnableArp(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_EnableExtendClk(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_EnableSoftwareReset(I2C_Module *I2Cx, FunctionalState Cmd);
 
 /* Data transfer */
-void I2C_SendData(I2C_Module* I2Cx, uint8_t data);
-uint8_t I2C_RecvData(const I2C_Module* I2Cx);
+void I2C_SendData(I2C_Module *I2Cx, uint8_t data);
+uint8_t I2C_RecvData(const I2C_Module *I2Cx);
 
 /* PEC management */
-void I2C_ConfigPecLocation(I2C_Module* I2Cx, uint32_t position);
-void I2C_SendPEC(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_ComputePec(I2C_Module* I2Cx, FunctionalState Cmd);
-uint8_t I2C_GetPec(const I2C_Module* I2Cx);
+void I2C_ConfigPecLocation(I2C_Module *I2Cx, uint32_t position);
+void I2C_SendPEC(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_ComputePec(I2C_Module *I2Cx, FunctionalState Cmd);
+uint8_t I2C_GetPec(const I2C_Module *I2Cx);
 
 /* DMA */
-void I2C_EnableDMA(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_EnableDmaLastSend(I2C_Module* I2Cx, FunctionalState Cmd);
+void I2C_EnableDMA(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_EnableDmaLastSend(I2C_Module *I2Cx, FunctionalState Cmd);
 
 /* Filter configuration */
-void I2C_SetSDADigitalFilterWidth(I2C_Module* I2Cx, uint8_t width);
-void I2C_SetSCLDigitalFilterWidth(I2C_Module* I2Cx, uint8_t width);
-void I2C_SetSDAAnalogFilterWidth(I2C_Module* I2Cx, uint16_t width);
-void I2C_EnableSDAAnalogFilter(I2C_Module* I2Cx, FunctionalState Cmd);
-void I2C_SetSCLAnalogFilterWidth(I2C_Module* I2Cx, uint16_t width);
-void I2C_EnableSCLAnalogFilter(I2C_Module* I2Cx, FunctionalState Cmd);
+void I2C_SetSDADigitalFilterWidth(I2C_Module *I2Cx, uint8_t width);
+void I2C_SetSCLDigitalFilterWidth(I2C_Module *I2Cx, uint8_t width);
+void I2C_SetSDAAnalogFilterWidth(I2C_Module *I2Cx, uint16_t width);
+void I2C_EnableSDAAnalogFilter(I2C_Module *I2Cx, FunctionalState Cmd);
+void I2C_SetSCLAnalogFilterWidth(I2C_Module *I2Cx, uint16_t width);
+void I2C_EnableSCLAnalogFilter(I2C_Module *I2Cx, FunctionalState Cmd);
 
 /* Interrupt and flag management */
-void I2C_ConfigInt(I2C_Module* I2Cx, uint32_t I2C_IT, FunctionalState Cmd);
-ErrorStatus I2C_CheckEvent(const I2C_Module* I2Cx, uint32_t I2C_event);
-uint32_t I2C_GetLastEvent(const I2C_Module* I2Cx);
-FlagStatus I2C_GetFlag(const I2C_Module* I2Cx, uint32_t I2C_flag);
-void I2C_ClrFlag(I2C_Module* I2Cx, uint32_t I2C_flag);
-INTStatus I2C_GetIntStatus(const I2C_Module* I2Cx, uint32_t Interrupt);
-void I2C_ClrIntPendingBit(I2C_Module* I2Cx, uint32_t Interrupt);
+void I2C_ConfigInt(I2C_Module *I2Cx, uint32_t I2C_IT, FunctionalState Cmd);
+ErrorStatus I2C_CheckEvent(const I2C_Module *I2Cx, uint32_t I2C_event);
+uint32_t I2C_GetLastEvent(const I2C_Module *I2Cx);
+FlagStatus I2C_GetFlag(const I2C_Module *I2Cx, uint32_t I2C_flag);
+void I2C_ClrFlag(I2C_Module *I2Cx, uint32_t I2C_flag);
+INTStatus I2C_GetIntStatus(const I2C_Module *I2Cx, uint32_t Interrupt);
+void I2C_ClrIntPendingBit(I2C_Module *I2Cx, uint32_t Interrupt);
 
 /* Timeout management */
-void I2C_SetTimeoutLowLimit(I2C_Module* I2Cx, uint32_t limit);
-void I2C_SetTimeoutHighLimit(I2C_Module* I2Cx, uint32_t limit);
-void I2C_ConfigTimeoutInt(I2C_Module* I2Cx, uint32_t I2C_IT, FunctionalState Cmd);
-void I2C_EnableTimeoutDetect(I2C_Module* I2Cx, uint32_t timeout_type, FunctionalState Cmd);
-FlagStatus I2C_GetTimeoutFlag(const I2C_Module* I2Cx, uint32_t I2C_flag);
-void I2C_ClrTimeoutFlag(I2C_Module* I2Cx, uint32_t I2C_flag);
+void I2C_SetTimeoutLowLimit(I2C_Module *I2Cx, uint32_t limit);
+void I2C_SetTimeoutHighLimit(I2C_Module *I2Cx, uint32_t limit);
+void I2C_ConfigTimeoutInt(I2C_Module *I2Cx, uint32_t I2C_IT, FunctionalState Cmd);
+void I2C_EnableTimeoutDetect(I2C_Module *I2Cx, uint32_t timeout_type, FunctionalState Cmd);
+FlagStatus I2C_GetTimeoutFlag(const I2C_Module *I2Cx, uint32_t I2C_flag);
+void I2C_ClrTimeoutFlag(I2C_Module *I2Cx, uint32_t I2C_flag);
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /*__n32g41x_I2C_H */
+#endif /* __N32G41X_I2C_H__ */
 

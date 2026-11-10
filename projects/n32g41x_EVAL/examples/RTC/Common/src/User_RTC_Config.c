@@ -1,55 +1,55 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
 *\*\file User_RTC_Config.c
-*\*\author Nsing
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
 #include <stdio.h>
@@ -63,12 +63,11 @@
 #include "User_RTC_Config.h"
 #include "delay.h"
 
-
-RTC_DateType  RTC_DateStructure;
-RTC_DateType  RTC_DateDefault;
-RTC_TimeType  RTC_TimeStructure;
-RTC_TimeType  RTC_TimeDefault;
-RTC_InitType  RTC_InitStructure;
+RTC_DateType RTC_DateStructure;
+RTC_DateType RTC_DateDefault;
+RTC_TimeType RTC_TimeStructure;
+RTC_TimeType RTC_TimeDefault;
+RTC_InitType RTC_InitStructure;
 RTC_AlarmType RTC_AlarmStructure;
 RTC_AlarmType RTC_AlarmDefault;
 uint32_t SynchPrediv, AsynchPrediv;
@@ -90,9 +89,9 @@ void RTC_AlarmShow(uint8_t AlarmX)
     else
         RTC_GetAlarm(RTC_FORMAT_BIN, RTC_B_ALARM, &RTC_AlarmStructure);
     printf("\n\r //=========== Current Alarm Display ==============// \n\r");
-    printf("\n\r The current alarm is :  %02u:%02u:%02u \n\r",\
-           RTC_AlarmStructure.AlarmTime.Hours,\
-           RTC_AlarmStructure.AlarmTime.Minutes,\
+    printf("\n\r The current alarm is :  %02u:%02u:%02u \n\r",
+           RTC_AlarmStructure.AlarmTime.Hours,
+           RTC_AlarmStructure.AlarmTime.Minutes,
            RTC_AlarmStructure.AlarmTime.Seconds);
 }
 
@@ -108,10 +107,10 @@ void RTC_DateShow(void)
     /* Get the current Date */
     RTC_GetDate(RTC_FORMAT_BIN, &RTC_DateStructure);
     log_info("\n\r //=========== Current Date Display ==============// \n\r");
-    log_info("\n\r The current date (WeekDay-Date-Month-Year) is :  %02u-%02u-%02u-%02u \n\r",\
-             RTC_DateStructure.WeekDay,\
-             RTC_DateStructure.Date,\
-             RTC_DateStructure.Month,\
+    log_info("\n\r The current date (WeekDay-Date-Month-Year) is :  %02u-%02u-%02u-%02u \n\r",
+             RTC_DateStructure.WeekDay,
+             RTC_DateStructure.Date,
+             RTC_DateStructure.Month,
              RTC_DateStructure.Year);
 }
 
@@ -127,9 +126,9 @@ void RTC_TimeShow(void)
     /* Get the current Time and Date */
     RTC_GetTime(RTC_FORMAT_BIN, &RTC_TimeStructure);
     log_info("\n\r //============ Current Time Display ===============// \n\r");
-    log_info("\n\r The current time (Hour-Minute-Second) is :  %02u:%02u:%02u \n\r",\
-             RTC_TimeStructure.Hours,\
-             RTC_TimeStructure.Minutes,\
+    log_info("\n\r The current time (Hour-Minute-Second) is :  %02u:%02u:%02u \n\r",
+             RTC_TimeStructure.Hours,
+             RTC_TimeStructure.Minutes,
              RTC_TimeStructure.Seconds);
     /* Unfreeze the RTC DAT Register */
     (void)RTC->DATE;
@@ -143,7 +142,7 @@ void RTC_TimeShow(void)
 *\*\
 **/
 void RTC_DateAndTimeDefaultVale(uint32_t AlarmMask)
-{  
+{
     RTC_TimeStructInit(&RTC_TimeDefault);
     RTC_DateStructInit(&RTC_DateDefault);
     RTC_AlarmStructInit(&RTC_AlarmDefault);
@@ -222,8 +221,8 @@ ErrorStatus RTC_AlarmRegulate(uint32_t RTC_Alarm)
     printf(": %02u\n\r", tmp_ss);
     /* Set the Alarm X */
     RTC_AlarmStructure.DateWeekValue = RTC_AlarmDefault.DateWeekValue;
-    RTC_AlarmStructure.DateWeekMode = RTC_AlarmDefault.DateWeekMode;
-    RTC_AlarmStructure.AlarmMask = RTC_AlarmDefault.AlarmMask;
+    RTC_AlarmStructure.DateWeekMode  = RTC_AlarmDefault.DateWeekMode;
+    RTC_AlarmStructure.AlarmMask     = RTC_AlarmDefault.AlarmMask;
     /* Configure the RTC Alarm A register */
     RTC_SetAlarm(RTC_FORMAT_BIN, RTC_Alarm, &RTC_AlarmStructure);
     printf("\n\r>> !! RTC Set Alarm_X success. !! <<\n\r");
@@ -387,7 +386,7 @@ ErrorStatus RTC_TimeRegulate(void)
 void RTC_PrescalerConfig(void)
 {
     RTC_StructInit(&RTC_InitStructure);
-  
+
     /* Configure the RTC data register and RTC prescaler */
     RTC_InitStructure.RTC_AsynchPrediv = AsynchPrediv;
     RTC_InitStructure.RTC_SynchPrediv  = SynchPrediv;
@@ -416,12 +415,12 @@ void RTC_PrescalerConfig(void)
 **/
 ErrorStatus RTC_CLKSourceConfig(RTC_CLK_SRC_TYPE Clk_Src_Type, bool Is_First_Cfg_RCC)
 {
-    uint8_t lse_ready_count=0;
-    ErrorStatus Status=SUCCESS;
+    uint8_t lse_ready_count = 0;
+    ErrorStatus Status      = SUCCESS;
 
     /* Disable RTC clock */
     RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_RTC, DISABLE);
-    
+
     if (RTC_CLK_SRC_TYPE_HSE_DIV128 == Clk_Src_Type)
     {
         log_info("\r\n RTC_ClkSrc Is Set HSE/128! \r\n");
@@ -446,7 +445,7 @@ ErrorStatus RTC_CLKSourceConfig(RTC_CLK_SRC_TYPE Clk_Src_Type, bool Is_First_Cfg
             }
         }
         SynchPrediv  = 0x270; // 8M/128 = 62500Hz / 100 = 625Hz  625Hz / 625 = 1Hz
-        AsynchPrediv = 0x63;  // value range: 0-7F  8M/128 = 62500Hz / 100 = 625Hz 
+        AsynchPrediv = 0x63;  // value range: 0-7F  8M/128 = 62500Hz / 100 = 625Hz
     }
     else if (RTC_CLK_SRC_TYPE_LSE == Clk_Src_Type)
     {
@@ -455,20 +454,20 @@ ErrorStatus RTC_CLKSourceConfig(RTC_CLK_SRC_TYPE Clk_Src_Type, bool Is_First_Cfg
         {
             /* Disable the LSI */
             RCC_EnableLsi(DISABLE);
-            
+
 #if (_TEST_LSE_BYPASS_)
             RCC_ConfigLse(RCC_LSE_BYPASS);
 #else
             RCC_ConfigLse(RCC_LSE_ENABLE);
 #endif
-            lse_ready_count=0;
-            /****Waite LSE Ready *****/
-            while((RCC_GetFlagStatus(RCC_CTRL_FLAG_LSERDF) == RESET) && (lse_ready_count<RTC_LSE_TRY_COUNT))
+            lse_ready_count = 0;
+            /*** Waite LSE Ready ***/
+            while ((RCC_GetFlagStatus(RCC_CTRL_FLAG_LSERDF) == RESET) && (lse_ready_count < RTC_LSE_TRY_COUNT))
             {
                 lse_ready_count++;
                 SysTick_Delay_Ms(10);
-                /****LSE Ready failed or timeout*****/
-                if(lse_ready_count>=RTC_LSE_TRY_COUNT)
+                /*** LSE Ready failed or timeout ***/
+                if (lse_ready_count >= RTC_LSE_TRY_COUNT)
                 {
                     Status = ERROR;
                     log_info("\r\n RTC_ClkSrc Set LSE Failed! \r\n");
@@ -481,25 +480,25 @@ ErrorStatus RTC_CLKSourceConfig(RTC_CLK_SRC_TYPE Clk_Src_Type, bool Is_First_Cfg
         {
             /* Disable the LSI */
             RCC_EnableLsi(DISABLE);
-            
+
             RCC_ConfigRTCClk(RCC_RTC_CLKSEL_LSE);
 #if (_TEST_LSE_BYPASS_)
             RCC_ConfigLse(RCC_LSE_BYPASS);
 #else
             RCC_ConfigLse(RCC_LSE_ENABLE);
 #endif
-            lse_ready_count=0;
-            /****Waite LSE Ready *****/
-            while((RCC_GetFlagStatus(RCC_CTRL_FLAG_LSERDF) == RESET) && (lse_ready_count<RTC_LSE_TRY_COUNT))
+            lse_ready_count = 0;
+            /*** Waite LSE Ready ***/
+            while ((RCC_GetFlagStatus(RCC_CTRL_FLAG_LSERDF) == RESET) && (lse_ready_count < RTC_LSE_TRY_COUNT))
             {
                 lse_ready_count++;
                 SysTick_Delay_Ms(10);
-                /****LSE Ready failed or timeout*****/
-                if(lse_ready_count>=RTC_LSE_TRY_COUNT)
+                /*** LSE Ready failed or timeout ***/
+                if (lse_ready_count >= RTC_LSE_TRY_COUNT)
                 {
-                   Status = ERROR;
-                   log_info("\r\n RTC_ClkSrc Set LSE Failed! \r\n");
-                   break;
+                    Status = ERROR;
+                    log_info("\r\n RTC_ClkSrc Set LSE Failed! \r\n");
+                    break;
                 }
             }
         }
@@ -536,8 +535,8 @@ ErrorStatus RTC_CLKSourceConfig(RTC_CLK_SRC_TYPE Clk_Src_Type, bool Is_First_Cfg
     }
     /* Enable the RTC Clock */
     RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_RTC, ENABLE);
-    
-    while((Status = RTC_WaitForSynchro()) != SUCCESS)
+
+    while ((Status = RTC_WaitForSynchro()) != SUCCESS)
     {
     }
     return Status;

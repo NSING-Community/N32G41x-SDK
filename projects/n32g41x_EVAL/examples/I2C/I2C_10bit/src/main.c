@@ -1,64 +1,62 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
-
 /**
 *\*\file main.c
-*\*\author Nsing
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
 #include "main.h"
 
+/*** n32g41x_StdPeriph_Examples ***/
 
-/** n32g41x_StdPeriph_Examples **/
-
-/** I2C_10bit **/
+/*** I2C_10bit ***/
 
 #define TEST_BUFFER_SIZE  100
 #define I2CT_FLAG_TIMEOUT ((uint32_t)0x8000)
@@ -69,48 +67,45 @@
 #define I2C_FRAME_HEAD_RX 0xF1
 
 /* master */
-#define I2Cx                I2C1
-#define I2Cx_CLK            RCC_APB1_PERIPH_I2C1
-#define I2Cx_SCL_PIN        GPIO_PIN_4
-#define I2Cx_SDA_PIN        GPIO_PIN_5
-#define I2Cx_SCL_GPIO       GPIOA
-#define I2Cx_SDA_GPIO       GPIOA
-#define I2Cx_SCL_AF         GPIO_AF7
-#define I2Cx_SDA_AF         GPIO_AF7
-#define I2Cx_GPIO_CLK       RCC_AHB_PERIPH_GPIO
+#define I2Cx          I2C1
+#define I2Cx_CLK      RCC_APB1_PERIPH_I2C1
+#define I2Cx_SCL_PIN  GPIO_PIN_4
+#define I2Cx_SDA_PIN  GPIO_PIN_5
+#define I2Cx_SCL_GPIO GPIOA
+#define I2Cx_SDA_GPIO GPIOA
+#define I2Cx_SCL_AF   GPIO_AF7
+#define I2Cx_SDA_AF   GPIO_AF7
+#define I2Cx_GPIO_CLK RCC_AHB_PERIPH_GPIO
 
 /* slave */
-#define Slave_I2Cx          I2C2
-#define Slave_I2Cx_CLK      RCC_APB1_PERIPH_I2C2
-#define Slave_SCL_PIN       GPIO_PIN_10
-#define Slave_SDA_PIN       GPIO_PIN_11
-#define Slave_GPIOx         GPIOB
-#define Slave_SCL_AF        GPIO_AF4
-#define Slave_SDA_AF        GPIO_AF4
-#define Slave_GPIO_CLK      RCC_AHB_PERIPH_GPIO
-
-
+#define Slave_I2Cx     I2C2
+#define Slave_I2Cx_CLK RCC_APB1_PERIPH_I2C2
+#define Slave_SCL_PIN  GPIO_PIN_10
+#define Slave_SDA_PIN  GPIO_PIN_11
+#define Slave_GPIOx    GPIOB
+#define Slave_SCL_AF   GPIO_AF4
+#define Slave_SDA_AF   GPIO_AF4
+#define Slave_GPIO_CLK RCC_AHB_PERIPH_GPIO
 
 static __IO uint32_t I2CTimeout = I2CT_LONG_TIMEOUT;
 
 static uint8_t master_tx_buf[TEST_BUFFER_SIZE] = {0};
 static uint8_t master_rx_buf[TEST_BUFFER_SIZE] = {0};
-static uint8_t slave_tx_buf[TEST_BUFFER_SIZE] = {0};
-static uint8_t slave_rx_buf[TEST_BUFFER_SIZE] = {0};
-static CommCtrl_t Comm_Flag = C_READY;
+static uint8_t slave_tx_buf[TEST_BUFFER_SIZE]  = {0};
+static uint8_t slave_rx_buf[TEST_BUFFER_SIZE]  = {0};
+static CommCtrl_t Comm_Flag                    = C_READY;
 
-static uint8_t rx_num = 0;
-static uint8_t tx_num = 0;
-volatile Status test_status = FAILED;
+static uint8_t rx_num               = 0;
+static uint8_t tx_num               = 0;
+volatile Status test_status         = FAILED;
 static uint8_t flag_master_complete = 0;
-static TR_STA flag_master_dir = TRANSMIT;
-static uint8_t flag_slave_complete = 0;
-static TR_STA master_TR = TRANSMIT;
+static TR_STA flag_master_dir       = TRANSMIT;
+static uint8_t flag_slave_complete  = 0;
+static TR_STA master_TR             = TRANSMIT;
 
-Status Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
-void Memset(void* s, uint8_t c, uint32_t count);
+Status Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferLength);
+void Memset(void *s, uint8_t c, uint32_t count);
 void CommTimeOut_CallBack(ErrCode_t errcode);
-
 
 /**
 *\*\name    NVIC_ConfigurationMaster.
@@ -165,23 +160,22 @@ int i2c_master_init(void)
     GPIO_InitType i2cx_gpio;
     RCC_EnableAPB1PeriphClk(I2Cx_CLK, ENABLE);
     RCC_EnableAHBPeriphClk(I2Cx_GPIO_CLK, ENABLE);
-    I2Cx_SCL_GPIO->POD |= (I2Cx_SCL_PIN );//pull up
+    I2Cx_SCL_GPIO->POD |= (I2Cx_SCL_PIN);//pull up
     I2Cx_SDA_GPIO->POD |= (I2Cx_SDA_PIN);//pull up
-
 
     /* Initialize GPIO_InitStructure */
     GPIO_InitStruct(&i2cx_gpio);
-    i2cx_gpio.Pin        = I2Cx_SCL_PIN;
-    i2cx_gpio.GPIO_Pull  = GPIO_PULL_UP;
+    i2cx_gpio.Pin            = I2Cx_SCL_PIN;
+    i2cx_gpio.GPIO_Pull      = GPIO_PULL_UP;
     i2cx_gpio.GPIO_Alternate = I2Cx_SCL_AF;
-    i2cx_gpio.GPIO_Mode  = GPIO_MODE_AF_OD;
+    i2cx_gpio.GPIO_Mode      = GPIO_MODE_AF_OD;
     i2cx_gpio.GPIO_Slew_Rate = GPIO_SLEW_RATE_SLOW;
     GPIO_InitPeripheral(I2Cx_SCL_GPIO, &i2cx_gpio);
 
-    i2cx_gpio.Pin        = I2Cx_SDA_PIN;
-    i2cx_gpio.GPIO_Pull  = GPIO_PULL_UP;
+    i2cx_gpio.Pin            = I2Cx_SDA_PIN;
+    i2cx_gpio.GPIO_Pull      = GPIO_PULL_UP;
     i2cx_gpio.GPIO_Alternate = I2Cx_SDA_AF;
-    i2cx_gpio.GPIO_Mode  = GPIO_MODE_AF_OD;
+    i2cx_gpio.GPIO_Mode      = GPIO_MODE_AF_OD;
     i2cx_gpio.GPIO_Slew_Rate = GPIO_SLEW_RATE_SLOW;
     GPIO_InitPeripheral(I2Cx_SDA_GPIO, &i2cx_gpio);
 
@@ -218,10 +212,10 @@ int i2c_slave_init(void)
 
     /* Initialize GPIO_InitStructure */
     GPIO_InitStruct(&i2c2_gpio);
-    i2c2_gpio.Pin        = Slave_SCL_PIN | Slave_SDA_PIN;
-    i2c2_gpio.GPIO_Pull  = GPIO_PULL_UP;
+    i2c2_gpio.Pin            = Slave_SCL_PIN | Slave_SDA_PIN;
+    i2c2_gpio.GPIO_Pull      = GPIO_PULL_UP;
     i2c2_gpio.GPIO_Alternate = Slave_SCL_AF;
-    i2c2_gpio.GPIO_Mode  = GPIO_MODE_AF_OD;
+    i2c2_gpio.GPIO_Mode      = GPIO_MODE_AF_OD;
     i2c2_gpio.GPIO_Slew_Rate = GPIO_SLEW_RATE_SLOW;
     GPIO_InitPeripheral(Slave_GPIOx, &i2c2_gpio);
 
@@ -243,7 +237,6 @@ int i2c_slave_init(void)
     return 0;
 }
 
-
 /**
 *\*\name    main.
 *\*\fun     main function.
@@ -256,11 +249,11 @@ int main(void)
 
     log_init();
     log_info("\nthis is a i2c(10bit) master/slave demo\r\n");
-    /* Initialize the I2C driver ---------------------------------*/
+    /*** Initialize the I2C driver ***/
     i2c_master_init();
     i2c_slave_init();
 
-    /*----------I2C1 Master write and I2C2 Slave read data---------*/
+    /*** I2C1 Master write and I2C2 Slave read data ***/
     for (i = 0; i < TEST_BUFFER_SIZE; i++)
     {
         master_tx_buf[i] = i;
@@ -268,7 +261,7 @@ int main(void)
 
     I2CTimeout = I2CT_LONG_TIMEOUT;
 
-    /*Wait until no busy*/
+    /* Wait until no busy */
     while (I2C_GetFlag(I2Cx, I2C_FLAG_BUSY))
     {
         if ((I2CTimeout--) == 0)
@@ -287,8 +280,8 @@ int main(void)
 
     I2CTimeout = I2CT_LONG_TIMEOUT * 1000;
 
-    /* Wait write/Read data complete*/
-    while((!flag_master_complete) || (!flag_slave_complete))
+    /* Wait write/Read data complete */
+    while ((!flag_master_complete) || (!flag_slave_complete))
     {
         if ((I2CTimeout--) == 0)
         {
@@ -324,19 +317,19 @@ int main(void)
 
     SysTick_Delay_Ms(1);
 
-    /*----------I2C1 Master Read and I2C2 Slave Write data---------*/
+    /*** I2C1 Master Read and I2C2 Slave Write data ***/
     for (i = 0; i < TEST_BUFFER_SIZE; i++)
     {
         slave_tx_buf[i] = (0x80 + i);
     }
 
     flag_master_complete = 0;
-    flag_slave_complete = 0;
-    master_TR = RECEIVE;
+    flag_slave_complete  = 0;
+    master_TR            = RECEIVE;
 
     I2CTimeout = I2CT_LONG_TIMEOUT;
 
-    /*Wait until no busy*/
+    /* Wait until no busy */
     while (I2C_GetFlag(I2Cx, I2C_FLAG_BUSY))
     {
         if ((I2CTimeout--) == 0)
@@ -345,7 +338,6 @@ int main(void)
             return 1;
         }
     }
-
 
     I2C_ConfigAck(I2Cx, ENABLE);
 
@@ -359,8 +351,8 @@ int main(void)
 
     I2CTimeout = I2CT_LONG_TIMEOUT * 1000;
 
-    /* Wait write/Read data complete*/
-    while((!flag_master_complete) || (!flag_slave_complete))
+    /* Wait write/Read data complete */
+    while ((!flag_master_complete) || (!flag_slave_complete))
     {
         if ((I2CTimeout--) == 0)
         {
@@ -371,7 +363,7 @@ int main(void)
 
     /* master recv finish */
     flag_master_complete = 0;
-    I2CTimeout = I2CT_LONG_TIMEOUT;
+    I2CTimeout           = I2CT_LONG_TIMEOUT;
 
     while (I2C_GetFlag(I2Cx, I2C_FLAG_BUSY))
     {
@@ -409,7 +401,7 @@ int main(void)
 *\*\return PASSED: pBuffer identical to pBuffer1
 *\*\       FAILED: pBuffer differs from pBuffer1
 **/
-Status Buffercmp(uint8_t* pBuffer, uint8_t* pBuffer1, uint16_t BufferLength)
+Status Buffercmp(uint8_t *pBuffer, uint8_t *pBuffer1, uint16_t BufferLength)
 {
     while (BufferLength--)
     {
@@ -433,9 +425,9 @@ Status Buffercmp(uint8_t* pBuffer, uint8_t* pBuffer1, uint16_t BufferLength)
 *\*\param count number
 *\*\return pointer of the memery
 **/
-void Memset(void* s, uint8_t c, uint32_t count)
+void Memset(void *s, uint8_t c, uint32_t count)
 {
-    char* xs = (char*)s;
+    char *xs = (char *)s;
 
     while (count--)
     {
@@ -453,7 +445,7 @@ void Memset(void* s, uint8_t c, uint32_t count)
 **/
 void I2C1_IRQHandler(void)
 {
-    /* --- Event handling --- */
+    /*** Event handling ***/
     unsigned int last_event;
 
     last_event = I2C_GetLastEvent(I2Cx);
@@ -473,7 +465,7 @@ void I2C1_IRQHandler(void)
                 {
                     Memset(master_rx_buf, 0, TEST_BUFFER_SIZE);
                     I2C_SendData(I2Cx, (I2C_FRAME_HEAD_RX | ((I2C_SLAVE_ADDR & 0x300) >> 7)));
-                    rx_num = 0;
+                    rx_num          = 0;
                     flag_master_dir = TRANSMIT;
                 }
                 break;
@@ -488,7 +480,7 @@ void I2C1_IRQHandler(void)
                 if (master_TR == RECEIVE)
                 {
                     I2C_GenerateStart(I2Cx, ENABLE);
-                    master_TR = NONE;
+                    master_TR       = NONE;
                     flag_master_dir = RECEIVE;
                 }
                 else
@@ -578,14 +570,13 @@ void I2C1_IRQHandler(void)
         }
     }
 
-    /* --- Error handling --- */
+    /*** Error handling ***/
     last_event = I2C_GetLastEvent(I2Cx);
 
-    if(last_event & I2C_EVT_SLAVE_ACK_MISS)
+    if (last_event & I2C_EVT_SLAVE_ACK_MISS)
     {
         I2C_ClrFlag(I2Cx, I2C_FLAG_ACKFAIL);
     }
-
 }
 
 /**
@@ -603,9 +594,9 @@ void I2C1_IRQHandler(void)
 **/
 void I2C2_IRQHandler(void)
 {
-    /* --- Event handling --- */
+    /*** Event handling ***/
     uint8_t timeout_flag = 0;
-    uint32_t last_event = 0;
+    uint32_t last_event  = 0;
 
     last_event = I2C_GetLastEvent(Slave_I2Cx);
 
@@ -616,7 +607,7 @@ void I2C2_IRQHandler(void)
             break;
 
         case I2C_EVT_SLAVE_SEND_ADDR_MATCHED:
-            tx_num = 0;
+            tx_num          = 0;
             Slave_I2Cx->DAT = slave_tx_buf[tx_num++];
             break;
 
@@ -635,7 +626,7 @@ void I2C2_IRQHandler(void)
         case I2C_EVT_SLAVE_STOP_RECVD:
             I2C_Enable(Slave_I2Cx, ENABLE);
 
-            if((tx_num != 0) || (rx_num != 0))
+            if ((tx_num != 0) || (rx_num != 0))
             {
                 flag_slave_complete = 1;
             }
@@ -658,14 +649,14 @@ void I2C2_IRQHandler(void)
     else
         I2CTimeout = I2CT_LONG_TIMEOUT;
 
-    /* --- Error handling --- */
+    /*** Error handling ***/
     last_event = I2C_GetLastEvent(Slave_I2Cx);
 
-    if(last_event & I2C_EVT_SLAVE_ACK_MISS)
+    if (last_event & I2C_EVT_SLAVE_ACK_MISS)
     {
         I2C_ClrFlag(Slave_I2Cx, I2C_FLAG_ACKFAIL);
 
-        if(tx_num != 1)  //slave send the last data and recv NACK
+        if (tx_num != 1)  //slave send the last data and recv NACK
         {
             flag_slave_complete = 1;
         }
@@ -673,7 +664,6 @@ void I2C2_IRQHandler(void)
         {
         }
     }
-
 }
 
 /**
@@ -682,7 +672,6 @@ void I2C2_IRQHandler(void)
 *\*\param   none
 *\*\return  none
 **/
-
 
 /**
 *\*\name    IIC_RestoreSlaveByClock.
@@ -695,19 +684,19 @@ void IIC_RestoreSlaveByClock(void)
     uint8_t i;
     GPIO_InitType i2cx_gpio;
 
-    I2Cx_SCL_GPIO->POD |= (I2Cx_SCL_PIN );//pull up
+    I2Cx_SCL_GPIO->POD |= (I2Cx_SCL_PIN);//pull up
     I2Cx_SDA_GPIO->POD |= (I2Cx_SDA_PIN);//pull up
     RCC_EnableAHBPeriphClk(I2Cx_GPIO_CLK, ENABLE);
-    I2Cx_SCL_GPIO->POD |= (I2Cx_SCL_PIN );//pull up
+    I2Cx_SCL_GPIO->POD |= (I2Cx_SCL_PIN);//pull up
     I2Cx_SDA_GPIO->POD |= (I2Cx_SDA_PIN);//pull up
 
     /* Initialize GPIO_InitStructure */
     GPIO_InitStruct(&i2cx_gpio);
 
-    i2cx_gpio.Pin        = I2Cx_SCL_PIN;
-    i2cx_gpio.GPIO_Pull  = GPIO_PULL_UP;
+    i2cx_gpio.Pin            = I2Cx_SCL_PIN;
+    i2cx_gpio.GPIO_Pull      = GPIO_PULL_UP;
     i2cx_gpio.GPIO_Alternate = I2Cx_SCL_AF;
-    i2cx_gpio.GPIO_Mode  = GPIO_MODE_OUTPUT_PP;
+    i2cx_gpio.GPIO_Mode      = GPIO_MODE_OUTPUT_PP;
     GPIO_InitPeripheral(I2Cx_SCL_GPIO, &i2cx_gpio);
 
     for (i = 0; i < 9; i++)
@@ -747,7 +736,6 @@ void IIC_RCCReset(void)
 
     log_info("***** IIC module by RCC reset! *****\r\n");
     i2c_master_init();
-
 }
 
 /**
@@ -763,16 +751,16 @@ void IIC_SWReset(void)
     /* Initialize GPIO_InitStructure */
     GPIO_InitStruct(&i2cx_gpio);
 
-    i2cx_gpio.Pin        = I2Cx_SCL_PIN;
-    i2cx_gpio.GPIO_Pull  = GPIO_PULL_UP;
+    i2cx_gpio.Pin            = I2Cx_SCL_PIN;
+    i2cx_gpio.GPIO_Pull      = GPIO_PULL_UP;
     i2cx_gpio.GPIO_Alternate = I2Cx_SCL_AF;
-    i2cx_gpio.GPIO_Mode  = GPIO_MODE_INPUT;
+    i2cx_gpio.GPIO_Mode      = GPIO_MODE_INPUT;
     GPIO_InitPeripheral(I2Cx_SCL_GPIO, &i2cx_gpio);
 
-    i2cx_gpio.Pin        = I2Cx_SDA_PIN;
-    i2cx_gpio.GPIO_Pull  = GPIO_PULL_UP;
+    i2cx_gpio.Pin            = I2Cx_SDA_PIN;
+    i2cx_gpio.GPIO_Pull      = GPIO_PULL_UP;
     i2cx_gpio.GPIO_Alternate = I2Cx_SDA_AF;
-    i2cx_gpio.GPIO_Mode  = GPIO_MODE_INPUT;
+    i2cx_gpio.GPIO_Mode      = GPIO_MODE_INPUT;
     GPIO_InitPeripheral(I2Cx_SDA_GPIO, &i2cx_gpio);
 
     I2CTimeout = I2CT_LONG_TIMEOUT;
@@ -814,13 +802,13 @@ void CommTimeOut_CallBack(ErrCode_t errcode)
 {
     log_info("...ErrCode:%d\r\n", errcode);
     Comm_Flag = C_READY;
-    #if (COMM_RECOVER_MODE == MODULE_SELF_RESET)
+#if (COMM_RECOVER_MODE == MODULE_SELF_RESET)
     IIC_SWReset();
-    #elif (COMM_RECOVER_MODE == MODULE_RCC_RESET)
+#elif (COMM_RECOVER_MODE == MODULE_RCC_RESET)
     IIC_RCCReset();
-    #elif (COMM_RECOVER_MODE == SYSTEM_NVIC_RESET)
+#elif (COMM_RECOVER_MODE == SYSTEM_NVIC_RESET)
     SystemNVICReset();
-    #endif
+#endif
 }
 
 

@@ -1,38 +1,38 @@
 /**
-*     Copyright (c) 2025, NSING Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter 
-* referred to as NSING). This software, and the product of NSING described herein 
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
 * (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     NSING does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     NSING reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact NSING and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although NSING has attempted to provide accurate and reliable information, NSING assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
 *     NSING Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
@@ -40,8 +40,8 @@
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
 *     NSING products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
@@ -49,7 +49,7 @@
 *\*\file main.c
 *\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, NSING Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
 #include "main.h"
@@ -105,15 +105,15 @@ void MCO_Configuration(uint32_t MCO_source, uint32_t MCO_prescaler)
 *\*\param   Pin
 *\*\return  none
 **/
-void LedInit(GPIO_Module* GPIOx, uint16_t Pin)
+void LedInit(GPIO_Module *GPIOx, uint16_t Pin)
 {
     GPIO_InitType GPIO_InitStructure;
 
     RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_GPIO, ENABLE);
 
     GPIO_InitStruct(&GPIO_InitStructure);
-    GPIO_InitStructure.Pin        = Pin;
-    GPIO_InitStructure.GPIO_Mode  = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStructure.Pin       = Pin;
+    GPIO_InitStructure.GPIO_Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitPeripheral(GPIOx, &GPIO_InitStructure);
 }
 
@@ -124,7 +124,7 @@ void LedInit(GPIO_Module* GPIOx, uint16_t Pin)
 *\*\param   Pin: GPIO pin
 *\*\return  none
 **/
-void LedOn(GPIO_Module* GPIOx, uint16_t Pin)
+void LedOn(GPIO_Module *GPIOx, uint16_t Pin)
 {
     GPIOx->PBSC = Pin;
 }
@@ -136,7 +136,7 @@ void LedOn(GPIO_Module* GPIOx, uint16_t Pin)
 *\*\param   Pin: GPIO pin
 *\*\return  none
 **/
-void LedOff(GPIO_Module* GPIOx, uint16_t Pin)
+void LedOff(GPIO_Module *GPIOx, uint16_t Pin)
 {
     GPIOx->PBC = Pin;
 }
@@ -148,7 +148,7 @@ void LedOff(GPIO_Module* GPIOx, uint16_t Pin)
 *\*\param   Pin: GPIO pin
 *\*\return  none
 **/
-void LedBlink(GPIO_Module* GPIOx, uint16_t Pin)
+void LedBlink(GPIO_Module *GPIOx, uint16_t Pin)
 {
     GPIOx->POD ^= Pin;
 }
@@ -170,9 +170,9 @@ int main(void)
     }
 
 #ifdef LSI_TIM_MEASURE
-    /* Configure GTIM3 to capture LSI via tim_ti1_in2 and measure frequency.
+    /** Configure GTIM3 to capture LSI via tim_ti1_in2 and measure frequency.
      * ISR accumulates Capture ticks over LSI_MEASURE_COUNT segments,
-     * then computes LsiFreq in one shot with 64-bit arithmetic. */
+     * then computes LsiFreq in one shot with 64-bit arithmetic. **/
     GTIM3_ConfigForLSI();
 
     /* Wait for measurement to complete */
@@ -213,20 +213,20 @@ int main(void)
         LedOff(LED1_PORT, LED1_PIN);
     }
 
-    /* IWDG timeout equal to 250 ms (the timeout may varies due to LSI frequency
-       dispersion) */
+    /** IWDG timeout equal to 250 ms (the timeout may varies due to LSI frequency
+       dispersion) **/
     /* Enable write access to IWDG_PR and IWDG_RLR registers */
     IWDG_WriteConfig(IWDG_WRITE_ENABLE);
 
     /* IWDG counter clock: LSI/32 */
     IWDG_SetPrescalerDiv(IWDG_PRESCALER_DIV32);
 
-    /* Set counter reload value to obtain 250ms IWDG TimeOut.
+    /** Set counter reload value to obtain 250ms IWDG TimeOut.
        Counter Reload Value = 250ms/IWDG counter clock period
                             = 250ms / (LSI/32)
                             = 0.25s / (LsiFreq/32)
                             = LsiFreq/(32 * 4)
-                            = LsiFreq/128 */
+                            = LsiFreq/128 **/
     log_debug("LsiFreq is: %d\n", LsiFreq);
 
     IWDG_CntReload(LsiFreq / 128);
@@ -275,13 +275,13 @@ void GTIM3_ConfigForLSI(void)
     /* Configure GTIM3 prescaler: counter clock = SystemCoreClock / (1 + 1) = SystemCoreClock / 2 */
     TIM_ConfigPrescaler(GTIM3, 1, TIM_PSC_RELOAD_MODE_IMMEDIATE);
 
-    /*
+    /**
      * GTIM3 CH1 configuration: Input Capture mode
      * The LSI oscillator is internally connected to GTIM3 tim_ti1_in2,
      * which is routed to CH1 via the TI1 input selection.
      * Rising edge is used as active edge, capture every 8th edge (DIV8).
      * CCDAT1 register is used to compute the frequency value.
-     */
+     **/
     TIM_ICInitStructure.Channel     = TIM_CH_1;
     TIM_ICInitStructure.ICPolarity  = TIM_IC_POLARITY_RISING;
     TIM_ICInitStructure.ICSelection = TIM_IC_SELECTION_DIRECTTI;

@@ -3,5 +3,5 @@
   <project>
     <path>$WS_DIR$\project.ewp</path>
   </project>
-  <batchBuild/>
+  <batchBuild><batchDefinition><name>N32G412</name><targets><target>$WS_DIR$\project.ewp/N32G412</target></targets></batchDefinition></batchBuild>
 </workspace>

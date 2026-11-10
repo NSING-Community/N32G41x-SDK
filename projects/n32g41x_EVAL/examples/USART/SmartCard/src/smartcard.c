@@ -1,55 +1,55 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
 *\*\file smartcard.c
-*\*\author Nsing
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
 #include <stdio.h>
@@ -67,17 +67,15 @@
 /* Global variables definition and initialization */
 SC_ATR SC_A2R;
 uint8_t SC_ATR_Table[40];
-static __IO uint8_t SCData = 0;
+static __IO uint8_t SCData  = 0;
 static uint32_t F_Table[16] = {0, 372, 558, 744, 1116, 1488, 1860, 0,
                                0, 512, 768, 1024, 1536, 2048, 0, 0
                               };
 static uint32_t D_Table[16] = {0, 1, 2, 4, 8, 16, 32, 64,
                                12, 20, 0, 0, 0, 0, 0, 0
                               };
-static int T_lenght_count = 0;
+static int T_lenght_count   = 0;
 extern uint8_t F_HotReset;
-
-
 
 /* Private function prototypes */
 static ErrorStatus USART_ByteReceive(uint8_t *Data, uint32_t TimeOut);
@@ -103,24 +101,24 @@ static void SC_Init(SC_InitStructure *SC_InitCfg)
     /* Initialize GPIO_InitStructure */
     GPIO_InitStruct(&GPIO_InitStructure);
     /* Configure USART CK pin as alternate function push-pull */
-    GPIO_InitStructure.Pin              = SC_USART_PIN_CK;
-    GPIO_InitStructure.GPIO_Mode        = GPIO_MODE_AF_PP;
-    GPIO_InitStructure.GPIO_Alternate   = SC_USART_Clk_GPIO_AF;
-    GPIO_InitStructure.GPIO_Current =  GPIO_DS_HIGH;
+    GPIO_InitStructure.Pin            = SC_USART_PIN_CK;
+    GPIO_InitStructure.GPIO_Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStructure.GPIO_Alternate = SC_USART_Clk_GPIO_AF;
+    GPIO_InitStructure.GPIO_Current   = GPIO_DS_HIGH;
     GPIO_InitPeripheral(SC_USART_CK_GPIO, &GPIO_InitStructure);
     /* Configure USART Tx pin as alternate function push-pull */
-    GPIO_InitStructure.Pin              = SC_USART_PIN_TX;
-    GPIO_InitStructure.GPIO_Mode        = GPIO_MODE_AF_OD;
-    GPIO_InitStructure.GPIO_Alternate   = SC_USART_Tx_GPIO_AF;
-    GPIO_InitStructure.GPIO_Current =  GPIO_DS_HIGH;
+    GPIO_InitStructure.Pin            = SC_USART_PIN_TX;
+    GPIO_InitStructure.GPIO_Mode      = GPIO_MODE_AF_OD;
+    GPIO_InitStructure.GPIO_Alternate = SC_USART_Tx_GPIO_AF;
+    GPIO_InitStructure.GPIO_Current   = GPIO_DS_HIGH;
     GPIO_InitPeripheral(SC_USART_GPIO, &GPIO_InitStructure);
     /* Configure Smartcard Reset pin */
-    GPIO_InitStructure.Pin = SC_PIN_RESET;
-    GPIO_InitStructure.GPIO_Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStructure.Pin            = SC_PIN_RESET;
+    GPIO_InitStructure.GPIO_Mode      = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStructure.GPIO_Alternate = GPIO_NO_AF;
     GPIO_InitPeripheral(SC_PIN_RESET_GPIO, &GPIO_InitStructure);
     /* SC_USART configuration */
-    /* SC_USART configured as follow:
+    /** SC_USART configured as follow:
         - Word Length = 9 Bits
         - 1.5 Stop Bit
         - Even parity
@@ -128,27 +126,27 @@ static void SC_Init(SC_InitStructure *SC_InitCfg)
         - Hardware flow control disabled (RTS and CTS signals)
         - Tx and Rx enabled
         - USART Clock enabled
-    */
+    **/
     /* SC_USART Clock set to (PCLK1 / Clk_Div) */
     USART_SetPrescaler(SC_USART, SC_InitCfg->Clk_Div >> 1);
     /* USART Guard Time set to 16 Bit */
     USART_SetGuardTime(SC_USART, SC_InitCfg->GT);
     USART_ClockStructInit(&USART_ClockInitStructure);
-    USART_ClockInitStructure.Clock      = USART_CLK_ENABLE;
-    USART_ClockInitStructure.Polarity   = USART_CLKPOL_LOW;
-    USART_ClockInitStructure.Phase      = USART_CLKPHA_1EDGE;
-    USART_ClockInitStructure.LastBit    = USART_CLKLB_ENABLE;
+    USART_ClockInitStructure.Clock    = USART_CLK_ENABLE;
+    USART_ClockInitStructure.Polarity = USART_CLKPOL_LOW;
+    USART_ClockInitStructure.Phase    = USART_CLKPHA_1EDGE;
+    USART_ClockInitStructure.LastBit  = USART_CLKLB_ENABLE;
     USART_ClockInit(SC_USART, &USART_ClockInitStructure);
     RCC_GetClocksFreqValue(&RCC_ClocksStatus);
     USART_StructInit(&USART_InitStructure);
     USART_InitStructure.BaudRate = RCC_ClocksStatus.Pclk1Freq / (372 * ((SC_USART->GTP & (uint16_t)0x00FF) * 2));
-    log_info(" Pclk1 =%d,Clk_Div = %d,bps =%d\r\n", RCC_ClocksStatus.Pclk1Freq, (372 * ((SC_USART->GTP & (uint16_t)0x00FF) *2)),USART_InitStructure.BaudRate);
+    log_info(" Pclk1 =%d,Clk_Div = %d,bps =%d\r\n", RCC_ClocksStatus.Pclk1Freq, (372 * ((SC_USART->GTP & (uint16_t)0x00FF) * 2)), USART_InitStructure.BaudRate);
     USART_InitStructure.WordLength = USART_WL_9B;
-    if(SC_InitCfg->StopBits == 1)
+    if (SC_InitCfg->StopBits == 1)
     {
         USART_InitStructure.StopBits = USART_STPB_0_5;
     }
-    else if(SC_InitCfg->StopBits == 3)
+    else if (SC_InitCfg->StopBits == 3)
     {
         USART_InitStructure.StopBits = USART_STPB_1_5;
     }
@@ -156,11 +154,11 @@ static void SC_Init(SC_InitStructure *SC_InitCfg)
     {
         log_info("\r\n StopBits value is error !!! \r\n");
     }
-    if(SC_InitCfg->Parity == 1)
+    if (SC_InitCfg->Parity == 1)
     {
         USART_InitStructure.Parity = USART_PE_EVEN;
     }
-    else if(SC_InitCfg->Parity == 2)
+    else if (SC_InitCfg->Parity == 2)
     {
         USART_InitStructure.Parity = USART_PE_ODD;
     }
@@ -168,9 +166,9 @@ static void SC_Init(SC_InitStructure *SC_InitCfg)
     {
         log_info("\r\n Parity value is error !!! \r\n");
     }
-    USART_InitStructure.Mode                  = USART_MODE_RX | USART_MODE_TX;
-    USART_InitStructure.HardwareFlowControl   = USART_HFCTRL_NONE;
-    USART_InitStructure.OverSampling          = USART_16OVER;
+    USART_InitStructure.Mode                = USART_MODE_RX | USART_MODE_TX;
+    USART_InitStructure.HardwareFlowControl = USART_HFCTRL_NONE;
+    USART_InitStructure.OverSampling        = USART_16OVER;
     USART_Init(SC_USART, &USART_InitStructure);
     /* Enable the SC_USART Parity Error Interrupt */
     USART_ConfigInt(SC_USART, USART_INT_PEF, ENABLE);
@@ -179,11 +177,11 @@ static void SC_Init(SC_InitStructure *SC_InitCfg)
     /* Enable SC_USART */
     USART_Enable(SC_USART, ENABLE);
     /* Enable the NACK Transmission */
-    if(SC_InitCfg->NackEn == 0)
+    if (SC_InitCfg->NackEn == 0)
     {
         USART_SetSmartCardNACK(SC_USART, DISABLE);
     }
-    else if(SC_InitCfg->NackEn == 1)
+    else if (SC_InitCfg->NackEn == 1)
     {
         USART_SetSmartCardNACK(SC_USART, ENABLE);
     }
@@ -227,7 +225,7 @@ void SC_DeInit(void)
 **/
 void SC_Reset(Bit_OperateType ResetState)
 {
-    if(ResetState)
+    if (ResetState)
     {
         GPIO_SetBits(SC_PIN_RESET_GPIO, SC_PIN_RESET);
     }
@@ -246,7 +244,7 @@ void SC_Reset(Bit_OperateType ResetState)
 void SC_ParityErrorHandler(void)
 {
     USART_SendData(SC_USART, SCData);
-    while(USART_GetFlagStatus(SC_USART, USART_FLAG_TXC) == RESET)
+    while (USART_GetFlagStatus(SC_USART, USART_FLAG_TXC) == RESET)
     {
     }
 }
@@ -260,7 +258,7 @@ void SC_ParityErrorHandler(void)
 *\*\param   RxBufferSize
 *\*\return  none
 **/
-void DMA_Configuration(uint8_t *TxBuffer,uint32_t TxBufferSize, uint8_t *RxBuffer,uint32_t RxBufferSize)
+void DMA_Configuration(uint8_t *TxBuffer, uint32_t TxBufferSize, uint8_t *RxBuffer, uint32_t RxBufferSize)
 {
     DMA_InitType DMA_InitStructure;
     RCC_EnableAHBPeriphClk(SC_USART_DMAx_CLK, ENABLE);
@@ -278,7 +276,8 @@ void DMA_Configuration(uint8_t *TxBuffer,uint32_t TxBufferSize, uint8_t *RxBuffe
     DMA_InitStructure.CircularMode   = DMA_MODE_NORMAL;
     DMA_InitStructure.Priority       = DMA_PRIORITY_VERY_HIGH;
     DMA_InitStructure.Mem2Mem        = DMA_M2M_DISABLE;
-    if(TxBufferSize != 0 ){
+    if (TxBufferSize != 0)
+    {
         DMA_Init(SC_USART_Tx_DMA_Channel, &DMA_InitStructure);
         DMA_RequestRemap(SC_USART_Tx_DMA_REMAP, SC_USART_DMAx, SC_USART_Tx_DMA_Channel, ENABLE);
     }
@@ -289,7 +288,8 @@ void DMA_Configuration(uint8_t *TxBuffer,uint32_t TxBufferSize, uint8_t *RxBuffe
     DMA_InitStructure.MemAddr    = (uint32_t)RxBuffer;
     DMA_InitStructure.Direction  = DMA_DIR_PERIPH_SRC;
     DMA_InitStructure.BufSize    = RxBufferSize;
-    if(RxBufferSize != 0 ){
+    if (RxBufferSize != 0)
+    {
         DMA_Init(SC_USART_Rx_DMA_Channel, &DMA_InitStructure);
         DMA_RequestRemap(SC_USART_Rx_DMA_REMAP, SC_USART_DMAx, SC_USART_Rx_DMA_Channel, ENABLE);
     }
@@ -303,7 +303,7 @@ void DMA_Configuration(uint8_t *TxBuffer,uint32_t TxBufferSize, uint8_t *RxBuffe
 *\*\return  PASSED: pBuffer1 identical to pBuffer2
 *\*\        FAILED: pBuffer1 differs from pBuffer2
 **/
-TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
+TestStatus Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferLength)
 {
     while (BufferLength--)
     {
@@ -333,16 +333,16 @@ void SC_PPSConfig(void)
     uint8_t RxBuffer1[4] = {0};
     USART_InitType USART_InitStructure;
     USART_ClockInitType USART_ClockInitStructure;
-    /* Reconfigure the USART Baud Rate -------------------------------------------*/
+    /*** Reconfigure the USART Baud Rate ***/
     RCC_GetClocksFreqValue(&RCC_ClocksStatus);
     apbclock = RCC_ClocksStatus.Pclk1Freq;
     apbclock /= ((SC_USART->GTP & (uint16_t)0x00FF) * 2);
-    /* Enable the DMA Receive (Set DMAR bit only) to enable interrupt generation
-    in case of a framing error FE */
+    /** Enable the DMA Receive (Set DMAR bit only) to enable interrupt generation
+    in case of a framing error FE **/
 
-    if((SC_A2R.T0 & (uint8_t)0x10) == 0x10)
+    if ((SC_A2R.T0 & (uint8_t)0x10) == 0x10)
     {
-        if(SC_A2R.T[0] != 0x11)
+        if (SC_A2R.T[0] != 0x11)
         {
 //            /* Send PPSS */
             TxBuffer1[0] = 0xFF;
@@ -352,7 +352,7 @@ void SC_PPSConfig(void)
             TxBuffer1[2] = SC_A2R.T[0];
 //            /* PCK */
             TxBuffer1[3] = (uint8_t)0xFF ^ (uint8_t)0x10 ^ (uint8_t)SC_A2R.T[0];
-            DMA_Configuration(TxBuffer1, 4, RxBuffer1, 4);            
+            DMA_Configuration(TxBuffer1, 4, RxBuffer1, 4);
             /* Enable USARTy DMA Rx and TX request */
             USART_EnableDMA(SC_USART, USART_DMAREQ_RX | USART_DMAREQ_TX, ENABLE);
 
@@ -369,9 +369,9 @@ void SC_PPSConfig(void)
             /* Wait until USARTy RX DMA Channel Transfer Complete */
             while (DMA_GetFlagStatus(SC_USART_Rx_DMA_FLAG, SC_USART_DMAx) == RESET)
             {
-            }            
+            }
             DMA_ClearFlag(SC_USART_Rx_DMA_FLAG, SC_USART_DMAx);
-            log_info(" locData =%02x %02x %02x %02x\r\n", RxBuffer1[0],RxBuffer1[1],RxBuffer1[2],RxBuffer1[3]);
+            log_info(" locData =%02x %02x %02x %02x\r\n", RxBuffer1[0], RxBuffer1[1], RxBuffer1[2], RxBuffer1[3]);
 
             /* ENABLE USARTy DMA Rx and TX request */
             USART_EnableDMA(SC_USART, USART_DMAREQ_RX | USART_DMAREQ_TX, ENABLE);
@@ -380,19 +380,22 @@ void SC_PPSConfig(void)
             DMA_EnableChannel(SC_USART_Tx_DMA_Channel, DISABLE);
             /* DISABLE USARTy RX DMA Channel */
             DMA_EnableChannel(SC_USART_Rx_DMA_Channel, DISABLE);
-            
-            if(Buffercmp(TxBuffer1, RxBuffer1, 4) == 0x01)
+
+            if (Buffercmp(TxBuffer1, RxBuffer1, 4) == 0x01)
             {
                 log_info(" PTS Confirm success\r\n");
-                /* DISABLE SC_USART */
+
+                /** requires UEN=0: CTRL1.OSPM and BRCF are only writable while the
+                USART is disabled, so a running port must be quiesced first. The baud rate
+                change also aborts the frame being transmitted/received. **/
                 USART_Enable(SC_USART, DISABLE);
                 workingbaudrate = apbclock * D_Table[(SC_A2R.T[0] & (uint8_t)0x0F)];
                 workingbaudrate /= F_Table[((SC_A2R.T[0] >> 4) & (uint8_t)0x0F)];
                 USART_ClockStructInit(&USART_ClockInitStructure);
-                USART_ClockInitStructure.Clock          = USART_CLK_ENABLE;
-                USART_ClockInitStructure.Polarity       = USART_CLKPOL_LOW;
-                USART_ClockInitStructure.Phase          = USART_CLKPHA_1EDGE;
-                USART_ClockInitStructure.LastBit        = USART_CLKLB_ENABLE;
+                USART_ClockInitStructure.Clock    = USART_CLK_ENABLE;
+                USART_ClockInitStructure.Polarity = USART_CLKPOL_LOW;
+                USART_ClockInitStructure.Phase    = USART_CLKPHA_1EDGE;
+                USART_ClockInitStructure.LastBit  = USART_CLKLB_ENABLE;
                 USART_ClockInit(SC_USART, &USART_ClockInitStructure);
                 log_info(" bps =%d\r\n", workingbaudrate);
                 USART_StructInit(&USART_InitStructure);
@@ -404,7 +407,7 @@ void SC_PPSConfig(void)
                 USART_InitStructure.OverSampling        = USART_16OVER;
                 USART_InitStructure.HardwareFlowControl = USART_HFCTRL_NONE;
                 USART_Init(SC_USART, &USART_InitStructure);
-                log_info(" Pclk1 =%d,apbclock = %d,bps =%d\r\n", RCC_ClocksStatus.Pclk1Freq, apbclock,USART_InitStructure.BaudRate);
+                log_info(" Pclk1 =%d,apbclock = %d,bps =%d\r\n", RCC_ClocksStatus.Pclk1Freq, apbclock, USART_InitStructure.BaudRate);
                 /* Enable SC_USART */
                 USART_Enable(SC_USART, ENABLE);
             }
@@ -413,9 +416,8 @@ void SC_PPSConfig(void)
                 log_info(" PTS Confirm fail,HotReset\r\n");
                 SC__HotReset_handle();
             }
-                
-        }   
-    }    
+        }
+    }
 }
 
 /**
@@ -427,13 +429,13 @@ void SC_PPSConfig(void)
 **/
 static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_ResponceStatus)
 {
-    uint8_t locData = 0;
+    uint8_t locData      = 0;
     uint8_t TxBuffer1[5] = {0};
-    uint32_t i = 0;
-    uint32_t number = 0;
-    uint32_t Tx_len = 0;
-    /* Reset responce buffer ---------------------------------------------------*/
-    for(i = 0; i < LC_MAX; i++)
+    uint32_t i           = 0;
+    uint32_t number      = 0;
+    uint32_t Tx_len      = 0;
+    /*** Reset responce buffer ***/
+    for (i = 0; i < LC_MAX; i++)
     {
         SC_ResponceStatus->Data[i] = 0;
     }
@@ -445,25 +447,28 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
     log_info(" 0x%x\r\n", SC_ADPU->Body.LE);
     SC_ResponceStatus->SW1 = 0;
     SC_ResponceStatus->SW2 = 0;
-    /* Send header -------------------------------------------------------------*/
+    /*** Send header ***/
     TxBuffer1[0] = SC_ADPU->Header.CLA;
     TxBuffer1[1] = SC_ADPU->Header.INS;
     TxBuffer1[2] = SC_ADPU->Header.P1;
     TxBuffer1[3] = SC_ADPU->Header.P2;
-    Tx_len = 4;    
-    if(SC_ADPU->Body.LC){
+    Tx_len       = 4;
+    if (SC_ADPU->Body.LC)
+    {
         TxBuffer1[4] = SC_ADPU->Body.LC;
         Tx_len++;
-    }else if(SC_ADPU->Body.LE){
+    }
+    else if (SC_ADPU->Body.LE)
+    {
         TxBuffer1[4] = SC_ADPU->Body.LE;
         Tx_len++;
-    }    
-    DMA_Configuration(TxBuffer1, Tx_len, NULL, 0);            
+    }
+    DMA_Configuration(TxBuffer1, Tx_len, NULL, 0);
     /* Enable USARTy DMA TX request */
     USART_EnableDMA(SC_USART, USART_DMAREQ_TX, ENABLE);
     /* Enable USARTy TX DMA Channel */
     DMA_EnableChannel(SC_USART_Tx_DMA_Channel, ENABLE);
-    
+
     /* Wait until USARTy TX DMA Channel Transfer Complete */
     while (DMA_GetFlagStatus(SC_USART_Tx_DMA_FLAG, SC_USART_DMAx) == RESET)
     {
@@ -475,37 +480,37 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
     DMA_EnableChannel(SC_USART_Tx_DMA_Channel, DISABLE);
 
     /* Wait until USARTy TX Transfer Complete */
-    while(USART_GetFlagStatus(SC_USART, USART_FLAG_TXC) == RESET)
+    while (USART_GetFlagStatus(SC_USART, USART_FLAG_TXC) == RESET)
     {
     }
     /* Flush the SC_USART DAT */
     USART_ReceiveData(SC_USART);
-    /* --------------------------------------------------------
+    /** --------------------------------------------------------
     Wait Procedure byte from card:
     1 - ACK
     2 - NULL
     3 - SW1; SW2
-    -------------------------------------------------------- */
+    -------------------------------------------------------- **/
     SC_USART->CTRL1 &= ~USART_WL_9B;
-    while(1)
+    while (1)
     {
-        if((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
+        if ((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
         {
-            if(locData != 0x60) 
+            if (locData != 0x60)
             {
-                if(((locData & (uint8_t)0xFE) == (((uint8_t)~(SC_ADPU->Header.INS)) & \
+                if (((locData & (uint8_t)0xFE) == (((uint8_t)~(SC_ADPU->Header.INS)) & \
                                                   (uint8_t)0xFE)) || ((locData & (uint8_t)0xFE) == (SC_ADPU->Header.INS & (uint8_t)0xFE)))
                 {
                     SC_ResponceStatus->Data[0] = locData;/* ACK received */
                     break;
                 }
-                else if(((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))//SW1
+                else if (((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))//SW1
                 {
                     SC_ResponceStatus->SW1 = locData;
-                    if((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
+                    if ((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
                     {
                         /* SW2 received */
-                        if(((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))
+                        if (((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))
                         {
                             SC_ResponceStatus->SW2 = locData;
                         }
@@ -516,28 +521,28 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
                 {
                     SC_ResponceStatus->Data[number] = locData;
                     number++;
-                    for(; number < (SC_ADPU->Body.LC); number++)
+                    for (; number < (SC_ADPU->Body.LC); number++)
                     {
-                        if((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
+                        if ((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
                         {
-                            if(((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))
+                            if (((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))
                             {
                                 SC_ResponceStatus->Data[number] = locData;
                             }
                         }
                     }
                     /* SW1 received */
-                    if((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
+                    if ((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
                     {
-                        if(((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))
+                        if (((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))
                         {
                             SC_ResponceStatus->SW1 = locData;
                         }
                     }
-                    if((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
+                    if ((USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT)) == SUCCESS)
                     {
                         /* SW2 received */
-                        if(((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))
+                        if (((locData & (uint8_t)0xF0) == 0x60) || ((locData & (uint8_t)0xF0) == 0x90))
                         {
                             SC_ResponceStatus->SW2 = locData;
                         }
@@ -548,57 +553,57 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
         }
     }
     SC_USART->CTRL1 |= USART_WL_9B;
-    /* If no status bytes received ---------------------------------------------*/
-    if(SC_ResponceStatus->SW1 == 0x00)
+    /*** If no status bytes received ***/
+    if (SC_ResponceStatus->SW1 == 0x00)
     {
-        /* Send body data to SC--------------------------------------------------*/
+        /*** Send body data to SC ***/
         if (SC_ADPU->Body.LC)
         {
-            for(i = 0; i < SC_ADPU->Body.LC; i++)
+            for (i = 0; i < SC_ADPU->Body.LC; i++)
             {
                 SCData = SC_ADPU->Body.Data[i];
                 USART_SendData(SC_USART, SCData);
-                while(USART_GetFlagStatus(SC_USART, USART_FLAG_TXC) == RESET)
+                while (USART_GetFlagStatus(SC_USART, USART_FLAG_TXC) == RESET)
                 {
                 }
             }
         }
-        /* Or receive body data from SC ------------------------------------------*/
+        /*** Or receive body data from SC ***/
         else if (SC_ADPU->Body.LE)
         {
             SC_USART->CTRL1 &= ~USART_WL_9B;
-            for(i = 0; i < SC_ADPU->Body.LE; i++)
+            for (i = 0; i < SC_ADPU->Body.LE; i++)
             {
-                if(USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT) == SUCCESS)
+                if (USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT) == SUCCESS)
                 {
                     SC_ResponceStatus->Data[i] = locData;
                 }
             }
             SC_USART->CTRL1 |= USART_WL_9B;
         }
-        /* Wait SW1 --------------------------------------------------------------*/
+        /*** Wait SW1 ***/
         SC_USART->CTRL1 &= ~USART_WL_9B;
         i = 0;
-        while(i < 10)
+        while (i < 10)
         {
-            if(USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT) == SUCCESS)
+            if (USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT) == SUCCESS)
             {
                 SC_ResponceStatus->SW1 = locData;
-                i = 11;
+                i                      = 11;
             }
             else
             {
                 i++;
             }
         }
-        /* Wait SW2 ------------------------------------------------------------*/
+        /*** Wait SW2 ***/
         i = 0;
-        while(i < 10)
+        while (i < 10)
         {
-            if(USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT) == SUCCESS)
+            if (USART_ByteReceive(&locData, SC_RECEIVE_TIMEOUT) == SUCCESS)
             {
                 SC_ResponceStatus->SW2 = locData;
-                i = 11;
+                i                      = 11;
             }
             else
             {
@@ -608,7 +613,6 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
         SC_USART->CTRL1 |= USART_WL_9B;
     }
 }
-
 
 /**
 *\*\name    SC_AnswerReq.
@@ -620,28 +624,28 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Responce
 **/
 static void SC_AnswerReq(SC_State *SCState, uint8_t *card, uint8_t length)
 {
-    uint8_t Data = 0;
-    uint32_t i = 0;
+    uint8_t Data    = 0;
+    uint32_t i      = 0;
     uint32_t number = 0;
     SC_USART->CTRL1 &= ~USART_WL_9B;
-    switch(*SCState)
+    switch (*SCState)
     {
         case SC_RESET_LOW:
             /* Generate cold/warm reset sequence: RST low -> delay -> RST high */
             SC_Reset(Bit_RESET);                     /* Pull reset pin low */
             SysTick_Delay_Ms(10);                    /* Wait >= 40000 clock cycles */
             SC_Reset(Bit_SET);                       /* Pull reset pin high  */
-            /* Wait for ATR from card -------------------------------------------- */
-            while(i < (length))
+            /*** Wait for ATR from card ***/
+            while (i < (length))
             {
                 i++;
-                if((USART_ByteReceive(&Data, SC_RECEIVE_TIMEOUT)) == SUCCESS)
+                if ((USART_ByteReceive(&Data, SC_RECEIVE_TIMEOUT)) == SUCCESS)
                 {
                     card[number] = Data;
                     number++;
                 }
             }
-            if(card[0])
+            if (card[0])
             {
                 (*SCState) = SC_ACTIVE;
             }
@@ -655,18 +659,18 @@ static void SC_AnswerReq(SC_State *SCState, uint8_t *card, uint8_t length)
             SC_Reset(Bit_RESET);                     /* Pull reset pin low */
             SysTick_Delay_Ms(10);                    /* Wait >= 40000 clock cycles */
             SC_Reset(Bit_SET);                       /* Pull reset pin high  */
-            /* Wait for ATR from card -------------------------------------------- */
-            while(i < length )
+            /*** Wait for ATR from card ***/
+            while (i < length)
             {
                 i++;
-                if((USART_ByteReceive(&Data, SC_RECEIVE_TIMEOUT)) == SUCCESS)
+                if ((USART_ByteReceive(&Data, SC_RECEIVE_TIMEOUT)) == SUCCESS)
                 {
                     card[number] = Data;
                     number++;
                 }
             }
 
-            if(card[0])
+            if (card[0])
             {
                 (*SCState) = SC_ACTIVE;
             }
@@ -678,14 +682,13 @@ static void SC_AnswerReq(SC_State *SCState, uint8_t *card, uint8_t length)
         case SC_ACTIVE:
             break;
         case SC_POWER_OFF:
-            /* Close Connection if no answer received ------------------------------*/
+            /*** Close Connection if no answer received ***/
             SC_Reset(Bit_SET); /* Reset high - a bit is used as level shifter from 3.3 to 5 V */
             break;
         default:
             (*SCState) = SC_RESET_LOW;
     }
     SC_USART->CTRL1 |= USART_WL_9B;
-
 }
 
 /**
@@ -699,16 +702,16 @@ static void SC_AnswerReq(SC_State *SCState, uint8_t *card, uint8_t length)
 static ErrorStatus USART_ByteReceive(uint8_t *Data, uint32_t TimeOut)
 {
     uint32_t Counter = 0;
-    while((USART_GetFlagStatus(SC_USART, USART_FLAG_RXDNE) == RESET) && (Counter != TimeOut))
+    while ((USART_GetFlagStatus(SC_USART, USART_FLAG_RXDNE) == RESET) && (Counter != TimeOut))
     {
         /* Overflow data loss */
-        if(USART_GetFlagStatus(SC_USART, USART_FLAG_OREF) != RESET)
+        if (USART_GetFlagStatus(SC_USART, USART_FLAG_OREF) != RESET)
         {
             SC_USART->DAT;
         }
         Counter++;
     }
-    if(Counter != TimeOut)
+    if (Counter != TimeOut)
     {
         *Data = (uint8_t)USART_ReceiveData(SC_USART);
         return SUCCESS;
@@ -735,16 +738,16 @@ static ErrorStatus USART_ByteReceive(uint8_t *Data, uint32_t TimeOut)
 void SC_APDU_Init(SC_ADPU_Commands *SC_ADPU, uint8_t SC_APDU_CLA, uint8_t SC_APDU_INS, uint8_t SC_APDU_P1, uint8_t SC_APDU_P2,
                   uint8_t SC_APDU_LC, uint8_t *SC_APDU_Data, uint8_t SC_APDU_LE)
 {
-    SC_ADPU->Header.CLA  = SC_APDU_CLA;
-    SC_ADPU->Header.INS  = SC_APDU_INS;
-    SC_ADPU->Header.P1   = SC_APDU_P1;
-    SC_ADPU->Header.P2   = SC_APDU_P2;
-    SC_ADPU->Body.LC     = SC_APDU_LC;
-    if(SC_ADPU->Body.LC)
+    SC_ADPU->Header.CLA = SC_APDU_CLA;
+    SC_ADPU->Header.INS = SC_APDU_INS;
+    SC_ADPU->Header.P1  = SC_APDU_P1;
+    SC_ADPU->Header.P2  = SC_APDU_P2;
+    SC_ADPU->Body.LC    = SC_APDU_LC;
+    if (SC_ADPU->Body.LC)
     {
         memcpy(SC_ADPU->Body.Data, SC_APDU_Data, SC_ADPU->Body.LC);
     }
-    if(SC_ADPU->Body.LC < LC_MAX)
+    if (SC_ADPU->Body.LC < LC_MAX)
     {
         memset(SC_ADPU->Body.Data + SC_ADPU->Body.LC, 0, LC_MAX - SC_ADPU->Body.LC);
     }
@@ -762,11 +765,11 @@ static void atr_TS(unsigned char ch)
     printf("TS: %02X\r\n", ch);
     SC_A2R.TS = ch;
 
-    if(ch == 0x3B)
+    if (ch == 0x3B)
     {
         printf("\t LSB \r\n");
     }
-    else if(ch == 0x3F)
+    else if (ch == 0x3F)
     {
         printf("\t MSB\r\n");
     }
@@ -786,7 +789,7 @@ static void atr_T0(unsigned char ch)
 {
     printf("T0: %02X\r\n", ch);
     SC_A2R.T0 = ch;
-    
+
     if ((ch & TA_BIT) == TA_BIT)
     {
         printf("\tTA1\r\n");
@@ -819,7 +822,7 @@ static void atr_TA1(unsigned char ch)
     T_lenght_count++;
     printf("\tFi: %d\r\n", (ch >> 4) & 0x0f);
     printf("\tDi: %d\r\n", (ch & 0x0f));
-    printf("\tFi/Di: %f\r\n", (F_Table[(ch>>4)&0x0f]!=0 && D_Table[ch&0x0f]!=0) ? (float)F_Table[(ch>>4)&0x0f]/(float)D_Table[ch&0x0f] : 0);
+    printf("\tFi/Di: %f\r\n", (F_Table[(ch >> 4) & 0x0f] != 0 && D_Table[ch & 0x0f] != 0) ? (float)F_Table[(ch >> 4) & 0x0f] / (float)D_Table[ch & 0x0f] : 0);
 }
 
 /**
@@ -834,7 +837,7 @@ static void atr_TB1(unsigned char ch)
     SC_A2R.T[T_lenght_count] = ch;
     T_lenght_count++;
     printf("\t P: %d\r\n", ch & 0x1f);
-    printf("\t I: %d\r\n", (ch >> 5) & 0x03); 
+    printf("\t I: %d\r\n", (ch >> 5) & 0x03);
 }
 
 /**
@@ -861,7 +864,7 @@ static void atr_TD1(unsigned char ch)
 {
     printf("TD1: %02X\r\n", ch);
     SC_A2R.T[T_lenght_count] = ch;
-    T_lenght_count++;    
+    T_lenght_count++;
     if ((ch & TA_BIT) == TA_BIT)
     {
         printf("\tTA2 \r\n");
@@ -892,9 +895,9 @@ static void atr_TA2(unsigned char ch)
     printf("TA2: %02X\r\n", ch);
     SC_A2R.T[T_lenght_count] = ch;
     T_lenght_count++;
-    printf("\t change operation mode: %s\r\n",(ch & 0x80) ? "Yes(0)" : "No(1)");
-    printf("\t mode is %s\r\n",(ch & 0x80) ? "consult(0)" : "fixed(1)");
-    printf("\t after massage: %d\r\n", ch & 0x0f); 
+    printf("\t change operation mode: %s\r\n", (ch & 0x80) ? "Yes(0)" : "No(1)");
+    printf("\t mode is %s\r\n", (ch & 0x80) ? "consult(0)" : "fixed(1)");
+    printf("\t after massage: %d\r\n", ch & 0x0f);
 }
 
 /**
@@ -936,7 +939,7 @@ static void atr_TD2(unsigned char ch)
     printf("TD2: %02X\r\n", ch);
     SC_A2R.T[T_lenght_count] = ch;
     T_lenght_count++;
-    
+
     if ((ch & TA_BIT) == TA_BIT)
     {
         printf("\tTA3 \r\n");
@@ -953,7 +956,7 @@ static void atr_TD2(unsigned char ch)
     {
         printf("\tTD3 \r\n");
     }
-    printf("\t after massage: %d\r\n", ch & 0x0f); 
+    printf("\t after massage: %d\r\n", ch & 0x0f);
 }
 
 /**
@@ -1012,11 +1015,11 @@ static void atr_history(unsigned char *ch, int len)
     printf("TKi:");
     SC_A2R.Hlength = len;
     memcpy(SC_A2R.H, ch, len);
-    for(i = 0; i < len; i++)
+    for (i = 0; i < len; i++)
     {
         printf(" %02X", SC_A2R.H[i]);
     }
-    
+
     printf("\r\n");
 }
 
@@ -1041,29 +1044,29 @@ static uint8_t SC_decode_Answer2reset(unsigned char *atr, int len)
 {
     uint8_t data;
     uint8_t TCK = 0;
-    uint8_t K = 0;
-    uint8_t Yi = 0;
-    uint32_t k, state, index, length, protocol;    
+    uint8_t K   = 0;
+    uint8_t Yi  = 0;
+    uint32_t k, state, index, length, protocol;
     uint8_t *ptr;
     uint8_t hist_bytes[16];
-    
+
     T_lenght_count = 0;
-    length = len;
-    ptr = atr;
-    state = STATE_PARSE_TS;
-    index = 0;
-    k = 0;
-    protocol = 0;
-    
-    while( ptr < (atr + length) )
+    length         = len;
+    ptr            = atr;
+    state          = STATE_PARSE_TS;
+    index          = 0;
+    k              = 0;
+    protocol       = 0;
+
+    while (ptr < (atr + length))
     {
         data = *ptr++;
-        if ( state != STATE_PARSE_TS )
+        if (state != STATE_PARSE_TS)
         {
-            TCK ^= data ;
+            TCK ^= data;
         }
-        
-        switch( state )
+
+        switch (state)
         {
             case STATE_PARSE_TS:
                 atr_TS(data);
@@ -1071,23 +1074,23 @@ static uint8_t SC_decode_Answer2reset(unsigned char *atr, int len)
                 break;
             case STATE_PARSE_T0:
                 atr_T0(data);
-                K = data & 0x0F;
+                K  = data & 0x0F;
                 Yi = data;
-                if ( data & 0x10 )
+                if (data & 0x10)
                 {
                     state = STATE_PARSE_TA;
                 }
-                else if ( data & 0x20 )
+                else if (data & 0x20)
                 {
                     state = STATE_PARSE_TB;
                 }
                 else
                 {
-                    if ( data & 0x40 )
+                    if (data & 0x40)
                     {
                         state = STATE_PARSE_TC;
                     }
-                    else if ( data & 0x80 )
+                    else if (data & 0x80)
                     {
                         state = STATE_PARSE_TD;
                     }
@@ -1097,28 +1100,28 @@ static uint8_t SC_decode_Answer2reset(unsigned char *atr, int len)
                     }
                 }
                 break;
-            case STATE_PARSE_TA :
-                switch( index )
+            case STATE_PARSE_TA:
+                switch (index)
                 {
-                    case 0:            /* TA1 */            
+                    case 0:            /* TA1 */
                         atr_TA1(data);
                         break;
-                    case 1:                    
+                    case 1:
                         atr_TA2(data);
                         break;
-                    case 2:                    
+                    case 2:
                         atr_TA3(data);
                         break;
                 }
-                if ( Yi & 0x20 )
+                if (Yi & 0x20)
                 {
                     state = STATE_PARSE_TB;
                 }
-                else if ( Yi & 0x40 )
+                else if (Yi & 0x40)
                 {
                     state = STATE_PARSE_TC;
                 }
-                else if ( Yi & 0x80 )
+                else if (Yi & 0x80)
                 {
                     state = STATE_PARSE_TD;
                 }
@@ -1127,24 +1130,24 @@ static uint8_t SC_decode_Answer2reset(unsigned char *atr, int len)
                     state = STATE_PARSE_HIST_BYTES;
                 }
                 break;
-            case STATE_PARSE_TB :
-                switch( index )
+            case STATE_PARSE_TB:
+                switch (index)
                 {
                     case 0:            /* TB1 */
                         atr_TB1(data);
-                        break ;
+                        break;
                     case 1:            /* TB2 */
                         atr_TB2(data);
-                        break ;
+                        break;
                     case 2:            /* TB3 */
                         atr_TB3(data);
                         break;
                 }
-                 if ( Yi & 0x40 )
-                 {
+                if (Yi & 0x40)
+                {
                     state = STATE_PARSE_TC;
-                 }
-                else if ( Yi & 0x80 )
+                }
+                else if (Yi & 0x80)
                 {
                     state = STATE_PARSE_TD;
                 }
@@ -1153,59 +1156,59 @@ static uint8_t SC_decode_Answer2reset(unsigned char *atr, int len)
                     state = STATE_PARSE_HIST_BYTES;
                 }
                 break;
-            case STATE_PARSE_TC :
-                switch( index )
+            case STATE_PARSE_TC:
+                switch (index)
                 {
                     case 0:            /* TC1 */
                         atr_TC1(data);
                         break;
                     case 1:            /* TC2 */
                         atr_TC2(data);
-                        break ;
+                        break;
                     case 2:            /* TC3 */
                         atr_TC3(data);
-                        break ;
+                        break;
                 }
-                 if ( Yi & 0x80 )
-                 {
+                if (Yi & 0x80)
+                {
                     state = STATE_PARSE_TD;
-                 }
+                }
                 else
                 {
                     state = STATE_PARSE_HIST_BYTES;
                 }
-                break ;
-            case STATE_PARSE_TD :
-                Yi = data ;
-                switch( index++ )
+                break;
+            case STATE_PARSE_TD:
+                Yi = data;
+                switch (index++)
                 {
                     case 0:
-                        protocol = Yi & 0x0F;        
+                        protocol = Yi & 0x0F;
                         atr_TD1(data);
                         break;
                     case 1:
                         atr_TD2(data);
                         break;
                 }
-    
-                if ( Yi & 0xF0 )
+
+                if (Yi & 0xF0)
                 {
-                    if ( Yi & 0x10 )
+                    if (Yi & 0x10)
                     {
                         /* TAx character present */
                         state = STATE_PARSE_TA;
                     }
-                    else if ( Yi & 0x20 )
+                    else if (Yi & 0x20)
                     {
                         /* TBx character present */
                         state = STATE_PARSE_TB;
                     }
-                    else if ( Yi & 0x40 )
+                    else if (Yi & 0x40)
                     {
                         /* TCx character present */
                         state = STATE_PARSE_TC;
                     }
-                    else if ( Yi & 0x80 )
+                    else if (Yi & 0x80)
                     {
                         /* TDx character present */
                         state = STATE_PARSE_TD;
@@ -1219,36 +1222,36 @@ static uint8_t SC_decode_Answer2reset(unsigned char *atr, int len)
                 {
                     state = STATE_PARSE_HIST_BYTES;
                 }
-                break ;
+                break;
             case STATE_PARSE_HIST_BYTES:
-                if( K )
+                if (K)
                 {
-                    if( k < K )
+                    if (k < K)
                     {
                         hist_bytes[k++] = data;
-                        if(k == K)
+                        if (k == K)
                         {
-                            if(protocol > 0)
+                            if (protocol > 0)
                                 state = STATE_PARSE_TCK;
                             else
                                 ptr = atr + length;
-                            
+
                             atr_history(hist_bytes, k);
-                        }    
+                        }
                     }
-                    break;    
+                    break;
                 }
             case STATE_PARSE_TCK:
                 atr_TCK(data);
-                if ( !TCK )
+                if (!TCK)
                 {
                 }
                 atr_TCK(TCK);
                 SC_A2R.TCK = data;
-                ptr = atr + length;
-                break ;
+                ptr        = atr + length;
+                break;
         }
-        if( state == STATE_PARSE_HIST_BYTES && K == 0 && protocol == 0)
+        if (state == STATE_PARSE_HIST_BYTES && K == 0 && protocol == 0)
             break;
     }
     SC_A2R.Tlength = T_lenght_count;
@@ -1267,75 +1270,75 @@ static uint8_t SC_decode_Answer2reset(unsigned char *atr, int len)
 void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Responce *SC_Response, SC_InitStructure *SC_InitCfg)
 {
     uint32_t i = 0;
-    switch(*SCState)
+    switch (*SCState)
     {
-    case SC_POWER_ON:
-        if (SC_ADPU->Header.INS == SC_GET_A2R)
-        {
-            if(F_HotReset == 0)
+        case SC_POWER_ON:
+            if (SC_ADPU->Header.INS == SC_GET_A2R)
             {
-                /* Smartcard intialization ------------------------------------------*/
-                SC_Init(SC_InitCfg);
-            }
-            /* Reset Data from SC buffer -----------------------------------------*/
-            for (i = 0; i < 40; i++)
-            {
-                SC_ATR_Table[i] = 0;
-            }
-            /* Reset SC_A2R Structure --------------------------------------------*/
-            SC_A2R.TS = 0;
-            SC_A2R.T0 = 0;
-            for (i = 0; i < SETUP_LENGTH; i++)
-            {
-                SC_A2R.T[i] = 0;
-            }
-            for (i = 0; i < HIST_LENGTH; i++)
-            {
-                SC_A2R.H[i] = 0;
-            }
-            SC_A2R.Tlength = 0;
-            SC_A2R.Hlength = 0;
-            /* Next State --------------------------------------------------------*/
-            *SCState = SC_RESET_LOW;
-        }
-        break;
-    case SC_RESET_LOW:
-        if(SC_ADPU->Header.INS == SC_GET_A2R)
-        {
-            /* If card is detected then Power ON, Card Reset and wait for an answer) */
-            if (1)
-            {
-                while(((*SCState) != SC_POWER_OFF) && ((*SCState) != SC_ACTIVE))
+                if (F_HotReset == 0)
                 {
-                    SC_AnswerReq(SCState, SC_ATR_Table, 40); /* Check for answer to reset */
-                    log_info("SC_ATR_Table:");
-                    for(i = 0; i < 32; i++)
+                /*** Smartcard intialization ***/
+                    SC_Init(SC_InitCfg);
+                }
+            /*** Reset Data from SC buffer ***/
+                for (i = 0; i < 40; i++)
+                {
+                    SC_ATR_Table[i] = 0;
+                }
+            /*** Reset SC_A2R Structure ***/
+                SC_A2R.TS = 0;
+                SC_A2R.T0 = 0;
+                for (i = 0; i < SETUP_LENGTH; i++)
+                {
+                    SC_A2R.T[i] = 0;
+                }
+                for (i = 0; i < HIST_LENGTH; i++)
+                {
+                    SC_A2R.H[i] = 0;
+                }
+                SC_A2R.Tlength = 0;
+                SC_A2R.Hlength = 0;
+            /*** Next State ***/
+                *SCState = SC_RESET_LOW;
+            }
+            break;
+        case SC_RESET_LOW:
+            if (SC_ADPU->Header.INS == SC_GET_A2R)
+            {
+            /* If card is detected then Power ON, Card Reset and wait for an answer) */
+                if (1)
+                {
+                    while (((*SCState) != SC_POWER_OFF) && ((*SCState) != SC_ACTIVE))
                     {
-                        log_info(" %x \r", SC_ATR_Table[i]);
+                        SC_AnswerReq(SCState, SC_ATR_Table, 40); /* Check for answer to reset */
+                        log_info("SC_ATR_Table:");
+                        for (i = 0; i < 32; i++)
+                        {
+                            log_info(" %x \r", SC_ATR_Table[i]);
+                        }
                     }
                 }
+                else
+                {
+                    (*SCState) = SC_POWER_OFF;
+                }
             }
-            else
+            printf("\n");
+            break;
+        case SC_ACTIVE:
+            if (SC_ADPU->Header.INS == SC_GET_A2R)
             {
-                (*SCState) = SC_POWER_OFF;
+                SC_decode_Answer2reset(SC_ATR_Table, 40);
+                (*SCState) = SC_ACTIVE_ON_T0;
             }
-        }
-        printf("\n");
-        break;
-    case SC_ACTIVE:
-        if (SC_ADPU->Header.INS == SC_GET_A2R)
-        {
-            SC_decode_Answer2reset(SC_ATR_Table, 40);
-            (*SCState) = SC_ACTIVE_ON_T0;
-        }
-        break;
-    case SC_ACTIVE_ON_T0:
-        SC_SendData(SC_ADPU, SC_Response);
-        break;
-    case SC_POWER_OFF:
-        SC_DeInit(); /* Disable Smartcard interface */
-        break;
-    default:
-        (*SCState) = SC_POWER_OFF;
+            break;
+        case SC_ACTIVE_ON_T0:
+            SC_SendData(SC_ADPU, SC_Response);
+            break;
+        case SC_POWER_OFF:
+            SC_DeInit(); /* Disable Smartcard interface */
+            break;
+        default:
+            (*SCState) = SC_POWER_OFF;
     }
 }

@@ -1,58 +1,56 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
-
 /**
 *\*\file n32g41x_tim.c
-*\*\author Nsing 
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
-
 
 #include "n32g41x_tim.h"
 #include "n32g41x_rcc.h"
@@ -73,17 +71,17 @@
 *\*\          - BTIM2
 *\*\return  none
 **/
-void TIM_DeInit(const TIM_Module* TIMx)
+void TIM_DeInit(const TIM_Module *TIMx)
 {
 
     if (TIMx == ATIM1)
     {
         RCC_EnableAPB2PeriphReset(RCC_APB2_PERIPH_ATIM1);
-    }  
+    }
     else if (TIMx == ATIM2)
     {
         RCC_EnableAPB2PeriphReset(RCC_APB2_PERIPH_ATIM2);
-    }    
+    }
     else if (TIMx == GTIM1)
     {
         RCC_EnableAPB1PeriphReset(RCC_APB1_PERIPH_GTIM1);
@@ -99,7 +97,7 @@ void TIM_DeInit(const TIM_Module* TIMx)
     else if (TIMx == GTIM4)
     {
         RCC_EnableAPB1PeriphReset(RCC_APB1_PERIPH_GTIM4);
-    } 
+    }
     else if (TIMx == BTIM1)
     {
         RCC_EnableAPB1PeriphReset(RCC_APB1_PERIPH_BTIM1);
@@ -179,56 +177,54 @@ void TIM_DeInit(const TIM_Module* TIMx)
 *\*\return  none
 *\*\note  GTIM1 is a 32-bit timer, while the others are 16-bit timers.
 **/
-void TIM_InitTimeBase(TIM_Module* TIMx, const TIM_TimeBaseInitType* TIM_TimeBaseInitStruct)
+void TIM_InitTimeBase(TIM_Module *TIMx, const TIM_TimeBaseInitType *TIM_TimeBaseInitStruct)
 {
     uint32_t tmpctrl1, tmpinsel;
-    tmpctrl1 = TIMx->CTRL1;  
-    
-    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx))) 
+    tmpctrl1 = TIMx->CTRL1;
+
+    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
         /* Select the Counter Mode */
         tmpctrl1 &= (uint32_t)(~(TIM_CTRL1_DIR | TIM_CTRL1_CAMSEL));
         tmpctrl1 |= (uint32_t)TIM_TimeBaseInitStruct->CounterMode;
     }
-    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx))) 
+    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
         /* Set the clock division */
         tmpctrl1 &= (uint32_t)(~TIM_CTRL1_CLKD);
         tmpctrl1 |= (uint32_t)TIM_TimeBaseInitStruct->ClkDiv;
-    }    
-    TIMx->CTRL1 = tmpctrl1;    
-    
+    }
+    TIMx->CTRL1 = tmpctrl1;
+
     /* Set the Autoreload value */
-    TIMx->AR = TIM_TimeBaseInitStruct->Period ;
+    TIMx->AR = TIM_TimeBaseInitStruct->Period;
 
     /* Set the Prescaler value */
-    TIMx->PSC = TIM_TimeBaseInitStruct->Prescaler;    
-    
+    TIMx->PSC = TIM_TimeBaseInitStruct->Prescaler;
+
     if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
         /* Set the Repetition Counter value */
         TIMx->REPCNT = TIM_TimeBaseInitStruct->RepetCnt;
     }
 
-    /* Generate an update event to reload the Prescaler and the Repetition counter
-     values immediately */
+    /** Generate an update event to reload the Prescaler and the Repetition counter
+     values immediately **/
     TIMx->EVTGEN = TIM_PSC_RELOAD_MODE_IMMEDIATE;
     /* Clear the update flag */
     TIMx->STS = (uint32_t)(~TIM_FLAG_UPDATE);
-    
+
     /* Channel 1/2/3/4 & OCxclr select capture in */
     tmpctrl1 = TIMx->CTRL1;
-    tmpinsel = TIMx->INSEL;    
+    tmpinsel = TIMx->INSEL;
 
     /* Channel 1 select capture in */
     tmpinsel &= (uint32_t)(~TIM_INSEL_TI1S);
     tmpinsel |= (uint32_t)TIM_TimeBaseInitStruct->CapCh1Sel;
 
-    
     /* Channel 2 select capture in */
     tmpinsel &= (uint32_t)(~TIM_INSEL_TI2S);
     tmpinsel |= (uint32_t)TIM_TimeBaseInitStruct->CapCh2Sel;
-
 
     /* Channel 3 select capture in */
     tmpinsel &= (uint32_t)(~TIM_INSEL_TI3S);
@@ -239,26 +235,25 @@ void TIM_InitTimeBase(TIM_Module* TIMx, const TIM_TimeBaseInitType* TIM_TimeBase
     tmpinsel |= (uint32_t)TIM_TimeBaseInitStruct->CapCh4Sel;
 
     /* CLR or ETR select capture in */
-    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx))) 
+    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
         tmpctrl1 &= (uint32_t)(~TIM_CTRL1_CLRSEL);
-        tmpinsel &= (uint32_t)(~TIM_INSEL_ETRS);  
-        tmpinsel &= (uint32_t)(~TIM_INSEL_CLRS);        
+        tmpinsel &= (uint32_t)(~TIM_INSEL_ETRS);
+        tmpinsel &= (uint32_t)(~TIM_INSEL_CLRS);
         if ((TIM_TimeBaseInitStruct->EtrOrClr) == 0U)
         {
             /* ETR select capture in */
-            tmpinsel |= (uint32_t)TIM_TimeBaseInitStruct->CapEtrClrSel;        
+            tmpinsel |= (uint32_t)TIM_TimeBaseInitStruct->CapEtrClrSel;
         }
         else
         {
             /* CLR select capture in */
-            tmpctrl1 |= (uint32_t)TIM_CTRL1_CLRSEL;            
-            tmpinsel |= (uint32_t)TIM_TimeBaseInitStruct->CapEtrClrSel;                    
+            tmpctrl1 |= (uint32_t)TIM_CTRL1_CLRSEL;
+            tmpinsel |= (uint32_t)TIM_TimeBaseInitStruct->CapEtrClrSel;
         }
     }
     TIMx->CTRL1 = tmpctrl1;
-    TIMx->INSEL = tmpinsel;  
-    
+    TIMx->INSEL = tmpinsel;
 }
 
 /**
@@ -307,42 +302,42 @@ void TIM_InitTimeBase(TIM_Module* TIMx, const TIM_TimeBaseInitType* TIM_TimeBase
 *\*\            * TIM_OCN_IDLE_STATE_RESET
 *\*\return  none
 **/
-void TIM_InitOc1(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
+void TIM_InitOc1(TIM_Module *TIMx, const OCInitType *TIM_OCInitStruct)
 {
     uint32_t tmpccmodx;
     uint32_t tmpccen, tmpctrl2;
-    
+
     /* Disable the Channel 1: Reset the CC1EN Bit */
-    TIMx->CCEN &= (uint32_t)(~TIM_CCEN_CC1EN);    
+    TIMx->CCEN &= (uint32_t)(~TIM_CCEN_CC1EN);
     /* Get the TIMx_CCEN register value */
-    tmpccen = TIMx->CCEN;    
+    tmpccen = TIMx->CCEN;
     /* Get the TIMx_CTRL2 register value */
-    tmpctrl2 =  TIMx->CTRL2;
+    tmpctrl2 = TIMx->CTRL2;
     /* Get the TIMx_CCMOD1 register value */
     tmpccmodx = TIMx->CCMOD1;
 
     /* Reset the Output Compare Mode Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD1_OC1MD);
-    tmpccmodx &= (uint32_t)(~TIM_CCMOD1_OC1MD_3);    
-    tmpccmodx &= (uint32_t)(~TIM_CCMOD1_CC1SEL);    
+    tmpccmodx &= (uint32_t)(~TIM_CCMOD1_OC1MD_3);
+    tmpccmodx &= (uint32_t)(~TIM_CCMOD1_CC1SEL);
     /* Select the Output Compare Mode */
     tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode);
 
     /* Reset the Output Polarity level */
-    tmpccen &= (uint32_t)(~TIM_CCEN_CC1P);    
+    tmpccen &= (uint32_t)(~TIM_CCEN_CC1P);
     /* Set the Output Compare Polarity */
     tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity);
     /* Set the Output State */
     tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState);
-    
-    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx))) 
+
+    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
         /* Reset the Output N Polarity level */
         tmpccen &= (uint32_t)(~TIM_CCEN_CC1NP);
         /* Set the Output N Polarity */
         tmpccen |= (uint32_t)(TIM_OCInitStruct->OCNPolarity);
         /* Reset the Output N State */
-        tmpccen &= (uint32_t)(~TIM_CCEN_CC1NEN);    
+        tmpccen &= (uint32_t)(~TIM_CCEN_CC1NEN);
         /* Set the Output N State */
         tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputNState);
 
@@ -353,8 +348,8 @@ void TIM_InitOc1(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
         tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState);
         /* Set the Output N Idle state */
         tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCNIdleState);
-    }    
-    
+    }
+
     /* Write to TIMx_CTRL2 */
     TIMx->CTRL2 = tmpctrl2;
 
@@ -362,11 +357,10 @@ void TIM_InitOc1(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
     TIMx->CCMOD1 = tmpccmodx;
 
     /* Set the Capture Compare Register value */
-    TIMx->CCDAT1 = TIM_OCInitStruct->Pulse; 
+    TIMx->CCDAT1 = TIM_OCInitStruct->Pulse;
 
     /* Write to TIMx_CCEN */
-    TIMx->CCEN = tmpccen;    
-
+    TIMx->CCEN = tmpccen;
 }
 
 /**
@@ -415,18 +409,18 @@ void TIM_InitOc1(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
 *\*\            * TIM_OCN_IDLE_STATE_RESET
 *\*\return  none
 **/
-void TIM_InitOc2(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
+void TIM_InitOc2(TIM_Module *TIMx, const OCInitType *TIM_OCInitStruct)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen , tmpctrl2;
+    uint32_t tmpccmodx;
+    uint32_t tmpccen, tmpctrl2;
 
     /* Disable the Channel 2: Reset the CC2EN Bit */
     TIMx->CCEN &= (uint32_t)(~TIM_CCEN_CC2EN);
 
-    /* Get the TIMx_CCEN register value */  
+    /* Get the TIMx_CCEN register value */
     tmpccen = TIMx->CCEN;
     /* Get the TIMx_CTRL2 register value */
-    tmpctrl2 =  TIMx->CTRL2;
+    tmpctrl2 = TIMx->CTRL2;
 
     /* Get the TIMx_CCMOD1 register value */
     tmpccmodx = TIMx->CCMOD1;
@@ -437,52 +431,52 @@ void TIM_InitOc2(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
     tmpccmodx &= (uint32_t)(~TIM_CCMOD1_CC2SEL);
     if (((TIM_OCInitStruct->OCMode) == TIM_OCMODE_OPMOD_RETRIG1) || ((TIM_OCInitStruct->OCMode) == TIM_OCMODE_OPMOD_RETRIG2) || \
         ((TIM_OCInitStruct->OCMode) == TIM_OCMODE_COMBI_PWM1) || ((TIM_OCInitStruct->OCMode) == TIM_OCMODE_COMBI_PWM2))
-    {          
+    {
         /* Select the Output Compare Mode */
-        tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8);    
+        tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8U);
         tmpccmodx |= (uint32_t)TIM_CCMOD1_OC2MD_3;
     }
     else
     {
         /* Select the Output Compare Mode */
-        tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8);      
+        tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8U);
     }
 
     /* Reset the Output Polarity level */
-    tmpccen &= (uint32_t)(~TIM_CCEN_CC2P);    
+    tmpccen &= (uint32_t)(~TIM_CCEN_CC2P);
     /* Set the Output Compare Polarity */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 4);  
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 4U);
     /* Set the Output State */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 4);    
-       
-    if (IS_ATIM1_2_DEVICE(TIMx)) 
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 4U);
+
+    if (IS_ATIM1_2_DEVICE(TIMx))
     {
         /* Reset the Output N Polarity level */
         tmpccen &= (uint32_t)(~TIM_CCEN_CC2NP);
         /* Set the Output N Polarity */
-        tmpccen |= (uint32_t)(TIM_OCInitStruct->OCNPolarity << 4);   
+        tmpccen |= (uint32_t)(TIM_OCInitStruct->OCNPolarity << 4U);
         /* Reset the Output N State */
-        tmpccen &= (uint32_t)(~TIM_CCEN_CC2NEN);    
+        tmpccen &= (uint32_t)(~TIM_CCEN_CC2NEN);
         /* Set the Output N State */
-        tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputNState << 4);   
-        
+        tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputNState << 4U);
+
         /* Reset the Output Compare and Output Compare N IDLE State */
         tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI2);
         tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI2N);
         /* Set the Output Idle state */
-        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 2);
+        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 2U);
         /* Set the Output N Idle state */
-        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCNIdleState << 2);        
-    }  
-    
-    if (IS_GTIM3_4_DEVICE(TIMx)) 
+        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCNIdleState << 2U);
+    }
+
+    if (IS_GTIM3_4_DEVICE(TIMx))
     {
         /* Reset the Output Compare IDLE State */
         tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI2);
         /* Set the Output Idle state */
-        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 2);
-    }         
-    
+        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 2U);
+    }
+
     /* Write to TIMx_CTRL2 */
     TIMx->CTRL2 = tmpctrl2;
 
@@ -491,9 +485,9 @@ void TIM_InitOc2(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
 
     /* Set the Capture Compare Register value */
     TIMx->CCDAT2 = TIM_OCInitStruct->Pulse;
- 
+
     /* Write to TIMx_CCEN */
-    TIMx->CCEN = tmpccen;    
+    TIMx->CCEN = tmpccen;
 }
 
 /**
@@ -542,64 +536,64 @@ void TIM_InitOc2(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
 *\*\            * TIM_OCN_IDLE_STATE_RESET
 *\*\return  none
 **/
-void TIM_InitOc3(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
+void TIM_InitOc3(TIM_Module *TIMx, const OCInitType *TIM_OCInitStruct)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen , tmpctrl2 ;
+    uint32_t tmpccmodx;
+    uint32_t tmpccen, tmpctrl2;
 
     /* Disable the Channel 3: Reset the CC3EN Bit */
     TIMx->CCEN &= (uint32_t)(~TIM_CCEN_CC3EN);
 
     /* Get the TIMx_CCEN register value */
     tmpccen = TIMx->CCEN;
-    
+
     /* Get the TIMx_CTRL2 register value */
-    tmpctrl2 =  TIMx->CTRL2;
+    tmpctrl2 = TIMx->CTRL2;
 
     /* Get the TIMx_CCMOD2 register value */
     tmpccmodx = TIMx->CCMOD2;
 
     /* Reset the Output Compare mode and Capture/Compare selection Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC3MD);
-    tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC3MD_3);    
-    tmpccmodx &= (uint32_t)(~TIM_CCMOD2_CC3SEL);  
+    tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC3MD_3);
+    tmpccmodx &= (uint32_t)(~TIM_CCMOD2_CC3SEL);
     /* Select the Output Compare Mode */
     tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode);
 
     /* Reset the Output Polarity level */
-    tmpccen &= (uint32_t)(~TIM_CCEN_CC3P);    
+    tmpccen &= (uint32_t)(~TIM_CCEN_CC3P);
     /* Set the Output Compare Polarity */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 8);
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 8U);
     /* Set the Output State */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 8);
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 8U);
 
-    if (IS_ATIM1_2_DEVICE(TIMx)) 
+    if (IS_ATIM1_2_DEVICE(TIMx))
     {
         /* Reset the Output N Polarity level */
         tmpccen &= (uint32_t)(~TIM_CCEN_CC3NP);
         /* Set the Output N Polarity */
-        tmpccen |= (uint32_t)(TIM_OCInitStruct->OCNPolarity << 8);          
+        tmpccen |= (uint32_t)(TIM_OCInitStruct->OCNPolarity << 8U);
         /* Reset the Output N State */
         tmpccen &= (uint32_t)(~TIM_CCEN_CC3NEN);
         /* Set the Output N State */
-        tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputNState << 8);  
+        tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputNState << 8U);
 
         /* Reset the Output Compare and Output Compare N IDLE State */
         tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI3);
-        tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI3N);        
+        tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI3N);
         /* Set the Output Idle state */
-        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 4);
+        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 4U);
         /* Set the Output N Idle state */
-        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCNIdleState << 4);        
-    }  
-    
-    if (IS_GTIM3_4_DEVICE(TIMx)) 
+        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCNIdleState << 4U);
+    }
+
+    if (IS_GTIM3_4_DEVICE(TIMx))
     {
         /* Reset the Output Compare IDLE State */
-        tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI3);        
+        tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI3);
         /* Set the Output Idle state */
-        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 4);
-    } 
+        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 4U);
+    }
 
     /* Write to TIMx_CTRL2 */
     TIMx->CTRL2 = tmpctrl2;
@@ -610,7 +604,7 @@ void TIM_InitOc3(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
     /* Set the Capture Compare Register value */
     TIMx->CCDAT3 = TIM_OCInitStruct->Pulse;
 
-    /* Write to TIMx CCER */
+    /* Write to TIMx_CCEN */
     TIMx->CCEN = tmpccen;
 }
 
@@ -660,84 +654,84 @@ void TIM_InitOc3(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
 *\*\            * TIM_OCN_IDLE_STATE_RESET
 *\*\return  none
 **/
-void TIM_InitOc4(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
+void TIM_InitOc4(TIM_Module *TIMx, const OCInitType *TIM_OCInitStruct)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen , tmpctrl2 ;
+    uint32_t tmpccmodx;
+    uint32_t tmpccen, tmpctrl2;
 
-    /* Disable the Channel 2: Reset the CC4E Bit */
+    /* Disable the Channel 4: Reset the CC4EN Bit */
     TIMx->CCEN &= (uint32_t)(~TIM_CCEN_CC4EN);
 
     /* Get the TIMx_CCEN register value */
     tmpccen = TIMx->CCEN;
-    
+
     /* Get the TIMx_CTRL2 register value */
-    tmpctrl2 =  TIMx->CTRL2;
+    tmpctrl2 = TIMx->CTRL2;
 
     /* Get the TIMx_CCMOD2 register value */
     tmpccmodx = TIMx->CCMOD2;
 
     /* Reset the Output Compare mode and Capture/Compare selection Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC4MD);
-    tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC4MD_3);    
+    tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC4MD_3);
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_CC4SEL);
     if (((TIM_OCInitStruct->OCMode) == TIM_OCMODE_OPMOD_RETRIG1) || ((TIM_OCInitStruct->OCMode) == TIM_OCMODE_OPMOD_RETRIG2) || \
         ((TIM_OCInitStruct->OCMode) == TIM_OCMODE_COMBI_PWM1) || ((TIM_OCInitStruct->OCMode) == TIM_OCMODE_COMBI_PWM2))
-    {          
+    {
         /* Select the Output Compare Mode */
-        tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8);    
+        tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8U);
         tmpccmodx |= (uint32_t)TIM_CCMOD2_OC4MD_3;
     }
     else
     {
-        tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8);      
+        tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8U);
     }
 
     /* Reset the Output Polarity level */
-    tmpccen &= (uint32_t)(~TIM_CCEN_CC4P);    
+    tmpccen &= (uint32_t)(~TIM_CCEN_CC4P);
     /* Set the Output Compare Polarity */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 12);
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 12U);
     /* Set the Output State */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 12);
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 12U);
 
-    if ((IS_ATIM1_2_DEVICE(TIMx))) 
+    if ((IS_ATIM1_2_DEVICE(TIMx)))
     {
         /* Reset the Output N Polarity level */
-        tmpccen &= (uint32_t)(~TIM_CCEN_CC4NP) ;
+        tmpccen &= (uint32_t)(~TIM_CCEN_CC4NP);
         /* Set the Output N Polarity */
-        tmpccen |= (uint32_t)(TIM_OCInitStruct->OCNPolarity << 12);
+        tmpccen |= (uint32_t)(TIM_OCInitStruct->OCNPolarity << 12U);
         /* Reset the Output N State */
         tmpccen &= (uint32_t)(~TIM_CCEN_CC4NEN);
         /* Set the Output N State */
-        tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputNState << 12);  
-        
+        tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputNState << 12U);
+
         /* Reset the Output Compare and Output Compare N IDLE State */
         tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI4);
         tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI4N);
         /* Set the Output Idle state */
-        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 6);
+        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 6U);
         /* Set the Output N Idle state */
-        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCNIdleState << 6);            
+        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCNIdleState << 6U);
     }
-    if (IS_GTIM3_4_DEVICE(TIMx)) 
+    if (IS_GTIM3_4_DEVICE(TIMx))
     {
         /* Reset the Output Compare and Output Compare N IDLE State */
-        tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI4);       
+        tmpctrl2 &= (uint32_t)(~TIM_CTRL2_OI4);
         /* Set the Output Idle state */
-        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 6);    
-    }  
+        tmpctrl2 |= (uint32_t)(TIM_OCInitStruct->OCIdleState << 6U);
+    }
 
     /* Write to TIMx_CTRL2 */
     TIMx->CTRL2 = tmpctrl2;
 
-    /* Write to TIMx_CCMOD2 */  
+    /* Write to TIMx_CCMOD2 */
     TIMx->CCMOD2 = tmpccmodx;
 
     /* Set the Capture Compare Register value */
     TIMx->CCDAT4 = TIM_OCInitStruct->Pulse;
 
     /* Write to TIMx_CCEN */
-    TIMx->CCEN = tmpccen;    
+    TIMx->CCEN = tmpccen;
 }
 
 /**
@@ -767,23 +761,23 @@ void TIM_InitOc4(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
 *\*\          - OCIdleState none
 *\*\return  none
 **/
-void TIM_InitOc5(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
+void TIM_InitOc5(TIM_Module *TIMx, const OCInitType *TIM_OCInitStruct)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen , tmpctrl2 ;
-    
+    uint32_t tmpccmodx;
+    uint32_t tmpccen, tmpctrl2;
+
     /* Disable the Channel 5: Reset the CC5EN Bit */
     TIMx->CCEN &= (uint32_t)(~TIM_CCEN_CC5EN);
 
     /* Get the TIMx_CCEN register value */
     tmpccen = TIMx->CCEN;
-    
+
     /* Get the TIMx_CTRL2 register value */
-    tmpctrl2 =  TIMx->CTRL2;
+    tmpctrl2 = TIMx->CTRL2;
 
     /* Get the TIMx_CCMOD3 register value */
-    tmpccmodx = TIMx->CCMOD3;    
-    
+    tmpccmodx = TIMx->CCMOD3;
+
     /* Reset the Output Compare mode and Capture/Compare selection Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC5MD);
     /* Select the Output Compare Mode */
@@ -792,21 +786,21 @@ void TIM_InitOc5(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
     /* Reset the Output Polarity level */
     tmpccen &= (uint32_t)(~TIM_CCEN_CC5P);
     /* Set the Output Compare Polarity */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 16);
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 16U);
     /* Set the Output State */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 16);
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 16U);
 
     /* Write to TIMx CR2 */
     TIMx->CTRL2 = tmpctrl2;
 
-    /* Write to TIMx_CCMOD3 */  
+    /* Write to TIMx_CCMOD3 */
     TIMx->CCMOD3 = tmpccmodx;
 
     /* Set the Capture Compare Register value */
     TIMx->CCDAT5 = TIM_OCInitStruct->Pulse;
 
     /* Write to TIMx CCER */
-    TIMx->CCEN = tmpccen;                         
+    TIMx->CCEN = tmpccen;
 }
 
 /**
@@ -835,46 +829,46 @@ void TIM_InitOc5(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
 *\*\            * TIM_OC_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_InitOc6(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
+void TIM_InitOc6(TIM_Module *TIMx, const OCInitType *TIM_OCInitStruct)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen , tmpctrl2 ;
+    uint32_t tmpccmodx;
+    uint32_t tmpccen, tmpctrl2;
 
     /* Disable the Channel 6: Reset the CC6EN Bit */
     TIMx->CCEN &= (uint32_t)(~TIM_CCEN_CC6EN);
 
     /* Get the TIMx_CCEN register value */
     tmpccen = TIMx->CCEN;
-    
+
     /* Get the TIMx_CTRL2 register value */
-    tmpctrl2 =  TIMx->CTRL2;
+    tmpctrl2 = TIMx->CTRL2;
 
     /* Get the TIMx_CCMOD3 register value */
     tmpccmodx = TIMx->CCMOD3;
-    
+
     /* Reset the Output Compare mode and Capture/Compare selection Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC6MD);
     /* Select the Output Compare Mode */
-    tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCInitStruct->OCMode << 8U);
 
     /* Reset the Output Polarity level */
-    tmpccen &= (uint32_t)(~TIM_CCEN_CC6P);    
+    tmpccen &= (uint32_t)(~TIM_CCEN_CC6P);
     /* Set the Output Compare Polarity */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 20);
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OCPolarity << 20U);
     /* Set the Output State */
-    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 20);
-    
+    tmpccen |= (uint32_t)(TIM_OCInitStruct->OutputState << 20U);
+
     /* Write to TIMx CR2 */
     TIMx->CTRL2 = tmpctrl2;
 
-    /* Write to TIMx_CCMOD3 */  
+    /* Write to TIMx_CCMOD3 */
     TIMx->CCMOD3 = tmpccmodx;
 
     /* Set the Capture Compare Register value */
     TIMx->CCDAT6 = TIM_OCInitStruct->Pulse;
 
     /* Write to TIMx CCER */
-    TIMx->CCEN = tmpccen;    
+    TIMx->CCEN = tmpccen;
 }
 
 /**
@@ -910,7 +904,7 @@ void TIM_InitOc6(TIM_Module* TIMx, const OCInitType* TIM_OCInitStruct)
 *\*\            * ICFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void TIM_ICInit(TIM_Module* TIMx, const TIM_ICInitType* TIM_ICInitStruct)
+void TIM_ICInit(TIM_Module *TIMx, const TIM_ICInitType *TIM_ICInitStruct)
 {
     if (TIM_ICInitStruct->Channel == TIM_CH_1)
     {
@@ -932,7 +926,7 @@ void TIM_ICInit(TIM_Module* TIMx, const TIM_ICInitType* TIM_ICInitStruct)
         ConfigTI3(TIMx, TIM_ICInitStruct->ICPolarity, TIM_ICInitStruct->ICSelection, TIM_ICInitStruct->ICFilter);
         /* Set the Input Capture Prescaler value */
         TIM_SetInCap3Prescaler(TIMx, TIM_ICInitStruct->ICPrescaler);
-    }    
+    }
     else if (TIM_ICInitStruct->Channel == TIM_CH_4)
     {
         /* TI4 Configuration */
@@ -943,7 +937,7 @@ void TIM_ICInit(TIM_Module* TIMx, const TIM_ICInitType* TIM_ICInitStruct)
     else
     {
         /* No process */
-    }    
+    }
 }
 
 /**
@@ -976,10 +970,10 @@ void TIM_ICInit(TIM_Module* TIMx, const TIM_ICInitType* TIM_ICInitStruct)
 *\*\            * ICFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void TIM_ConfigPwmIc(TIM_Module* TIMx, const TIM_ICInitType* TIM_ICInitStruct)
+void TIM_ConfigPwmIc(TIM_Module *TIMx, const TIM_ICInitType *TIM_ICInitStruct)
 {
-    uint32_t icoppositepolarity  ;
-    uint32_t icoppositeselection ;
+    uint32_t icoppositepolarity;
+    uint32_t icoppositeselection;
 
     /* Select the Opposite Input Polarity */
     if (TIM_ICInitStruct->ICPolarity == TIM_IC_POLARITY_RISING)
@@ -1060,21 +1054,21 @@ void TIM_ConfigPwmIc(TIM_Module* TIMx, const TIM_ICInitType* TIM_ICInitStruct)
 *\*\            * TIM_AUTO_OUTPUT_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigBkdt(TIM_Module* TIMx, const TIM_BDTRInitType* TIM_BDTRInitStruct)
+void TIM_ConfigBkdt(TIM_Module *TIMx, const TIM_BDTRInitType *TIM_BDTRInitStruct)
 {
     uint32_t tmpbkdt;
-    
-    /* Set the Lock level, the OSSR State, the OSSI State, 
-           the dead time value and the Automatic Output Enable Bit */
+
+    /** Set the Lock level, the OSSR State, the OSSI State,
+           the dead time value and the Automatic Output Enable Bit **/
     tmpbkdt = TIMx->BKDT;
     tmpbkdt &= (uint32_t)(~(TIM_BKDT_OSSR | TIM_BKDT_OSSI | TIM_BKDT_LCKCFG | TIM_BKDT_DTGN | TIM_BKDT_AOEN));
-    tmpbkdt |= (uint32_t)(TIM_BDTRInitStruct->OSSRState | TIM_BDTRInitStruct->OSSIState | TIM_BDTRInitStruct->LOCKLevel |\
+    tmpbkdt |= (uint32_t)(TIM_BDTRInitStruct->OSSRState | TIM_BDTRInitStruct->OSSIState | TIM_BDTRInitStruct->LOCKLevel | \
                           TIM_BDTRInitStruct->DeadTime | TIM_BDTRInitStruct->AutomaticOutput);
 
-    tmpbkdt &= (uint32_t)(~(TIM_BKDT_BKEN | TIM_BKDT_BKP | TIM_BKDT_BRKBID));        
+    tmpbkdt &= (uint32_t)(~(TIM_BKDT_BKEN | TIM_BKDT_BKP | TIM_BKDT_BRKBID));
     tmpbkdt |= (uint32_t)(TIM_BDTRInitStruct->Break | TIM_BDTRInitStruct->BreakPolarity | TIM_BDTRInitStruct->Bidirection);
-    
-    TIMx->BKDT = tmpbkdt;    
+
+    TIMx->BKDT = tmpbkdt;
 }
 
 /**
@@ -1085,43 +1079,41 @@ void TIM_ConfigBkdt(TIM_Module* TIMx, const TIM_BDTRInitType* TIM_BDTRInitStruct
 *\*\          - ATIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_FiltInitStruct: 
+*\*\param   TIM_FiltInitStruct:
 *\*\          - refer to the definition of TIM_FiltInitType
 *\*\return  none
 **/
-void TIM_BreakFiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitStruct)
+void TIM_BreakFiltConfig(TIM_Module *TIMx, const TIM_FiltInitType *TIM_FiltInitStruct)
 {
     uint32_t tempbkfr;
 
     tempbkfr = TIMx->BKFR;
-    
-    tempbkfr &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_BKFR_THRESH)) & 
-                             ((uint32_t) ~((uint32_t)TIM_BKFR_WSIZE)));
 
-    tempbkfr |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18)) | 
-                             (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11)));        
+    tempbkfr &= (uint32_t)(((uint32_t)~((uint32_t)TIM_BKFR_THRESH)) & ((uint32_t)~((uint32_t)TIM_BKFR_WSIZE)));
+
+    tempbkfr |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18U)) | (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11U)));
     TIMx->BKFR = tempbkfr;
-	
-	if (TIMx == ATIM1)
+
+    if (TIMx == ATIM1)
     {
-        /* Set the filt*/
-		RCC_ConfigATIM1Filter(TIM_FiltInitStruct->Prescaler);
-    }    
+        /* Set the filt */
+        RCC_ConfigATIM1Filter(TIM_FiltInitStruct->Prescaler);
+    }
     else if (TIMx == ATIM2)
     {
-        /* Set the filt*/
-		RCC_ConfigATIM2Filter(TIM_FiltInitStruct->Prescaler);
-    }  
+        /* Set the filt */
+        RCC_ConfigATIM2Filter(TIM_FiltInitStruct->Prescaler);
+    }
     else if (TIMx == GTIM3)
     {
-        /* Set the filt*/
-		RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
-    }  
+        /* Set the filt */
+        RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
+    }
     else if (TIMx == GTIM4)
     {
-        /* Set the filt*/
-		RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
-    } 
+        /* Set the filt */
+        RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
+    }
     else
     {
         /* No process */
@@ -1141,7 +1133,7 @@ void TIM_BreakFiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitS
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_BreakFiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
+void TIM_BreakFiltEnable(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -1184,80 +1176,79 @@ void TIM_BreakFiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_BreakInputSourceEnable(TIM_Module* TIMx, uint32_t Source, uint32_t Polarity, FunctionalState Cmd)
+void TIM_BreakInputSourceEnable(TIM_Module *TIMx, uint32_t Source, uint32_t Polarity, FunctionalState Cmd)
 {
     uint32_t tempctrl1;
     uint32_t tempaf1;
     tempctrl1 = TIMx->CTRL1;
-    tempaf1 = TIMx->AF1;
-    
+    tempaf1   = TIMx->AF1;
+
     if (Cmd != DISABLE)
     {
         if (IS_SYS_BREAK(Source))
         {
-            tempctrl1 |= (uint32_t)(Source);        
+            tempctrl1 |= (uint32_t)(Source);
         }
         else
         {
-            /* Enable break input source */ 
-            tempaf1 |= (uint32_t)(Source);   
-        } 
-
+            /* Enable break input source */
+            tempaf1 |= (uint32_t)(Source);
+        }
     }
     else
     {
         if (IS_SYS_BREAK(Source))
         {
-            tempctrl1 &= (uint32_t)(~Source);        
+            tempctrl1 &= (uint32_t)(~Source);
         }
         else
         {
-            /* Disable break input source */             
-            tempaf1 &= (uint32_t)(~Source);                
-        }        
+            /* Disable break input source */
+            tempaf1 &= (uint32_t)(~Source);
+        }
     }
-    if(Polarity==TIM_BREAK_SOURCE_POLARITY_INVERT)
+    if (Polarity == TIM_BREAK_SOURCE_POLARITY_INVERT)
     {
         /* Set break input source polarity */
-        if(Source==TIM_BREAK_IOM1)
+        if (Source == TIM_BREAK_IOM1)
         {
-            tempaf1 |= (uint32_t)(TIM_BREAK_IOM1P); 
+            tempaf1 |= (uint32_t)(TIM_BREAK_IOM1P);
         }
-        else if(Source==TIM_BREAK_IOM2)
+        else if (Source == TIM_BREAK_IOM2)
         {
-            tempaf1 |= (uint32_t)(TIM_BREAK_IOM2P); 
-        }  
-        else if(Source==TIM_BREAK_IOM3)
-        {
-            tempaf1 |= (uint32_t)(TIM_BREAK_IOM3P); 
-        } 
-        else if(Source==TIM_BREAK_IOM4)
-        {
-            tempaf1 |= (uint32_t)(TIM_BREAK_IOM4P); 
-        } 
-        else if(Source==TIM_BREAK_IOM5)
-        {
-            tempaf1 |= (uint32_t)(TIM_BREAK_IOM5P); 
-        } 
-        else if(Source==TIM_BREAK_IOM6)
-        {
-            tempaf1 |= (uint32_t)(TIM_BREAK_IOM6P); 
-        } 
-        else if(Source==TIM_BREAK_IOM7)
-        {
-            tempaf1 |= (uint32_t)(TIM_BREAK_IOM7P); 
-        } 
-        else if(Source==TIM_BREAK_COMP1)
-        {
-            tempaf1 |= (uint32_t)(TIM_BREAK_COMP1P); 
+            tempaf1 |= (uint32_t)(TIM_BREAK_IOM2P);
         }
-        else if(Source==TIM_BREAK_COMP2)
+        else if (Source == TIM_BREAK_IOM3)
         {
-            tempaf1 |= (uint32_t)(TIM_BREAK_COMP2P); 
+            tempaf1 |= (uint32_t)(TIM_BREAK_IOM3P);
         }
-        else if(Source==TIM_BREAK_COMP3)
+        else if (Source == TIM_BREAK_IOM4)
         {
-            tempaf1 |= (uint32_t)(TIM_BREAK_COMP3P); 
+            tempaf1 |= (uint32_t)(TIM_BREAK_IOM4P);
+        }
+        else if (Source == TIM_BREAK_IOM5)
+        {
+            tempaf1 |= (uint32_t)(TIM_BREAK_IOM5P);
+        }
+        else if (Source == TIM_BREAK_IOM6)
+        {
+            tempaf1 |= (uint32_t)(TIM_BREAK_IOM6P);
+        }
+        else if (Source == TIM_BREAK_IOM7)
+        {
+            tempaf1 |= (uint32_t)(TIM_BREAK_IOM7P);
+        }
+        else if (Source == TIM_BREAK_COMP1)
+        {
+            tempaf1 |= (uint32_t)(TIM_BREAK_COMP1P);
+        }
+        else if (Source == TIM_BREAK_COMP2)
+        {
+            tempaf1 |= (uint32_t)(TIM_BREAK_COMP2P);
+        }
+        else if (Source == TIM_BREAK_COMP3)
+        {
+            tempaf1 |= (uint32_t)(TIM_BREAK_COMP3P);
         }
         else
         {
@@ -1267,45 +1258,45 @@ void TIM_BreakInputSourceEnable(TIM_Module* TIMx, uint32_t Source, uint32_t Pola
     else
     {
         /* Set break input source polarity */
-        if(Source==TIM_BREAK_IOM1)
+        if (Source == TIM_BREAK_IOM1)
         {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM1P); 
+            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM1P);
         }
-        else if(Source==TIM_BREAK_IOM2)
+        else if (Source == TIM_BREAK_IOM2)
         {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM2P); 
-        }  
-        else if(Source==TIM_BREAK_IOM3)
-        {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM3P); 
-        } 
-        else if(Source==TIM_BREAK_IOM4)
-        {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM4P); 
-        } 
-        else if(Source==TIM_BREAK_IOM5)
-        {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM5P); 
-        } 
-        else if(Source==TIM_BREAK_IOM6)
-        {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM6P); 
-        } 
-        else if(Source==TIM_BREAK_IOM7)
-        {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM7P); 
-        } 
-        else if(Source==TIM_BREAK_COMP1)
-        {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_COMP1P); 
+            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM2P);
         }
-        else if(Source==TIM_BREAK_COMP2)
+        else if (Source == TIM_BREAK_IOM3)
         {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_COMP2P); 
+            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM3P);
         }
-        else if(Source==TIM_BREAK_COMP3)
+        else if (Source == TIM_BREAK_IOM4)
         {
-            tempaf1 &= (uint32_t)(~TIM_BREAK_COMP3P); 
+            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM4P);
+        }
+        else if (Source == TIM_BREAK_IOM5)
+        {
+            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM5P);
+        }
+        else if (Source == TIM_BREAK_IOM6)
+        {
+            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM6P);
+        }
+        else if (Source == TIM_BREAK_IOM7)
+        {
+            tempaf1 &= (uint32_t)(~TIM_BREAK_IOM7P);
+        }
+        else if (Source == TIM_BREAK_COMP1)
+        {
+            tempaf1 &= (uint32_t)(~TIM_BREAK_COMP1P);
+        }
+        else if (Source == TIM_BREAK_COMP2)
+        {
+            tempaf1 &= (uint32_t)(~TIM_BREAK_COMP2P);
+        }
+        else if (Source == TIM_BREAK_COMP3)
+        {
+            tempaf1 &= (uint32_t)(~TIM_BREAK_COMP3P);
         }
         else
         {
@@ -1313,8 +1304,8 @@ void TIM_BreakInputSourceEnable(TIM_Module* TIMx, uint32_t Source, uint32_t Pola
         }
     }
     TIMx->CTRL1 = tempctrl1;
-    TIMx->AF1 = tempaf1;    
-}  
+    TIMx->AF1   = tempaf1;
+}
 
 /**
 *\*\name    TIM_BidirectionDisarm
@@ -1326,7 +1317,7 @@ void TIM_BreakInputSourceEnable(TIM_Module* TIMx, uint32_t Source, uint32_t Pola
 *\*\          - GTIM4
 *\*\return  none
 **/
-void TIM_BidirectionDisarm(TIM_Module* TIMx)
+void TIM_BidirectionDisarm(TIM_Module *TIMx)
 {
     TIMx->BKDT |= (uint32_t)TIM_BKDT_BRKDSRM;
 }
@@ -1341,7 +1332,7 @@ void TIM_BidirectionDisarm(TIM_Module* TIMx)
 *\*\          - GTIM4
 *\*\return  none
 **/
-void TIM_BidirectionRearm(TIM_Module* TIMx)
+void TIM_BidirectionRearm(TIM_Module *TIMx)
 {
     TIMx->BKDT &= (uint32_t)(~TIM_BKDT_BRKDSRM);
 }
@@ -1401,23 +1392,23 @@ void TIM_BidirectionRearm(TIM_Module* TIMx)
 *\*\            * TIM_OCCLRSEL_2
 *\*\return  none
 **/
-void TIM_InitTimBaseStruct(TIM_TimeBaseInitType* TIM_TimeBaseInitStruct)
+void TIM_InitTimBaseStruct(TIM_TimeBaseInitType *TIM_TimeBaseInitStruct)
 {
     /* Set the default configuration */
-    TIM_TimeBaseInitStruct->Prescaler    = 0x00000000U;
-    TIM_TimeBaseInitStruct->CounterMode  = TIM_CNT_MODE_UP;
-    TIM_TimeBaseInitStruct->Period       = 0x0000FFFFU;
-    TIM_TimeBaseInitStruct->ClkDiv       = TIM_CLK_DIV1;
-    TIM_TimeBaseInitStruct->RepetCnt     = 0x00000000U;
+    TIM_TimeBaseInitStruct->Prescaler   = 0x00000000U;
+    TIM_TimeBaseInitStruct->CounterMode = TIM_CNT_MODE_UP;
+    TIM_TimeBaseInitStruct->Period      = 0x0000FFFFU;
+    TIM_TimeBaseInitStruct->ClkDiv      = TIM_CLK_DIV1;
+    TIM_TimeBaseInitStruct->RepetCnt    = 0x00000000U;
 
     /* CH1/CH2/CH3/CH4/ETR from IOM */
-    TIM_TimeBaseInitStruct->CapCh1Sel     = TIM_CAPCH1SEL_0;
-    TIM_TimeBaseInitStruct->CapCh2Sel     = TIM_CAPCH2SEL_0;
-    TIM_TimeBaseInitStruct->CapCh3Sel     = TIM_CAPCH3SEL_0;
-    TIM_TimeBaseInitStruct->CapCh4Sel     = TIM_CAPCH4SEL_0;
-    TIM_TimeBaseInitStruct->EtrOrClr      = TIM_ETRSEL;
-    
-    TIM_TimeBaseInitStruct->CapEtrClrSel  = TIM_CAPETRSEL_0;
+    TIM_TimeBaseInitStruct->CapCh1Sel = TIM_CAPCH1SEL_0;
+    TIM_TimeBaseInitStruct->CapCh2Sel = TIM_CAPCH2SEL_0;
+    TIM_TimeBaseInitStruct->CapCh3Sel = TIM_CAPCH3SEL_0;
+    TIM_TimeBaseInitStruct->CapCh4Sel = TIM_CAPCH4SEL_0;
+    TIM_TimeBaseInitStruct->EtrOrClr  = TIM_ETRSEL;
+
+    TIM_TimeBaseInitStruct->CapEtrClrSel = TIM_CAPETRSEL_0;
 }
 
 /**
@@ -1459,7 +1450,7 @@ void TIM_InitTimBaseStruct(TIM_TimeBaseInitType* TIM_TimeBaseInitStruct)
 *\*\            * TIM_OCN_IDLE_STATE_RESET
 *\*\return  none
 **/
-void TIM_InitOcStruct(OCInitType* TIM_OCInitStruct)
+void TIM_InitOcStruct(OCInitType *TIM_OCInitStruct)
 {
     /* Set the default configuration */
     TIM_OCInitStruct->OCMode       = TIM_OCMODE_TIMING;
@@ -1497,7 +1488,7 @@ void TIM_InitOcStruct(OCInitType* TIM_OCInitStruct)
 *\*\            * ICFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void TIM_InitIcStruct(TIM_ICInitType* TIM_ICInitStruct)
+void TIM_InitIcStruct(TIM_ICInitType *TIM_ICInitStruct)
 {
     /* Set the default configuration */
     TIM_ICInitStruct->Channel     = TIM_CH_1;
@@ -1526,7 +1517,7 @@ void TIM_InitIcStruct(TIM_ICInitType* TIM_ICInitStruct)
 *\*\            * DeadTime can be a number between 0x00 and 0xFF
 *\*\          - Break
 *\*\            * TIM_BREAK_IN_ENABLE
-*\*\            * TIM_BREAK_BID_DISABLE
+*\*\            * TIM_BREAK_IN_DISABLE
 *\*\          - BreakPolarity
 *\*\            * TIM_BREAK_POLARITY_LOW
 *\*\            * TIM_BREAK_POLARITY_HIGH
@@ -1538,7 +1529,7 @@ void TIM_InitIcStruct(TIM_ICInitType* TIM_ICInitStruct)
 *\*\            * TIM_AUTO_OUTPUT_DISABLE
 *\*\return  none
 **/
-void TIM_InitBkdtStruct(TIM_BDTRInitType* TIM_BDTRInitStruct)
+void TIM_InitBkdtStruct(TIM_BDTRInitType *TIM_BDTRInitStruct)
 {
     /* Set the default configuration */
     TIM_BDTRInitStruct->OSSRState       = TIM_OSSR_STATE_DISABLE;
@@ -1568,7 +1559,7 @@ void TIM_InitBkdtStruct(TIM_BDTRInitType* TIM_BDTRInitStruct)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_Enable(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_Enable(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -1595,7 +1586,7 @@ void TIM_Enable(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_EnableCtrlPwmOutputs(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_EnableCtrlPwmOutputs(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -1642,7 +1633,7 @@ void TIM_EnableCtrlPwmOutputs(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\return  none
 *\*\note  TIM_INT_C3LDCNT is only for GTIM1 or GTIM2.
 **/
-void TIM_ConfigInt(TIM_Module* TIMx, uint32_t TIM_IT, FunctionalState Cmd)
+void TIM_ConfigInt(TIM_Module *TIMx, uint32_t TIM_IT, FunctionalState Cmd)
 {
 
     if (Cmd != DISABLE)
@@ -1680,7 +1671,7 @@ void TIM_ConfigInt(TIM_Module* TIMx, uint32_t TIM_IT, FunctionalState Cmd)
 *\*\          - TIM_EVT_SRC_BREAK
 *\*\return  none
 **/
-void TIM_GenerateEvent(TIM_Module* TIMx, uint32_t TIM_EventSource)
+void TIM_GenerateEvent(TIM_Module *TIMx, uint32_t TIM_EventSource)
 {
     /* Set the event sources */
     TIMx->EVTGEN = TIM_EventSource;
@@ -1737,7 +1728,7 @@ void TIM_GenerateEvent(TIM_Module* TIMx, uint32_t TIM_EventSource)
 *\*\            TIM_DMABURST_LENGTH_1TRANSFER and TIM_DMABURST_LENGTH_37TRANSFERS.
 *\*\return  none
 **/
-void TIM_ConfigDma(TIM_Module* TIMx, uint32_t TIM_DMABase, uint32_t TIM_DMABurstLength)
+void TIM_ConfigDma(TIM_Module *TIMx, uint32_t TIM_DMABase, uint32_t TIM_DMABurstLength)
 {
     /* Set the DMA Base and the DMA Burst Length */
     TIMx->DCTRL = TIM_DMABase | TIM_DMABurstLength;
@@ -1766,7 +1757,7 @@ void TIM_ConfigDma(TIM_Module* TIMx, uint32_t TIM_DMABase, uint32_t TIM_DMABurst
 *\*\          - ENABLE
 *\*\return  none
 **/
-void TIM_EnableDma(TIM_Module* TIMx, uint32_t TIM_DMASource, FunctionalState Cmd)
+void TIM_EnableDma(TIM_Module *TIMx, uint32_t TIM_DMASource, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -1792,7 +1783,7 @@ void TIM_EnableDma(TIM_Module* TIMx, uint32_t TIM_DMASource, FunctionalState Cmd
 *\*\          - GTIM4
 *\*\return  none
 **/
-void TIM_ConfigInternalClk(TIM_Module* TIMx)
+void TIM_ConfigInternalClk(TIM_Module *TIMx)
 {
     /* Disable slave mode to clock the prescaler directly with the internal clock */
     TIMx->SMCTRL &= (uint32_t)(~((uint32_t)TIM_SMCTRL_SMSEL));
@@ -1817,11 +1808,12 @@ void TIM_ConfigInternalClk(TIM_Module* TIMx)
 *\*\          - TIM_TRIG_SEL_IN_TR5
 *\*\return  none
 **/
-void TIM_ConfigInternalTrigToExt(TIM_Module* TIMx, uint32_t TIM_InputTriggerSource)
+void TIM_ConfigInternalTrigToExt(TIM_Module *TIMx, uint32_t TIM_InputTriggerSource)
 {
     /* Select the Internal Trigger */
     TIM_SelectInputTrig(TIMx, TIM_InputTriggerSource);
     /* Select the External clock mode1 */
+    TIMx->SMCTRL &= (uint32_t)(~((uint32_t)TIM_SMCTRL_SMSEL));
     TIMx->SMCTRL |= (uint32_t)TIM_SLAVE_MODE_EXT1;
 }
 
@@ -1839,14 +1831,14 @@ void TIM_ConfigInternalTrigToExt(TIM_Module* TIMx, uint32_t TIM_InputTriggerSour
 *\*\          - TIM_TRIG_SEL_TI1F_ED
 *\*\          - TIM_TRIG_SEL_TI1FP1
 *\*\          - TIM_TRIG_SEL_TI2FP2
-*\*\param   ICPolarity
+*\*\param   IcPolarity
 *\*\          - TIM_IC_POLARITY_RISING
 *\*\          - TIM_IC_POLARITY_FALLING
 *\*\param   ICFilter
 *\*\          - ICFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void TIM_ConfigExtTrigAsClk(TIM_Module* TIMx, uint32_t TIM_TIxExternalCLKSource, uint32_t IcPolarity, uint32_t ICFilter)
+void TIM_ConfigExtTrigAsClk(TIM_Module *TIMx, uint32_t TIM_TIxExternalCLKSource, uint32_t IcPolarity, uint32_t ICFilter)
 {
     /* Configure the Timer Input Clock Source */
     if (TIM_TIxExternalCLKSource == TIM_TRIG_SEL_TI2FP2)
@@ -1860,6 +1852,7 @@ void TIM_ConfigExtTrigAsClk(TIM_Module* TIMx, uint32_t TIM_TIxExternalCLKSource,
     /* Select the Trigger source */
     TIM_SelectInputTrig(TIMx, TIM_TIxExternalCLKSource);
     /* Select the External clock mode1 */
+    TIMx->SMCTRL &= (uint32_t)(~((uint32_t)TIM_SMCTRL_SMSEL));
     TIMx->SMCTRL |= (uint32_t)TIM_SLAVE_MODE_EXT1;
 }
 
@@ -1892,10 +1885,10 @@ void TIM_ConfigExtTrigAsClk(TIM_Module* TIMx, uint32_t TIM_TIxExternalCLKSource,
 *\*\          - ExtTRGFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void TIM_ConfigExtClkMode1(TIM_Module* TIMx,uint32_t TIM_ETRInputSource,uint32_t TIM_ExtTRGPrescaler,uint32_t TIM_ExtTRGPolarity,uint32_t ExtTRGFilter)
+void TIM_ConfigExtClkMode1(TIM_Module *TIMx, uint32_t TIM_ETRInputSource, uint32_t TIM_ExtTRGPrescaler, uint32_t TIM_ExtTRGPolarity, uint32_t ExtTRGFilter)
 {
-    uint32_t tmpsmctrl ;
-    /* Configure the ETR input source */    
+    uint32_t tmpsmctrl;
+    /* Configure the ETR input source */
     TIM_SelectETRInputSource(TIMx, TIM_ETRInputSource);
     /* Configure the ETR Clock source */
     TIM_ConfigExtTrig(TIMx, TIM_ExtTRGPrescaler, TIM_ExtTRGPolarity, ExtTRGFilter);
@@ -1942,10 +1935,10 @@ void TIM_ConfigExtClkMode1(TIM_Module* TIMx,uint32_t TIM_ETRInputSource,uint32_t
 *\*\          - ExtTRGFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void TIM_ConfigExtClkMode2(TIM_Module* TIMx,uint32_t TIM_ETRInputSource,uint32_t TIM_ExtTRGPrescaler,uint32_t TIM_ExtTRGPolarity,uint32_t ExtTRGFilter)
+void TIM_ConfigExtClkMode2(TIM_Module *TIMx, uint32_t TIM_ETRInputSource, uint32_t TIM_ExtTRGPrescaler, uint32_t TIM_ExtTRGPolarity, uint32_t ExtTRGFilter)
 {
-    /* Configure the ETR input source */    
-    TIM_SelectETRInputSource(TIMx, TIM_ETRInputSource);    
+    /* Configure the ETR input source */
+    TIM_SelectETRInputSource(TIMx, TIM_ETRInputSource);
     /* Configure the ETR Clock source */
     TIM_ConfigExtTrig(TIMx, TIM_ExtTRGPrescaler, TIM_ExtTRGPolarity, ExtTRGFilter);
     /* Enable the External clock mode2 */
@@ -1971,7 +1964,7 @@ void TIM_ConfigExtClkMode2(TIM_Module* TIMx,uint32_t TIM_ETRInputSource,uint32_t
 *\*\          - TIM_PSC_RELOAD_MODE_IMMEDIATE
 *\*\return  none
 **/
-void TIM_ConfigPrescaler(TIM_Module* TIMx, uint32_t Prescaler, uint32_t TIM_PSCReloadMode)
+void TIM_ConfigPrescaler(TIM_Module *TIMx, uint32_t Prescaler, uint32_t TIM_PSCReloadMode)
 {
     /* Set the Prescaler value */
     TIMx->PSC = Prescaler;
@@ -1999,9 +1992,9 @@ void TIM_ConfigPrescaler(TIM_Module* TIMx, uint32_t Prescaler, uint32_t TIM_PSCR
 *\*\          - TIM_CNT_MODE_CENTER_ALIGN3
 *\*\return  none
 **/
-void TIM_ConfigCntMode(TIM_Module* TIMx, uint32_t CntMode)
+void TIM_ConfigCntMode(TIM_Module *TIMx, uint32_t CntMode)
 {
-    uint32_t tmpctrl1 ;
+    uint32_t tmpctrl1;
     tmpctrl1 = TIMx->CTRL1;
     /* Reset the CMS and DIR Bits */
     tmpctrl1 &= (uint32_t)(~((uint32_t)(TIM_CTRL1_DIR | TIM_CTRL1_CAMSEL)));
@@ -2031,11 +2024,11 @@ void TIM_ConfigCntMode(TIM_Module* TIMx, uint32_t CntMode)
 *\*\          - TIM_IC_POLARITY_RISING
 *\*\return  none
 **/
-void TIM_ConfigEncoderInterface(TIM_Module* TIMx,uint32_t TIM_EncoderMode,uint32_t TIM_IC1Polarity,uint32_t TIM_IC2Polarity)
+void TIM_ConfigEncoderInterface(TIM_Module *TIMx, uint32_t TIM_EncoderMode, uint32_t TIM_IC1Polarity, uint32_t TIM_IC2Polarity)
 {
-    uint32_t tmpsmctrl  ;
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen  ;
+    uint32_t tmpsmctrl;
+    uint32_t tmpccmodx;
+    uint32_t tmpccen;
     /* Get the TIMx SMCTRL register value */
     tmpsmctrl = TIMx->SMCTRL;
 
@@ -2054,8 +2047,8 @@ void TIM_ConfigEncoderInterface(TIM_Module* TIMx,uint32_t TIM_EncoderMode,uint32
     tmpccmodx |= (uint32_t)(TIM_CCMOD1_CC1SEL_0 | TIM_CCMOD1_CC2SEL_0);
 
     /* Set the TI1 and the TI2 Polarities */
-    tmpccen &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_CCEN_CC1P)) & ((uint32_t) ~((uint32_t)TIM_CCEN_CC2P)));
-    tmpccen |= (uint32_t)(TIM_IC1Polarity | (uint32_t)(TIM_IC2Polarity << (uint32_t)4));
+    tmpccen &= (uint32_t)(((uint32_t)~((uint32_t)TIM_CCEN_CC1P)) & ((uint32_t)~((uint32_t)TIM_CCEN_CC2P)));
+    tmpccen |= (uint32_t)(TIM_IC1Polarity | (uint32_t)(TIM_IC2Polarity << (uint32_t)4U));
 
     /* Write to TIMx SMCTRL */
     TIMx->SMCTRL = tmpsmctrl;
@@ -2091,11 +2084,11 @@ void TIM_ConfigEncoderInterface(TIM_Module* TIMx,uint32_t TIM_EncoderMode,uint32
 *\*\          - TIM_IC_POLARITY_RISING
 *\*\return  none
 **/
-void TIM_ConfigEncoderInterface2(TIM_Module* TIMx,uint32_t TIM_EncoderMode,uint32_t TIM_IC1Polarity,uint32_t TIM_IC2Polarity)
+void TIM_ConfigEncoderInterface2(TIM_Module *TIMx, uint32_t TIM_EncoderMode, uint32_t TIM_IC1Polarity, uint32_t TIM_IC2Polarity)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen  ;
-    uint32_t tmpencmctrl  ;
+    uint32_t tmpccmodx;
+    uint32_t tmpccen;
+    uint32_t tmpencmctrl;
 
     /* Get the TIMx CCMOD1 register value */
     tmpccmodx = TIMx->CCMOD1;
@@ -2108,15 +2101,15 @@ void TIM_ConfigEncoderInterface2(TIM_Module* TIMx,uint32_t TIM_EncoderMode,uint3
 
     /* Set the encoder Mode */
     tmpencmctrl &= (uint32_t)(~((uint32_t)TIM_ENCMCTRL_ENCMD));
-    tmpencmctrl |= (uint32_t)TIM_EncoderMode;        
+    tmpencmctrl |= (uint32_t)TIM_EncoderMode;
 
     /* Select the Capture Compare 1 and the Capture Compare 2 as input */
     tmpccmodx &= (uint32_t)((~TIM_CCMOD1_CC1SEL) & (~TIM_CCMOD1_CC2SEL));
     tmpccmodx |= (uint32_t)(TIM_CCMOD1_CC1SEL_0 | TIM_CCMOD1_CC2SEL_0);
 
     /* Set the TI1 and the TI2 Polarities */
-    tmpccen &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_CCEN_CC1P)) & ((uint32_t) ~((uint32_t)TIM_CCEN_CC2P)));
-    tmpccen |= (uint32_t)(TIM_IC1Polarity | (uint32_t)(TIM_IC2Polarity << (uint32_t)4));
+    tmpccen &= (uint32_t)(((uint32_t)~((uint32_t)TIM_CCEN_CC1P)) & ((uint32_t)~((uint32_t)TIM_CCEN_CC2P)));
+    tmpccen |= (uint32_t)(TIM_IC1Polarity | (uint32_t)(TIM_IC2Polarity << (uint32_t)4U));
 
     /* Write to TIMx ENCMCTRL */
     TIMx->ENCMCTRL = tmpencmctrl;
@@ -2141,7 +2134,7 @@ void TIM_ConfigEncoderInterface2(TIM_Module* TIMx,uint32_t TIM_EncoderMode,uint3
 *\*\          - TIM_FORCED_ACTION_INACTIVE
 *\*\return  none
 **/
-void TIM_ConfigForcedOc1(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
+void TIM_ConfigForcedOc1(TIM_Module *TIMx, uint32_t TIM_ForcedAction)
 {
     uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD1;
@@ -2168,14 +2161,14 @@ void TIM_ConfigForcedOc1(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
 *\*\          - TIM_FORCED_ACTION_INACTIVE
 *\*\return  none
 **/
-void TIM_ConfigForcedOc2(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
+void TIM_ConfigForcedOc2(TIM_Module *TIMx, uint32_t TIM_ForcedAction)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD1;
     /* Reset the OC2M Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD1_OC2MD);
     /* Configure The Forced output Mode */
-    tmpccmodx |= (uint32_t)(TIM_ForcedAction << 8);
+    tmpccmodx |= (uint32_t)(TIM_ForcedAction << 8U);
     /* Write to TIMx CCMOD1 register */
     TIMx->CCMOD1 = tmpccmodx;
 }
@@ -2195,11 +2188,11 @@ void TIM_ConfigForcedOc2(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
 *\*\          - TIM_FORCED_ACTION_INACTIVE
 *\*\return  none
 **/
-void TIM_ConfigForcedOc3(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
+void TIM_ConfigForcedOc3(TIM_Module *TIMx, uint32_t TIM_ForcedAction)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD2;
-    /* Reset the OC1M Bits */
+    /* Reset the OC3M Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC3MD);
     /* Configure The Forced output Mode */
     tmpccmodx |= (uint32_t)TIM_ForcedAction;
@@ -2222,14 +2215,14 @@ void TIM_ConfigForcedOc3(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
 *\*\          - TIM_FORCED_ACTION_INACTIVE
 *\*\return  none
 **/
-void TIM_ConfigForcedOc4(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
+void TIM_ConfigForcedOc4(TIM_Module *TIMx, uint32_t TIM_ForcedAction)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD2;
-    /* Reset the OC2M Bits */
+    /* Reset the OC4M Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC4MD);
     /* Configure The Forced output Mode */
-    tmpccmodx |= (uint32_t)(TIM_ForcedAction << 8);
+    tmpccmodx |= (uint32_t)(TIM_ForcedAction << 8U);
     /* Write to TIMx CCMOD2 register */
     TIMx->CCMOD2 = tmpccmodx;
 }
@@ -2245,15 +2238,15 @@ void TIM_ConfigForcedOc4(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
 *\*\          - TIM_FORCED_ACTION_INACTIVE
 *\*\return  none
 **/
-void TIM_ConfigForcedOc5(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
+void TIM_ConfigForcedOc5(TIM_Module *TIMx, uint32_t TIM_ForcedAction)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD3;
-    /* Reset the OC2M Bits */
+    /* Reset the OC5M Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC5MD);
     /* Configure The Forced output Mode */
     tmpccmodx |= (uint32_t)(TIM_ForcedAction);
-    /* Write to TIMx CCMOD2 register */
+    /* Write to TIMx CCMOD3 register */
     TIMx->CCMOD3 = tmpccmodx;
 }
 
@@ -2268,14 +2261,14 @@ void TIM_ConfigForcedOc5(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
 *\*\          - TIM_FORCED_ACTION_INACTIVE
 *\*\return  none
 **/
-void TIM_ConfigForcedOc6(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
+void TIM_ConfigForcedOc6(TIM_Module *TIMx, uint32_t TIM_ForcedAction)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD3;
-    /* Reset the OC2M Bits */
+    /* Reset the OC6M Bits */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC6MD);
     /* Configure The Forced output Mode */
-    tmpccmodx |= (uint32_t)(TIM_ForcedAction << 8);
+    tmpccmodx |= (uint32_t)(TIM_ForcedAction << 8U);
     /* Write to TIMx CCMOD2 register */
     TIMx->CCMOD3 = tmpccmodx;
 }
@@ -2297,7 +2290,7 @@ void TIM_ConfigForcedOc6(TIM_Module* TIMx, uint32_t TIM_ForcedAction)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_ConfigArPreload(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_ConfigArPreload(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -2324,7 +2317,7 @@ void TIM_ConfigArPreload(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_SelectComEvt(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_SelectComEvt(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -2353,7 +2346,7 @@ void TIM_SelectComEvt(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_SelectCapCmpDmaSrc(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_SelectCapCmpDmaSrc(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -2380,7 +2373,7 @@ void TIM_SelectCapCmpDmaSrc(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_EnableCapCmpPreloadControl(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_EnableCapCmpPreloadControl(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -2409,9 +2402,9 @@ void TIM_EnableCapCmpPreloadControl(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - TIM_OC_PRE_LOAD_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc1Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
+void TIM_ConfigOc1Preload(TIM_Module *TIMx, uint32_t TIM_OCPreload)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD1;
     /* Reset the OC1PEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD1_OC1PEN);
@@ -2436,14 +2429,14 @@ void TIM_ConfigOc1Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
 *\*\          - TIM_OC_PRE_LOAD_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc2Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
+void TIM_ConfigOc2Preload(TIM_Module *TIMx, uint32_t TIM_OCPreload)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD1;
     /* Reset the OC2PEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD1_OC2PEN);
     /* Enable or Disable the Output Compare Preload feature */
-    tmpccmodx |= (uint32_t)(TIM_OCPreload << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCPreload << 8U);
     /* Write to TIMx CCMOD1 register */
     TIMx->CCMOD1 = tmpccmodx;
 }
@@ -2463,9 +2456,9 @@ void TIM_ConfigOc2Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
 *\*\          - TIM_OC_PRE_LOAD_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc3Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
+void TIM_ConfigOc3Preload(TIM_Module *TIMx, uint32_t TIM_OCPreload)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD2;
     /* Reset the OC3PEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC3PEN);
@@ -2491,14 +2484,14 @@ void TIM_ConfigOc3Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
 *\*\          - TIM_OC_PRE_LOAD_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc4Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
+void TIM_ConfigOc4Preload(TIM_Module *TIMx, uint32_t TIM_OCPreload)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD2;
     /* Reset the OC4PEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC4PEN);
     /* Enable or Disable the Output Compare Preload feature */
-    tmpccmodx |= (uint32_t)(TIM_OCPreload << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCPreload << 8U);
     /* Write to TIMx CCMOD2 register */
     TIMx->CCMOD2 = tmpccmodx;
 }
@@ -2514,9 +2507,9 @@ void TIM_ConfigOc4Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
 *\*\          - TIM_OC_PRE_LOAD_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc5Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
+void TIM_ConfigOc5Preload(TIM_Module *TIMx, uint32_t TIM_OCPreload)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD3;
     /* Reset the OC5PEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC5PEN);
@@ -2537,21 +2530,21 @@ void TIM_ConfigOc5Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
 *\*\          - TIM_OC_PRE_LOAD_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc6Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
+void TIM_ConfigOc6Preload(TIM_Module *TIMx, uint32_t TIM_OCPreload)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD3;
     /* Reset the OC6PEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC6PEN);
     /* Enable or Disable the Output Compare Preload feature */
-    tmpccmodx |= (uint32_t)(TIM_OCPreload << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCPreload << 8U);
     /* Write to TIMx CCMOD3 register */
     TIMx->CCMOD3 = tmpccmodx;
 }
 
 /**
 *\*\name    TIM_ConfigOc7Preload
-*\*\fun     Enables or disables the TIMx peripheral Preload register on CCDAT6.
+*\*\fun     Enables or disables the TIMx peripheral Preload register on CCDAT7.
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
@@ -2560,21 +2553,21 @@ void TIM_ConfigOc6Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
 *\*\          - TIM_OC_PRE_LOAD_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc7Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
+void TIM_ConfigOc7Preload(TIM_Module *TIMx, uint32_t TIM_OCPreload)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD3;
     /* Reset the OC7PEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC7PEN);
     /* Enable or Disable the Output Compare Preload feature */
-    tmpccmodx |= (uint32_t)(TIM_OCPreload << 14);
+    tmpccmodx |= (uint32_t)(TIM_OCPreload << 14U);
     /* Write to TIMx CCMOD3 register */
     TIMx->CCMOD3 = tmpccmodx;
 }
 
 /**
 *\*\name    TIM_ConfigOc8Preload
-*\*\fun     Enables or disables the TIMx peripheral Preload register on CCDAT6.
+*\*\fun     Enables or disables the TIMx peripheral Preload register on CCDAT8.
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
@@ -2583,21 +2576,21 @@ void TIM_ConfigOc7Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
 *\*\          - TIM_OC_PRE_LOAD_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc8Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
+void TIM_ConfigOc8Preload(TIM_Module *TIMx, uint32_t TIM_OCPreload)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD3;
     /* Reset the OC8PEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC8PEN);
     /* Enable or Disable the Output Compare Preload feature */
-    tmpccmodx |= (uint32_t)(TIM_OCPreload << 18);
+    tmpccmodx |= (uint32_t)(TIM_OCPreload << 18U);
     /* Write to TIMx CCMOD3 register */
     TIMx->CCMOD3 = tmpccmodx;
 }
 
 /**
 *\*\name    TIM_ConfigOc9Preload
-*\*\fun     Enables or disables the TIMx peripheral Preload register on CCDAT6.
+*\*\fun     Enables or disables the TIMx peripheral Preload register on CCDAT9.
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
@@ -2606,14 +2599,14 @@ void TIM_ConfigOc8Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
 *\*\          - TIM_OC_PRE_LOAD_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc9Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
+void TIM_ConfigOc9Preload(TIM_Module *TIMx, uint32_t TIM_OCPreload)
 {
     uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD3;
     /* Reset the OC9PEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC9PEN);
     /* Enable or Disable the Output Compare Preload feature */
-    tmpccmodx |= (uint32_t)(TIM_OCPreload << 22);
+    tmpccmodx |= (uint32_t)(TIM_OCPreload << 22U);
     /* Write to TIMx CCMOD3 register */
     TIMx->CCMOD3 = tmpccmodx;
 }
@@ -2628,14 +2621,14 @@ void TIM_ConfigOc9Preload(TIM_Module* TIMx, uint32_t TIM_OCPreload)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCFast
 *\*\          - TIM_OC_FAST_ENABLE
 *\*\          - TIM_OC_FAST_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc1Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
+void TIM_ConfigOc1Fast(TIM_Module *TIMx, uint32_t TIM_OCFast)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     /* Get the TIMx CCMOD1 register value */
     tmpccmodx = TIMx->CCMOD1;
     /* Reset the OC1FEN Bit */
@@ -2656,20 +2649,20 @@ void TIM_ConfigOc1Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCFast
 *\*\          - TIM_OC_FAST_ENABLE
 *\*\          - TIM_OC_FAST_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc2Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
+void TIM_ConfigOc2Fast(TIM_Module *TIMx, uint32_t TIM_OCFast)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     /* Get the TIMx CCMOD1 register value */
     tmpccmodx = TIMx->CCMOD1;
     /* Reset the OC2FEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD1_OC2FEN);
     /* Enable or Disable the Output Compare Fast Bit */
-    tmpccmodx |= (uint32_t)(TIM_OCFast << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCFast << 8U);
     /* Write to TIMx CCMOD1 */
     TIMx->CCMOD1 = tmpccmodx;
 }
@@ -2684,14 +2677,14 @@ void TIM_ConfigOc2Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCFast
 *\*\          - TIM_OC_FAST_ENABLE
 *\*\          - TIM_OC_FAST_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc3Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
+void TIM_ConfigOc3Fast(TIM_Module *TIMx, uint32_t TIM_OCFast)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     /* Get the TIMx CCMOD2 register value */
     tmpccmodx = TIMx->CCMOD2;
     /* Reset the OC3FEN Bit */
@@ -2712,20 +2705,20 @@ void TIM_ConfigOc3Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCFast
 *\*\          - TIM_OC_FAST_ENABLE
 *\*\          - TIM_OC_FAST_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc4Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
+void TIM_ConfigOc4Fast(TIM_Module *TIMx, uint32_t TIM_OCFast)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     /* Get the TIMx CCMOD2 register value */
     tmpccmodx = TIMx->CCMOD2;
     /* Reset the OC4FEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC4FEN);
     /* Enable or Disable the Output Compare Fast Bit */
-    tmpccmodx |= (uint32_t)(TIM_OCFast << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCFast << 8U);
     /* Write to TIMx CCMOD2 */
     TIMx->CCMOD2 = tmpccmodx;
 }
@@ -2736,17 +2729,17 @@ void TIM_ConfigOc4Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCFast
 *\*\          - TIM_OC_FAST_ENABLE
 *\*\          - TIM_OC_FAST_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc5Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
+void TIM_ConfigOc5Fast(TIM_Module *TIMx, uint32_t TIM_OCFast)
 {
-    uint32_t tmpccmodx ;
-    /* Get the TIMx CCMOD2 register value */
+    uint32_t tmpccmodx;
+    /* Get the TIMx CCMOD3 register value */
     tmpccmodx = TIMx->CCMOD3;
-    /* Reset the OC4FEN Bit */
+    /* Reset the OC5FEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC5FEN);
     /* Enable or Disable the Output Compare Fast Bit */
     tmpccmodx |= (uint32_t)(TIM_OCFast);
@@ -2760,20 +2753,20 @@ void TIM_ConfigOc5Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCFast
 *\*\          - TIM_OC_FAST_ENABLE
 *\*\          - TIM_OC_FAST_DISABLE
 *\*\return  none
 **/
-void TIM_ConfigOc6Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
+void TIM_ConfigOc6Fast(TIM_Module *TIMx, uint32_t TIM_OCFast)
 {
-    uint32_t tmpccmodx ;
-    /* Get the TIMx CCMOD2 register value */
+    uint32_t tmpccmodx;
+    /* Get the TIMx CCMOD3 register value */
     tmpccmodx = TIMx->CCMOD3;
-    /* Reset the OC4FEN Bit */
+    /* Reset the OC6FEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC6FEN);
     /* Enable or Disable the Output Compare Fast Bit */
-    tmpccmodx |= (uint32_t)(TIM_OCFast << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCFast << 8U);
     /* Write to TIMx CCMOD3 */
     TIMx->CCMOD3 = tmpccmodx;
 }
@@ -2788,14 +2781,14 @@ void TIM_ConfigOc6Fast(TIM_Module* TIMx, uint32_t TIM_OCFast)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCClear
 *\*\          - TIM_OC_CLR_ENABLE
 *\*\          - TIM_OC_CLR_DISABLE
 *\*\return  none
 **/
-void TIM_ClrOc1Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
+void TIM_ClrOc1Ref(TIM_Module *TIMx, uint32_t TIM_OCClear)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD1;
     /* Reset the OC1CEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD1_OC1CEN);
@@ -2815,19 +2808,19 @@ void TIM_ClrOc1Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCClear
 *\*\          - TIM_OC_CLR_ENABLE
 *\*\          - TIM_OC_CLR_DISABLE
 *\*\return  none
 **/
-void TIM_ClrOc2Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
+void TIM_ClrOc2Ref(TIM_Module *TIMx, uint32_t TIM_OCClear)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD1;
     /* Reset the OC2CEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD1_OC2CEN);
     /* Enable or Disable the Output Compare Clear Bit */
-    tmpccmodx |= (uint32_t)(TIM_OCClear << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCClear << 8U);
     /* Write to TIMx CCMOD1 register */
     TIMx->CCMOD1 = tmpccmodx;
 }
@@ -2842,14 +2835,14 @@ void TIM_ClrOc2Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCClear
 *\*\          - TIM_OC_CLR_ENABLE
 *\*\          - TIM_OC_CLR_DISABLE
 *\*\return  none
 **/
-void TIM_ClrOc3Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
+void TIM_ClrOc3Ref(TIM_Module *TIMx, uint32_t TIM_OCClear)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD2;
     /* Reset the OC3CEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC3CEN);
@@ -2868,19 +2861,19 @@ void TIM_ClrOc3Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
 *\*\          - GTIM1
 *\*\          - GTIM2
 *\*\          - GTIM3
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCClear
 *\*\          - TIM_OC_CLR_ENABLE
 *\*\          - TIM_OC_CLR_DISABLE
 *\*\return  none
 **/
-void TIM_ClrOc4Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
+void TIM_ClrOc4Ref(TIM_Module *TIMx, uint32_t TIM_OCClear)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD2;
     /* Reset the OC4CEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD2_OC4CEN);
     /* Enable or Disable the Output Compare Clear Bit */
-    tmpccmodx |= (uint32_t)(TIM_OCClear << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCClear << 8U);
     /* Write to TIMx CCMOD2 register */
     TIMx->CCMOD2 = tmpccmodx;
 }
@@ -2891,16 +2884,16 @@ void TIM_ClrOc4Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCClear
 *\*\          - TIM_OC_CLR_ENABLE
 *\*\          - TIM_OC_CLR_DISABLE
 *\*\return  none
 **/
-void TIM_ClrOc5Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
+void TIM_ClrOc5Ref(TIM_Module *TIMx, uint32_t TIM_OCClear)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD3;
-    /* Reset the OC4CEN Bit */
+    /* Reset the OC5CEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC5CEN);
     /* Enable or Disable the Output Compare Clear Bit */
     tmpccmodx |= (uint32_t)(TIM_OCClear);
@@ -2914,19 +2907,19 @@ void TIM_ClrOc5Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
-*\*\param   TIM_OCPreload
+*\*\param   TIM_OCClear
 *\*\          - TIM_OC_CLR_ENABLE
 *\*\          - TIM_OC_CLR_DISABLE
 *\*\return  none
 **/
-void TIM_ClrOc6Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
+void TIM_ClrOc6Ref(TIM_Module *TIMx, uint32_t TIM_OCClear)
 {
-    uint32_t tmpccmodx ;
+    uint32_t tmpccmodx;
     tmpccmodx = TIMx->CCMOD3;
-    /* Reset the OC4CEN Bit */
+    /* Reset the OC6CEN Bit */
     tmpccmodx &= (uint32_t)(~TIM_CCMOD3_OC6CEN);
     /* Enable or Disable the Output Compare Clear Bit */
-    tmpccmodx |= (uint32_t)(TIM_OCClear << 8);
+    tmpccmodx |= (uint32_t)(TIM_OCClear << 8U);
     /* Write to TIMx CCMOD3 register */
     TIMx->CCMOD3 = tmpccmodx;
 }
@@ -2956,28 +2949,28 @@ void TIM_ClrOc6Ref(TIM_Module* TIMx, uint32_t TIM_OCClear)
 *\*\          - TIM_OCCLRSEL_2
 *\*\return  none
 **/
-void TIM_ClrOcRefInputSource(TIM_Module* TIMx, uint32_t OCRefClearInputSelect,uint32_t OCRefClearInputSource)
+void TIM_ClrOcRefInputSource(TIM_Module *TIMx, uint32_t OCRefClearInputSelect, uint32_t OCRefClearInputSource)
 {
-    uint32_t tmpctrl1 ;
-    uint32_t tmpinsel ;   
+    uint32_t tmpctrl1;
+    uint32_t tmpinsel;
     /* Get the value of TIMx_CTRL1 and TIMx_INSEL */
-    tmpctrl1 = TIMx->CTRL1;    
-    tmpinsel = TIMx->INSEL;    
+    tmpctrl1 = TIMx->CTRL1;
+    tmpinsel = TIMx->INSEL;
     /* Reset the CTRL1_CLRSEL\INSEL_ETRS\INSEL_CLRS bits */
     tmpctrl1 &= (uint32_t)(~TIM_CTRL1_CLRSEL);
-    tmpinsel &= (uint32_t)(~TIM_INSEL_ETRS);  
-    tmpinsel &= (uint32_t)(~TIM_INSEL_CLRS); 
-    
+    tmpinsel &= (uint32_t)(~TIM_INSEL_ETRS);
+    tmpinsel &= (uint32_t)(~TIM_INSEL_CLRS);
+
     if (OCRefClearInputSelect == TIM_CLRSEL)
     {
         /* CLR select capture in */
-        tmpctrl1 |= (uint32_t)TIM_CLRSEL;            
-        tmpinsel |= (uint32_t)OCRefClearInputSource;                   
+        tmpctrl1 |= (uint32_t)TIM_CLRSEL;
+        tmpinsel |= (uint32_t)OCRefClearInputSource;
     }
     else
     {
         /* ETR select capture in */
-        tmpinsel |= (uint32_t)OCRefClearInputSource;                    
+        tmpinsel |= (uint32_t)OCRefClearInputSource;
     }
     TIMx->CTRL1 = tmpctrl1;
     TIMx->INSEL = tmpinsel;
@@ -2993,14 +2986,14 @@ void TIM_ClrOcRefInputSource(TIM_Module* TIMx, uint32_t OCRefClearInputSelect,ui
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   OcPolarity
 *\*\          - TIM_OC_POLARITY_HIGH
 *\*\          - TIM_OC_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc1Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
+void TIM_ConfigOc1Polarity(TIM_Module *TIMx, uint32_t OcPolarity)
 {
-    uint32_t tmpccen ;
+    uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
     /* Set or Reset the CC1P Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC1P));
@@ -3017,14 +3010,14 @@ void TIM_ConfigOc1Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
 *\*\          - ATIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   OcNPolarity
 *\*\          - TIM_OCN_POLARITY_HIGH
 *\*\          - TIM_OCN_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc1NPolarity(TIM_Module* TIMx, uint32_t OcNPolarity)
+void TIM_ConfigOc1NPolarity(TIM_Module *TIMx, uint32_t OcNPolarity)
 {
-    uint32_t tmpccen ;
+    uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
     /* Set or Reset the CC1NP Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC1NP));
@@ -3043,18 +3036,18 @@ void TIM_ConfigOc1NPolarity(TIM_Module* TIMx, uint32_t OcNPolarity)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   OcPolarity
 *\*\          - TIM_OC_POLARITY_HIGH
 *\*\          - TIM_OC_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc2Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
+void TIM_ConfigOc2Polarity(TIM_Module *TIMx, uint32_t OcPolarity)
 {
-    uint32_t tmpccen ;
+    uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
     /* Set or Reset the CC2P Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC2P));
-    tmpccen |= (uint32_t)(OcPolarity << 4);
+    tmpccen |= (uint32_t)(OcPolarity << 4U);
     /* Write to TIMx CCEN register */
     TIMx->CCEN = tmpccen;
 }
@@ -3065,18 +3058,18 @@ void TIM_ConfigOc2Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
-*\*\param   TIM_OCPreload
+*\*\param   OcNPolarity
 *\*\          - TIM_OCN_POLARITY_HIGH
 *\*\          - TIM_OCN_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc2NPolarity(TIM_Module* TIMx, uint32_t OcNPolarity)
+void TIM_ConfigOc2NPolarity(TIM_Module *TIMx, uint32_t OcNPolarity)
 {
-    uint32_t tmpccen ;
+    uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
     /* Set or Reset the CC2NP Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC2NP));
-    tmpccen |= (uint32_t)(OcNPolarity << 4);
+    tmpccen |= (uint32_t)(OcNPolarity << 4U);
     /* Write to TIMx CCEN register */
     TIMx->CCEN = tmpccen;
 }
@@ -3091,18 +3084,18 @@ void TIM_ConfigOc2NPolarity(TIM_Module* TIMx, uint32_t OcNPolarity)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   OcPolarity
 *\*\          - TIM_OC_POLARITY_HIGH
 *\*\          - TIM_OC_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc3Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
+void TIM_ConfigOc3Polarity(TIM_Module *TIMx, uint32_t OcPolarity)
 {
-    uint32_t tmpccen ;
+    uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
     /* Set or Reset the CC3P Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC3P));
-    tmpccen |= (uint32_t)(OcPolarity << 8);
+    tmpccen |= (uint32_t)(OcPolarity << 8U);
     /* Write to TIMx CCEN register */
     TIMx->CCEN = tmpccen;
 }
@@ -3113,18 +3106,18 @@ void TIM_ConfigOc3Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
-*\*\param   TIM_OCPreload
+*\*\param   OcNPolarity
 *\*\          - TIM_OCN_POLARITY_HIGH
 *\*\          - TIM_OCN_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc3NPolarity(TIM_Module* TIMx, uint32_t OcNPolarity)
+void TIM_ConfigOc3NPolarity(TIM_Module *TIMx, uint32_t OcNPolarity)
 {
-    uint32_t tmpccen ;
+    uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
     /* Set or Reset the CC3NP Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC3NP));
-    tmpccen |= (uint32_t)(OcNPolarity << 8);
+    tmpccen |= (uint32_t)(OcNPolarity << 8U);
     /* Write to TIMx CCEN register */
     TIMx->CCEN = tmpccen;
 }
@@ -3139,18 +3132,18 @@ void TIM_ConfigOc3NPolarity(TIM_Module* TIMx, uint32_t OcNPolarity)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_OCPreload
+*\*\param   OcPolarity
 *\*\          - TIM_OC_POLARITY_HIGH
 *\*\          - TIM_OC_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc4Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
+void TIM_ConfigOc4Polarity(TIM_Module *TIMx, uint32_t OcPolarity)
 {
-    uint32_t tmpccen ;
+    uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
     /* Set or Reset the CC4P Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC4P));
-    tmpccen |= (uint32_t)(OcPolarity << 12);
+    tmpccen |= (uint32_t)(OcPolarity << 12U);
     /* Write to TIMx CCEN register */
     TIMx->CCEN = tmpccen;
 }
@@ -3161,18 +3154,18 @@ void TIM_ConfigOc4Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
-*\*\param   TIM_OCPreload
+*\*\param   OcNPolarity
 *\*\          - TIM_OCN_POLARITY_HIGH
 *\*\          - TIM_OCN_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc4NPolarity(TIM_Module* TIMx, uint32_t OcNPolarity)
+void TIM_ConfigOc4NPolarity(TIM_Module *TIMx, uint32_t OcNPolarity)
 {
-    uint32_t tmpccen ;
+    uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
-    /* Set or Reset the CC3NP Bit */
+    /* Set or Reset the CC4NP Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC4NP));
-    tmpccen |= (uint32_t)(OcNPolarity << 12);
+    tmpccen |= (uint32_t)(OcNPolarity << 12U);
     /* Write to TIMx CCEN register */
     TIMx->CCEN = tmpccen;
 }
@@ -3183,18 +3176,18 @@ void TIM_ConfigOc4NPolarity(TIM_Module* TIMx, uint32_t OcNPolarity)
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
-*\*\param   TIM_OCPreload
+*\*\param   OcPolarity
 *\*\          - TIM_OC_POLARITY_HIGH
 *\*\          - TIM_OC_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc5Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
+void TIM_ConfigOc5Polarity(TIM_Module *TIMx, uint32_t OcPolarity)
 {
     uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
     /* Set or Reset the CC5P Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC5P));
-    tmpccen |= (uint32_t)(OcPolarity << 16);
+    tmpccen |= (uint32_t)(OcPolarity << 16U);
     /* Write to TIMx CCEN register */
     TIMx->CCEN = tmpccen;
 }
@@ -3205,18 +3198,18 @@ void TIM_ConfigOc5Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
-*\*\param   TIM_OCPreload
+*\*\param   OcPolarity
 *\*\          - TIM_OC_POLARITY_HIGH
 *\*\          - TIM_OC_POLARITY_LOW
 *\*\return  none
 **/
-void TIM_ConfigOc6Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
+void TIM_ConfigOc6Polarity(TIM_Module *TIMx, uint32_t OcPolarity)
 {
-    uint32_t tmpccen ;
+    uint32_t tmpccen;
     tmpccen = TIMx->CCEN;
     /* Set or Reset the CC6P Bit */
     tmpccen &= (uint32_t)(~((uint32_t)TIM_CCEN_CC6P));
-    tmpccen |= (uint32_t)(OcPolarity << 20);
+    tmpccen |= (uint32_t)(OcPolarity << 20U);
     /* Write to TIMx CCEN register */
     TIMx->CCEN = tmpccen;
 }
@@ -3243,9 +3236,9 @@ void TIM_ConfigOc6Polarity(TIM_Module* TIMx, uint32_t OcPolarity)
 *\*\          - TIM_CAP_CMP_DISABLE
 *\*\return  none
 **/
-void TIM_EnableCapCmpCh(TIM_Module* TIMx, uint32_t Channel, uint32_t TIM_CCx)
+void TIM_EnableCapCmpCh(TIM_Module *TIMx, uint32_t Channel, uint32_t TIM_CCx)
 {
-    uint32_t tmp ;
+    uint32_t tmp;
     tmp = CAPCMPEN_CCE_SET << Channel;
     /* Reset the CCxEN Bit */
     TIMx->CCEN &= (uint32_t)(~tmp);
@@ -3266,14 +3259,14 @@ void TIM_EnableCapCmpCh(TIM_Module* TIMx, uint32_t Channel, uint32_t TIM_CCx)
 *\*\          - TIM_CH_2
 *\*\          - TIM_CH_3
 *\*\          - TIM_CH_4
-*\*\param   TIM_CCx
+*\*\param   TIM_CCxN
 *\*\          - TIM_CAP_CMP_N_ENABLE
 *\*\          - TIM_CAP_CMP_N_DISABLE
 *\*\return  none
 **/
-void TIM_EnableCapCmpChN(TIM_Module* TIMx, uint32_t Channel, uint32_t TIM_CCxN)
+void TIM_EnableCapCmpChN(TIM_Module *TIMx, uint32_t Channel, uint32_t TIM_CCxN)
 {
-    uint32_t tmp ;
+    uint32_t tmp;
     tmp = CAPCMPEN_CCNE_SET << Channel;
     /* Reset the CCxNEN Bit */
     TIMx->CCEN &= (uint32_t)(~tmp);
@@ -3313,10 +3306,10 @@ void TIM_EnableCapCmpChN(TIM_Module* TIMx, uint32_t Channel, uint32_t TIM_CCxN)
 *\*\          - TIM_OCMODE_COMBI_PWM2
 *\*\return  none
 **/
-void TIM_SelectOcMode(TIM_Module* TIMx, uint32_t Channel, uint32_t OcMode)
+void TIM_SelectOcMode(TIM_Module *TIMx, uint32_t Channel, uint32_t OcMode)
 {
-    uint32_t tmp  ;
-    uint32_t tmp1 ;
+    uint32_t tmp;
+    uint32_t tmp1;
 
     tmp = (uint32_t)(uintptr_t)TIMx;
     tmp += CAPCMPMOD_OFFSET;
@@ -3328,23 +3321,23 @@ void TIM_SelectOcMode(TIM_Module* TIMx, uint32_t Channel, uint32_t OcMode)
 
     if ((Channel == TIM_CH_1) || (Channel == TIM_CH_3) || (Channel == TIM_CH_5))
     {
-        tmp += (uint32_t)(Channel >> 1);
+        tmp += (uint32_t)(Channel >> 1U);
 
-        /* Reset the OCxMD bits in the CCMRx register */
-        *((__IO uint32_t*)(uintptr_t)tmp) &= (uint32_t) (~((uint32_t)(TIM_CCMOD1_OC1MD | TIM_CCMOD1_OC1MD_3)));
+        /* Reset the OCxMD bits in the CCMODx register */
+        *((__IO uint32_t *)(uintptr_t)tmp) &= (uint32_t)(~((uint32_t)(TIM_CCMOD1_OC1MD | TIM_CCMOD1_OC1MD_3)));
 
-        /* Configure the OCxMD bits in the CCMRx register */
-        *((__IO uint32_t*)(uintptr_t)tmp) |= (uint32_t)OcMode;
+        /* Configure the OCxMD bits in the CCMODx register */
+        *((__IO uint32_t *)(uintptr_t)tmp) |= (uint32_t)OcMode;
     }
     else
     {
         tmp += (uint32_t)((Channel - 4U) >> 1U);
 
-        /* Reset the OCxMD bits in the CCMRx register */
-        *((__IO uint32_t*)(uintptr_t)tmp) &= (uint32_t)(~((uint32_t)(TIM_CCMOD1_OC2MD | TIM_CCMOD1_OC2MD_3)));
+        /* Reset the OCxMD bits in the CCMODx register */
+        *((__IO uint32_t *)(uintptr_t)tmp) &= (uint32_t)(~((uint32_t)(TIM_CCMOD1_OC2MD | TIM_CCMOD1_OC2MD_3)));
 
-        /* Configure the OCxMD bits in the CCMRx register */
-        *((__IO uint32_t*)(uintptr_t)tmp) |= (uint32_t)(((OcMode << 8)&(0x0000E000U)) | ((OcMode << 1)&(0x00040000U)));
+        /* Configure the OCxMD bits in the CCMODx register */
+        *((__IO uint32_t *)(uintptr_t)tmp) |= (uint32_t)(((OcMode << 8U) & (0x0000E000U)) | ((OcMode << 1U) & (0x00040000U)));
     }
 }
 
@@ -3365,7 +3358,7 @@ void TIM_SelectOcMode(TIM_Module* TIMx, uint32_t Channel, uint32_t OcMode)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_ConfigUpdateEvt(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_ConfigUpdateEvt(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -3396,7 +3389,7 @@ void TIM_ConfigUpdateEvt(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - TIM_UPDATE_SRC_REGULAR
 *\*\return  none
 **/
-void TIM_ConfigUpdateRequestIntSrc(TIM_Module* TIMx, uint32_t TIM_UpdateSource)
+void TIM_ConfigUpdateRequestIntSrc(TIM_Module *TIMx, uint32_t TIM_UpdateSource)
 {
     if (TIM_UpdateSource != TIM_UPDATE_SRC_GLOBAL)
     {
@@ -3425,7 +3418,7 @@ void TIM_ConfigUpdateRequestIntSrc(TIM_Module* TIMx, uint32_t TIM_UpdateSource)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_SelectHallSensor(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_SelectHallSensor(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -3454,7 +3447,7 @@ void TIM_SelectHallSensor(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - TIM_OPMODE_REPET
 *\*\return  none
 **/
-void TIM_SelectOnePulseMode(TIM_Module* TIMx, uint32_t TIM_OPMode)
+void TIM_SelectOnePulseMode(TIM_Module *TIMx, uint32_t TIM_OPMode)
 {
     /* Reset the ONEPM Bit */
     TIMx->CTRL1 &= (uint32_t)(~((uint32_t)TIM_CTRL1_ONEPM));
@@ -3486,7 +3479,7 @@ void TIM_SelectOnePulseMode(TIM_Module* TIMx, uint32_t TIM_OPMode)
 *\*\          - TIM_TRGO_SRC_OC4_7_8_9REF
 *\*\return  none
 **/
-void TIM_SelectOutputTrig(TIM_Module* TIMx, uint32_t TIM_TRGOSource)
+void TIM_SelectOutputTrig(TIM_Module *TIMx, uint32_t TIM_TRGOSource)
 {
     /* Reset the MMSEL Bits */
     TIMx->CTRL2 &= (uint32_t)(~((uint32_t)TIM_CTRL2_MMSEL));
@@ -3518,7 +3511,7 @@ void TIM_SelectOutputTrig(TIM_Module* TIMx, uint32_t TIM_TRGOSource)
 *\*\          - LL_TIM_TRGO2_OC5_RISING_OC6_FALLING
 *\*\return  none
 **/
-void TIM_SelectOutputTrig2(TIM_Module* TIMx, uint32_t TIM_TRGO2Source)
+void TIM_SelectOutputTrig2(TIM_Module *TIMx, uint32_t TIM_TRGO2Source)
 {
     /* Reset the MMSEL2 Bits */
     TIMx->CTRL2 &= (uint32_t)(~((uint32_t)TIM_CTRL2_MMSEL2));
@@ -3546,7 +3539,7 @@ void TIM_SelectOutputTrig2(TIM_Module* TIMx, uint32_t TIM_TRGO2Source)
 *\*\          - TIM_SLAVE_MODE_TRIG_RESET
 *\*\return  none
 **/
-void TIM_SelectSlaveMode(TIM_Module* TIMx, uint32_t TIM_SlaveMode)
+void TIM_SelectSlaveMode(TIM_Module *TIMx, uint32_t TIM_SlaveMode)
 {
     /* Reset the SMSEL Bits */
     TIMx->SMCTRL &= (uint32_t)(~((uint32_t)TIM_SMCTRL_SMSEL));
@@ -3564,12 +3557,12 @@ void TIM_SelectSlaveMode(TIM_Module* TIMx, uint32_t TIM_SlaveMode)
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_SlaveMode
+*\*\param   TIM_MasterSlaveMode
 *\*\          - TIM_MASTER_SLAVE_MODE_ENABLE
 *\*\          - TIM_MASTER_SLAVE_MODE_DISABLE
 *\*\return  none
 **/
-void TIM_SelectMasterSlaveMode(TIM_Module* TIMx, uint32_t TIM_MasterSlaveMode)
+void TIM_SelectMasterSlaveMode(TIM_Module *TIMx, uint32_t TIM_MasterSlaveMode)
 {
     /* Reset the MSMD Bit */
     TIMx->SMCTRL &= (uint32_t)(~((uint32_t)TIM_SMCTRL_MSMD));
@@ -3593,7 +3586,7 @@ void TIM_SelectMasterSlaveMode(TIM_Module* TIMx, uint32_t TIM_MasterSlaveMode)
 *\*\          - Counter can be a number between 0x00000000 and 0xFFFFFFFF
 *\*\return  none
 **/
-void TIM_SetCnt(TIM_Module* TIMx, uint32_t Counter)
+void TIM_SetCnt(TIM_Module *TIMx, uint32_t Counter)
 {
     /* Set the Counter Register value */
     TIMx->CNT = (uint32_t)((uint32_t)Counter);
@@ -3615,7 +3608,7 @@ void TIM_SetCnt(TIM_Module* TIMx, uint32_t Counter)
 *\*\          - Autoreload can be a number between 0x00000000 and 0xFFFFFFFF
 *\*\return  none
 **/
-void TIM_SetAutoReload(TIM_Module* TIMx, uint32_t Autoreload)
+void TIM_SetAutoReload(TIM_Module *TIMx, uint32_t Autoreload)
 {
     /* Set the Autoreload Register value */
     TIMx->AR = (uint32_t)((uint32_t)Autoreload);
@@ -3635,21 +3628,21 @@ void TIM_SetAutoReload(TIM_Module* TIMx, uint32_t Autoreload)
 *\*\          - Compare1 can be a number between 0x00000000 and 0xFFFFFFFF
 *\*\return  none
 **/
-void TIM_SetCmp1(TIM_Module* TIMx, uint32_t Compare1)
+void TIM_SetCmp1(TIM_Module *TIMx, uint32_t Compare1)
 {
-    uint32_t tmpccdatx ;
-    tmpccdatx = TIMx->CCDAT1 ;
-    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx))) 
+    uint32_t tmpccdatx;
+    tmpccdatx = TIMx->CCDAT1;
+    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
-        /* Reset the Capture Compare1 Register value */ 
+        /* Reset the Capture Compare1 Register value */
         tmpccdatx &= (uint32_t)(~TIM_CCDAT1_CCDAT1);
-        tmpccdatx |= (uint32_t)Compare1; 
+        tmpccdatx |= (uint32_t)Compare1;
     }
     else
     {
-        /* Reset the Capture Compare1 Register value */ 
+        /* Reset the Capture Compare1 Register value */
         tmpccdatx &= (uint32_t)(~TIM_CCDAT1);
-        tmpccdatx |= (uint32_t)Compare1;       
+        tmpccdatx |= (uint32_t)Compare1;
     }
     /* Set the Capture Compare1 Register value */
     TIMx->CCDAT1 = tmpccdatx;
@@ -3669,24 +3662,24 @@ void TIM_SetCmp1(TIM_Module* TIMx, uint32_t Compare1)
 *\*\          - Compare2 can be a number between 0x00000000 and 0xFFFFFFFF
 *\*\return  none
 **/
-void TIM_SetCmp2(TIM_Module* TIMx, uint32_t Compare2)
+void TIM_SetCmp2(TIM_Module *TIMx, uint32_t Compare2)
 {
-    uint32_t tmpccdatx ;
-    tmpccdatx = TIMx->CCDAT2 ;
-    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx))) 
+    uint32_t tmpccdatx;
+    tmpccdatx = TIMx->CCDAT2;
+    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
-        /* Reset the Capture Compare2 Register value */ 
+        /* Reset the Capture Compare2 Register value */
         tmpccdatx &= (uint32_t)(~TIM_CCDAT2_CCDAT2);
-        tmpccdatx |= (uint32_t)Compare2; 
+        tmpccdatx |= (uint32_t)Compare2;
     }
     else
     {
-        /* Reset the Capture Compare2 Register value */ 
+        /* Reset the Capture Compare2 Register value */
         tmpccdatx &= (uint32_t)(~TIM_CCDAT2);
-        tmpccdatx |= (uint32_t)Compare2;       
+        tmpccdatx |= (uint32_t)Compare2;
     }
     /* Set the Capture Compare2 Register value */
-    TIMx->CCDAT2 = tmpccdatx;    
+    TIMx->CCDAT2 = tmpccdatx;
 }
 
 /**
@@ -3703,24 +3696,24 @@ void TIM_SetCmp2(TIM_Module* TIMx, uint32_t Compare2)
 *\*\          - Compare3 can be a number between 0x00000000 and 0xFFFFFFFF
 *\*\return  none
 **/
-void TIM_SetCmp3(TIM_Module* TIMx, uint32_t Compare3)
+void TIM_SetCmp3(TIM_Module *TIMx, uint32_t Compare3)
 {
-    uint32_t tmpccdatx ;
-    tmpccdatx = TIMx->CCDAT3 ;
-    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx))) 
+    uint32_t tmpccdatx;
+    tmpccdatx = TIMx->CCDAT3;
+    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
-        /* Reset the Capture Compare3 Register value */ 
+        /* Reset the Capture Compare3 Register value */
         tmpccdatx &= (uint32_t)(~TIM_CCDAT3_CCDAT3);
-        tmpccdatx |= (uint32_t)Compare3; 
+        tmpccdatx |= (uint32_t)Compare3;
     }
     else
     {
-        /* Reset the Capture Compare3 Register value */ 
+        /* Reset the Capture Compare3 Register value */
         tmpccdatx &= (uint32_t)(~TIM_CCDAT3);
-        tmpccdatx |= (uint32_t)Compare3;       
+        tmpccdatx |= (uint32_t)Compare3;
     }
     /* Set the Capture Compare3 Register value */
-    TIMx->CCDAT3 = tmpccdatx;  
+    TIMx->CCDAT3 = tmpccdatx;
 }
 
 /**
@@ -3737,24 +3730,24 @@ void TIM_SetCmp3(TIM_Module* TIMx, uint32_t Compare3)
 *\*\          - Compare4 can be a number between 0x00000000 and 0xFFFFFFFF
 *\*\return  none
 **/
-void TIM_SetCmp4(TIM_Module* TIMx, uint32_t Compare4)
+void TIM_SetCmp4(TIM_Module *TIMx, uint32_t Compare4)
 {
-    uint32_t tmpccdatx ;
-    tmpccdatx = TIMx->CCDAT4 ;
-    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx))) 
+    uint32_t tmpccdatx;
+    tmpccdatx = TIMx->CCDAT4;
+    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
-        /* Reset the Capture Compare3 Register value */ 
+        /* Reset the Capture Compare4 Register value */
         tmpccdatx &= (uint32_t)(~TIM_CCDAT4_CCDAT4);
-        tmpccdatx |= (uint32_t)Compare4; 
+        tmpccdatx |= (uint32_t)Compare4;
     }
     else
     {
-        /* Reset the Capture Compare3 Register value */ 
+        /* Reset the Capture Compare4 Register value */
         tmpccdatx &= (uint32_t)(~TIM_CCDAT4);
-        tmpccdatx |= (uint32_t)Compare4;       
+        tmpccdatx |= (uint32_t)Compare4;
     }
-    /* Set the Capture Compare3 Register value */
-    TIMx->CCDAT4 = tmpccdatx;  
+    /* Set the Capture Compare4 Register value */
+    TIMx->CCDAT4 = tmpccdatx;
 }
 
 /**
@@ -3767,7 +3760,7 @@ void TIM_SetCmp4(TIM_Module* TIMx, uint32_t Compare4)
 *\*\          - Compare5 can be a number between 0x0000 and 0xFFFF
 *\*\return  none
 **/
-void TIM_SetCmp5(TIM_Module* TIMx, uint16_t Compare5)
+void TIM_SetCmp5(TIM_Module *TIMx, uint16_t Compare5)
 {
     /* Set the Capture Compare5 Register value */
     TIMx->CCDAT5 = (uint32_t)Compare5;
@@ -3783,7 +3776,7 @@ void TIM_SetCmp5(TIM_Module* TIMx, uint16_t Compare5)
 *\*\          - Compare6 can be a number between 0x0000 and 0xFFFF
 *\*\return  none
 **/
-void TIM_SetCmp6(TIM_Module* TIMx, uint16_t Compare6)
+void TIM_SetCmp6(TIM_Module *TIMx, uint16_t Compare6)
 {
     /* Set the Capture Compare6 Register value */
     TIMx->CCDAT6 = (uint32_t)Compare6;
@@ -3799,7 +3792,7 @@ void TIM_SetCmp6(TIM_Module* TIMx, uint16_t Compare6)
 *\*\          - Compare7 can be a number between 0x0000 and 0xFFFF
 *\*\return  none
 **/
-void TIM_SetCmp7(TIM_Module* TIMx, uint16_t Compare7)
+void TIM_SetCmp7(TIM_Module *TIMx, uint16_t Compare7)
 {
     /* Set the Capture Compare7 Register value */
     TIMx->CCDAT7 = (uint32_t)Compare7;
@@ -3815,7 +3808,7 @@ void TIM_SetCmp7(TIM_Module* TIMx, uint16_t Compare7)
 *\*\          - Compare8 can be a number between 0x0000 and 0xFFFF
 *\*\return  none
 **/
-void TIM_SetCmp8(TIM_Module* TIMx, uint16_t Compare8)
+void TIM_SetCmp8(TIM_Module *TIMx, uint16_t Compare8)
 {
     /* Set the Capture Compare8 Register value */
     TIMx->CCDAT8 = (uint32_t)Compare8;
@@ -3831,7 +3824,7 @@ void TIM_SetCmp8(TIM_Module* TIMx, uint16_t Compare8)
 *\*\          - Compare9 can be a number between 0x0000 and 0xFFFF
 *\*\return  none
 **/
-void TIM_SetCmp9(TIM_Module* TIMx, uint16_t Compare9)
+void TIM_SetCmp9(TIM_Module *TIMx, uint16_t Compare9)
 {
     /* Set the Capture Compare9 Register value */
     TIMx->CCDAT9 = (uint32_t)Compare9;
@@ -3839,7 +3832,7 @@ void TIM_SetCmp9(TIM_Module* TIMx, uint16_t Compare9)
 
 /**
 *\*\name    TIM_SetCmp1D
-*\*\fun     Sets the CCDDAT1[16:31] in TIM1_CCDAT1 register
+*\*\fun     Sets the CCDDAT1[31:16] in TIMx_CCDAT1 register
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
@@ -3847,20 +3840,20 @@ void TIM_SetCmp9(TIM_Module* TIMx, uint16_t Compare9)
 *\*\          - compare1D can be a number between 0x0000 and 0xFFFF
 *\*\return  none
 **/
-void TIM_SetCmp1D(TIM_Module* TIMx, uint16_t compare1D)
+void TIM_SetCmp1D(TIM_Module *TIMx, uint16_t compare1D)
 {
-    uint32_t tmpccdatx ;
-    tmpccdatx = TIMx->CCDAT1 ;
-    /* Reset the Capture compare1D Register value */ 
+    uint32_t tmpccdatx;
+    tmpccdatx = TIMx->CCDAT1;
+    /* Reset the Capture compare1D Register value */
     tmpccdatx &= (uint32_t)(~TIM_CCDAT1_CCDDAT1);
-    tmpccdatx |= (uint32_t)(((uint32_t)compare1D) << 0x00000010);
+    tmpccdatx |= (uint32_t)(((uint32_t)compare1D) << 0x00000010U);
     /* Set the Capture compare1D Register value */
     TIMx->CCDAT1 = tmpccdatx;
 }
 
 /**
 *\*\name    TIM_SetCmp2D
-*\*\fun     Sets the CCDDAT2[16:31] in TIM1_CCDAT2 register
+*\*\fun     Sets the CCDDAT2[31:16] in TIMx_CCDAT2 register
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
@@ -3868,20 +3861,20 @@ void TIM_SetCmp1D(TIM_Module* TIMx, uint16_t compare1D)
 *\*\          - compare2D can be a number between 0x0000 and 0xFFFF
 *\*\return  none
 **/
-void TIM_SetCmp2D(TIM_Module* TIMx, uint16_t compare2D)
+void TIM_SetCmp2D(TIM_Module *TIMx, uint16_t compare2D)
 {
-    uint32_t tmpccdatx ;
-    tmpccdatx = TIMx->CCDAT2 ;
-    /* Reset the Capture compare2D Register value */ 
+    uint32_t tmpccdatx;
+    tmpccdatx = TIMx->CCDAT2;
+    /* Reset the Capture compare2D Register value */
     tmpccdatx &= (uint32_t)(~TIM_CCDAT2_CCDDAT2);
-    tmpccdatx |= (uint32_t)(((uint32_t)compare2D) << 0x00000010);
+    tmpccdatx |= (uint32_t)(((uint32_t)compare2D) << 0x00000010U);
     /* Set the Capture compare2D Register value */
     TIMx->CCDAT2 = tmpccdatx;
 }
 
 /**
 *\*\name    TIM_SetCmp3D
-*\*\fun     Sets the CCDDAT3[16:31] in TIM1_CCDAT3 register
+*\*\fun     Sets the CCDDAT3[31:16] in TIMx_CCDAT3 register
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
@@ -3889,20 +3882,20 @@ void TIM_SetCmp2D(TIM_Module* TIMx, uint16_t compare2D)
 *\*\          - compare3D can be a number between 0x0000 and 0xFFFF
 *\*\return  none
 **/
-void TIM_SetCmp3D(TIM_Module* TIMx, uint16_t compare3D)
+void TIM_SetCmp3D(TIM_Module *TIMx, uint16_t compare3D)
 {
-    uint32_t tmpccdatx ;
-    tmpccdatx = TIMx->CCDAT3 ;
-    /* Reset the Capture compare3D Register value */ 
+    uint32_t tmpccdatx;
+    tmpccdatx = TIMx->CCDAT3;
+    /* Reset the Capture compare3D Register value */
     tmpccdatx &= (uint32_t)(~TIM_CCDAT3_CCDDAT3);
-    tmpccdatx |= (uint32_t)(((uint32_t)compare3D) << 0x00000010);
+    tmpccdatx |= (uint32_t)(((uint32_t)compare3D) << 0x00000010U);
     /* Set the Capture compare3D Register value */
     TIMx->CCDAT3 = tmpccdatx;
 }
 
 /**
 *\*\name    TIM_SetCmp4D
-*\*\fun     Sets the CCDDAT4[16:31] in TIM1_CCDAT4 register
+*\*\fun     Sets the CCDDAT4[31:16] in TIMx_CCDAT4 register
 *\*\param   TIMx (The input parameters must be the following values):
 *\*\          - ATIM1
 *\*\          - ATIM2
@@ -3910,13 +3903,13 @@ void TIM_SetCmp3D(TIM_Module* TIMx, uint16_t compare3D)
 *\*\          - compare4D can be a number between 0x0000 and 0xFFFF
 *\*\return  none
 **/
-void TIM_SetCmp4D(TIM_Module* TIMx, uint16_t compare4D)
+void TIM_SetCmp4D(TIM_Module *TIMx, uint16_t compare4D)
 {
-    uint32_t tmpccdatx ;
-    tmpccdatx = TIMx->CCDAT4 ;
-    /* Reset the Capture compare4D Register value */ 
+    uint32_t tmpccdatx;
+    tmpccdatx = TIMx->CCDAT4;
+    /* Reset the Capture compare4D Register value */
     tmpccdatx &= (uint32_t)(~TIM_CCDAT4_CCDDAT4);
-    tmpccdatx |= (uint32_t)(((uint32_t)compare4D) << 0x00000010);
+    tmpccdatx |= (uint32_t)(((uint32_t)compare4D) << 0x00000010U);
     /* Set the Capture compare4D Register value */
     TIMx->CCDAT4 = tmpccdatx;
 }
@@ -3942,29 +3935,29 @@ void TIM_SetCmp4D(TIM_Module* TIMx, uint16_t compare4D)
 *\*\          - ICFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void ConfigTI1(TIM_Module* TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint32_t ICFilter)
+void ConfigTI1(TIM_Module *TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint32_t ICFilter)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen  ;
-    
-    /* Disable the Channel 1: Reset the CC1E Bit */
-    TIMx->CCEN &= (uint32_t)(~((uint32_t)TIM_CCEN_CC1EN));    
+    uint32_t tmpccmodx;
+    uint32_t tmpccen;
 
-    /* Get the TIMx_CCMOD1 and TIMx_CCEN register value */    
+    /* Disable the Channel 1: Reset the CC1E Bit */
+    TIMx->CCEN &= (uint32_t)(~((uint32_t)TIM_CCEN_CC1EN));
+
+    /* Get the TIMx_CCMOD1 and TIMx_CCEN register value */
     tmpccmodx = TIMx->CCMOD1;
-    tmpccen  = TIMx->CCEN;    
-    
+    tmpccen   = TIMx->CCEN;
+
     /* Select the Input and set the filter */
-    tmpccmodx &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_CCMOD1_CC1SEL)) & ((uint32_t) ~((uint32_t)TIM_CCMOD1_IC1F)));
-    tmpccmodx |= (uint32_t)(ICSelection | (uint32_t)(ICFilter << (uint32_t)4));
-    
+    tmpccmodx &= (uint32_t)(((uint32_t)~((uint32_t)TIM_CCMOD1_CC1SEL)) & ((uint32_t)~((uint32_t)TIM_CCMOD1_IC1F)));
+    tmpccmodx |= (uint32_t)(ICSelection | (uint32_t)(ICFilter << (uint32_t)4U));
+
     /* Select the Polarity and set the CC1E Bit */
     tmpccen &= (uint32_t)(~((uint32_t)(TIM_CCEN_CC1P)));
-    tmpccen |= (uint32_t)(ICPolarity | (uint32_t)TIM_CCEN_CC1EN); 
-    
+    tmpccen |= (uint32_t)(ICPolarity | (uint32_t)TIM_CCEN_CC1EN);
+
     /* Write to TIMx CCMOD1 and CCEN registers */
     TIMx->CCMOD1 = tmpccmodx;
-    TIMx->CCEN   = tmpccen;    
+    TIMx->CCEN   = tmpccen;
 }
 
 /**
@@ -3988,24 +3981,24 @@ void ConfigTI1(TIM_Module* TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint
 *\*\          - ICFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void ConfigTI2(TIM_Module* TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint32_t ICFilter)
+void ConfigTI2(TIM_Module *TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint32_t ICFilter)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen , tmp ;
-    
+    uint32_t tmpccmodx;
+    uint32_t tmpccen, tmp;
+
     /* Disable the Channel 2: Reset the CC2E Bit */
     TIMx->CCEN &= (uint32_t)(~((uint32_t)TIM_CCEN_CC2EN));
-    
-    /* Get the TIMx_CCMOD1 and TIMx_CCEN register value */       
+
+    /* Get the TIMx_CCMOD1 and TIMx_CCEN register value */
     tmpccmodx = TIMx->CCMOD1;
-    tmpccen  = TIMx->CCEN;
-    
-    tmp      = (uint32_t)(ICPolarity << 4);
-    
+    tmpccen   = TIMx->CCEN;
+
+    tmp = (uint32_t)(ICPolarity << 4U);
+
     /* Select the Input and set the filter */
-    tmpccmodx &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_CCMOD1_CC2SEL)) & ((uint32_t) ~((uint32_t)TIM_CCMOD1_IC2F)));
-    tmpccmodx |= (uint32_t)(ICFilter << 12);
-    tmpccmodx |= (uint32_t)(ICSelection << 8);
+    tmpccmodx &= (uint32_t)(((uint32_t)~((uint32_t)TIM_CCMOD1_CC2SEL)) & ((uint32_t)~((uint32_t)TIM_CCMOD1_IC2F)));
+    tmpccmodx |= (uint32_t)(ICFilter << 12U);
+    tmpccmodx |= (uint32_t)(ICSelection << 8U);
 
     /* Select the Polarity and set the CC2E Bit */
     tmpccen &= (uint32_t)(~((uint32_t)(TIM_CCEN_CC2P)));
@@ -4037,23 +4030,23 @@ void ConfigTI2(TIM_Module* TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint
 *\*\          - ICFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void ConfigTI3(TIM_Module* TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint32_t ICFilter)
+void ConfigTI3(TIM_Module *TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint32_t ICFilter)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen , tmp ;
-    
+    uint32_t tmpccmodx;
+    uint32_t tmpccen, tmp;
+
     /* Disable the Channel 3: Reset the CC3E Bit */
     TIMx->CCEN &= (uint32_t)(~((uint32_t)TIM_CCEN_CC3EN));
 
-    /* Get the TIMx_CCMOD2 and TIMx_CCEN register value */       
+    /* Get the TIMx_CCMOD2 and TIMx_CCEN register value */
     tmpccmodx = TIMx->CCMOD2;
-    tmpccen  = TIMx->CCEN;
-    
-    tmp      = (uint32_t)(ICPolarity << 8);
-    
+    tmpccen   = TIMx->CCEN;
+
+    tmp = (uint32_t)(ICPolarity << 8U);
+
     /* Select the Input and set the filter */
-    tmpccmodx &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_CCMOD2_CC3SEL)) & ((uint32_t) ~((uint32_t)TIM_CCMOD2_IC3F)));
-    tmpccmodx |= (uint32_t)(ICSelection | (uint32_t)(ICFilter << (uint32_t)4));
+    tmpccmodx &= (uint32_t)(((uint32_t)~((uint32_t)TIM_CCMOD2_CC3SEL)) & ((uint32_t)~((uint32_t)TIM_CCMOD2_IC3F)));
+    tmpccmodx |= (uint32_t)(ICSelection | (uint32_t)(ICFilter << (uint32_t)4U));
 
     /* Select the Polarity and set the CC3E Bit */
     tmpccen &= (uint32_t)(~((uint32_t)(TIM_CCEN_CC3P)));
@@ -4085,29 +4078,29 @@ void ConfigTI3(TIM_Module* TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint
 *\*\          - ICFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void ConfigTI4(TIM_Module* TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint32_t ICFilter)
+void ConfigTI4(TIM_Module *TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint32_t ICFilter)
 {
-    uint32_t tmpccmodx ;
-    uint32_t tmpccen , tmp ;
+    uint32_t tmpccmodx;
+    uint32_t tmpccen, tmp;
 
     /* Disable the Channel 4: Reset the CC4E Bit */
     TIMx->CCEN &= (uint32_t)(~((uint32_t)TIM_CCEN_CC4EN));
 
-    /* Get the TIMx_CCMOD2 and TIMx_CCEN register value */        
+    /* Get the TIMx_CCMOD2 and TIMx_CCEN register value */
     tmpccmodx = TIMx->CCMOD2;
-    tmpccen  = TIMx->CCEN;
-    
-    tmp      = (uint32_t)(ICPolarity << 12);
-    
+    tmpccen   = TIMx->CCEN;
+
+    tmp = (uint32_t)(ICPolarity << 12U);
+
     /* Select the Input and set the filter */
-    tmpccmodx &= (uint32_t)((uint32_t)(~(uint32_t)TIM_CCMOD2_CC4SEL) & ((uint32_t) ~((uint32_t)TIM_CCMOD2_IC4F)));
-    tmpccmodx |= (uint32_t)(ICSelection << 8);
-    tmpccmodx |= (uint32_t)(ICFilter << 12);
+    tmpccmodx &= (uint32_t)((uint32_t)(~(uint32_t)TIM_CCMOD2_CC4SEL) & ((uint32_t)~((uint32_t)TIM_CCMOD2_IC4F)));
+    tmpccmodx |= (uint32_t)(ICSelection << 8U);
+    tmpccmodx |= (uint32_t)(ICFilter << 12U);
 
     /* Select the Polarity and set the CC4E Bit */
     tmpccen &= (uint32_t)(~((uint32_t)(TIM_CCEN_CC4P)));
     tmpccen |= (uint32_t)(tmp | (uint32_t)TIM_CCEN_CC4EN);
-        
+
     /* Write to TIMx CCMOD2 and CCEN registers */
     TIMx->CCMOD2 = tmpccmodx;
     TIMx->CCEN   = tmpccen;
@@ -4130,7 +4123,7 @@ void ConfigTI4(TIM_Module* TIMx, uint32_t ICPolarity, uint32_t ICSelection, uint
 *\*\          - TIM_IC_PSC_DIV8
 *\*\return  none
 **/
-void TIM_SetInCap1Prescaler(TIM_Module* TIMx, uint32_t ICPrescaler)
+void TIM_SetInCap1Prescaler(TIM_Module *TIMx, uint32_t ICPrescaler)
 {
     /* Reset the IC1PSC Bits */
     TIMx->CCMOD1 &= (uint32_t)(~TIM_CCMOD1_IC1PSC);
@@ -4155,12 +4148,12 @@ void TIM_SetInCap1Prescaler(TIM_Module* TIMx, uint32_t ICPrescaler)
 *\*\          - TIM_IC_PSC_DIV8
 *\*\return  none
 **/
-void TIM_SetInCap2Prescaler(TIM_Module* TIMx, uint32_t ICPrescaler)
+void TIM_SetInCap2Prescaler(TIM_Module *TIMx, uint32_t ICPrescaler)
 {
     /* Reset the IC2PSC Bits */
     TIMx->CCMOD1 &= (uint32_t)(~TIM_CCMOD1_IC2PSC);
     /* Set the IC2PSC value */
-    TIMx->CCMOD1 |= (uint32_t)(ICPrescaler << 8);
+    TIMx->CCMOD1 |= (uint32_t)(ICPrescaler << 8U);
 }
 
 /**
@@ -4180,7 +4173,7 @@ void TIM_SetInCap2Prescaler(TIM_Module* TIMx, uint32_t ICPrescaler)
 *\*\          - TIM_IC_PSC_DIV8
 *\*\return  none
 **/
-void TIM_SetInCap3Prescaler(TIM_Module* TIMx, uint32_t ICPrescaler)
+void TIM_SetInCap3Prescaler(TIM_Module *TIMx, uint32_t ICPrescaler)
 {
     /* Reset the IC3PSC Bits */
     TIMx->CCMOD2 &= (uint32_t)(~TIM_CCMOD2_IC3PSC);
@@ -4205,12 +4198,12 @@ void TIM_SetInCap3Prescaler(TIM_Module* TIMx, uint32_t ICPrescaler)
 *\*\          - TIM_IC_PSC_DIV8
 *\*\return  none
 **/
-void TIM_SetInCap4Prescaler(TIM_Module* TIMx, uint32_t ICPrescaler)
+void TIM_SetInCap4Prescaler(TIM_Module *TIMx, uint32_t ICPrescaler)
 {
     /* Reset the IC4PSC Bits */
     TIMx->CCMOD2 &= (uint32_t)(~TIM_CCMOD2_IC4PSC);
     /* Set the IC4PSC value */
-    TIMx->CCMOD2 |= (uint32_t)(ICPrescaler << 8);
+    TIMx->CCMOD2 |= (uint32_t)(ICPrescaler << 8U);
 }
 
 /**
@@ -4243,33 +4236,32 @@ void TIM_SetInCap4Prescaler(TIM_Module* TIMx, uint32_t ICPrescaler)
 *\*\          - TIM_TRIG_SEL_ETRF
 *\*\return  none
 **/
-void TIM_SelectInputTrig(TIM_Module* TIMx, uint32_t TIM_InputTriggerSource)
+void TIM_SelectInputTrig(TIM_Module *TIMx, uint32_t TIM_InputTriggerSource)
 {
-    uint32_t tmpsmctrl ;
-    uint32_t tmpinsel ;    
+    uint32_t tmpsmctrl;
+    uint32_t tmpinsel;
     /* Get the TIMx SMCTRL and TIMx INSEL register value */
     tmpsmctrl = TIMx->SMCTRL;
-    tmpinsel  = TIMx->INSEL;    
-    
+    tmpinsel  = TIMx->INSEL;
+
     /* Reset the TS Bits */
     tmpsmctrl &= (uint32_t)(~((uint32_t)TIM_SMCTRL_TSEL));
     /* Reset the ITRS Bits */
-    tmpinsel &= (uint32_t)(~((uint32_t)TIM_INSEL_ITRS));    
-    
+    tmpinsel &= (uint32_t)(~((uint32_t)TIM_INSEL_ITRS));
+
     if (IS_ITR_SEL(TIM_InputTriggerSource))
-    {    
+    {
         /* Set the Input Trigger source */
-        tmpinsel |= (uint32_t)TIM_InputTriggerSource;  
+        tmpinsel |= (uint32_t)TIM_InputTriggerSource;
     }
     else
     {
         /* Set the Input Trigger source */
         tmpsmctrl |= (uint32_t)TIM_InputTriggerSource;
-     
     }
     /* Write to TIMx SMCTRL and INSEL */
-    TIMx->SMCTRL = tmpsmctrl;          
-    TIMx->INSEL = tmpinsel;  
+    TIMx->SMCTRL = tmpsmctrl;
+    TIMx->INSEL  = tmpinsel;
 }
 
 /**
@@ -4294,14 +4286,14 @@ void TIM_SelectInputTrig(TIM_Module* TIMx, uint32_t TIM_InputTriggerSource)
 *\*\          - ExtTRGFilter can be a number between 0x0 and 0xF
 *\*\return  none
 **/
-void TIM_ConfigExtTrig(TIM_Module* TIMx,uint32_t TIM_ExtTRGPrescaler,uint32_t TIM_ExtTRGPolarity,uint32_t ExtTRGFilter)
+void TIM_ConfigExtTrig(TIM_Module *TIMx, uint32_t TIM_ExtTRGPrescaler, uint32_t TIM_ExtTRGPolarity, uint32_t ExtTRGFilter)
 {
-    uint32_t tmpsmctrl ;
+    uint32_t tmpsmctrl;
     tmpsmctrl = TIMx->SMCTRL;
     /* Reset the ETR Bits */
     tmpsmctrl &= (uint32_t)(~(TIM_SMCTRL_EXTPS | TIM_SMCTRL_EXTP | TIM_SMCTRL_EXTF));
     /* Set the Prescaler, the Filter value and the Polarity */
-    tmpsmctrl |= (uint32_t)(TIM_ExtTRGPrescaler |(TIM_ExtTRGPolarity | (ExtTRGFilter << (uint32_t)12)));
+    tmpsmctrl |= (uint32_t)(TIM_ExtTRGPrescaler | (TIM_ExtTRGPolarity | (ExtTRGFilter << (uint32_t)12U)));
     /* Write to TIMx SMCTRL */
     TIMx->SMCTRL = tmpsmctrl;
 }
@@ -4325,15 +4317,15 @@ void TIM_ConfigExtTrig(TIM_Module* TIMx,uint32_t TIM_ExtTRGPrescaler,uint32_t TI
 *\*\          - TIM_CAPETRSEL_5
 *\*\return  none
 **/
-void TIM_SelectETRInputSource(TIM_Module* TIMx, uint32_t TIM_ETRInputSource)
+void TIM_SelectETRInputSource(TIM_Module *TIMx, uint32_t TIM_ETRInputSource)
 {
-    uint32_t tmpinsel ;
+    uint32_t tmpinsel;
     tmpinsel = TIMx->INSEL;
     /* Reset the ETRS Bits */
     tmpinsel &= (uint32_t)(~TIM_INSEL_ETRS);
     /* Set the ETRS Bits */
     tmpinsel |= (uint32_t)TIM_ETRInputSource;
-    /* Write to TIMx SMCTRL */
+    /* Write to TIMx INSEL */
     TIMx->INSEL = tmpinsel;
 }
 
@@ -4353,7 +4345,7 @@ void TIM_SelectETRInputSource(TIM_Module* TIMx, uint32_t TIM_ETRInputSource)
 *\*\          - TIM_CLK_DIV4
 *\*\return  none
 **/
-void TIM_SetClkDiv(TIM_Module* TIMx, uint32_t TIM_CKD)
+void TIM_SetClkDiv(TIM_Module *TIMx, uint32_t TIM_CKD)
 {
     /* Reset the CKD Bits */
     TIMx->CTRL1 &= (uint32_t)(~TIM_CTRL1_CLKD);
@@ -4373,19 +4365,19 @@ void TIM_SetClkDiv(TIM_Module* TIMx, uint32_t TIM_CKD)
 *\*\          - GTIM4
 *\*\return  Capture Compare 1 Register value.
 **/
-uint32_t TIM_GetCap1(const TIM_Module* TIMx)
+uint32_t TIM_GetCap1(const TIM_Module *TIMx)
 {
-	uint32_t tmpccdat1 = 0;
+    uint32_t tmpccdat1 = 0U;
 
-    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx))) 
+    if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
         /* Get the Capture 1 Register value */
-    	tmpccdat1 = (uint32_t)((uint16_t)(TIMx->CCDAT1));
+        tmpccdat1 = (uint32_t)((uint16_t)(TIMx->CCDAT1));
     }
     else
     {
         /* Get the Capture 1 Register value */
-    	tmpccdat1 = (uint32_t)(TIMx->CCDAT1);
+        tmpccdat1 = (uint32_t)(TIMx->CCDAT1);
     }
 
     return tmpccdat1;
@@ -4403,19 +4395,19 @@ uint32_t TIM_GetCap1(const TIM_Module* TIMx)
 *\*\          - GTIM4
 *\*\return  Capture Compare 2 Register value.
 **/
-uint32_t TIM_GetCap2(const TIM_Module* TIMx)
+uint32_t TIM_GetCap2(const TIM_Module *TIMx)
 {
-	uint32_t tmpccdat2 = 0;
+    uint32_t tmpccdat2 = 0U;
 
     if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
         /* Get the Capture 2 Register value */
-    	tmpccdat2 = (uint32_t)((uint16_t)(TIMx->CCDAT2));
+        tmpccdat2 = (uint32_t)((uint16_t)(TIMx->CCDAT2));
     }
     else
     {
         /* Get the Capture 2 Register value */
-    	tmpccdat2 = (uint32_t)(TIMx->CCDAT2);
+        tmpccdat2 = (uint32_t)(TIMx->CCDAT2);
     }
 
     return tmpccdat2;
@@ -4433,19 +4425,19 @@ uint32_t TIM_GetCap2(const TIM_Module* TIMx)
 *\*\          - GTIM4
 *\*\return  Capture Compare 3 Register value.
 **/
-uint32_t TIM_GetCap3(const TIM_Module* TIMx)
+uint32_t TIM_GetCap3(const TIM_Module *TIMx)
 {
-	uint32_t tmpccdat3 = 0;
+    uint32_t tmpccdat3 = 0U;
 
     if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
         /* Get the Capture 3 Register value */
-    	tmpccdat3 = (uint32_t)((uint16_t)(TIMx->CCDAT3));
+        tmpccdat3 = (uint32_t)((uint16_t)(TIMx->CCDAT3));
     }
     else
     {
         /* Get the Capture 3 Register value */
-    	tmpccdat3 = (uint32_t)(TIMx->CCDAT3);
+        tmpccdat3 = (uint32_t)(TIMx->CCDAT3);
     }
 
     return tmpccdat3;
@@ -4463,19 +4455,19 @@ uint32_t TIM_GetCap3(const TIM_Module* TIMx)
 *\*\          - GTIM4
 *\*\return  Capture Compare 4 Register value.
 **/
-uint32_t TIM_GetCap4(const TIM_Module* TIMx)
+uint32_t TIM_GetCap4(const TIM_Module *TIMx)
 {
-	uint32_t tmpccdat4 = 0;
+    uint32_t tmpccdat4 = 0U;
 
     if ((IS_ATIM1_2_DEVICE(TIMx)) || (IS_GTIM3_4_DEVICE(TIMx)))
     {
         /* Get the Capture 4 Register value */
-    	tmpccdat4 = (uint32_t)((uint16_t)(TIMx->CCDAT4));
+        tmpccdat4 = (uint32_t)((uint16_t)(TIMx->CCDAT4));
     }
     else
     {
         /* Get the Capture 4 Register value */
-    	tmpccdat4 = (uint32_t)(TIMx->CCDAT4);
+        tmpccdat4 = (uint32_t)(TIMx->CCDAT4);
     }
 
     return tmpccdat4;
@@ -4489,12 +4481,11 @@ uint32_t TIM_GetCap4(const TIM_Module* TIMx)
 *\*\          - ATIM2
 *\*\return  Capture Compare 5 Register value.
 **/
-uint16_t TIM_GetCap5(const TIM_Module* TIMx)
+uint16_t TIM_GetCap5(const TIM_Module *TIMx)
 {
     /* Get the Capture 5 Register value */
     return (uint16_t)(TIMx->CCDAT5);
 }
-
 
 /**
 *\*\name    TIM_GetCap6
@@ -4504,9 +4495,9 @@ uint16_t TIM_GetCap5(const TIM_Module* TIMx)
 *\*\          - ATIM2
 *\*\return  Capture Compare 6 Register value.
 **/
-uint16_t TIM_GetCap6(const TIM_Module* TIMx)
+uint16_t TIM_GetCap6(const TIM_Module *TIMx)
 {
-    /* Get the Capture 1 Register value */
+    /* Get the Capture 6 Register value */
     return (uint16_t)(TIMx->CCDAT6);
 }
 
@@ -4518,7 +4509,7 @@ uint16_t TIM_GetCap6(const TIM_Module* TIMx)
 *\*\          - ATIM2
 *\*\return  Capture Compare 7 Register value.
 **/
-uint16_t TIM_GetCap7(const TIM_Module* TIMx)
+uint16_t TIM_GetCap7(const TIM_Module *TIMx)
 {
     /* Get the Capture 7 Register value */
     return (uint16_t)(TIMx->CCDAT7);
@@ -4532,7 +4523,7 @@ uint16_t TIM_GetCap7(const TIM_Module* TIMx)
 *\*\          - ATIM2
 *\*\return  Capture Compare 8 Register value.
 **/
-uint16_t TIM_GetCap8(const TIM_Module* TIMx)
+uint16_t TIM_GetCap8(const TIM_Module *TIMx)
 {
     /* Get the Capture 8 Register value */
     return (uint16_t)(TIMx->CCDAT8);
@@ -4546,7 +4537,7 @@ uint16_t TIM_GetCap8(const TIM_Module* TIMx)
 *\*\          - ATIM2
 *\*\return  Capture Compare 9 Register value.
 **/
-uint16_t TIM_GetCap9(const TIM_Module* TIMx)
+uint16_t TIM_GetCap9(const TIM_Module *TIMx)
 {
     /* Get the Capture 9 Register value */
     return (uint16_t)(TIMx->CCDAT9);
@@ -4560,7 +4551,7 @@ uint16_t TIM_GetCap9(const TIM_Module* TIMx)
 *\*\          - ATIM2
 *\*\return  Capture Compare 1D Register value.
 **/
-uint16_t TIM_GetCap1D(const TIM_Module* TIMx)
+uint16_t TIM_GetCap1D(const TIM_Module *TIMx)
 {
     /* Get the Capture 1D Register value */
     return (uint16_t)((TIMx->CCDAT1) >> 0x00000010U);
@@ -4574,7 +4565,7 @@ uint16_t TIM_GetCap1D(const TIM_Module* TIMx)
 *\*\          - ATIM2
 *\*\return  Capture Compare 2D Register value.
 **/
-uint16_t TIM_GetCap2D(const TIM_Module* TIMx)
+uint16_t TIM_GetCap2D(const TIM_Module *TIMx)
 {
     /* Get the Capture 2D Register value */
     return (uint16_t)((TIMx->CCDAT2) >> 0x00000010U);
@@ -4588,7 +4579,7 @@ uint16_t TIM_GetCap2D(const TIM_Module* TIMx)
 *\*\          - ATIM2
 *\*\return  Capture Compare 3D Register value.
 **/
-uint16_t TIM_GetCap3D(const TIM_Module* TIMx)
+uint16_t TIM_GetCap3D(const TIM_Module *TIMx)
 {
     /* Get the Capture 3D Register value */
     return (uint16_t)((TIMx->CCDAT3) >> 0x00000010U);
@@ -4602,7 +4593,7 @@ uint16_t TIM_GetCap3D(const TIM_Module* TIMx)
 *\*\          - ATIM2
 *\*\return  Capture Compare 4D Register value.
 **/
-uint16_t TIM_GetCap4D(const TIM_Module* TIMx)
+uint16_t TIM_GetCap4D(const TIM_Module *TIMx)
 {
     /* Get the Capture 4D Register value */
     return (uint16_t)((TIMx->CCDAT4) >> 0x00000010U);
@@ -4622,7 +4613,7 @@ uint16_t TIM_GetCap4D(const TIM_Module* TIMx)
 *\*\          - BTIM2
 *\*\return  Counter Register value.
 **/
-uint32_t TIM_GetCnt(const TIM_Module* TIMx)
+uint32_t TIM_GetCnt(const TIM_Module *TIMx)
 {
     /* Get the Counter Register value */
     return (uint32_t)(TIMx->CNT);
@@ -4642,7 +4633,7 @@ uint32_t TIM_GetCnt(const TIM_Module* TIMx)
 *\*\          - BTIM2
 *\*\return  Prescaler Register value.
 **/
-uint16_t TIM_GetPrescaler(const TIM_Module* TIMx)
+uint16_t TIM_GetPrescaler(const TIM_Module *TIMx)
 {
     /* Get the Prescaler Register value */
     return (uint16_t)(TIMx->PSC);
@@ -4662,9 +4653,9 @@ uint16_t TIM_GetPrescaler(const TIM_Module* TIMx)
 *\*\          - BTIM2
 *\*\return  AR Register value.
 **/
-uint32_t TIM_GetAutoReload(const TIM_Module* TIMx)
+uint32_t TIM_GetAutoReload(const TIM_Module *TIMx)
 {
-    /* Get the Prescaler Register value */
+    /* Get the AR Register value */
     return (uint32_t)(TIMx->AR);
 }
 
@@ -4691,7 +4682,7 @@ uint32_t TIM_GetAutoReload(const TIM_Module* TIMx)
 *\*\          - TIM_CC6EN
 *\*\return  The new state of TIM_FLAG (SET or RESET).
 **/
-FlagStatus TIM_GetCCENStatus(const TIM_Module* TIMx, uint32_t TIM_CCEN)
+FlagStatus TIM_GetCCENStatus(const TIM_Module *TIMx, uint32_t TIM_CCEN)
 {
     FlagStatus bitstatus;
 
@@ -4699,12 +4690,12 @@ FlagStatus TIM_GetCCENStatus(const TIM_Module* TIMx, uint32_t TIM_CCEN)
     {
         bitstatus = SET;
     }
-    
+
     else
     {
         bitstatus = RESET;
     }
-    
+
     return bitstatus;
 }
 
@@ -4745,9 +4736,9 @@ FlagStatus TIM_GetCCENStatus(const TIM_Module* TIMx, uint32_t TIM_CCEN)
 *\*\          - TIM_FLAG_C3LDCNT
 *\*\return  The new state of TIM_FLAG (SET or RESET).
 **/
-FlagStatus TIM_GetFlagStatus(const TIM_Module* TIMx, uint32_t TIM_FLAG)
+FlagStatus TIM_GetFlagStatus(const TIM_Module *TIMx, uint32_t TIM_FLAG)
 {
-    INTStatus bitstatus ;
+    INTStatus bitstatus;
 
     if ((TIMx->STS & TIM_FLAG) != (uint32_t)RESET)
     {
@@ -4797,7 +4788,7 @@ FlagStatus TIM_GetFlagStatus(const TIM_Module* TIMx, uint32_t TIM_FLAG)
 *\*\          - TIM_FLAG_C3LDCNT
 *\*\return  none.
 **/
-void TIM_ClearFlag(TIM_Module* TIMx, uint32_t TIM_FLAG)
+void TIM_ClearFlag(TIM_Module *TIMx, uint32_t TIM_FLAG)
 {
     /* Clear the flags */
     TIMx->STS = (uint32_t)(~TIM_FLAG);
@@ -4831,70 +4822,70 @@ void TIM_ClearFlag(TIM_Module* TIMx, uint32_t TIM_FLAG)
 *\*\          - TIM_INT_BREAK
 *\*\return  The new state of the TIM_IT(SET or RESET).
 **/
-INTStatus TIM_GetIntStatus(const TIM_Module* TIMx, uint32_t TIM_IT)
+INTStatus TIM_GetIntStatus(const TIM_Module *TIMx, uint32_t TIM_IT)
 {
-    INTStatus bitstatus ;
-    uint32_t itstatus = 0x0, itenable;
-    if(TIM_IT == TIM_INT_UPDATE)
+    INTStatus bitstatus;
+    uint32_t itstatus = 0x0U, itenable;
+    if (TIM_IT == TIM_INT_UPDATE)
     {
         itstatus = TIMx->STS & TIM_FLAG_UPDATE;
     }
-    else if(TIM_IT == TIM_INT_CC1)
+    else if (TIM_IT == TIM_INT_CC1)
     {
         itstatus = TIMx->STS & TIM_FLAG_CC1;
-    }  
-    else if(TIM_IT == TIM_INT_CC2)
+    }
+    else if (TIM_IT == TIM_INT_CC2)
     {
         itstatus = TIMx->STS & TIM_FLAG_CC2;
-    }  
-    else if(TIM_IT == TIM_INT_CC3)
+    }
+    else if (TIM_IT == TIM_INT_CC3)
     {
         itstatus = TIMx->STS & TIM_FLAG_CC3;
-    }  
-    else if(TIM_IT == TIM_INT_CC4)
+    }
+    else if (TIM_IT == TIM_INT_CC4)
     {
         itstatus = TIMx->STS & TIM_FLAG_CC4;
-    }  
-    else if(TIM_IT == TIM_INT_CC5)
+    }
+    else if (TIM_IT == TIM_INT_CC5)
     {
         itstatus = TIMx->STS & TIM_FLAG_CC5;
     }
-    else if(TIM_IT == TIM_INT_CC6)
+    else if (TIM_IT == TIM_INT_CC6)
     {
         itstatus = TIMx->STS & TIM_FLAG_CC6;
     }
-    else if(TIM_IT == TIM_INT_CC7)
+    else if (TIM_IT == TIM_INT_CC7)
     {
         itstatus = TIMx->STS & TIM_FLAG_CC7;
     }
-    else if(TIM_IT == TIM_INT_CC8)
+    else if (TIM_IT == TIM_INT_CC8)
     {
         itstatus = TIMx->STS & TIM_FLAG_CC8;
     }
-    else if(TIM_IT == TIM_INT_CC9)
+    else if (TIM_IT == TIM_INT_CC9)
     {
         itstatus = TIMx->STS & TIM_FLAG_CC9;
     }
-    else if(TIM_IT == TIM_INT_C3LDCNT)
+    else if (TIM_IT == TIM_INT_C3LDCNT)
     {
         itstatus = TIMx->STS & TIM_FLAG_C3LDCNT;
     }
-    else if(TIM_IT == TIM_INT_COM)
+    else if (TIM_IT == TIM_INT_COM)
     {
         itstatus = TIMx->STS & TIM_FLAG_COM;
-    }  
-    else if(TIM_IT == TIM_INT_TRIG)
+    }
+    else if (TIM_IT == TIM_INT_TRIG)
     {
         itstatus = TIMx->STS & TIM_FLAG_TRIG;
-    } 
-    else if(TIM_IT == TIM_INT_BREAK)
+    }
+    else if (TIM_IT == TIM_INT_BREAK)
     {
         itstatus = TIMx->STS & TIM_FLAG_BREAK;
-    }  
+    }
     else
     {
         /* No process */
-    } 
+    }
 
     itenable = TIMx->DINTEN & TIM_IT;
     if ((itstatus != (uint32_t)RESET) && (itenable != (uint32_t)RESET))
@@ -4927,7 +4918,6 @@ INTStatus TIM_GetIntStatus(const TIM_Module* TIMx, uint32_t TIM_IT)
 *\*\          - TIM_INT_CC5
 *\*\          - TIM_INT_CC6
 *\*\          - TIM_INT_CC7
-*\*\          - TIM_INT_CC7
 *\*\          - TIM_INT_CC8
 *\*\          - TIM_INT_CC9
 *\*\          - TIM_INT_C3LDCNT
@@ -4936,69 +4926,69 @@ INTStatus TIM_GetIntStatus(const TIM_Module* TIMx, uint32_t TIM_IT)
 *\*\          - TIM_INT_BREAK
 *\*\return  none.
 **/
-void TIM_ClrIntPendingBit(TIM_Module* TIMx, uint32_t TIM_IT)
+void TIM_ClrIntPendingBit(TIM_Module *TIMx, uint32_t TIM_IT)
 {
     /* Clear the IT pending Bit */
-    if(TIM_IT == TIM_INT_UPDATE)
+    if (TIM_IT == TIM_INT_UPDATE)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_UPDATE);
     }
-    else if(TIM_IT == TIM_INT_CC1)
+    else if (TIM_IT == TIM_INT_CC1)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_CC1);
-    }  
-    else if(TIM_IT == TIM_INT_CC2)
+    }
+    else if (TIM_IT == TIM_INT_CC2)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_CC2);
-    }  
-    else if(TIM_IT == TIM_INT_CC3)
+    }
+    else if (TIM_IT == TIM_INT_CC3)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_CC3);
-    }  
-    else if(TIM_IT == TIM_INT_CC4)
+    }
+    else if (TIM_IT == TIM_INT_CC4)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_CC4);
-    }  
-    else if(TIM_IT == TIM_INT_CC5)
+    }
+    else if (TIM_IT == TIM_INT_CC5)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_CC5);
-    }  
-    else if(TIM_IT == TIM_INT_CC6)
+    }
+    else if (TIM_IT == TIM_INT_CC6)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_CC6);
-    }  
-    else if(TIM_IT == TIM_INT_CC7)
+    }
+    else if (TIM_IT == TIM_INT_CC7)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_CC7);
-    }  
-    else if(TIM_IT == TIM_INT_CC8)
+    }
+    else if (TIM_IT == TIM_INT_CC8)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_CC8);
     }
-    else if(TIM_IT == TIM_INT_CC9)
+    else if (TIM_IT == TIM_INT_CC9)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_CC9);
     }
-    else if(TIM_IT == TIM_INT_C3LDCNT)
+    else if (TIM_IT == TIM_INT_C3LDCNT)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_C3LDCNT);
-    } 
-    else if(TIM_IT == TIM_INT_COM)
+    }
+    else if (TIM_IT == TIM_INT_COM)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_COM);
-    }  
-    else if(TIM_IT == TIM_INT_TRIG)
+    }
+    else if (TIM_IT == TIM_INT_TRIG)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_TRIG);
-    } 
-    else if(TIM_IT == TIM_INT_BREAK)
+    }
+    else if (TIM_IT == TIM_INT_BREAK)
     {
         TIMx->STS = (uint32_t)(~TIM_FLAG_BREAK);
-    }  
+    }
     else
     {
         /* No process */
-    }      
+    }
 }
 
 /**
@@ -5013,9 +5003,9 @@ void TIM_ClrIntPendingBit(TIM_Module* TIMx, uint32_t TIM_IT)
 *\*\          - TIM_UP_DOWN_COUNTING
 *\*\return  none
 **/
-void TIM_SelectCenterAlignTrig(TIM_Module* TIMx, uint32_t TIM_CenterAlignTriggerSource)
+void TIM_SelectCenterAlignTrig(TIM_Module *TIMx, uint32_t TIM_CenterAlignTriggerSource)
 {
-    uint32_t temp_value ;
+    uint32_t temp_value;
 
     temp_value = TIMx->CTRL1;
     /* Reset the CMODE Bits */
@@ -5027,7 +5017,7 @@ void TIM_SelectCenterAlignTrig(TIM_Module* TIMx, uint32_t TIM_CenterAlignTrigger
 }
 
 /**
-*\*\name    TIM_Asymmetric_Enable.
+*\*\name    TIM_AsymmetricEnable.
 *\*\fun     Enable or disable asymmetric mode in center-aligned.
 *\*\param   TIMx:
 *\*\          - ATIM1
@@ -5039,17 +5029,17 @@ void TIM_SelectCenterAlignTrig(TIM_Module* TIMx, uint32_t TIM_CenterAlignTrigger
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_AsymmetricEnable(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_AsymmetricEnable(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
-        /* Set the ASMMETRIC Bit */
-        TIMx->CTRL1 |= (uint32_t)TIM_CTRL1_ASMMETRIC;
+        /* Set the ASYMMETRIC Bit */
+        TIMx->CTRL1 |= (uint32_t)TIM_CTRL1_ASYMMETRIC;
     }
     else
     {
-        /* Reset the ASMMETRIC Bit */
-        TIMx->CTRL1 &= (uint32_t)(~((uint32_t)TIM_CTRL1_ASMMETRIC));
+        /* Reset the ASYMMETRIC Bit */
+        TIMx->CTRL1 &= (uint32_t)(~((uint32_t)TIM_CTRL1_ASYMMETRIC));
     }
 }
 
@@ -5069,7 +5059,7 @@ void TIM_AsymmetricEnable(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_OCxRefTriggerADC(TIM_Module* TIMx, uint32_t OCxRef, FunctionalState Cmd)
+void TIM_OCxRefTriggerADC(TIM_Module *TIMx, uint32_t OCxRef, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -5091,43 +5081,41 @@ void TIM_OCxRefTriggerADC(TIM_Module* TIMx, uint32_t OCxRef, FunctionalState Cmd
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_FiltInitStruct: 
+*\*\param   TIM_FiltInitStruct:
 *\*\          - refer to the definition of TIM_FiltInitType
 *\*\return  none
 **/
-void TIM_IC1FiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitStruct)
+void TIM_IC1FiltConfig(TIM_Module *TIMx, const TIM_FiltInitType *TIM_FiltInitStruct)
 {
     uint32_t temp_chxfilt = 0;
-    
-    temp_chxfilt &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_C1FILT_THRESH)) & 
-                             ((uint32_t) ~((uint32_t)TIM_C1FILT_WSIZE)));
 
-    temp_chxfilt |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18)) | 
-                             (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11)));
- 
+    temp_chxfilt = TIMx->C1FILT;
+    temp_chxfilt &= (uint32_t)(((uint32_t)~((uint32_t)TIM_C1FILT_THRESH)) & ((uint32_t)~((uint32_t)TIM_C1FILT_WSIZE)));
+
+    temp_chxfilt |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18)) | (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11)));
 
     TIMx->C1FILT = temp_chxfilt;
-    
-	if (TIMx == GTIM1)
-	{
-		RCC_ConfigGTIM1Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM2)
-	{
-		RCC_ConfigGTIM2Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM3)
-	{
-		RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM4)
-	{
-		RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else
-	{
-		/* No process */
-	}
+
+    if (TIMx == GTIM1)
+    {
+        RCC_ConfigGTIM1Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM2)
+    {
+        RCC_ConfigGTIM2Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM3)
+    {
+        RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM4)
+    {
+        RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else
+    {
+        /* No process */
+    }
 }
 
 /**
@@ -5138,42 +5126,41 @@ void TIM_IC1FiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitStr
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_FiltInitStruct: 
+*\*\param   TIM_FiltInitStruct:
 *\*\          - refer to the definition of TIM_FiltInitType
 *\*\return  none
 **/
-void TIM_IC2FiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitStruct)
+void TIM_IC2FiltConfig(TIM_Module *TIMx, const TIM_FiltInitType *TIM_FiltInitStruct)
 {
     uint32_t temp_chxfilt = 0;
-    
-    temp_chxfilt &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_C2FILT_THRESH)) & 
-                             ((uint32_t) ~((uint32_t)TIM_C2FILT_WSIZE)));
 
-    temp_chxfilt |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18)) | 
-                             (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11)));
+    temp_chxfilt = TIMx->C2FILT;
+    temp_chxfilt &= (uint32_t)(((uint32_t)~((uint32_t)TIM_C2FILT_THRESH)) & ((uint32_t)~((uint32_t)TIM_C2FILT_WSIZE)));
+
+    temp_chxfilt |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18)) | (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11)));
 
     TIMx->C2FILT = temp_chxfilt;
-	
-	if (TIMx == GTIM1)
-	{
-		RCC_ConfigGTIM1Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM2)
-	{
-		RCC_ConfigGTIM2Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM3)
-	{
-		RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM4)
-	{
-		RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else
-	{
-		/* No process */
-	}
+
+    if (TIMx == GTIM1)
+    {
+        RCC_ConfigGTIM1Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM2)
+    {
+        RCC_ConfigGTIM2Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM3)
+    {
+        RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM4)
+    {
+        RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else
+    {
+        /* No process */
+    }
 }
 
 /**
@@ -5184,42 +5171,41 @@ void TIM_IC2FiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitStr
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_FiltInitStruct: 
+*\*\param   TIM_FiltInitStruct:
 *\*\          - refer to the definition of TIM_FiltInitType
 *\*\return  none
 **/
-void TIM_IC3FiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitStruct)
+void TIM_IC3FiltConfig(TIM_Module *TIMx, const TIM_FiltInitType *TIM_FiltInitStruct)
 {
     uint32_t temp_chxfilt = 0;
-    
-    temp_chxfilt &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_C3FILT_THRESH)) & 
-                             ((uint32_t) ~((uint32_t)TIM_C3FILT_WSIZE)));
 
-    temp_chxfilt |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18)) | 
-                             (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11)));
+    temp_chxfilt = TIMx->C3FILT;
+    temp_chxfilt &= (uint32_t)(((uint32_t)~((uint32_t)TIM_C3FILT_THRESH)) & ((uint32_t)~((uint32_t)TIM_C3FILT_WSIZE)));
+
+    temp_chxfilt |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18)) | (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11)));
 
     TIMx->C3FILT = temp_chxfilt;
-	
+
     if (TIMx == GTIM1)
-	{
-		RCC_ConfigGTIM1Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM2)
-	{
-		RCC_ConfigGTIM2Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM3)
-	{
-		RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM4)
-	{
-		RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else
-	{
-		/* No process */
-	}
+    {
+        RCC_ConfigGTIM1Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM2)
+    {
+        RCC_ConfigGTIM2Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM3)
+    {
+        RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM4)
+    {
+        RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else
+    {
+        /* No process */
+    }
 }
 
 /**
@@ -5230,42 +5216,41 @@ void TIM_IC3FiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitStr
 *\*\          - GTIM2
 *\*\          - GTIM3
 *\*\          - GTIM4
-*\*\param   TIM_FiltInitStruct: 
+*\*\param   TIM_FiltInitStruct:
 *\*\          - refer to the definition of TIM_FiltInitType
 *\*\return  none
 **/
-void TIM_IC4FiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitStruct)
+void TIM_IC4FiltConfig(TIM_Module *TIMx, const TIM_FiltInitType *TIM_FiltInitStruct)
 {
     uint32_t temp_chxfilt = 0;
-    
-    temp_chxfilt &= (uint32_t)(((uint32_t) ~((uint32_t)TIM_C4FILT_THRESH)) & 
-                             ((uint32_t) ~((uint32_t)TIM_C4FILT_WSIZE)));
 
-    temp_chxfilt |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18)) | 
-                             (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11)));
+    temp_chxfilt = TIMx->C4FILT;
+    temp_chxfilt &= (uint32_t)(((uint32_t)~((uint32_t)TIM_C4FILT_THRESH)) & ((uint32_t)~((uint32_t)TIM_C4FILT_WSIZE)));
+
+    temp_chxfilt |= (uint32_t)((TIM_FiltInitStruct->ThreshHold << (uint32_t)(0x18)) | (TIM_FiltInitStruct->WindowSize << (uint32_t)(0x11)));
 
     TIMx->C4FILT = temp_chxfilt;
-	
-	if (TIMx == GTIM1)
-	{
-		RCC_ConfigGTIM1Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM2)
-	{
-		RCC_ConfigGTIM2Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM3)
-	{
-		RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else if (TIMx == GTIM4)
-	{
-		RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
-	}
-	else
-	{
-		/* No process */
-	}
+
+    if (TIMx == GTIM1)
+    {
+        RCC_ConfigGTIM1Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM2)
+    {
+        RCC_ConfigGTIM2Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM3)
+    {
+        RCC_ConfigGTIM3Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else if (TIMx == GTIM4)
+    {
+        RCC_ConfigGTIM4Filter(TIM_FiltInitStruct->Prescaler);
+    }
+    else
+    {
+        /* No process */
+    }
 }
 
 /**
@@ -5281,7 +5266,7 @@ void TIM_IC4FiltConfig(TIM_Module* TIMx, const TIM_FiltInitType* TIM_FiltInitStr
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_IC1FiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
+void TIM_IC1FiltEnable(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -5308,7 +5293,7 @@ void TIM_IC1FiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_IC2FiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
+void TIM_IC2FiltEnable(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -5335,7 +5320,7 @@ void TIM_IC2FiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_IC3FiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
+void TIM_IC3FiltEnable(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -5362,7 +5347,7 @@ void TIM_IC3FiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_IC4FiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
+void TIM_IC4FiltEnable(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -5391,7 +5376,7 @@ void TIM_IC4FiltEnable(TIM_Module* TIMx,FunctionalState Cmd)
 *\*\          - TIM_C4FILTO
 *\*\return  The new state of TIM_FiltFlag (SET or RESET).
 **/
-FlagStatus TIM_GetFiltStatus(const TIM_Module* TIMx, uint32_t TIM_FiltFlag)
+FlagStatus TIM_GetFiltStatus(const TIM_Module *TIMx, uint32_t TIM_FiltFlag)
 {
     FlagStatus bitstatus;
 
@@ -5410,14 +5395,13 @@ FlagStatus TIM_GetFiltStatus(const TIM_Module* TIMx, uint32_t TIM_FiltFlag)
 *\*\name    TIM_TrgiLoadLvrToCNTEnable
 *\*\fun     The TRGI signal triggers the loading of the ENCLVR value into the CNT.
 *\*\param   TIMx (The input parameters must be the following values):
-*\*\          - GTIM1
 *\*\          - GTIM2
 *\*\param   Cmd :
 *\*\          - ENABLE
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_TrgiLoadLvrToCNTEnable(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_TrgiLoadLvrToCNTEnable(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -5429,7 +5413,6 @@ void TIM_TrgiLoadLvrToCNTEnable(TIM_Module* TIMx, FunctionalState Cmd)
         /* Disable the TRGI signal triggers the loading of the ENCLVR value into the CNT. */
         TIMx->CTRL1 &= (uint32_t)(~TIM_CTRL1_TRGLDCNTEN);
     }
-
 }
 
 /**
@@ -5440,19 +5423,19 @@ void TIM_TrgiLoadLvrToCNTEnable(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - GTIM2
 *\*\return  ENCLVR Register value.
 **/
-uint32_t TIM_GetLVR(const TIM_Module* TIMx)
+uint32_t TIM_GetLVR(const TIM_Module *TIMx)
 {
-	uint32_t tmpenclvr = 0;
+    uint32_t tmpenclvr = 0U;
 
-    if(TIMx == GTIM2)
+    if (TIMx == GTIM2)
     {
         /* Get ENCLVR Register value */
-    	tmpenclvr = (uint32_t)((uint16_t)(TIMx->ENCLVR));
+        tmpenclvr = (uint32_t)((uint16_t)(TIMx->ENCLVR));
     }
     else
     {
         /* Get ENCLVR Register value */
-    	tmpenclvr = (uint32_t)(TIMx->ENCLVR);
+        tmpenclvr = (uint32_t)(TIMx->ENCLVR);
     }
 
     return tmpenclvr;
@@ -5469,7 +5452,7 @@ uint32_t TIM_GetLVR(const TIM_Module* TIMx)
 *\*\          - DISABLE
 *\*\return  none
 **/
-void TIM_CH3LoadLvrToCNTEnable(TIM_Module* TIMx, FunctionalState Cmd)
+void TIM_CH3LoadLvrToCNTEnable(TIM_Module *TIMx, FunctionalState Cmd)
 {
     if (Cmd != DISABLE)
     {
@@ -5481,7 +5464,6 @@ void TIM_CH3LoadLvrToCNTEnable(TIM_Module* TIMx, FunctionalState Cmd)
         /* Disable the CH3 triggers the loading of the ENCLVR value into the CNT. */
         TIMx->ENCMCTRL &= (uint32_t)(~TIM_ENCMCTRL_C3LDCNTEN);
     }
-
 }
 
 /**
@@ -5497,9 +5479,9 @@ void TIM_CH3LoadLvrToCNTEnable(TIM_Module* TIMx, FunctionalState Cmd)
 *\*\          - TIM_CH3_POLARITY_FALLING
 *\*\return  none
 **/
-void TIM_CH3LoadLvrToCNTPolarity(TIM_Module* TIMx, uint32_t Polarity)
+void TIM_CH3LoadLvrToCNTPolarity(TIM_Module *TIMx, uint32_t Polarity)
 {
-    uint32_t tmpencmctrl ;
+    uint32_t tmpencmctrl;
     tmpencmctrl = TIMx->ENCMCTRL;
     /* Config the C3LDCNTSEL Bit */
     tmpencmctrl &= (uint32_t)(~((uint32_t)TIM_ENCMCTRL_C3LDCNTSEL));
@@ -5516,7 +5498,7 @@ void TIM_CH3LoadLvrToCNTPolarity(TIM_Module* TIMx, uint32_t Polarity)
 *\*\          - GTIM2
 *\*\return  ENCDAT Register value.
 **/
-uint32_t TIM_GetENCDAT(const TIM_Module* TIMx)
+uint32_t TIM_GetENCDAT(const TIM_Module *TIMx)
 {
     /* Get ENCDAT Register value */
     return (uint32_t)TIMx->ENCDAT;
@@ -5530,9 +5512,9 @@ uint32_t TIM_GetENCDAT(const TIM_Module* TIMx)
 *\*\          - GTIM2
 *\*\return  Sign of TIMx ENCDAT value.
 **/
-uint32_t TIM_GetENCDATSign(const TIM_Module* TIMx)
+uint32_t TIM_GetENCDATSign(const TIM_Module *TIMx)
 {
     /* Get the sign of TIMx ENCDAT value. */
-    return (uint32_t)(TIMx->ENCMCTRL >> 31);
+    return (uint32_t)(TIMx->ENCMCTRL >> 31U);
 }
 

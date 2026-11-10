@@ -1,55 +1,55 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
 *\*\file main.c
-*\*\author Nsing
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 #include "main.h"
 #include "smartcard.h"
@@ -83,17 +83,17 @@ void SC__HotReset_handle(void)
     USART_InitType USART_InitStructure;
     RCC_ClocksType RCC_ClocksStatus;
     F_HotReset = 1;
-    
+
     log_info("USARTx Smart_Card Hot_Reset\r\n");
-    SC_InitCfg.Clk_Div   = 40;    //SC_USART Clock set to (PCLK1 = SC_USART MHZ / Clk_Div)MHz 
-    SC_InitCfg.GT        = 16;
-    SC_InitCfg.StopBits  = 3;
-    SC_InitCfg.Parity    = 1;
-    SC_InitCfg.NackEn    = 0;    // 0 - Disable NACK, 1 - Enable NACK
-    SCState = SC_POWER_ON;
+    SC_InitCfg.Clk_Div  = 40;    //SC_USART Clock set to (PCLK1 = SC_USART MHZ / Clk_Div)MHz
+    SC_InitCfg.GT       = 16;
+    SC_InitCfg.StopBits = 3;
+    SC_InitCfg.Parity   = 1;
+    SC_InitCfg.NackEn   = 0;    // 0 - Disable NACK, 1 - Enable NACK
+    SCState             = SC_POWER_ON;
     SC_APDU_Init(&SC_ADPU, 0x00, SC_GET_A2R, 0x00, 0x00, 0x00, NULL, NULL);
     RCC_GetClocksFreqValue(&RCC_ClocksStatus);
-    /*reset BaudRate*/
+    /* reset BaudRate */
     USART_StructInit(&USART_InitStructure);
     USART_InitStructure.BaudRate            = RCC_ClocksStatus.Pclk1Freq / (372 * ((SC_USART->GTP & (uint16_t)0x00FF) * 2));
     USART_InitStructure.WordLength          = USART_WL_9B;
@@ -103,7 +103,7 @@ void SC__HotReset_handle(void)
     USART_InitStructure.OverSampling        = USART_16OVER;
     USART_InitStructure.HardwareFlowControl = USART_HFCTRL_NONE;
     USART_Init(SC_USART, &USART_InitStructure);
-    while(SCState != SC_ACTIVE_ON_T0)
+    while (SCState != SC_ACTIVE_ON_T0)
     {
         SC_Handler(&SCState, &SC_ADPU, &SC_Responce, &SC_InitCfg);
     }
@@ -125,14 +125,14 @@ void Test_PSAM(void)
     SC_ADPU_Commands SC_ADPU;
     SC_ADPU_Responce SC_Responce;
     log_info("USARTx Smart_Card Test Start\r\n");
-    SC_InitCfg.Clk_Div   = 10;    //SC_USART Clock set to (PCLK1 = SC_USART MHZ / Clk_Div) MHz
-    SC_InitCfg.GT        = 16;
-    SC_InitCfg.StopBits  = 3;
-    SC_InitCfg.Parity    = 1;
-    SC_InitCfg.NackEn    = 0;    // 0 - Disable NACK, 1 - Enable NACK
-    SCState = SC_POWER_ON;
+    SC_InitCfg.Clk_Div  = 10;    //SC_USART Clock set to (PCLK1 = SC_USART MHZ / Clk_Div) MHz
+    SC_InitCfg.GT       = 16;
+    SC_InitCfg.StopBits = 3;
+    SC_InitCfg.Parity   = 1;
+    SC_InitCfg.NackEn   = 0;    // 0 - Disable NACK, 1 - Enable NACK
+    SCState             = SC_POWER_ON;
     SC_APDU_Init(&SC_ADPU, 0x00, SC_GET_A2R, 0x00, 0x00, 0x00, NULL, 0);
-    while(SCState != SC_ACTIVE_ON_T0)
+    while (SCState != SC_ACTIVE_ON_T0)
     {
         SC_Handler(&SCState, &SC_ADPU, &SC_Responce, &SC_InitCfg);
     }
@@ -140,46 +140,45 @@ void Test_PSAM(void)
     SC_PPSConfig();
     SC_APDU_Init(&SC_ADPU, 0x00, 0x84, 0x00, 0x00, 0x00, NULL, 8);
     SC_Handler(&SCState, &SC_ADPU, &SC_Responce, &SC_InitCfg);
-    for(i = 0; i < SC_ADPU.Body.LE; i++)
+    for (i = 0; i < SC_ADPU.Body.LE; i++)
     {
         log_info("\r\n SC_Responce.Data[%d] = 0x%02x \r\n", i, SC_Responce.Data[i]);
     }
     printf("\r\n SC_Responce.SW1 = 0x%02x \r\n", SC_Responce.SW1);
     printf("\r\n SC_Responce.SW2 = 0x%02x \r\n", SC_Responce.SW2);
-    if((SC_Responce.SW1 == 0x90) && (SC_Responce.SW2 == 0x00))
+    if ((SC_Responce.SW1 == 0x90) && (SC_Responce.SW2 == 0x00))
     {
         log_info("\r\n SmartCard command normally completed \r\n");
         log_info("get rand success!\r\n");
-        for(i = 0; i < SC_ADPU.Body.LE; i++)
+        for (i = 0; i < SC_ADPU.Body.LE; i++)
         {
             printf("%02x ", SC_Responce.Data[i]);
         }
         log_info("\r\n");
     }
-    else if((SC_Responce.SW1 == 0x6E) && (SC_Responce.SW2 == 0x00))
+    else if ((SC_Responce.SW1 == 0x6E) && (SC_Responce.SW2 == 0x00))
     {
         log_info("\r\n SmartCard CLA not supported \r\n");
     }
-    else if((SC_Responce.SW1 == 0x6D) && (SC_Responce.SW2 == 0x00))
+    else if ((SC_Responce.SW1 == 0x6D) && (SC_Responce.SW2 == 0x00))
     {
         log_info("\r\n SmartCard CLA supported, but INS not programmed or invalid \r\n");
     }
-    else if((SC_Responce.SW1 == 0x6B) && (SC_Responce.SW2 == 0x00))
+    else if ((SC_Responce.SW1 == 0x6B) && (SC_Responce.SW2 == 0x00))
     {
         log_info("\r\n SmartCard CLA INS supported, but P1 P2 incorrect \r\n");
     }
-    else if((SC_Responce.SW1 == 0x67) && (SC_Responce.SW2 == 0x00))
+    else if ((SC_Responce.SW1 == 0x67) && (SC_Responce.SW2 == 0x00))
     {
         log_info("\r\n SmartCard CLA INS P1 P2 supported, but P3 incorrect \r\n");
     }
-    else if((SC_Responce.SW1 == 0x6F) && (SC_Responce.SW2 == 0x00))
+    else if ((SC_Responce.SW1 == 0x6F) && (SC_Responce.SW2 == 0x00))
     {
         log_info("\r\n SmartCard command not supported and no precise diagnosis given \r\n");
     }
     SC__HotReset_handle();
     SC_DeInit();
 }
-
 
 /**
 *\*\name    main.

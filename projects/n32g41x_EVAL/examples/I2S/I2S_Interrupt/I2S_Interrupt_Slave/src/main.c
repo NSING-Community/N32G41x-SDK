@@ -1,29 +1,61 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
+*     Copyright (c) 2026, NSING Technologies Inc.
 *
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter
-* referred to as Nsing). This software, and the product of Nsing described herein
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
+* thereto (if any) for identification purposes only.
+*
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
+* the latest version of this software before placing orders.
+
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
+* no responsibility for the accuracy and reliability of this software.
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
+* consequential damages arising in any way out of the use of this software or the Product.
+*
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
+* damage. Such applications are deemed, "Insecure Usage".
+*
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
 * harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
+
+*     Any express or implied warranty with regard to this software or the Product, including,but not
+* limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
+* are disclaimed to the fullest extent permitted by law.
+
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
+* or otherwise distribute this software for any purposes, in whole or in part.
+*
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
+* the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
-*\*\file      main.c
-*\*\author    Nsing
-*\*\version   v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\file main.c
+*\*\author NSING
+*\*\version v1.0.0
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 #include "main.h"
 #include "misc.h"
 #include "log.h"
 
-/** I2S_Interrupt_Slave - Board-to-board test with I2S_Interrupt (Master) **/
+/*** I2S_Interrupt_Slave - Board-to-board test with I2S_Interrupt (Master) ***/
 
 typedef enum
 {
@@ -38,14 +70,14 @@ const uint16_t I2S_Expected_Buffer[BufferSize] = {0x0102, 0x0304, 0x0506, 0x0708
                                                   0x3132, 0x3334, 0x3536, 0x3738, 0x393A, 0x3B3C, 0x3D3E, 0x3F40};
 
 uint16_t I2S_Buffer_Rx[BufferSize];
-__IO uint32_t RxIdx = 0;
+__IO uint32_t RxIdx       = 0;
 TestStatus TransferStatus = FAILED;
 
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
 void NVIC_Configuration(void);
 void I2S_Configuration(void);
-TestStatus Buffercmp(uint16_t* pBuffer1, const uint16_t* pBuffer2, uint16_t BufferLength);
+TestStatus Buffercmp(uint16_t *pBuffer1, const uint16_t *pBuffer2, uint16_t BufferLength);
 
 /**
 *\*\name    main.
@@ -101,10 +133,10 @@ int main(void)
 **/
 void RCC_Configuration(void)
 {
-	/* Enable GPIO clock */
+    /* Enable GPIO clock */
     RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_GPIO, ENABLE);
-	
-	/* Enable SPI1/I2S1 clock */
+
+    /* Enable SPI1/I2S1 clock */
     RCC_EnableAPB2PeriphClk(I2S_SLAVE_CLK, ENABLE);
 }
 
@@ -149,7 +181,7 @@ void NVIC_Configuration(void)
 
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
-	/* SPI1/I2S1 IRQ channel configuration */
+    /* SPI1/I2S1 IRQ channel configuration */
     NVIC_InitStructure.NVIC_IRQChannel                   = I2S_SLAVE_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority        = 0;
@@ -171,10 +203,10 @@ void I2S_Configuration(void)
 
     SPI_I2S_DeInit(I2S_SLAVE);
 
-	/* Configure I2S clock source as system clock */
+    /* Configure I2S clock source as system clock */
     RCC_ConfigI2SClk(RCC_I2S_CLKSEL_SYS);
 
-	/* I2S configuration */
+    /* I2S configuration */
     I2S_InitStruct(&I2S_InitStructure);
     I2S_InitStructure.Standard       = I2S_STD_PHILLIPS;
     I2S_InitStructure.DataFormat     = I2S_DATA_FMT_16BITS_EXTENDED;
@@ -182,11 +214,11 @@ void I2S_Configuration(void)
     I2S_InitStructure.AudioFrequency = I2S_AUDIO_FREQ_48K;
     I2S_InitStructure.CLKPOL         = I2S_CLKPOL_LOW;
 
-	/* Get system clock frequency for I2S clock calculation */
+    /* Get system clock frequency for I2S clock calculation */
     RCC_GetClocksFreqValue(&RCC_Clocks);
     I2S_InitStructure.ClkSrcFrequency = RCC_Clocks.SysclkFreq;
 
-	/* Configure I2S1 as Slave RX */
+    /* Configure I2S1 as Slave RX */
     I2S_InitStructure.I2sMode = I2S_MODE_SlAVE_RX;
     I2S_Init(I2S_SLAVE, &I2S_InitStructure);
 }
@@ -199,7 +231,7 @@ void I2S_Configuration(void)
 *\*\param   BufferLength Number of half-words to compare
 *\*\return  PASSED if all match, FAILED otherwise
 **/
-TestStatus Buffercmp(uint16_t* pBuffer1, const uint16_t* pBuffer2, uint16_t BufferLength)
+TestStatus Buffercmp(uint16_t *pBuffer1, const uint16_t *pBuffer2, uint16_t BufferLength)
 {
     while (BufferLength--)
     {
@@ -222,7 +254,7 @@ TestStatus Buffercmp(uint16_t* pBuffer1, const uint16_t* pBuffer2, uint16_t Buff
 *\*\param   line    Line number in source file
 *\*\return  none
 **/
-void assert_failed(const uint8_t* expr, const uint8_t* file, uint32_t line)
+void assert_failed(const uint8_t *expr, const uint8_t *file, uint32_t line)
 {
     while (1)
     {

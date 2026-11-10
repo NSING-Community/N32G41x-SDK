@@ -1,38 +1,38 @@
 /**
-*     Copyright (c) 2025, NSING Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter 
-* referred to as NSING). This software, and the product of NSING described herein 
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
 * (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     NSING does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     NSING reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact NSING and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although NSING has attempted to provide accurate and reliable information, NSING assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
 *     NSING Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
@@ -40,8 +40,8 @@
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
 *     NSING products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
@@ -49,7 +49,7 @@
 *\*\file crc_dma.c
 *\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, NSING Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
 #include "main.h"
@@ -57,8 +57,8 @@
 DMA_InitType DMA_InitStructure;
 
 uint32_t CRC_original_word_data[114] =
-{
-    0x00001021, 0x20423063, 0x408450a5, 0x60c670e7, 0x9129a14a, 0xb16bc18c,
+    {
+        0x00001021, 0x20423063, 0x408450a5, 0x60c670e7, 0x9129a14a, 0xb16bc18c,
     0xd1ade1ce, 0xf1ef1231, 0x32732252, 0x52b54294, 0x72f762d6, 0x93398318,
     0xa35ad3bd, 0xc39cf3ff, 0xe3de2462, 0x34430420, 0x64e674c7, 0x44a45485,
     0xa56ab54b, 0x85289509, 0xf5cfc5ac, 0xd58d3653, 0x26721611, 0x063076d7,
@@ -80,8 +80,8 @@ uint32_t CRC_original_word_data[114] =
 };
 
 uint8_t CRC_original_byte_data[456] =
-{
-    0x00, 0x00, 0x10, 0x21, 0x20, 0x42, 0x30, 0x63, 0x40, 0x84, 0x50, 0xa5, 0x60, 0xc6, 0x70, 0xe7, 0x91, 0x29, 0xa1, 0x4a, 0xb1, 0x6b, 0xc1, 0x8c,
+    {
+        0x00, 0x00, 0x10, 0x21, 0x20, 0x42, 0x30, 0x63, 0x40, 0x84, 0x50, 0xa5, 0x60, 0xc6, 0x70, 0xe7, 0x91, 0x29, 0xa1, 0x4a, 0xb1, 0x6b, 0xc1, 0x8c,
     0xd1, 0xad, 0xe1, 0xce, 0xf1, 0xef, 0x12, 0x31, 0x32, 0x73, 0x22, 0x52, 0x52, 0xb5, 0x42, 0x94, 0x72, 0xf7, 0x62, 0xd6, 0x93, 0x39, 0x83, 0x18,
     0xa3, 0x5a, 0xd3, 0xbd, 0xc3, 0x9c, 0xf3, 0xff, 0xe3, 0xde, 0x24, 0x62, 0x34, 0x43, 0x04, 0x20, 0x64, 0xe6, 0x74, 0xc7, 0x44, 0xa4, 0x54, 0x85,
     0xa5, 0x6a, 0xb5, 0x4b, 0x85, 0x28, 0x95, 0x09, 0xf5, 0xcf, 0xc5, 0xac, 0xd5, 0x8d, 0x36, 0x53, 0x26, 0x72, 0x16, 0x11, 0x06, 0x30, 0x76, 0xd7,
@@ -109,7 +109,7 @@ uint8_t CRC_original_byte_data[456] =
 **/
 void TestCrc32AndDma(void)
 {
-    uint32_t CRC32_Value = 0;
+    uint32_t CRC32_Value      = 0;
     uint32_t temp_crc_32_code = 0;
 
     /* Memory -> CRC32DAT */
@@ -167,10 +167,10 @@ void TestCrc32AndDma(void)
 **/
 void TestCrc16AndDma(void)
 {
-    uint16_t CRC16_Value = 0;
-    uint8_t  LRC_Value = 0xAA;
+    uint16_t CRC16_Value      = 0;
+    uint8_t LRC_Value         = 0xAA;
     uint16_t temp_crc_16_code = 0;
-    uint8_t  temp_lrc_code = 0xAA;
+    uint8_t temp_lrc_code     = 0xAA;
 
     __CRC16_SetCrc(0x00);
     __CRC16_SetLRC(0x00);
@@ -196,7 +196,7 @@ void TestCrc16AndDma(void)
     DMA_DeInit(DMA_CH1);
 
     CRC16_Value = __CRC16_GetCrc();
-    LRC_Value = __CRC16_GetLRC();
+    LRC_Value   = __CRC16_GetLRC();
 
     printf("The CRC 16 code after Memory->CRC16DAT DMA transmission is %04x.\r\n", __CRC16_GetCrc());
     if (CRC16_Value != 0x5268)

@@ -1,62 +1,61 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
 *\*\file n32g41x_crc.c
-*\*\author Nsing
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 #include "n32g41x_crc.h"
 
-/** CRC Private Defines **/
+/*** CRC Private Defines ***/
 
-
-/** CRC Driving Functions Declaration **/
+/*** CRC Driving Functions Declaration ***/
 
 /**
 *\*\name    CRC32_ResetCrc.
@@ -79,9 +78,9 @@ void CRC32_ResetCrc(void)
 **/
 uint32_t CRC32_CalcCrc(uint32_t Data)
 {
-		/* Write data to the CRC32DAT register */
+    /* Write data to the CRC32DAT register */
     CRC->CRC32DAT = Data;
-		/* Returns the computed CRC result */
+    /* Returns the computed CRC result */
     return (CRC->CRC32D);
 }
 
@@ -94,16 +93,16 @@ uint32_t CRC32_CalcCrc(uint32_t Data)
 *\*\          - length of the buffer to be computed
 *\*\return  32-bit CRC
 **/
-uint32_t CRC32_CalcBufCrc(const uint32_t pBuffer[],  uint32_t BufferLength)
+uint32_t CRC32_CalcBufCrc(const uint32_t pBuffer[], uint32_t BufferLength)
 {
     uint32_t index;
 
-    for (index = 0; index < BufferLength; index++)
+    for (index = 0U; index < BufferLength; index++)
     {
-				/* Write data to the CRC32DAT register */
+        /* Write data to the CRC32DAT register */
         CRC->CRC32DAT = pBuffer[index];
     }
-		/* Returns the computed CRC result */
+    /* Returns the computed CRC result */
     return (CRC->CRC32D);
 }
 
@@ -115,20 +114,20 @@ uint32_t CRC32_CalcBufCrc(const uint32_t pBuffer[],  uint32_t BufferLength)
 **/
 uint32_t CRC32_GetCrc(void)
 {
-	/* Returns the computed CRC result */
+    /* Returns the computed CRC result */
     return (CRC->CRC32D);
 }
 
 /**
 *\*\name    CRC32_SetIDat.
-*\*\fun     Stores a 8-bit data in the Independent Data(ID) register.
+*\*\fun     Stores an 8-bit data in the Independent Data(ID) register.
 *\*\param   IDValue :
 *\*\          - 8-bit value to be stored in the ID register
 *\*\return  none
 **/
 void CRC32_SetIDat(uint8_t IDValue)
 {
-	 /* storage of 8-bit data */
+    /* storage of 8-bit data */
     CRC->CRC32IDAT = IDValue;
 }
 
@@ -140,7 +139,7 @@ void CRC32_SetIDat(uint8_t IDValue)
 **/
 uint8_t CRC32_GetIDat(void)
 {
-		/* Returns the 8-bit data */
+    /* Returns the 8-bit data */
     return (CRC->CRC32IDAT);
 }
 
@@ -196,22 +195,22 @@ void __CRC16_SetCleanDisable(void)
 **/
 uint16_t __CRC16_CalcCrc(uint8_t Data)
 {
-		/* Write data to the CRC16DAT register */
+    /* Write data to the CRC16DAT register */
     CRC->CRC16DAT = Data;
-	 /* Returns the computed CRC16 result */
+    /* Returns the computed CRC16 result */
     return (CRC->CRC16D);
 }
 
 /**
 *\*\name    __CRC16_SetCrc.
-*\*\fun     write a 8-bit data in the 16-bit CRC Data register.
+*\*\fun     Writes an 8-bit data to the CRC16 data register (CRC16DAT).
 *\*\param   Data :
-*\*\          - 8-bit data value to be writed in the 16-bit CRC Data register
+*\*\          - 8-bit data value to be written to the CRC16 data register
 *\*\return  none
 **/
 void __CRC16_SetCrc(uint8_t Data)
 {
-		/* Writes 8-bit data to the CRC16DAT register */
+    /* Writes 8-bit data to the CRC16DAT register */
     CRC->CRC16DAT = Data;
 }
 /**
@@ -222,7 +221,7 @@ void __CRC16_SetCrc(uint8_t Data)
 **/
 uint16_t __CRC16_GetCrc(void)
 {
-		/* Returns the CRC16 calculation result */
+    /* Returns the CRC16 calculation result */
     return (CRC->CRC16D);
 }
 
@@ -235,7 +234,7 @@ uint16_t __CRC16_GetCrc(void)
 **/
 void __CRC16_SetLRC(uint8_t Data)
 {
-		/* Write LRC to verify the initial value */
+    /* Write LRC to verify the initial value */
     CRC->LRC = Data;
 }
 
@@ -247,7 +246,7 @@ void __CRC16_SetLRC(uint8_t Data)
 **/
 uint8_t __CRC16_GetLRC(void)
 {
-		/* Returns the LRC check value */
+    /* Returns the LRC check value */
     return (CRC->LRC);
 }
 
@@ -264,13 +263,13 @@ uint16_t CRC16_CalcBufCrc(const uint8_t pBuffer[], uint32_t BufferLength)
 {
     uint32_t index;
 
-    CRC->CRC16D = 0x00;
-    for (index = 0; index < BufferLength; index++)
+    CRC->CRC16D = CRC_CRC16D_CLEAR_VALUE;
+    for (index = 0U; index < BufferLength; index++)
     {
-			/* Write data to the CRC16DAT register */
+        /* Write data to the CRC16DAT register */
         CRC->CRC16DAT = pBuffer[index];
     }
-		/* Returns the computed CRC16 result */
+    /* Returns the computed CRC16 result */
     return (CRC->CRC16D);
 }
 

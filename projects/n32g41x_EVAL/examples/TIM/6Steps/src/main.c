@@ -1,34 +1,34 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
+*     Copyright (c) 2026, NSING Technologies Inc.
 *
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter
-* referred to as Nsing). This software, and the product of Nsing described herein
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
 * intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and
-* improvements to this software at any time without notice. Please contact Nsing and obtain
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
 *
 *     It is the responsibility of the user of this software to properly design, program, and test
 * the functionality and safety of any application made of this information and any resulting product.
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
 * malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
 * harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
@@ -36,20 +36,20 @@
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
 * whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
 * User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
-*\*\file      main.c
-*\*\author    Nsing
-*\*\version   v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\file main.c
+*\*\author NSING
+*\*\version v1.0.0
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
 #include "main.h"
@@ -65,7 +65,7 @@ TIM_BDTRInitType TIM_BDTRInitStructure;
 **/
 int main(void)
 {
-    SetSysClockToPLL(RCC_PLL_SRC_HSE,72000000);
+    SetSysClockToPLL(RCC_PLL_SRC_HSE, 72000000);
     /* System Clocks Configuration */
     RCC_Configuration();
 
@@ -78,7 +78,7 @@ int main(void)
     /* SysTick Configuration */
     SysTick_Configuration();
 
-    /*
+    /**
     The TIMx peripheral offers the possibility to program in advance the
     configuration for the next TIMx outputs behaviour (step) and change the configuration
     of all the channels at the same time. This operation is possible when the COM
@@ -105,7 +105,7 @@ int main(void)
     ----------------------------------------------------------
     |Channel3N |   0   |   0   |   0   |   0   |   1   |   1   |
     ----------------------------------------------------------
-    */
+    **/
     /* Time Base configuration */
     TIM_InitTimBaseStruct(&TIM_TimeBaseStructure);
     TIM_TimeBaseStructure.Prescaler   = 0;
@@ -117,13 +117,13 @@ int main(void)
 
     /* Channel 1, 2 and 3 Configuration in Timing mode */
     TIM_InitOcStruct(&TIM_OCInitStructure);
-    TIM_OCInitStructure.OCMode      = TIM_OCMODE_TIMING;
-    TIM_OCInitStructure.OutputState = TIM_OUTPUT_STATE_ENABLE;
+    TIM_OCInitStructure.OCMode       = TIM_OCMODE_TIMING;
+    TIM_OCInitStructure.OutputState  = TIM_OUTPUT_STATE_ENABLE;
     TIM_OCInitStructure.OutputNState = TIM_OUTPUT_NSTATE_ENABLE;
-    TIM_OCInitStructure.Pulse       = 2047;
-    TIM_OCInitStructure.OCPolarity  = TIM_OC_POLARITY_HIGH;
-    TIM_OCInitStructure.OCNPolarity = TIM_OCN_POLARITY_HIGH;
-    TIM_OCInitStructure.OCIdleState = TIM_OC_IDLE_STATE_SET;
+    TIM_OCInitStructure.Pulse        = 2047;
+    TIM_OCInitStructure.OCPolarity   = TIM_OC_POLARITY_HIGH;
+    TIM_OCInitStructure.OCNPolarity  = TIM_OCN_POLARITY_HIGH;
+    TIM_OCInitStructure.OCIdleState  = TIM_OC_IDLE_STATE_SET;
     TIM_OCInitStructure.OCNIdleState = TIM_OCN_IDLE_STATE_SET;
     TIM_InitOc1(TIMx, &TIM_OCInitStructure);
 
@@ -169,9 +169,9 @@ void RCC_Configuration(void)
     /* Enable GPIO clock */
     RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_GPIO, ENABLE);
 
-    /* Config ATIM1 clock source:PLL(144Mhz)*/
+    /* Config ATIM1 clock source:PLL(144Mhz) */
     RCC_ConfigAtim1Clk(RCC_ATIM1_CLKSEL_PLL);
-    
+
     /* Enable ATIM1 clock */
     RCC_EnableAPB2PeriphClk(TIMx_CLK, ENABLE);
 }
@@ -278,10 +278,10 @@ ErrorStatus SetSysClockToPLL(uint32_t PLL_src, uint32_t SYS_freq)
     uint32_t latency;
     uint32_t pllmul, pllinpre, plloutdiv;
     FunctionalState pllsysdiv;
-    
-    if ((PLL_src == RCC_PLL_SRC_HSE)&&(HSE_VALUE != 8000000))
+
+    if ((PLL_src == RCC_PLL_SRC_HSE) && (HSE_VALUE != 8000000))
     {
-        /* HSE_VALUE == 8000000 is needed in this project! */
+        /* HSE_VALUE == 8000000 is needed in this project */
         return ERROR;
     }
 
@@ -311,9 +311,9 @@ ErrorStatus SetSysClockToPLL(uint32_t PLL_src, uint32_t SYS_freq)
         return ERROR;
     }
 
-    /* Configure PLL input prescaler based on clock source
+    /** Configure PLL input prescaler based on clock source
      * HSI = 16MHz -> PLLINPRES = /4 -> 4MHz 
-     * HSE = 8MHz  -> PLLINPRES = /2 -> 4MHz  */
+     * HSE = 8MHz  -> PLLINPRES = /2 -> 4MHz  **/
     if (PLL_src == RCC_PLL_SRC_HSI)
     {
         pllinpre = 4;
@@ -366,7 +366,7 @@ ErrorStatus SetSysClockToPLL(uint32_t PLL_src, uint32_t SYS_freq)
             return ERROR;
         }
     }
-    
+
     /* Enable or Disable PLLSYSDIV (SYSCLK = FPLL / pllsysdiv) */
     RCC_EnablePllSysclkDiv(pllsysdiv);
 

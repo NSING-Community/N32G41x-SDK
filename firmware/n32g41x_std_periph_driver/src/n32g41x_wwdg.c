@@ -1,60 +1,59 @@
 /**
-*     Copyright (c) 2025, Nsing Technologies Inc.
-* 
+*     Copyright (c) 2026, NSING Technologies Inc.
+*
 *     All rights reserved.
 *
-*     This software is the exclusive property of Nsing Technologies Inc. (Hereinafter 
-* referred to as Nsing). This software, and the product of Nsing described herein 
-* (Hereinafter referred to as the Product) are owned by Nsing under the laws and treaties
+*     This software is the exclusive property of NSING Technologies Inc. (Hereinafter
+* referred to as NSING). This software, and the product of NSING described herein
+* (Hereinafter referred to as the Product) are owned by NSING under the laws and treaties
 * of the People's Republic of China and other applicable jurisdictions worldwide.
 *
-*     Nsing does not grant any license under its patents, copyrights, trademarks, or other 
-* intellectual property rights. Names and brands of third party may be mentioned or referred 
+*     NSING does not grant any license under its patents, copyrights, trademarks, or other
+* intellectual property rights. Names and brands of third party may be mentioned or referred
 * thereto (if any) for identification purposes only.
 *
-*     Nsing reserves the right to make changes, corrections, enhancements, modifications, and 
-* improvements to this software at any time without notice. Please contact Nsing and obtain 
+*     NSING reserves the right to make changes, corrections, enhancements, modifications, and
+* improvements to this software at any time without notice. Please contact NSING and obtain
 * the latest version of this software before placing orders.
 
-*     Although Nsing has attempted to provide accurate and reliable information, Nsing assumes 
+*     Although NSING has attempted to provide accurate and reliable information, NSING assumes
 * no responsibility for the accuracy and reliability of this software.
-* 
-*     It is the responsibility of the user of this software to properly design, program, and test 
-* the functionality and safety of any application made of this information and any resulting product. 
-* In no event shall Nsing be liable for any direct, indirect, incidental, special,exemplary, or 
+*
+*     It is the responsibility of the user of this software to properly design, program, and test
+* the functionality and safety of any application made of this information and any resulting product.
+* In no event shall NSING be liable for any direct, indirect, incidental, special,exemplary, or
 * consequential damages arising in any way out of the use of this software or the Product.
 *
-*     Nsing Products are neither intended nor warranted for usage in systems or equipment, any
-* malfunction or failure of which may cause loss of human life, bodily injury or severe property 
+*     NSING Products are neither intended nor warranted for usage in systems or equipment, any
+* malfunction or failure of which may cause loss of human life, bodily injury or severe property
 * damage. Such applications are deemed, "Insecure Usage".
 *
-*     All Insecure Usage shall be made at user's risk. User shall indemnify Nsing and hold Nsing 
-* harmless from and against all claims, costs, damages, and other liabilities, arising from or related 
+*     All Insecure Usage shall be made at user's risk. User shall indemnify NSING and hold NSING
+* harmless from and against all claims, costs, damages, and other liabilities, arising from or related
 * to any customer's Insecure Usage.
 
-*     Any express or implied warranty with regard to this software or the Product, including,but not 
+*     Any express or implied warranty with regard to this software or the Product, including,but not
 * limited to, the warranties of merchantability, fitness for a particular purpose and non-infringement
 * are disclaimed to the fullest extent permitted by law.
 
-*     Unless otherwise explicitly permitted by Nsing, anyone may not duplicate, modify, transcribe
+*     Unless otherwise explicitly permitted by NSING, anyone may not duplicate, modify, transcribe
 * or otherwise distribute this software for any purposes, in whole or in part.
 *
-*     Nsing products and technologies shall not be used for or incorporated into any products or systems
-* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations. 
-* User shall comply with any applicable export control laws and regulations promulgated and administered by 
+*     NSING products and technologies shall not be used for or incorporated into any products or systems
+* whose manufacture, use, or sale is prohibited under any applicable domestic or foreign laws or regulations.
+* User shall comply with any applicable export control laws and regulations promulgated and administered by
 * the governments of any countries asserting jurisdiction over the parties or transactions.
 **/
 
 /**
 *\*\file n32g41x_wwdg.c
-*\*\author Nsing
+*\*\author NSING
 *\*\version v1.0.0
-*\*\copyright Copyright (c) 2025, Nsing Technologies Inc. All rights reserved.
+*\*\copyright Copyright (c) 2026, NSING Technologies Inc. All rights reserved.
 **/
 
 #include "n32g41x_wwdg.h"
 #include "n32g41x_rcc.h"
-
 
 /**
 *\*\name    WWDG_Reset.
@@ -68,8 +67,8 @@ void WWDG_Reset(void)
 
 /**
 *\*\name    WWDG_SetPrescalerDiv.
-*\*\fun     Set the WWDOG Prescaler Division Value.
-*\*\param   WWDG_Prescaler : 
+*\*\fun     Set the WWDG Prescaler Division Value.
+*\*\param   WWDG_Prescaler :
 *\*\          - WWDG_PRESCALER_DIV1   WWDG Counter Clock (PCLK1 / 4096) / 1
 *\*\          - WWDG_PRESCALER_DIV2   WWDG Counter Clock (PCLK1 / 4096) / 2
 *\*\          - WWDG_PRESCALER_DIV4   WWDG Counter Clock (PCLK1 / 4096) / 4
@@ -78,13 +77,13 @@ void WWDG_Reset(void)
 **/
 void WWDG_SetPrescalerDiv(uint32_t WWDG_Prescaler)
 {
-    __IO uint32_t tmpregister = 0;
+    __IO uint32_t tmpregister = 0U;
 
     /* Clear TIMERB[1:0] bits */
     tmpregister = WWDG->CFG & CFG_TIMERB_MASK;
 
-    /* Set TIMERB[1:0] bits according to prescaler_division value */
-    tmpregister |= WWDG_Prescaler;
+    /* Set TIMERB[1:0] bits according to WWDG_Prescaler value */
+    tmpregister |= (WWDG_Prescaler & WWDG_CFG_TIMERB);
 
     /* Store the new value */
     WWDG->CFG = tmpregister;
@@ -92,15 +91,15 @@ void WWDG_SetPrescalerDiv(uint32_t WWDG_Prescaler)
 
 /**
 *\*\name    WWDG_SetWValue.
-*\*\fun     Set the WWDOG Window Value.
-*\*\param   WindowValue : WWDOG Window Value
+*\*\fun     Set the WWDG Window Value.
+*\*\param   WindowValue : WWDG Window Value
 *\*\          The value range of this parameter :
 *\*\          - 0x0040 ~ 0x3FFF
 *\*\return  none
 **/
 void WWDG_SetWValue(uint16_t WindowValue)
 {
-    __IO uint32_t tmpregister = 0;
+    __IO uint32_t tmpregister = 0U;
 
     /* Clear W[13:0] bits */
     tmpregister = WWDG->CFG & CFG_W_MASK;
@@ -122,39 +121,37 @@ void WWDG_EnableInt(void)
     WWDG->CFG |= EARLY_WAKEUP_INT;
 }
 
-
 /**
 *\*\name    WWDG_SetCnt.
-*\*\fun     Set the WWDOG Counter Value.
-*\*\param   Counter : WWDOG Counter value
+*\*\fun     Set the WWDG Counter Value.
+*\*\param   Counter : WWDG Counter value
 *\*\          The value range of this parameter :
 *\*\          - 0x40 ~ 0x3FFF
-*\*\return  none 
+*\*\return  none
 **/
 void WWDG_SetCnt(uint16_t Counter)
 {
-    /* Write to T[6:0] bits to configure the counter value, no need to do
-       a read-modify-write; writing a 0 to WDGA bit does nothing */
+    /** Write to T[13:0] bits to configure the counter value, no need to do
+       a read-modify-write; writing a 0 to ACTB bit does nothing **/
     WWDG->CTRL = (uint32_t)Counter & (uint32_t)BIT_MASK;
 }
 
 /**
 *\*\name    WWDG_Enable.
-*\*\fun     Set the WWDOG Counter Value and Enable WWDOG .
-*\*\param   Counter : WWDOG Counter value
+*\*\fun     Set the WWDG Counter Value and Enable WWDG.
+*\*\param   Counter : WWDG Counter value
 *\*\          The value range of this parameter :
 *\*\          - 0x40 ~ 0x3FFF
 *\*\return  none
 **/
 void WWDG_Enable(uint16_t Counter)
 {
-    WWDG->CTRL = CTRL_ACTB_SET | Counter;
+    WWDG->CTRL = CTRL_ACTB_SET | ((uint32_t)Counter & (uint32_t)WWDG_CTRL_T);
 }
-
 
 /**
 *\*\name    WWDG_GetEWINTF.
-*\*\fun     Get WWDOG Early Wake-up Interrupt Flag.
+*\*\fun     Get WWDG Early Wakeup Interrupt Flag.
 *\*\return  SET or RESET
 **/
 FlagStatus WWDG_GetEWINTF(void)
@@ -170,13 +167,13 @@ FlagStatus WWDG_GetEWINTF(void)
     {
         bitstatus = RESET;
     }
-		
+
     return bitstatus;
 }
 
 /**
 *\*\name    WWDG_ClrEWINTF.
-*\*\fun     Clear WWDOG Early Wake-up Interrupt Flag.
+*\*\fun     Clear WWDG Early Wake-up Interrupt Flag.
 *\*\return  none
 **/
 void WWDG_ClrEWINTF(void)

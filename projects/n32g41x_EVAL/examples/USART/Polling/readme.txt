@@ -42,7 +42,7 @@
         - USART1_RX(PA10) <------->  USART2_TX(PA2)
     N32G415:
         - USART1_TX(PA9)  <------->  USART2_RX(PA3)
-        - USART1_RX(PA8) <------->  USART2_TX(PA2)
+        - USART1_RX(PA10) <------->  USART2_TX(PA2)
 
     测试步骤与现象：
     - Demo在KEIL环境下编译后，下载至MCU
@@ -100,7 +100,7 @@
         - USART1_RX(PA10) <------->  USART2_TX(PA2)
     N32G415:
         - USART1_TX(PA9)  <------->  USART2_RX(PA3)
-        - USART1_RX(PA8) <------->  USART2_TX(PA2)
+        - USART1_RX(PA10) <------->  USART2_TX(PA2)
 
     Test steps and phenomena:
     -After the Demo is compiled in the KEIL environment, download it to the MCU
